@@ -62,6 +62,7 @@ widgets:
 - douban
 - github-card
 - rss
+- weibo
 ## provide seven widgets:github-card,category,tag,rss,archive,tagcloud,links,weibo,douban
 
 
