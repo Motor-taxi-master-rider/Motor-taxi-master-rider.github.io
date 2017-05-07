@@ -1,12 +1,13 @@
 ---
 layout: post
-title: [LeetCode] Two Sum
+title: LeetCode - Two Sum
 tags:
 - LeetCode
 - Algorithms
 - Easy
 - Hashtable
 categories: Python
+description: Leet code
 ---
 > Description
 
