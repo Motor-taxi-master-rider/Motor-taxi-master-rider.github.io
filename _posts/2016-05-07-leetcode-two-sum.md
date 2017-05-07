@@ -9,17 +9,21 @@ tags:
 categories: Python
 ---
 > Description
+
 Given an array of integers, return **indices** of the two numbers such that they add up to a specific target.
 
 You may assume that each input would have **exactly** one solution, and you may not use the same element twice.
 
 Example:
-'''
+```
 Given nums = [2, 7, 11, 15], target = 9,
 
 Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
-'''
+```
+
+<!-- more -->
+
 Subscribe to see which companies asked this question.
 
 [link](https://leetcode.com/problems/two-sum/#/description)
@@ -27,7 +31,7 @@ Subscribe to see which companies asked this question.
 <!-- more -->
 > Most popular solution
 
-'''
+```
 class Solution(object):
     def twoSum(self, nums, target):
         """
@@ -43,14 +47,14 @@ class Solution(object):
                 return [dict[nums[i]], i]
             else:
                 dict[target - nums[i]] = i
-'''
+```
 
 **Mark:** 84%
 
 
 > My solution
 
-'''
+```
 class Solution(object):
     def twoSum(self, nums, target):
         """
@@ -71,6 +75,6 @@ class Solution(object):
                 i += 1
             else:
                 return [num_temp[i], num_temp[j]]
-'''
+```
 
 **Mark:** 86%
