@@ -33,7 +33,7 @@ defaults:
 paginate: 10
 
 #### Site
-title : Twilight struggle
+title : The Tower of Babel
 tagline: fresh thoughts and interesting ideas
 assets: /assets
 baseurl:
