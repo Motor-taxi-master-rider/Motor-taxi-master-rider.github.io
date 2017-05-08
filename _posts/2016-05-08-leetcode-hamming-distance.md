@@ -21,7 +21,7 @@ Given two integers x and y, calculate the Hamming distance.
 0 ≤ x, y < 231.
 
 -**Example:**
-'''
+```
 Input: x = 1, y = 4
 
 Output: 2
@@ -32,7 +32,7 @@ Explanation:
        ↑   ↑
 
 The above arrows point to positions where the corresponding bits are different.
-'''
+```
 
 [Source link](https://leetcode.com/problems/hamming-distance/#/description)
 
@@ -85,7 +85,7 @@ class Solution(object):
 
 *按位与:* &
 
-*按位并:* |
+*按位或:* |
 
 *按位异或:* ^
 
