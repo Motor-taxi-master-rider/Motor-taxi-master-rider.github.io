@@ -49,7 +49,6 @@ class Solution(object):
       """
       return bin(x^y).count('1')
 ```
-使用了bin函数将
 
 
 > My solution
