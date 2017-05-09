@@ -29,7 +29,7 @@ Subscribe to see which companies asked this question.
 
 [Source page](https://leetcode.com/problems/two-sum/#/description)
 
-===============
+__________
 # Most popular solution
 
 ```python
@@ -50,7 +50,7 @@ class Solution(object):
                 dict[target - nums[i]] = i
 ```
 
-===============
+__________
 # My solution
 
 ```python
@@ -78,5 +78,5 @@ class Solution(object):
 
 **Mark:** 86%
 
-=============
+__________
 #Additional

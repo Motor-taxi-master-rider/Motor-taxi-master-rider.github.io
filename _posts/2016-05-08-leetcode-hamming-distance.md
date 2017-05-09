@@ -36,7 +36,7 @@ The above arrows point to positions where the corresponding bits are different.
 
 [Source link](https://leetcode.com/problems/hamming-distance/#/description)
 
-==========
+__________
 # Most popular solution
 
 ```Python
@@ -50,7 +50,7 @@ class Solution(object):
       return bin(x^y).count('1')
 ```
 
-===========
+__________
 # My solution
 
 ```python
@@ -72,10 +72,10 @@ class Solution(object):
 
 **Mark:** 97%
 
-=============
+__________
 # Additional
 
-##**Python 位运算**
+###**Python 位运算**
 
 *按位与:* |`&`|
 
@@ -85,7 +85,7 @@ class Solution(object):
 
 *按位翻转:* |`~`| +1 之后乘以 -1
 
-*左移运算符* |`<<`|X`<<`N 将一个数字X向左移动N位
+*左移运算符* |`<<`|`X << N` 将一个数字X向左移动N位
 
 *右移运算符* |`>>`|      
 

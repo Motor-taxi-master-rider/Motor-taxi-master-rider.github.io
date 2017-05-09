@@ -30,7 +30,7 @@ All the integers in the array will be in the range of [-10000, 10000].
 
 [Source link](https://leetcode.com/problems/array-partition-i/#/description)
 
-===================
+__________
 # Most popular solution
 
 ```
@@ -46,7 +46,7 @@ class Solution(object):
 
 **Mark:** 87%
 
-==========
+__________
 # My solution
 
 ```
@@ -63,7 +63,7 @@ class Solution(object):
 
 **Mark:** 85%
 
-=========
+__________
 # Additional
 '''
 Help on method_descriptor:

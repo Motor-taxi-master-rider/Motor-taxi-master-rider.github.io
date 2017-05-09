@@ -38,7 +38,7 @@ The number in given array is in range [-100,000, 100,000].
 
 [Source link](https://leetcode.com/problems/hamming-distance/#/description)
 
-===========
+__________
 # Most popular solution
 
 ```python
@@ -51,7 +51,7 @@ class Solution(object):
         return min(len(candies) / 2, len(set(candies)))
 ```
 
-=========
+__________
 # My solution
 
 ```python
@@ -60,5 +60,5 @@ Same
 
 **Mark:** 97%
 
-=============
+__________
 # Additional
