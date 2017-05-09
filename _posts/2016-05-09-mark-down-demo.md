@@ -9,7 +9,7 @@ description: The Hamming distance between two integers is the number of position
 
 # 欢迎使用马克飞象
 
-@(示例笔记本)[马克飞象|帮助|Markdown]
+
 
 **马克飞象**是一款专为印象笔记（Evernote）打造的Markdown编辑器，通过精心的设计与技术实现，配合印象笔记强大的存储和同步功能，带来前所未有的书写体验。特点概述：
 
@@ -19,7 +19,6 @@ description: The Hamming distance between two integers is the number of position
 
 -------------------
 
-[TOC]
 
 ## Markdown简介
 
@@ -47,43 +46,10 @@ class SomeClass:
 $$	x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$
 
 ### 表格
-| Item      |    Value | Qty  |
-| :-------- | --------:| :--: |
-| Computer  | 1600 USD |  5   |
-| Phone     |   12 USD |  12  |
-| Pipe      |    1 USD | 234  |
-
-### 流程图
-```flow
-st=>start: Start
-e=>end
-op=>operation: My Operation
-cond=>condition: Yes or No?
-
-st->op->cond
-cond(yes)->e
-cond(no)->op
-```
-
-以及时序图:
-
-```sequence
-Alice->Bob: Hello Bob, how are you?
-Note right of Bob: Bob thinks
-Bob-->Alice: I am good thanks!
-```
-
-> **提示：**想了解更多，请查看**流程图**[语法][3]以及**时序图**[语法][4]。
-
-### 复选框
-
-使用 `- [ ]` 和 `- [x]` 语法可以创建复选框，实现 todo-list 等功能。例如：
-
-- [x] 已完成事项
-- [ ] 待办事项1
-- [ ] 待办事项2
-
-> **注意：**目前支持尚不完全，在印象笔记中勾选复选框是无效、不能同步的，所以必须在**马克飞象**中修改 Markdown 原文才可生效。下个版本将会全面支持。
+name | age
+---- | ---
+LearnShare | 12
+Mike |  32
 
 
 ## 印象笔记相关
@@ -127,17 +93,6 @@ Bob-->Alice: I am good thanks!
 插入链接    `Ctrl + L`
 提升标题    `Ctrl + H`
 
-## 关于收费
-
-**马克飞象**为新用户提供 10 天的试用期，试用期过后需要[续费](maxiang.info/vip.html)才能继续使用。未购买或者未及时续费，将不能同步新的笔记。之前保存过的笔记依然可以编辑。
-
-
-## 反馈与建议
-- 微博：[@马克飞象](http://weibo.com/u/2788354117)，[@GGock](http://weibo.com/ggock "开发者个人账号")
-- 邮箱：<hustgock@gmail.com>
-
----------
-感谢阅读这份帮助文档。请点击右上角，绑定印象笔记账号，开启全新的记录与分享体验吧。
 
 
 

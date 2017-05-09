@@ -10,7 +10,7 @@ categories: Python
 description: Given an array of 2n integers, your task is to group these integers into n pairs of integer, say (a1, b1), (a2, b2), ..., (an, bn) which makes sum of min(ai, bi) for all i from 1 to n as large as possible.
 ---
 
-> Description
+# Description
 
 Given an array of **2n** integers, your task is to group these integers into **n** pairs of integer, say (a1, b1), (a2, b2), ..., (an, bn) which makes sum of min(ai, bi) for all i from 1 to n as large as possible.
 
@@ -30,8 +30,8 @@ All the integers in the array will be in the range of [-10000, 10000].
 
 [Source link](https://leetcode.com/problems/array-partition-i/#/description)
 
-<!-- more -->
-> Most popular solution
+===================
+# Most popular solution
 
 ```
 class Solution(object):
@@ -46,8 +46,8 @@ class Solution(object):
 
 **Mark:** 87%
 
-
-> My solution
+==========
+# My solution
 
 ```
 class Solution(object):
@@ -63,7 +63,8 @@ class Solution(object):
 
 **Mark:** 85%
 
-> Additional
+=========
+# Additional
 '''
 Help on method_descriptor:
 

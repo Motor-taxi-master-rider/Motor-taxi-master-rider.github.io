@@ -9,7 +9,7 @@ categories: Python
 description: Given an integer array with even length, where different numbers in this array represent different kinds of candies. Each number means one candy of the corresponding kind. You need to distribute these candies equally in number to brother and sister. Return the maximum number of kinds of candies the sister could gain.
 ---
 
-> Description
+# Description
 
 Given an integer array with **even** length, where different numbers in this array represent different **kinds** of candies. Each number means one candy of the corresponding kind. You need to distribute these candies **equally** in number to brother and sister. Return the maximum number of **kinds** of candies the sister could gain.
 
@@ -38,10 +38,10 @@ The number in given array is in range [-100,000, 100,000].
 
 [Source link](https://leetcode.com/problems/hamming-distance/#/description)
 
-<!-- more -->
-> Most popular solution
+===========
+# Most popular solution
 
-```
+```python
 class Solution(object):
     def distributeCandies(self, candies):
         """
@@ -51,13 +51,14 @@ class Solution(object):
         return min(len(candies) / 2, len(set(candies)))
 ```
 
+=========
+# My solution
 
-> My solution
-
-```
+```python
 Same
 ```
 
 **Mark:** 97%
 
-> Additional
+=============
+# Additional
