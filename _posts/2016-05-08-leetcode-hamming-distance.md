@@ -39,7 +39,7 @@ The above arrows point to positions where the corresponding bits are different.
 __________
 # Most popular solution
 
-```Python
+```python
 class Solution(object):
     def hammingDistance(self, x, y):
       """
@@ -75,7 +75,7 @@ class Solution(object):
 __________
 # Additional
 
-###**Python 位运算**
+##**Python 位运算**##
 
 *按位与:* |`&`|
 
