@@ -27,7 +27,7 @@ return [0, 1].
 <!-- more -->
 Subscribe to see which companies asked this question.
 
-[link](https://leetcode.com/problems/two-sum/#/description)
+[Source page](https://leetcode.com/problems/two-sum/#/description)
 
 <!-- more -->
 > Most popular solution
