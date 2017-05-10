@@ -5,7 +5,7 @@ tags:
 - Python
 - LeetCode
 - Algorithms
-- Python sort()
+- Python_sort()
 categories: Python
 description: Given an array of 2n integers, your task is to group these integers into n pairs of integer, say (a1, b1), (a2, b2), ..., (an, bn) which makes sum of min(ai, bi) for all i from 1 to n as large as possible.
 ---
@@ -72,7 +72,7 @@ sort(...)
 L.sort(cmp=None, key=None, reverse=False) -- stable sort *IN PLACE*;
 cmp(x, y) -> -1, 0, 1
 
->>>help(sorted)
+help(sorted)
 Help on built-in function sorted in module __builtin__:
 
 sorted(...)
