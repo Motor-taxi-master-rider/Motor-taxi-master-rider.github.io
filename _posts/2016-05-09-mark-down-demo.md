@@ -10,6 +10,8 @@ description: The Hamming distance between two integers is the number of position
 
 This is an unofficial kramdown sandbox, the official complete documentation for [kramdown](https://github.com/gettalong/kramdown/) is [here](http://kramdown.rubyforge.org/).
 
+[documentation](https://kramdown.gettalong.org/quickref.html)
+
 -----
 
 ### Code
