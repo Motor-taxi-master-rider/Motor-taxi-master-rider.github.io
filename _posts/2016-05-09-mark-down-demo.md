@@ -1,6 +1,6 @@
 ---
 layout: post
-title: LeetCode - Hamming Distance
+title: Markdown Syntax
 tags:
 - Markdown
 categories: Python
