@@ -14,7 +14,7 @@ description: Given a List of words, return the words that can be typed using let
 
 Given a List of words, return the words that can be typed using letters of alphabet on only one row's of American keyboard like the image below.
 
-!![keyboard]({{site.baseurl}}/{{ site.assets }}/img/post_files/_keyboard_row_1.png)
+<img src="/{{ site.assets }}/{{ site.imglogo.src }}" alt="{{ site.title }}" title="{{site.title }}"/>
 
 **Example 1:**
 
