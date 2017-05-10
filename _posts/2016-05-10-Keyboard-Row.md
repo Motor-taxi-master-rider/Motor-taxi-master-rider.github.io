@@ -24,8 +24,8 @@ Output: ["Alaska", "Dad"]
 ```
 
 **Note:**
--You may use one character in the keyboard more than once.
--You may assume the input string will only contain letters of alphabet.
+1. You may use one character in the keyboard more than once.
+2. You may assume the input string will only contain letters of alphabet.
 
 [Source link](https://leetcode.com/problems/keyboard-row/#/description)
 
