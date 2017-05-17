@@ -134,7 +134,7 @@ class Solution(object):
             for j in range(len(X)):
                 if X[j] % i == 0 or i % X[j] == 0:
                     total += helper(i - 1, X[:j] + X[j + 1:])
-            cache[key] = total
+            cache[key] = total   #用哈希表来储存(位置,([剩余元素])):配对数量 信息
             return total
         return helper(N, tuple(range(1, N + 1)))
 ```
