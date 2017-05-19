@@ -88,4 +88,4 @@ class Solution(object):
 __________
 # Additional
 
-[Find duplicates in O(n) time and O(1) extra space | Set 1](http://www.geeksforgeeks.org/find-duplicates-in-on-time-and-constant-extra-space/)
+[Find duplicates in O(n) time and O(1) extra space](http://www.geeksforgeeks.org/find-duplicates-in-on-time-and-constant-extra-space/)
