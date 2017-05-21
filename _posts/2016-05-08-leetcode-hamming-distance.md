@@ -6,7 +6,7 @@ tags:
 - LeetCode
 - Algorithms
 - Hamming_Distance
-- Python_bit_manipulation
+- Bit_Manipulation
 categories: Python
 description: The Hamming distance between two integers is the number of positions at which the corresponding bits are different.Given two integers x and y, calculate the Hamming distance.
 ---
