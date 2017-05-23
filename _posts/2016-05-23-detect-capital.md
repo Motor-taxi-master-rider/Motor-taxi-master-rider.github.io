@@ -50,20 +50,16 @@ __________
 
 >利用二叉搜索树的特性，以右中左的方式遍历全树。python版本先完成，使用了全局变量记录累计值来辅助递归。C++版本则将变量加入递归,不使用全局变量。
 
-C++ version
+C++ reg verison
 
 ```c++
 class Solution {
 public:
-	int helper(TreeNode* root, int cum) {
-		if (root->right) cum = helper(root->right, cum);
-		root->val = root->val + cum;
-		return (root->left) ? helper(root->left, root->val) : root->val;
-	}
-	TreeNode* convertBST(TreeNode* root) {
-		if (!root) return NULL;
-		helper(root, 0);
-		return root;
+	bool detectCapitalUse(string& word) {
+		const regex pattern("[A-Z]+$|[a-z]+$|[A-Z][a-z]*$");
+		match_results<string::const_iterator> result;
+		bool valid = regex_match(word,result,pattern);
+		return valid;
 	}
 };
 ```
@@ -111,5 +107,3 @@ class Solution(object):
 
 __________
 # Additional
-
-[LeetCode - Keyboard Row](https://motor-taxi-master-rider.github.io/python/2016/05/10/Keyboard-Row)
