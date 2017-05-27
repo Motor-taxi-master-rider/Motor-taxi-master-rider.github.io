@@ -7,7 +7,6 @@ categories: Python
 description: The Hamming distance between two integers is the number of positions at which the corresponding bits are different.Given two integers x and y, calculate the Hamming distance.
 ---
 # Please Note:
-
 This is an unofficial kramdown sandbox, the official complete documentation for [kramdown](https://github.com/gettalong/kramdown/) is [here](http://kramdown.rubyforge.org/).
 
 [documentation](https://kramdown.gettalong.org/quickref.html)
