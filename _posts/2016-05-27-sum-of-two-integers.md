@@ -201,13 +201,13 @@ int hammingWeight(uint32_t n) {
 
 重复DNA序列
 
-All DNA is composed of a series of nucleotides abbreviated as A, C, G, and T, for example: "ACGAATTCCG". When studying DNA, it is sometimes useful to identify repeated sequences within the DNA. Write a function to find all the 10-letter-long sequences (substrings) that occur more than once in a DNA molecule.
-For example,
-Given s = "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT",
-Return: ["AAAAACCCCC", "CCCCCAAAAA"].
+所有DNA由一系列缩写为A、G、C、T的核苷酸组成, 例如: "ACGAATTCCG". 当研究DNA序列的时候，DNA中的重复序列是一个很重要的的部分. 编写一个函数来找到出现多于两次的十字符长度序列。
+例如,
+给出 s = "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT",
+返回: ["AAAAACCCCC", "CCCCCAAAAA"].
 
-Solution
 
+```c++
 class Solution {
 public:
     vector<string> findRepeatedDnaSequences(string s) {
@@ -224,13 +224,16 @@ public:
         return v;
     }
 };
-But the above solution can be invalid when repeated sequence appears too many times, in which case we should use unordered_map<int, int> keyMap to replace char keyMap[1<<21]{0}here.
-Majority Element
+```
+
+> 以上方法会在重复序列出现太多次时候失效。 为了避免这种情况的发生，我们可以使用 unordered_map<int, int> keyMap 来替代 char keyMap[1<<21]{0}.
+
+主要的元素
 
 Given an array of size n, find the majority element. The majority element is the element that appears more than ⌊ n/2 ⌋ times. (bit-counting as a usual way, but here we actually also can adopt sorting and Moore Voting Algorithm)
 
-Solution
 
+```c++
 int majorityElement(vector<int>& nums) {
     int len = sizeof(int)*8, size = nums.size();
     int count = 0, mask = 1, ret = 0;
@@ -243,6 +246,8 @@ int majorityElement(vector<int>& nums) {
     }
     return ret;
 }
+```
+
 Single Number III
 
 Given an array of integers, every element appears three times except for one. Find that single one. (Still this type can be solved by bit-counting easily.) But we are going to solve it by digital logic design
