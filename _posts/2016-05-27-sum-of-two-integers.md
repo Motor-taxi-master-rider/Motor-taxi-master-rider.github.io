@@ -55,7 +55,7 @@ Given a = 1 and b = 2, return 3.
 
 ## 实例
 
-求所给数字二进制表示中的1的数量：
+### 求所给数字二进制表示中的1的数量：
 
 ```c++
 int count_one(int n) {
@@ -67,7 +67,7 @@ int count_one(int n) {
 }
 ```
 
-是4的幂数嘛？ (事实上图检查方法、 迭代和递归可以做到一样的效果)
+### 是4的幂数嘛？ (事实上图检查方法、 迭代和递归可以做到一样的效果)
 
 ```c++
 bool isPowerOfFour(int n) {
@@ -80,7 +80,7 @@ bool isPowerOfFour(int n) {
 
 `^` 可以用来消除偶数个个一模一样的数字并且保留奇数的数字对, 或者保存不一样的对应位并且移除一样的对应位.
 
-两数求和
+### 两数求和
 
 使用 `^` 和 `&` 来进行两数求和
 
@@ -91,7 +91,7 @@ int getSum(int a, int b) {
 }
 ```
 
-丢失的数字
+### 丢失的数字
 
 已知一个数组包含n个不同的数字： 0, 1, 2, ..., n, 找到那个不在数组中的数字。 例如, 所给数组 = [0, 1, 3] 则返回 2.
 
@@ -108,7 +108,7 @@ int missingNumber(vector<int>& nums) {
 
 ## `|` 的技巧
 
-保存尽可能多的1位
+### 保存尽可能多的1位
 
 找到小于或等于N的2的最大的幂数 (最大二进制数).
 
@@ -124,7 +124,7 @@ long largest_power(long N) {
 }
 ```
 
-反转比特
+### 反转比特
 
 反转一个所给的 32 bits unsigned integer.
 
@@ -154,9 +154,9 @@ uint32_t reverseBits(uint32_t n) {
 
 ## `&` 的技巧
 
-选择指定的位
+`&`具有选择指定的位的功能。
 
-反转整数中的位
+### 反转整数中的位
 
 ```c++
 x = ((x & 0xaaaaaaaa) >> 1) | ((x & 0x55555555) << 1);
@@ -166,7 +166,7 @@ x = ((x & 0xff00ff00) >> 8) | ((x & 0x00ff00ff) << 8);
 x = ((x & 0xffff0000) >> 16) | ((x & 0x0000ffff) << 16);
 ```
 
-位运算符 AND  数字范围
+### 位运算符 AND  数字范围
 
 已知范围 [m, n] 其中 0 <= m <= n <= 2147483647, 返回对范围中的所有数据按位计算符AND计算的结果。 例如, 输入 [5, 7], 则返回 4.
 
@@ -182,14 +182,15 @@ int rangeBitwiseAnd(int m, int n) {
 }
 ```
 
-1的数量
+### 1的数量
 
 
 ```c++
 int hammingWeight(uint32_t n) {
     ulong mask = 1;
     int count = 0;
-    for(int i = 0; i < 32; ++i){ //31 will not do, delicate;
+    for(int i = 0; i < 32; ++i){
+       //31 will not do, delicate;
         if(mask & n) count++;
         mask <<= 1;
     }
@@ -197,10 +198,9 @@ int hammingWeight(uint32_t n) {
 }
 ```
 
+## 应用
 
-##　应用
-
-重复DNA序列
+### 重复DNA序列
 
 所有DNA由一系列缩写为A、G、C、T的核苷酸组成, 例如: "ACGAATTCCG". 当研究DNA序列的时候，DNA中的重复序列是一个很重要的的部分. 编写一个函数来找到出现多于两次的十字符长度序列。
 例如,
@@ -229,14 +229,14 @@ public:
 
 > 以上方法会在重复序列出现太多次时候失效。 为了避免这种情况的发生，我们可以使用 `unordered_map<int, int> keyMap` 来替代这里的 `char keyMap[1<<21]{0}`.
 
-主要的元素
+### 主元素
 
-Given an array of size n, find the majority element. The majority element is the element that appears more than ⌊ n/2 ⌋ times. (bit-counting as a usual way, but here we actually also can adopt sorting and Moore Voting Algorithm)
+对于一个大小为n的数组，求其主元素. 主元素是在数组中出现次数大于 ⌊ n/2 ⌋ 次的元素. (比特计数是不是一个通常方法, 我们通常会应用排序和Moore Voting算法)
 
 
 ```c++
 int majorityElement(vector<int>& nums) {
-    int len = sizeof(int)*8, size = nums.size();
+    int len = sizeof(int)*8, size = nums.size();*
     int count = 0, mask = 1, ret = 0;
     for(int i = 0; i < len; ++i) {
         count = 0;
@@ -249,12 +249,11 @@ int majorityElement(vector<int>& nums) {
 }
 ```
 
-Single Number III
+### 单一数字 III
 
-Given an array of integers, every element appears three times except for one. Find that single one. (Still this type can be solved by bit-counting easily.) But we are going to solve it by digital logic design
+对于给予的一个整数数组, 除了一个元素以外的所有元素会出现三次，你的目标是找到那个单一的数字. (这种类型的问题同样也可以用比特计数简单地解决，但在这里我们将使用`digital logic design`来处理它)
 
-Solution
-
+```c++
 //inspired by logical circuit design and boolean algebra;
 //counter - unit of 3;
 //current   incoming  next
@@ -277,29 +276,35 @@ int singleNumber(vector<int>& nums) {
     }
     return a | b;
 }
-;
-Maximum Product of Word Lengths
+```
 
-Given a string array words, find the maximum value of length(word[i]) * length(word[j]) where the two words do not share common letters. You may assume that each word will contain only lower case letters. If no such two words exist, return 0.
 
-Example 1:
-Given ["abcw", "baz", "foo", "bar", "xtfn", "abcdef"]
-Return 16
-The two words can be "abcw", "xtfn".
-Example 2:
-Given ["a", "ab", "abc", "d", "cd", "bcd", "abcd"]
-Return 4
-The two words can be "ab", "cd".
-Example 3:
-Given ["a", "aa", "aaa", "aaaa"]
-Return 0
-No such pair of words.
-Solution
+### 最大字母长度组合
 
-Since we are going to use the length of the word very frequently and we are to compare the letters of two words checking whether they have some letters in common:
+对于给予的一组单词, 找到单词长度(word[i]) * length(word[j])之积的最大值， 要求两个单词不能有相同的字母. 你可以假定所有单词只包含小写字母. 如果没有符合条件的单词组存在则返回 0.
 
-using an array of int to pre-store the length of each word reducing the frequently measuring process;
-since int has 4 bytes, a 32-bit type, and there are only 26 different letters, so we can just use one bit to indicate the existence of the letter in a word.
+>示例 1:
+给予 ["abcw", "baz", "foo", "bar", "xtfn", "abcdef"]
+返回 16
+符合条件的两个单词可以是 "abcw", "xtfn".
+
+>示例 2:
+给予 ["a", "ab", "abc", "d", "cd", "bcd", "abcd"]
+返回 4
+符合条件的两个单词可以是 "ab", "cd".
+
+>示例 3:
+给予 ["a", "aa", "aaa", "aaaa"]
+返回 0
+没有符合条件的单词组.
+
+
+显然我们将会频繁使用单词的长度以及比较两个单词是否拥有相同的字母:
+
+* 使用一个整形数组去预存每个单词的长度将能够有效减少测量长度这一过程频度;
+* 整形是一个四个字节三十二位存储单元, 而我们只有二十六个不同的字母, 所以我们就可以用每一位来表示单词是否包含某一字母.
+
+```c++
 int maxProduct(vector<string>& words) {
     vector<int> mask(words.size());
     vector<int> lens(words.size());
@@ -314,18 +319,24 @@ int maxProduct(vector<string>& words) {
     }
     return result;
 }
-Attention
+```
 
-result after shifting left(or right) too much is undefined
-right shifting operations on negative values are undefined
-right operand in shifting should be non-negative, otherwise the result is undefined
-The & and | operators have lower precedence than comparison operators
-Sets
-All the subsets
-A big advantage of bit manipulation is that it is trivial to iterate over all the subsets of an N-element set: every N-bit value represents some subset. Even better, if A is a subset of B then the number representing A is less than that representing B, which is convenient for some dynamic programming solutions.
+## 注意
 
-It is also possible to iterate over all the subsets of a particular subset (represented by a bit pattern), provided that you don’t mind visiting them in reverse order (if this is problematic, put them in a list as they’re generated, then walk the list backwards). The trick is similar to that for finding the lowest bit in a number. If we subtract 1 from a subset, then the lowest set element is cleared, and every lower element is set. However, we only want to set those lower elements that are in the superset. So the iteration step is just i = (i - 1) & superset.
+* 左右位移太多的返回值是 undefined
+* 对于负数的右移太多的返回值是 undefined
+* right operand in shifting should be non-negative, otherwise the result is undefined
+* `&` 和 `|` 运算符相对于比较运算符来说拥有更低的优先级
 
+# 集合
+
+所有的子集
+
+在这种情况下位操作会体现出巨大的优势：当遍历一个N元素集合的所有子集是非常繁琐的时候，而一个N位比特值能够表示其所有子集。 如果A是B的子集，则表达A所需的数字小于直接表示B时候，位操作对于一些动态的编程方案是一个更好的选择。
+
+如果你不介意以逆序遍历子集的话，你也可以在一个特定的子集里遍历到所有可能的子集星矢 (用比特模式表示). 使用的技巧和找到数字中的最低位的方法相似. 如果我们从一个子集中减去1, 则集合的最低的元素将会被清楚, 并且每个更低的元素将会被设置. 然而, 我们仅仅想要在父集合中设置这些更低的元素. 因此遍历的步骤只会是 i = (i - 1) & superset.
+
+```c++
 vector<vector<int>> subsets(vector<int>& nums) {
     vector<vector<int>> vv;
     int size = nums.size();
@@ -338,12 +349,16 @@ vector<vector<int>> subsets(vector<int>& nums) {
     }
     return vv;
 }
-Actually there are two more methods to handle this using recursion and iteration respectively.
+```
 
-Bitset
-A bitset stores bits (elements with only two possible values: 0 or 1, true or false, ...).
-The class emulates an array of bool elements, but optimized for space allocation: generally, each element occupies only one bit (which, on most systems, is eight times less than the smallest elemental type: char).
+事实上还有另外两种方式： recursion 和 iteration 也能分别解决这个问题.
 
+# Bitset类
+
+Bitset储存位 (只有两种可能值的元素: 0 or 1, true or false, ...).
+这个类有些类似布尔值数组，不过具有空间优化：通常每个元素只占一位 (在大部分系统中比最小的元素种类：char小八倍).
+
+```c++
 // bitset::count
 #include <iostream>       // std::cout
 #include <string>         // std::string
@@ -356,4 +371,4 @@ int main () {
   std::cout << (foo.size()-foo.count()) << " zeros.\n";
   return 0;
 }
-Always welcom new ideas and practical tricks, just leave them in the comments!
+```
