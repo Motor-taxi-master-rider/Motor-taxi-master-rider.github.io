@@ -14,15 +14,11 @@ description: Bit manipulation is the act of algorithmically manipulating bits or
 
 
 # Question
-
 Calculate the sum of two integers a and b, but you are **not allowed** to use the operator `+` and `-`.
-
 **Example:**
 Given a = 1 and b = 2, return 3.
-
-
 [Source link](https://leetcode.com/problems/sum-of-two-integers/#/description)
-
+<!--more-->
 
 
 # 简介
@@ -30,7 +26,7 @@ Given a = 1 and b = 2, return 3.
 
 在某些情况下，由于位操作是并行进行的， 因此通常能够去除或者减少对一个数据格式的循环遍历， 带来运算速度的成倍提升. 但与此同时， 位操作的代码也会更难编写和维护。
 
-<!--more-->
+
 
 
 # 详细内容
