@@ -166,7 +166,7 @@ x = ((x & 0xff00ff00) >> 8) | ((x & 0x00ff00ff) << 8);
 x = ((x & 0xffff0000) >> 16) | ((x & 0x0000ffff) << 16);
 ```
 
-位运算符 AND of 数字范围
+位运算符 AND  数字范围
 
 已知范围 [m, n] 其中 0 <= m <= n <= 2147483647, 返回对范围中的所有数据按位计算符AND计算的结果。 例如, 输入 [5, 7], 则返回 4.
 
@@ -180,7 +180,7 @@ int rangeBitwiseAnd(int m, int n) {
     }
     return m<<a;
 }
-```　
+```
 
 1的数量
 
@@ -210,23 +210,23 @@ int hammingWeight(uint32_t n) {
 ```c++
 class Solution {
 public:
-    vector<string> findRepeatedDnaSequences(string s) {
-        int sLen = s.length();
-        vector<string> v;
-        if(sLen < 11) return v;
-        char keyMap[1<<21]{0};
-        int hashKey = 0;
-        for(int i = 0; i < 9; ++i) hashKey = (hashKey<<2) | (s[i]-'A'+1)%5;
-        for(int i = 9; i < sLen; ++i) {
-            if(keyMap[hashKey = ((hashKey<<2)|(s[i]-'A'+1)%5)&0xfffff]++ == 1)
-                v.push_back(s.substr(i-9, 10));
-        }
-        return v;
-    }
+	vector<string> findRepeatedDnaSequences(string s) {
+		int sLen = s.length();
+		vector<string> v;
+		if (sLen < 11) return v;
+		char keyMap[1 << 21]{ 0 };
+		int hashKey = 0;
+		for (int i = 0; i < 9; ++i) hashKey = (hashKey << 2) | (s[i] - 'A' + 1) % 5;
+		for (int i = 9; i < sLen; ++i) {
+			if (keyMap[hashKey = ((hashKey << 2) | (s[i] - 'A' + 1) % 5) & 0xfffff]++ == 1)
+				v.push_back(s.substr(i - 9, 10));
+		}
+		return v;
+	}
 };
 ```
 
-> 以上方法会在重复序列出现太多次时候失效。 为了避免这种情况的发生，我们可以使用 unordered_map<int, int> keyMap 来替代 char keyMap[1<<21]{0}.
+> 以上方法会在重复序列出现太多次时候失效。 为了避免这种情况的发生，我们可以使用 `unordered_map<int, int> keyMap` 来替代这里的 `char keyMap[1<<21]{0}`.
 
 主要的元素
 
