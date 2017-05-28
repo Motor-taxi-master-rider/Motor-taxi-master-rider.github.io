@@ -15,7 +15,6 @@ description: Suppose you have N integers from 1 to N...
 
 
 # Description
-
 Suppose you have **N** integers from 1 to N. We define a beautiful arrangement as an array that is constructed by these N numbers successfully if one of the following is true for the i<sub>th</sub> position (`1 ≤ i ≤ N`) in this array:
 
 1. The number at the i<sub>th</sub> position is divisible by **i**.

@@ -14,7 +14,6 @@ This is an unofficial kramdown sandbox, the official complete documentation for 
 -----
 
 ### Code
-
 This demo uses [highlight.js](http://softwaremaniacs.org/soft/highlight/en/) to enable client-side syntax highlighting
 
 `inline` or as a block (auto detect language):

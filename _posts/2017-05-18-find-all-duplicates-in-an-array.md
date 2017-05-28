@@ -14,7 +14,6 @@ description: Given a binary array, find the maximum number of consecutive 1s in 
 
 
 # Description
-
 Given an array of integers, 1 ≤ a[i] ≤ n (n = size of array), some elements appear **twice** and others appear **once**.
 
 Find all the elements that appear **twice** in this array.
