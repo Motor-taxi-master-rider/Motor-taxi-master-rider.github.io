@@ -1037,12 +1037,21 @@ article .article-content .kb {
     white-space: nowrap
 }
 
-article .article-content h1, article .article-content h2 {
+article .article-content h1 {
     font-size: 180%;
     line-height: 1.2em;
     padding-bottom: .3em;
     margin-top: 1.5em;
-    border-bottom: 2px solid #dbdbdb
+    border-bottom: 2px solid #dbdbdb;
+    font-weight:bold;
+}
+
+article .article-content h2{
+    font-size: 160%;
+    line-height: 1em;
+    margin-top: 1.4em;
+    padding-bottom: .3em;
+    font-weight:bold;
 }
 
 article .article-content h3 {
