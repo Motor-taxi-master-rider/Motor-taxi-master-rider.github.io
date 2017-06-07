@@ -43,14 +43,14 @@ Explanation: The restaurant they both like and have the least index sum is "Shog
 
 [Source link](https://leetcode.com/problems/minimum-index-sum-of-two-lists/#/description)
 
-__________
+
 
 # Best practice
 
 >首先以第一个列表建一个以index为key，string为item的哈希表。
 然后遍历第二个列表，当两个列表的index和比之前小时刷新输出列表，相等时在输出列表后添加第二个列表真的string。
 
-C++ -- hash table
+C++ : hash table
 
 ```c++
 class Solution {
@@ -80,5 +80,5 @@ public:
 ```
 
 **Mark:** 92ms
-__________
+
 # Additional

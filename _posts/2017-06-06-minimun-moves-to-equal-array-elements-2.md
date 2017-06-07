@@ -33,7 +33,6 @@ Only two moves are needed (remember each move increments or decrements one eleme
 
 [Source link](https://leetcode.com/problems/minimum-moves-to-equal-array-elements-ii/#/description)
 
-__________
 
 # Best practice
 
@@ -58,5 +57,6 @@ public:
 ```
 
 **Mark:** 19ms
-__________
+
+
 # Additional
