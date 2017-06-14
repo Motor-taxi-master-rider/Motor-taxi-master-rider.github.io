@@ -1,4 +1,4 @@
----
+﻿---
 layout: post
 title: Python 单例实现的几种方式
 tags:
@@ -23,7 +23,8 @@ description: Given a non-empty integer array, find the minimum number of moves r
 
 ## __new__ 方法
 
-```Python
+
+```python
 class Singleton(object):
     def __new__(cls, *args, **kw):
         if not hasattr(cls, '_instance'):

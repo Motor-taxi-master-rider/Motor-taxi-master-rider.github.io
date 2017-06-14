@@ -1,4 +1,4 @@
-#### Exclude
+﻿#### Exclude
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
 
 #### Code Highlighter
@@ -56,7 +56,6 @@ menu:
 #### Widgets
 widgets:
 - category
-- tag
 - tagcloud
 - links
 - douban
@@ -115,7 +114,6 @@ toc:
 
 #### Links
 links:
-  码农圈:
   Blog:
 
 #### Comment
