@@ -2,7 +2,7 @@
 layout: post
 title: LeetCode - Minimum Moves to Equal Array Elements II
 tags:
-- C++
+- LeetCode
 - Bit_Manipulation
 categories:
 - C++
