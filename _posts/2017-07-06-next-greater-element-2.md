@@ -1,6 +1,6 @@
 ---
 layout: post
-title: LeetCode - Construct the Rectangle
+title: LeetCode - Next Greater Element II
 tags:
 - LeetCode
 - Stack
