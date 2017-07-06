@@ -53,17 +53,17 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
-				length = len(nums)
-			    stack, res = [], [-1] * length
-			    for i in range(length * 2):
-			        #如果出现大于栈顶序号得元素值的元素时，
-			        #就可以疯狂出掉所有小于该元素的所有元素序号
-			        while stack and (nums[stack[-1]] < nums[i % length]):
-			            res[stack.pop()] = nums[i % length]
-			        #仅仅将每个元素的序号入栈一次
-			        if i < length:
-			            stack.append(i)
-			    return res
+    length = len(nums)
+      stack, res = [], [-1] * length
+      for i in range(length * 2):
+          #如果出现大于栈顶序号得元素值的元素时，
+          #就可以疯狂出掉所有小于该元素的所有元素序号
+          while stack and (nums[stack[-1]] < nums[i % length]):
+              res[stack.pop()] = nums[i % length]
+          #仅仅将每个元素的序号入栈一次
+          if i < length:
+              stack.append(i)
+      return res
 ```
 
 **Mark:** 275ms
