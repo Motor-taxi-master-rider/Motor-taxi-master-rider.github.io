@@ -53,10 +53,13 @@ class Solution(object):
         length=len(nums)
         def helper(stack):
             for item in stack:
+                #忽略被标记的元素
                 if nums[item] < length:
                     stack.append(nums[item])
+                    #将所有遍历过的元素的序号+length做唯一标记
                     nums[item] += length
             return len(stack) - 1
+        #遍历所有未被标记的元素
         return max([helper([item]) for item in nums if item <length])
 ```
 
