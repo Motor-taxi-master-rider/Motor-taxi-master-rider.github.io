@@ -136,6 +136,20 @@ def main(data):
 
 假如使用源程序的while true这段代码的话，对于每个key子迭代器会生成两遍，当然第二遍的子迭代器是不会使用的。
 
+下面简要说明示例的运作方式，还会说明把 main 函数中调用 group.send(None) 那一行代码（带有“重要！”注释的那一行）去掉会发生什么事。
+
+* 外层 for 循环每次迭代会新建一个 grouper 实例，赋值给 group 变量；group 是委派生成器。
+
+* 调用 next(group)，预激委派生成器 grouper，此时进入 while True 循环，调用子生成器 averager 后，在 yield from 表达式处暂停。
+
+* 内层 for 循环调用 group.send(value)，直接把值传给子生成器 averager。同时，当前的 grouper 实例（group）在 yield from 表达式处暂停。
+
+* 内层循环结束后，group 实例依旧在 yield from 表达式处暂停，因此，grouper 函数定义体中为 results[key] 赋值的语句还没有执行。
+
+* 如果外层 for 循环的末尾没有 group.send(None)，那么 averager 子生成器永远不会终止，委派生成器 group 永远不会再次激活，因此永远不会为 results[key] 赋值。
+
+* 外层 for 循环重新迭代时会新建一个 grouper 实例，然后绑定到 group 变量上。前一个 grouper 实例（以及它创建的尚未终止的 averager 子生成器实例）被垃圾回收程序回收。
+
 # Additional
 参考文献:
 1. [流畅的python](http://www.ituring.com.cn/book/1564)
