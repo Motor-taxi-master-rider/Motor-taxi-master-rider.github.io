@@ -3,7 +3,7 @@ layout: post
 title: Flunet Python 16.7 coroutine understading
 tags:
 - Fluent_Python
-- coroutine
+- Coroutine
 categories:
 - Python
 description: Flunet Python 16.7 coroutine understading.
