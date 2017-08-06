@@ -207,6 +207,22 @@ class Text(collections.UserString):
 # END FUNC_DESCRIPTOR_EX
 ```
 
+# 总结
+
+描述符的作用方式可用以下函数表示：
+
+```python
+x = C()
+x.foo
+==>
+if hasattr(C, 'foo'):
+  d = C.foo;
+  D = d.__class__
+  if hasattr(D, '__get__') and (hasattr(D, '__set__') or 'foo' not in x.__dict__):
+      return D.__get__(d, x, C)
+return x.__dict__['foo'] # or from C, &c
+```
+
 # Additional
 **描述符用法建议：**
 
