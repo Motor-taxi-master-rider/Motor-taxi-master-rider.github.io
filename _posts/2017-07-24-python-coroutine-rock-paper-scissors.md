@@ -24,7 +24,7 @@ For generators that are driven by input to .send() no data is transferred in the
 
 This is a decorator that arranges for .next() to be called once immediately after a generator is created. This will turn a generator function into a function that returns a generator immediately ready to receive data (step 4).
 
-```Python
+```python
 def advance_generator_once(original_fn):
     "decorator to advance a generator once immediately after it is created"
     def actual_call(*args, **kwargs):
@@ -47,7 +47,7 @@ This generator uses a common pattern of storing the result that will be yielded 
 
 The outer while loop runs once for each full game. The inner while loop collects input from the users until the game result can be decided.
 
-```Python
+```python
 @advance_generator_once
 def rock_paper_scissors():
     """
