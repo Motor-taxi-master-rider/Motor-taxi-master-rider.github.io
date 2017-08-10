@@ -1,11 +1,11 @@
-﻿---
+---
 layout: post
-title: Python Descriptor
+title: Python descriptor behavior
 tags:
 - Descriptor
 categories:
 - Python
-description: 介绍了python中描述符（Descriptor）的种种。
+description: a talk about descriptor behavior in python.
 ---
 
 
