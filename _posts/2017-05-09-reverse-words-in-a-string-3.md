@@ -2,10 +2,10 @@
 layout: post
 title: LeetCode - Reverse Words in a String III
 tags:
-- Python
 - LeetCode
 - Python_map
-categories: Python
+categories:
+- Python
 description: Given a string, you need to reverse the order of characters in each word within a sentence while still preserving whitespace and initial word order.
 ---
 

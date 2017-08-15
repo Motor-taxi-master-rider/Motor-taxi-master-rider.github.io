@@ -2,13 +2,11 @@
 layout: post
 title: LeetCode - Find Largest Value in Each Tree Row
 tags:
-- Python
-- C++
 - LeetCode
 - Tree
 categories:
 - Python
-- C++
+- C
 description: You need to find the largest value in each row of a binary tree.
 ---
 

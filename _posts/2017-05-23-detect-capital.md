@@ -2,13 +2,11 @@
 layout: post
 title: LeetCode - Detect Capital
 tags:
-- Python
-- C++
 - Re
 - String
 categories:
 - Python
-- C++
+- C
 description: Given a word, you need to judge whether the usage of capitals in it is right or not.
 ---
 

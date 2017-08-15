@@ -2,13 +2,11 @@
 layout: post
 title: 总结：如何用位运算来简单高效地解决问题
 tags:
-- Python
-- C++
 - Bit_Manipulation
 - Translation
 categories:
 - Python
-- C++
+- C
 description: Bit manipulation is the act of algorithmically manipulating bits or other pieces of data shorter than a word. Computer programming tasks that require bit manipulation include low-level device control, error detection and correction algorithms, data compression, encryption algorithms, and optimization.
 ---
 # Question

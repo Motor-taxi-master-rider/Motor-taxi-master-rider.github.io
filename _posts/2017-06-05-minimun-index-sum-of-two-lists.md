@@ -2,11 +2,10 @@
 layout: post
 title: LeetCode - Minimum Index Sum of Two Lists
 tags:
-- C++
 - Hashtable
 - Vector
 categories:
-- C++
+- C
 description: Suppose Andy and Doris want to choose a restaurant for dinner, and they both have a list of favorite restaurants represented by strings.
 ---
 

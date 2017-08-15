@@ -161,7 +161,7 @@ class SubClass(Model):
         print('    self =', self)
 ```
 
-另外，在类中定义的函数属于绑定方法（bound method），因为用户定义的函数都有 __get__ 方法，所以依附到类上时，就相当于描述符。
+>另外，在类中定义的函数属于绑定方法（bound method），因为用户定义的函数都有 __get__ 方法，所以依附到类上时，就相当于描述符。
 
 ```python
 """
@@ -209,7 +209,7 @@ class Text(collections.UserString):
 
 # 总结
 
-描述符的作用方式可用以下函数表示：
+>描述符的作用方式可用以下函数表示：
 
 ```python
 x = C()

@@ -6,7 +6,7 @@ tags:
 - Hashtable
 - String
 categories:
-- C++
+- C
 - Python
 description: Given a string, sort it in decreasing order based on the frequency of characters.
 ---

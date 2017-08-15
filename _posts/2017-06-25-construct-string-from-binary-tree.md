@@ -6,7 +6,7 @@ tags:
 - Tree
 - String
 categories:
-- C++
+- C
 - Python
 description: You need to construct a string consists of parenthesis and integers from a binary tree with the preorder traversing way.
 ---

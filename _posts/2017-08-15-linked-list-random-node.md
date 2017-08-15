@@ -143,7 +143,7 @@ class Solution(object):
 >这是维基百科上关于加权蓄水池算法的R语言实现。
 
 In many applications sampling is required to be according to the weights that are assigned to each items available in set. For example, it might be required to sample queries in a search engine with weight as number of times they were performed so that the sample can be analyzed for overall impact on user experience. There are two ways to interpret weights assigned to each item in the set:
-1. Let the weight of each item be $$ {\displaystyle w_{i}} w_{i} $$ and sum of all weights be W. We can convert weight to probability of item getting selected in sample as $$ {\displaystyle P_{i}=w_{i}/W} P_{i}=w_{i}/W $$.
+1. Let the weight of each item be $$ {\displaystyle w_{i}} w_{i} $$ and sum of all weights be W. We can convert weight to probability of item getting selected in sample as $$ {\displaystyle P_{i}=w_{i}/W} $$.
 2. Let the weight of two items i and j be $$ {\displaystyle w_{i}} w_{i} and {\displaystyle w_{j}} w_{j} $$. Let the probability of item i getting selected in sample be $$ {\displaystyle p_{i}} p_{i }$$, then we give$$ {\displaystyle p_{j}=\min(1,p_{i}{\frac {w_{j}}{w_{i}}})} {\displaystyle p_{j}=\min(1,p_{i}{\frac {w_{j}}{w_{i}}})} $$.
 
 **Algorithm A-Res**

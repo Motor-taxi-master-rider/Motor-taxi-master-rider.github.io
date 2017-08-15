@@ -6,7 +6,7 @@ tags:
 - Re
 - Stringstream
 categories:
-- C++
+- C
 - Python
 description: Given two strings representing two complex numbers.
 ---

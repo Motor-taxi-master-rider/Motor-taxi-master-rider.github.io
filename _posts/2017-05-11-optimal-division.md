@@ -2,10 +2,10 @@
 layout: post
 title: LeetCode - Optimal Division
 tags:
-- Python
 - LeetCode
 - String
-categories: Python
+categories:
+- Python
 description: Given a list of positive integers, the adjacent integers will perform the float division. For example, [2,3,4] -> 2 / 3 / 4.
 ---
 

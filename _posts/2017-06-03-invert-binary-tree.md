@@ -1,12 +1,11 @@
-﻿---
+---
 layout: post
 title: LeetCode - Invert binary tree
 tags:
-- C++
 - Tree
 - Google
 categories:
-- C++
+- C
 description: Invert a binary tree.
 ---
 

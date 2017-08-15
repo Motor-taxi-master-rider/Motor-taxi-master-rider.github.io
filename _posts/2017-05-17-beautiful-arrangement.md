@@ -2,14 +2,12 @@
 layout: post
 title: LeetCode - Beautiful Arrangement
 tags:
-- Python
-- C++
 - LeetCode
 - Backtracking
 - DFS
 categories:
 - Python
-- C++
+- C
 description: Suppose you have N integers from 1 to N...
 ---
 

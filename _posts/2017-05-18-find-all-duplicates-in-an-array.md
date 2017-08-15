@@ -2,13 +2,11 @@
 layout: post
 title: LeetCode - Find All Duplicates in an Array
 tags:
-- Python
-- C++
 - LeetCode
 - Consecutive
 categories:
 - Python
-- C++
+- C
 description: Given a binary array, find the maximum number of consecutive 1s in this array.
 ---
 

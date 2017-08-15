@@ -2,10 +2,10 @@
 layout: post
 title: LeetCode - Find Bottom Left Tree Value
 tags:
-- Python
 - LeetCode
 - Tree
-categories: Python
+categories:
+- Python
 description: Given a binary tree, find the leftmost value in the last row of the tree.
 ---
 

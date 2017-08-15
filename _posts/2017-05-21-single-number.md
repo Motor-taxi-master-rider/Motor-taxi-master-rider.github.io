@@ -2,13 +2,11 @@
 layout: post
 title: LeetCode - Single Number
 tags:
-- Python
-- C++
 - LeetCode
 - Bit_Manipulation
 categories:
 - Python
-- C++
+- C
 description: Given an array of integers, every element appears twice except for one. Find that single one.
 ---
 
