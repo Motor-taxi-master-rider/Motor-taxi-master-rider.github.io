@@ -34,7 +34,7 @@ solution.getRandom();
 
 # Analytics
 
-当数据流长度已知或不大的时候可以简单的解决这个问题：遍历链表之后得到长度n，以`\frac{1}{n}`的概率选取元素。
+当数据流长度已知或不大的时候可以简单的解决这个问题：遍历链表之后得到长度n，以`$$ \frac{1}{n} $$`的概率选取元素。
 
 但当给出数据流的长度很大或者未知时，我们将无法做遍历链表得到长度的操作。此时因为数据流很大，为了追求效率，该数据流中数据只能访问一次。有没有这么一个随机选择算法，使得该数据流中的所有数据被选中的概率相等呢？
 
@@ -45,7 +45,7 @@ solution.getRandom();
 蓄水池抽样是一种从一个包含`n`个元素的列表`S`中随机抽取`k`个样本的随机算法，这里的`n`是一个非常大或者未知的值。
 
 这个算法的基本思想就是先选中`1`到`k`个元素，作为被选中的元素。然后依次对第`k+1`至第`n`个元素做以下操作：
-每个元素都有`\frac{k}{i}`的概率被选中，然后以等概率`\frac{1}{k}`替换掉被选中的元素。其中`i`是元素的序号。
+每个元素都有`$$ \frac{k}{i} $$`的概率被选中，然后以等概率`$$ \frac{1}{k} $$`替换掉被选中的元素。其中`i`是元素的序号。
 
 ## 算法证明
 
@@ -144,8 +144,8 @@ class Solution(object):
 >这是维基百科上关于加权蓄水池算法的R语言实现。
 
 In many applications sampling is required to be according to the weights that are assigned to each items available in set. For example, it might be required to sample queries in a search engine with weight as number of times they were performed so that the sample can be analyzed for overall impact on user experience. There are two ways to interpret weights assigned to each item in the set:
-1. Let the weight of each item be {\displaystyle w_{i}} w_{i} and sum of all weights be W. We can convert weight to probability of item getting selected in sample as {\displaystyle P_{i}=w_{i}/W} P_{i}=w_{i}/W.
-2. Let the weight of two items i and j be {\displaystyle w_{i}} w_{i} and {\displaystyle w_{j}} w_{j}. Let the probability of item i getting selected in sample be {\displaystyle p_{i}} p_{i}, then we give {\displaystyle p_{j}=\min(1,p_{i}{\frac {w_{j}}{w_{i}}})} {\displaystyle p_{j}=\min(1,p_{i}{\frac {w_{j}}{w_{i}}})}.
+1. Let the weight of each item be $$ {\displaystyle w_{i}} w_{i} $$ and sum of all weights be W. We can convert weight to probability of item getting selected in sample as $${\displaystyle P_{i}=w_{i}/W} P_{i}=w_{i}/W$$.
+2. Let the weight of two items i and j be $$ {\displaystyle w_{i}} w_{i} and {\displaystyle w_{j}} w_{j} $$. Let the probability of item i getting selected in sample be $$ {\displaystyle p_{i}} p_{i }$$, then we give$$ {\displaystyle p_{j}=\min(1,p_{i}{\frac {w_{j}}{w_{i}}})} {\displaystyle p_{j}=\min(1,p_{i}{\frac {w_{j}}{w_{i}}})} $$.
 
 **Algorithm A-Res**
 ```r
