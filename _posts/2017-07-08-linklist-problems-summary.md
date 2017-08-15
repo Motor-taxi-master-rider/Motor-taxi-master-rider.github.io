@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Linklist problems summary
+title: Linklist Problems Summary
 tags:
 - Linklist
 - Data_Structure

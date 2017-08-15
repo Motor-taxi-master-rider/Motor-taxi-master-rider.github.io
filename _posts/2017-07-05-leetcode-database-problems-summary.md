@@ -1,6 +1,6 @@
 ---
 layout: post
-title: LeetCode - Database problems summary
+title: LeetCode - Database Problems Summary
 tags:
 - LeetCode
 - Mysql

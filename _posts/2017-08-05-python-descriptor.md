@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Python descriptor behavior
+title: Python Descriptor Behavior
 tags:
 - Descriptor
 categories:

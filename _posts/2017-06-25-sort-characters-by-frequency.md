@@ -1,6 +1,6 @@
 ---
 layout: post
-title: LeetCode - Sort Characters By Frequency
+title: LeetCode - Sort Characters by Frequency
 tags:
 - LeetCode
 - Hashtable

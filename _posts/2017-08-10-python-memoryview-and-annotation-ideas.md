@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Python memoryview and annotation ideas
+title: Python Memoryview and Annotation Ideas
 tags:
 - Memoryview
 - Annotation
@@ -11,7 +11,7 @@ description: some brief ideas and preliminary cognition of python memoryview and
 
 
 # Description
-**memoryview**(内存视图)是一个内置类，它能让用户在不复制内容的情况下操作同一个数组的不同切片。memoryview 的概念受到了 NumPy 的启发（参见 2.9.3 节）。Travis Oliphant 是 NumPy 的主要作者，他在回答“ When should a memoryview be used?”（http://stackoverflow.com/questions/4845418/when-should-a-memoryview-be-used/）这个问题时是这样说的：
+**Memoryview** (内存视图)是一个内置类，它能让用户在不复制内容的情况下操作同一个数组的不同切片。memoryview 的概念受到了 NumPy 的启发（参见 2.9.3 节）。Travis Oliphant 是 NumPy 的主要作者，他在回答“ When should a memoryview be used?” [link](http://stackoverflow.com/questions/4845418/when-should-a-memoryview-be-used/）这个问题时是这样说的：
 
 内存视图其实是泛化和去数学化的 NumPy 数组。它让你在不需要复制内容的前提下，在数据结构之间共享内存。其中数据结构可以是任何形式，比如 PIL 图片、SQLite 数据库和 NumPy 的数组，等等。这个功能在处理大型数据集合的时候非常重要。
 
