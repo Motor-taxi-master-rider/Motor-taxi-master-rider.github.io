@@ -84,7 +84,7 @@ Init : a reservoir with the size： k
 
 ## 加权分布式蓄水池抽样
 
-有时候我们的蓄水池中的数据是有权重，算法希望数据被抽样选中的概率和该数据的权重成正比。2005年Pavlos S. Efraimidis和Paul G. Spirakis的论文[Weighted random sampling with a reservoir](http://dl.acm.org/citation.cfm?id=1138834)提供了对于加权状态下这一问题的解决方案。们的解法既简单又优雅，基本思想和上面的分布式蓄水池抽样一致：对于每个数据计算一个0-1的值R，并求r的n次方根作为该数据的新的R值。这里的n就是该数据的权重。最终算法返回前k个R值最高的数据然后返回。根据计算规则，权重越大的数据计算所得的R值越接近1，所以越有可能被返回。
+有时候我们的蓄水池中的数据是有权重，算法希望数据被抽样选中的概率和该数据的权重成正比。2005年Pavlos S. Efraimidis和Paul G. Spirakis的论文[Weighted random sampling with a reservoir](http://dl.acm.org/citation.cfm?id=1138834)提供了对于加权状态下这一问题的解决方案。他的解法既简单又优雅，基本思想和上面的分布式蓄水池抽样一致：对于每个数据计算一个0-1的值R，并求r的n次方根作为该数据的新的R值。这里的n就是该数据的权重。最终算法返回前k个R值最高的数据然后返回。根据计算规则，权重越大的数据计算所得的R值越接近1，所以越有可能被返回。
 
 # Best practice
 
