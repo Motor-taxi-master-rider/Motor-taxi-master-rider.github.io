@@ -40,7 +40,7 @@ function = function_wrapper(function)
 >1.定义类
 
 ```python
-class function_wrapper(object):
+class function_wrapper:
     def __init__(self, wrapped):
         self.wrapped = wrapped
     def __call__(self, *args, **kwargs):
@@ -79,7 +79,7 @@ def function_wrapper(wrapped):
         return wrapped(*args, **kwargs)
     return _wrapper
 
-class function_wrapper(object):
+class function_wrapper:
     def __init__(self, wrapped):
         self.wrapped = wrapped
         #对于类使用functools.update_wrapper装饰
@@ -131,14 +131,14 @@ def update_wrapper(wrapper, wrapped,
 解决问题的一个办法是为普通函数和类中函数分配各自的装饰方法，这样形成的装饰器也会是一种描述符。
 
 ```python
-class bound_function_wrapper(object):
+class bound_function_wrapper:
     def __init__(self, wrapped):
         self.wrapped = wrapped
         functools.update_wrapper(self, wrapped)
     def __call__(self, *args, **kwargs):
         return self.wrapped(*args, **kwargs)
 
-class function_wrapper(object):
+class function_wrapper:
     def __init__(self, wrapped):
         self.wrapped = wrapped
         functools.update_wrapper(self, wrapped)
@@ -158,7 +158,7 @@ class function_wrapper(object):
 
 ```python
 #这个对象代理的例子只代理了一些基本的方法。
-class object_proxy(object):
+class object_proxy:
 
     def __init__(self, wrapped):
         self.wrapped = wrapped
@@ -181,7 +181,7 @@ class object_proxy(object):
 class bound_function_wrapper(object_proxy):
 
     def __init__(self, wrapped):
-        super(bound_function_wrapper, self).__init__(wrapped)
+        super().__init__(wrapped)
 
     def __call__(self, *args, **kwargs):
         return self.wrapped(*args, **kwargs)  
@@ -189,7 +189,7 @@ class bound_function_wrapper(object_proxy):
 class function_wrapper(object_proxy):
 
     def __init__(self, wrapped):
-       super(function_wrapper, self).__init__(wrapped)
+       super().__init__(wrapped)
 
     def __get__(self, instance, owner):
         wrapped = self.wrapped.__get__( instance, owner)
@@ -199,9 +199,112 @@ class function_wrapper(object_proxy):
         return self.wrapped(*args, **kwargs)
 ```
 
->这时，__name__ 和 __doc__ 之类的属性将会从代理对象中获取，inspect.getargspec()和inspect.getsource()也能够顺利工作。
+>这时__name__和__doc__ 之类的属性将会从代理对象中获取，inspect.getargspec()和inspect.getsource()也能够顺利工作。
 
 这个方案还存在的一个明显缺陷就是：每次我们要定义一个新装饰器便要继承object_proxy代理函数并写两个类的代码。为了让我们的装饰器更好用不妨用工厂函数来帮我们完成这项重复工作。
+
+## 使用装饰器工厂来创建装饰器
+在这节我们的目的是创建一个帮助我们更好地创建装饰器的装饰器。这可能听起来有些拗口，但这种设计确实能减少我们构建一个新的装饰器时候的代码。简而言之，我们的目标是让我们可以像这样创建一个装饰器：
+
+```python
+@decorator
+def my_function_wrapper(wrapped, args, kwargs):
+    return wrapped(*args, **kwargs)
+
+@my_function_wrapper
+def function():
+    pass
+```
+
+事实上，我们的装饰器工厂的实现方式和使用`partial()`函数很像，它在定义时将新装饰器绑入，在运行时接受被新装饰器装饰的的对象。因此在我们之前的定义的装饰器基础上要传入wrapper参数。
+
+```python
+import functools
+def decorator(wrapper):
+    @functools.wraps(wrapper)
+    def _decorator(wrapped):
+        return function_wrapper(wrapped, wrapper)
+    return _decorator
+
+class bound_function_wrapper(object_proxy):
+
+    def __init__(self, wrapped, wrapper):
+        super().__init__(wrapped)
+        self.instace = instance #为之后的内省保存instance属性
+        self.wrapper = wrapper
+
+    def __call__(self, *args, **kwargs):
+      if self.instance is None:
+        #当类方法以Class.method(instance,arg1,arg2)的形式调用
+        #的时候，会产生self.instance为None的特殊情况，这时第一
+        #个参数为instance，其余参数为传入变量，以这个形式返回被
+        #装饰好的类方法
+        instance,args = args[0], args[1:]
+        wrapped = functools.partial(self.wrapped, instance)
+        return self.wrapper(wrapped, instance, args, kwargs)
+      return self.wrapper(self.wrapped, self.instance, args, kwargs)
+
+class function_wrapper(object_proxy):
+
+    def __init__(self, wrapped, wrapper):
+        super().__init__(wrapped)
+        self.wrapper = wrapper
+
+    def __get__(self, instance, owner):
+        wrapped = self.wrapped.__get__(instance, owner)
+        return bound_function_wrapper(wrapped, instance, self.wrapper)  #当装饰器附加在类方法时传入该instance
+
+    def __call__(self, *args, **kwargs):
+        return self.wrapper(self.wrapped, None, args, kwargs) #当装饰器附加在普通函数时instance变量传入None
+```
+
+这个装饰器工厂的使用示例如下：
+
+```python
+@decorator
+def my_function_wrapper(wrapped, instance, args, kwargs):
+    print('INSTANCE', instance)
+    print('ARGS', args)
+    return wrapped(*args, **kwargs)
+
+@my_function_wrapper
+def function(a, b):
+    pass
+
+class Class(object):
+    @my_function_wrapper
+    def function_im(self, a, b):
+        pass
+
+>>> function(1, 2)
+INSTANCE None
+ARGS (1, 2)
+
+>>> c.function_im(1, 2)
+INSTANCE <__main__.Class object at 0x1085ca9d0>
+ARGS (1, 2)
+
+>>> Class.function_im(c, 1, 2)
+INSTANCE <__main__.Class object at 0x1085ca9d0>
+ARGS (1, 2)
+```
+
+可以看到这个设计已经比较好地解决了我们之前遇到的那些问题，但这仍旧不是一个完美的方案。秉持着求真务实的精神，我们可以发现该装饰器如果叠加载classmethod上则会出现问题：
+
+```python
+class Class(object):
+
+    @my_function_wrapper
+    @classmethod
+    def function_cm(cls, a, b):
+        pass
+
+>>> Class.function_cm(1, 2)
+INSTANCE 1
+ARGS (2,)
+```
+
+我们也很绝望啊,所以只能改进啦。接下来我们会设计一个统一装饰器（宇宙装饰器）来对装饰器附加在普通函数、实例方法、类方法、静态函数甚至类上的情况分发对应的策略。
 
 
 # Additional
