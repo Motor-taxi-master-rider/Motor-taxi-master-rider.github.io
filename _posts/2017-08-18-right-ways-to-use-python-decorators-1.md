@@ -335,7 +335,7 @@ class bound_function_wrapper(object_proxy):
                 return self.wrapper(self.wrapped, self.instance, args, kwargs)
         else:
             #如果是类方法或者静态方法调用
-            instance = getattr(self.wrapped, '__self__', None) #当为时类方法instance变量等于方法__self__即Class对象，党委静态方法时则为None
+            instance = getattr(self.wrapped, '__self__', None) #当为时类方法instance变量等于方法__self__即Class对象，当为静态方法时则为None
             return self.wrapper(self.wrapped, instance, args, kwargs)
 
 class function_wrapper(object_proxy):
