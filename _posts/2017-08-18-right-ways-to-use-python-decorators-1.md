@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Python装饰器的正确打开方式
+title: Python装饰器的正确打开方式(1)
 tags:
 - Decorator
 - Wrapt
@@ -306,6 +306,89 @@ ARGS (2,)
 
 我们也很绝望啊,所以只能改进啦。接下来我们会设计一个统一装饰器（宇宙装饰器）来对装饰器附加在普通函数、实例方法、类方法、静态函数甚至类上的情况分发对应的策略。
 
+## 讲类方法和静态方法纳入疆界
+在解决之前，我们先明确一下问题。我们的目标是让我们的装饰器能够区分以下三种不同的方法：
+* 通过类的途径运行的实例方法
+* 被classmethod装饰的类方法
+* 被staticmethod装饰的静态方法
+
+首先能想到的是一个简单的方法，就是在传入一个参数来记录被绑定的方法类型。因此我们可以对代码作如下修改。
+
+```python
+class bound_function_wrapper(object_proxy):
+
+    def __init__(self, wrapped, instance, wrapper, binding):
+        super(bound_function_wrapper, self).__init__(wrapped)
+        self.instance = instance
+        self.wrapper = wrapper
+        self.binding = binding  #传入绑定的方法类型
+
+    def __call__(self, *args, **kwargs):
+        if self.binding == 'function':  #方法调用
+            if self.instance is None:
+                #以Class.method(instan,args,kwargs)形式调用，则取第一个参数作为self
+                instance, args = args[0], args[1:]
+                wrapped = functools.partial(self.wrapped, instance)
+                return self.wrapper(wrapped, instance, args, kwargs)
+            else:
+                #以instance.method()方式调用
+                return self.wrapper(self.wrapped, self.instance, args, kwargs)
+        else:
+            #如果是类方法或者静态方法调用
+            instance = getattr(self.wrapped, '__self__', None) #当为时类方法instance变量等于方法__self__即Class对象，党委静态方法时则为None
+            return self.wrapper(self.wrapped, instance, args, kwargs)
+
+class function_wrapper(object_proxy):
+
+    def __init__(self, wrapped, wrapper):
+        super(function_wrapper, self).__init__(wrapped)
+        self.wrapper = wrapper
+        #判断被绑定方法的种类
+        if isinstance(wrapped, classmethod):
+            self.binding = 'classmethod'
+        elif isinstance(wrapped, staticmethod):
+            self.binding = 'staticmethod'
+        else:
+            self.binding = 'function'
+
+    def __get__(self, instance, owner):
+        wrapped = self.wrapped.__get__(instance, owner)
+        return bound_function_wrapper(wrapped, instance, self.wrapper,
+                self.binding)
+
+    def __call__(self, *args, **kwargs):
+        return self.wrapper(self.wrapped, None, args, kwargs)
+```
+
+接下来我们可以分别对普通类方法im，类方法cm，静态方法sm做测试来检验了：
+
+```python
+>>> c.function_im(1,2)
+INSTANCE <__main__.Class object at 0x10c2c43d0>
+ARGS (1, 2)
+
+>>> Class.function_im(c, 1, 2)
+INSTANCE <__main__.Class object at 0x10c2c43d0>
+ARGS (1, 2)
+
+>>> c.function_cm(1,2)
+INSTANCE <class '__main__.Class'>
+ARGS (1, 2)
+
+>>> Class.function_cm(1, 2)
+INSTANCE <class '__main__.Class'>
+ARGS (1, 2)
+
+>>> c.function_sm(1,2)
+INSTANCE None
+ARGS (1, 2)
+
+>>> Class.function_sm(1, 2)
+INSTANCE None
+ARGS (1, 2)
+```
+
+写完这些代码就可以了嘛，很不幸的告诉你，这还不够。在接下来的博文中会展现GrahamDumpleton对装饰器理解的方方面面，让我们来看看他对完美装饰器的不懈追求吧。
 
 # Additional
 参考文献:
