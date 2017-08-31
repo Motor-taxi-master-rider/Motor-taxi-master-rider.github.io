@@ -4,7 +4,7 @@ title: 一个简单的文本解析计算器
 tags:
 - Coroutine
 - Singledispatch
-- Parse_tree
+- Tree
 - Stackless
 categories:
 - Python
