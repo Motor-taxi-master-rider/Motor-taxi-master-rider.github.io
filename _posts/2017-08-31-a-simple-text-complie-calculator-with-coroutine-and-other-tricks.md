@@ -8,7 +8,7 @@ tags:
 - Stackless
 categories:
 - Python
-description: implement a simple text-compile calculator with following techs: coroutine, functools.singledispatch, re.scanner, the target of this tutorial is to implement visiter parttern with stackless python.
+description: the target of this tutorial is to implement visiter parttern with stackless python.
 ---
 
 
@@ -262,6 +262,20 @@ meth = getattr(self, methname, None)
 4. 将`1`传入委派生成器`B`代理的协程`b`，此时`left = yield node.left`中变量`left`获得传入值并继续`yield`出右节点`BinOp('*',x,y)`
 5. 中间重复过程不再累述，当协程走至`return switch.get(node.op, None)(left, right)`则会抛出`StopIteration`异常和该表达式的运算结果，以此层层回溯得到最终的结果。
 
+# 总结
+
+至此，我们已经完成对`Calculator`类的编写，可以通过以下方式进行测试：
+
+```python
+cal = Calculator()
+cal.caculate('1+2*4-5^2')
+```
+
+其实我们完全可以用python自带的`eval`方法来执行任意字符串代码。但之所以我们要大费周章地用协程实现这一文本计算器，是为了在python中实践`stackless`的思想。
+
+比如要计算`cal.caculate('+'.join(str(i) for i in range(2017)))`,我们的`parse`函数会生成一棵超过两千深度的树，这时候就无法用递归的方式来遍历树了。
+
+另外，如cookbook里说的，如果我们想用另一种没有`yield`语句的方案，我们不得不处理很多棘手的问题。例如，为了消除递归，我们必须要维护一个栈结构。如果不使用生成器，代码就会变得很臃肿，到处都是栈操作语句、会掉函数等。因此使用`yield`可以让你写出非常漂流的代码，它消除了递归但看上去又很像是递归实现，代码很简洁。
 
 
 # Additional
