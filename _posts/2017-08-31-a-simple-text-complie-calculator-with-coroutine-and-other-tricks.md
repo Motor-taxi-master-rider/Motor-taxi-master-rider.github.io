@@ -21,6 +21,15 @@ description: the target of this tutorial is to implement visiter parttern with s
 
 # 代码实现
 
+我们希望实现的计算器能够这样使用：
+
+```python
+cal = Calculator()
+cal.caculate('1+2*4-5^2')
+
+>>> -16
+```
+
 从逻辑上来说，这个文本计算器会为我们分三步做事情：
 
 1. 解析传入文本，将文本转换成可识别单元。很容易想到的是使用正则表达式来解析文本。
@@ -125,6 +134,25 @@ def _tokenize(self, text):
 
 这里值得一提的是`re`模块的`scanner`方法。不知道是不是刻意而为之，它没有任何官方的文档。在我们这个简单编译器的情景下，它逐个扫描传入字符串里的所有符合正则表达式的元素并输出。
 
+对于`1+2*4-5^2`我们将生成这些元素：
+
+```python
+cal = Calculator()
+   cal.text='1+2*4-5^2'
+   for item in cal._tokenize(cal.text):
+       print(item)
+
+>>>Token(type='NUM', value='1')
+Token(type='PLUS', value='+')
+Token(type='NUM', value='2')
+Token(type='TIMES', value='*')
+Token(type='NUM', value='4')
+Token(type='MINUS', value='-')
+Token(type='NUM', value='5')
+Token(type='POWER', value='^')
+Token(type='NUM', value='2')
+```
+
 ## Parse
 
 ```python
@@ -177,6 +205,14 @@ def _parse(self, toks):
 `Parse`方法通过`accept`函数来遍历`tokenize`返回的字符元素迭代器，并通过树状的函数结构来生成一棵真正的树。非常欣赏它的模仿能力。
 
 它将表达式在语意上分为三种类型：term，pow，factor (实际上这些名字没什么特别的意意义)。例如`1+2*4-5^2`这个表达式，factor为最小单元即数字，factor组成pow即` 1 2 4 5^2`为次小单元，pow组成term`1 2*4 5^2`,term组成表达式来体现运算符的优先级。
+
+对于`1+2*4-5^2`我们可以这样生成树：
+
+```python
+cal = Calculator()
+cal.text='1+2*4-5^2'
+print(cal._parse(cal._tokenize(cal.text)))
+```
 
 ## Evaluate
 
@@ -264,12 +300,7 @@ meth = getattr(self, methname, None)
 
 # 总结
 
-至此，我们已经完成对`Calculator`类的编写，可以通过以下方式进行测试：
-
-```python
-cal = Calculator()
-cal.caculate('1+2*4-5^2')
-```
+至此，我们已经完成对`Calculator`类的编写。
 
 其实我们完全可以用python自带的`eval`方法来执行任意字符串代码。但之所以我们要大费周章地用协程实现这一文本计算器，是为了在python中实践`stackless`的思想。
 
