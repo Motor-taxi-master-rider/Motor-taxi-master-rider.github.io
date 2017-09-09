@@ -2,7 +2,7 @@
 layout: post
 title: 总结：如何用位运算来简单高效地解决问题
 tags:
-- Bit_Manipulation
+- Bit_manipulation
 - Translation
 categories:
 - Python

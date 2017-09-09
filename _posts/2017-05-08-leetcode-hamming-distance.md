@@ -62,13 +62,13 @@ class Solution(object):
         bit = x ^ y
         count = 0
         while bit:
-            if bit & 1 == 1:
+            if bit & 1:
                 count += 1
             bit = bit >> 1
         return count
 ```
 
-**Mark:** 97%
+**Mark:** 42 ms
 
 __________
 # Additional

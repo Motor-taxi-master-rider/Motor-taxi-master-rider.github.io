@@ -3,7 +3,7 @@ layout: post
 title: LeetCode - Single Number
 tags:
 - LeetCode
-- Bit_Manipulation
+- Bit_manipulation
 categories:
 - Python
 - C
