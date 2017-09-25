@@ -17,7 +17,7 @@ description: a further talk about descriptor behavior in python.
 # 属性访问的优先规则
 属性访问的入口点是`__getattribute__`方法。它的实现中定义了Python中属性访问的优先规则。Python官方文档中对`__getattribute__`的底层实现有相关的介绍，本文暂时只是讨论属性查找的规则，相关规则可见下图：
 
-<img src="motor-taxi-master-rider.github.io/{{ site.assets }}/img/python_descriptor.png"  title="{{site.title }}"/>
+<img src="https://motor-taxi-master-rider.github.io/assets/img/python_descriptor.png"  title="{{site.title }}"/>
 
 上图是查找b.x这样一个属性的过程。在这里要对此图进行简单的介绍：
 
