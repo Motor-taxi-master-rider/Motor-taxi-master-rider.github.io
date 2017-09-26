@@ -298,6 +298,3 @@ TypeError: No matching method for types (<class '__main__.B'>,)
 ```
 
 # Additional
-参考文献:
-1. [Less Copies in Python with the Buffer Protocol and memoryviews](http://eli.thegreenplace.net/2011/11/28/less-copies-in-python-with-the-buffer-protocol-and-memoryviews/)
-2. [Memoryview Q&A](https://stackoverflow.com/questions/3038033/what-are-good-uses-for-python3s-function-annotations)
