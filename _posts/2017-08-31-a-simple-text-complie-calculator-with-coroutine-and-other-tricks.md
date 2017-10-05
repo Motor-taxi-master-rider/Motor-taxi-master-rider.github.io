@@ -43,9 +43,9 @@ cal.caculate('1+2*4-5^2')
 
 本文代码环境为python3.6。
 
-首先定义好此次所需的数据结构。在这里我们利用了David在[Python 3 Metaprogramming](https://www.youtube.com/watch?time_continue=13&v=sPiWg5jSoZI)中所描述的元编程的方式来批量地构造简单结构类型。这里我们对他的代码稍作改进，使其支持默认参数及参数注释。这也算我们对元编程的一个小小实践。
+首先定义好此次所需的数据结构。在这里我们利用了David在[Python 3 Metaprogramming](https://www.youtube.com/watch?time_continue=13&v=sPiWg5jSoZI)中所描述的元编程的方式来批量地构造简单结构类型。这里我们对他的代码稍作改进，使其支持默认参数及参数注释。这也算我们对元编程的一个小小实践，读者不需要理解这部分的内容就可以完成余下的阅读。
 
-这里也用到了python3的新特性，inpect模块的signature部分，具体可参见[官方文档](https://docs.python.org/3/library/inspect.html)。
+这里也用到了python3的新特性，`inpect`模块的signature部分，具体可参见[官方文档](https://docs.python.org/3/library/inspect.html)。
 
 定义数据结构的代码如下：
 
@@ -104,7 +104,7 @@ class BinOp(Structure):
     _fields = ['op', 'left', 'right']
 ```
 
-其次则是要使用的Calculator的基本框架：
+其次则是要使用的Calculator的基本框架，三个关键步骤的函数讲在余下节内容一一实现：
 
 ```python
 class Calculator:
