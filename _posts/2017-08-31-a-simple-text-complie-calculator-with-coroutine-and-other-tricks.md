@@ -6,6 +6,7 @@ tags:
 - Singledispatch
 - Tree
 - Stackless
+- Metaprogramming
 categories:
 - Python
 description: the target of this tutorial is to implement visiter parttern with stackless python.
@@ -40,33 +41,72 @@ cal.caculate('1+2*4-5^2')
 
 ## 准备工作
 
-首先定义好此次所需的数据结构和计算器类：
+本文代码环境为python3.6。
+
+首先定义好此次所需的数据结构。在这里我们利用了David在[Python 3 Metaprogramming](https://www.youtube.com/watch?time_continue=13&v=sPiWg5jSoZI)中所描述的元编程的方式来批量地构造简单结构类型。这里我们对他的代码稍作改进，使其支持默认参数及参数注释。这也算我们对元编程的一个小小实践。
+
+这里也用到了python3的新特性，inpect模块的signature部分，具体可参见[官方文档](https://docs.python.org/3/library/inspect.html)。
+
+定义数据结构的代码如下：
 
 ```python
 import re
 import types
 from collections import namedtuple
 from functools import singledispatch
+from inspect import Parameter, Signature
 
 
-class Node:
+def make_signature(names):
+    """用一个列表来产生参数签名的模块函数,也可以放在StructureMeta内部"""
+    parameters = []
+    #抓出参数的名称、默认值和注释
+    parameter_re = re.compile(r'^(?P<name>\w+)(\s*=\s*(?P<default>\w+))?(\s*:\s*(?P<annotation>\w+))?$')
+    for name in names:
+        re_result = parameter_re.match(name)
+        if not re_result:
+            raise SyntaxError('Invalid parameter syntax：{}'.format(name))
+        parameters.append(Parameter(kind=Parameter.POSITIONAL_OR_KEYWORD, **re_result.groupdict()))  #支持参数默认值和注释
+    return Signature(parameters)
+
+
+class StructureMeta(type):
+    """
+    Structure类的元类，在生成class的时候将_fields里提供的属性转化为
+    参数签名类属性。
+    """
+
+    def __new__(cls, name, bases, clsdict):
+        clsobj = super().__new__(cls, name, bases, clsdict)
+        sig = make_signature(clsobj._fields)
+        setattr(clsobj, '__signature__', sig)
+        return clsobj
+
+
+class Structure(metaclass=StructureMeta):
     """简易数据结构构造父类"""
     _fields = []
 
-    def __init__(self, *args):
-        for name, value in zip(self._fields, args):
-            setattr(self, name, value)
+    def __init__(self, *args, **kwargs):
+        # 这里实际上取的是self.__class___.__signature__
+        bound = self.__signature__.bind(*args, **kwargs)
+        for name, val in bound.arguments.items():
+            setattr(self, name, val)
 
 
-class Number(Node):
+class Number(Structure):
     """数字型"""
     _fields = ['value']
 
 
-class BinOp(Node):
+class BinOp(Structure):
     """操作符号型"""
     _fields = ['op', 'left', 'right']
+```
 
+其次则是要使用的Calculator的基本框架：
+
+```python
 class Calculator:
     # 可以被tokenize函数解析的字符
     TOKENS = [

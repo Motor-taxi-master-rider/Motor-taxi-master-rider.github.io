@@ -105,7 +105,10 @@ a = A(1, 2)
 b = B('Hello', 'world')
 ```
 
-这些代码是通不过当时版本`PyPy`的编译的，然而在现在版本中可以正常运行。
+这些代码是通不过当时版本`PyPy`的编译的，然而在现在版本中可以正常运行，这点着实让我惊讶。David提到的一个`PyPy`的独特处理方式，就是讲纯python代码和rpython代码分开编译，我想这大概是其中原因。
+
+<img src="https://motor-taxi-master-rider.github.io/assets/img/pypy_compile_1.png"  title="PyPy处理方式"/>
+
 
 
 # Additional
