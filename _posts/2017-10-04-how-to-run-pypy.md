@@ -11,7 +11,7 @@ description: an attempt to run pypy in linux.
 
 # Description
 `PyPy`是目前速度最快的python解释器。先不说它惊人的用python来编写python解释器的理念，之前在planet python里看到一篇`PyPy`计划移除GIL的[文章](https://morepypy.blogspot.com/2017/08/lets-remove-global-interpreter-lock.html)就已经让我惊为天人了。
-听了David Beazley在2012年关于`PyPy`和`Rpython`的几个演讲之后([Additional](# additional) 1,2,3)，就对这个项目起了浓厚的兴趣。
+听了David Beazley在2012年关于`PyPy`和`Rpython`的几个演讲之后([Additional](#additional) 1,2,3)，就对这个项目起了浓厚的兴趣。
 
 # Download and install
 可以在<https://pypy.org/download.html>下载到`PyPy`的最新版本。`PyPy`已经支持python2.7和3.5.3了，但基于python3的`PyPy`依旧是一个beta版本，并且声称比`PyPy`2的速度慢很多。因为我们选择安装了基于Ubuntu的64位`PyPy`。解压后，为了日后使用我们使用以下命令在`/usr/local/bin`下创建一个软连接,其中第一个目录为`PyPy`的安装目录：
@@ -30,15 +30,15 @@ David给了一段斐波那契数列的测试代码,其中`PyPy`是将`target`函
 
 import sys
 def fib(n):
-        if n < 2:
-                return n
-        else:
-                return fib(n-1) + fib(n-2)
+    if n < 2:
+        return n
+    else:
+        return fib(n-1) + fib(n-2)
 
 
 def main(argv):
-        print(fib(int(argv[1])))
-        return 0
+    print(fib(int(argv[1])))
+    return 0
 
 
 if __name__ == '__main__':
