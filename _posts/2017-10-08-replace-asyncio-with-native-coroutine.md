@@ -199,7 +199,7 @@ asyncio库其实有很大的历史包袱。python中的协程从单纯的yield�
 受到[Icon语言](https://www2.cs.arizona.edu/icon/)的启发，python2.2中生成器首次被[PEP255 - simple generators](https://www.python.org/dev/peps/pep-0255/)引入。
 而python2.5中yield语法的加入使得这一使用更少内存来迭代序列的想法更加实用。在这一版本中，[PEP342 - coroutine via enhanced generators](https://www.python.org/dev/peps/pep-0342/)使得python中的生成器不再试一点单纯的迭代器，被暂停的生成器也拥有了可以被send信息，与外界交互的能力。
 生成器协程在相安无事了数个版本之后，终于在python3.3版本中[PEP380 - syntax for delegating to a subgenerator](https://www.python.org/dev/peps/pep-0380/)增加了新的语法yield from简化了协程之间的管道式调用。同一个版本中Guido主导的asyncio库作为实验性发布，并且在python3.4中正式成为标准库的一员。
-python3.5中协程迎来了新的纪元，加入async def、async with、async for、await语法及相对应的底层协议。为了以示区分，用这些语法构成的协程称之为原生协程。原生协程不可以await一个非协程生成器，彻底讲生成器与协程的界限划分开来。
+python3.5中协程迎来了新的纪元，[PEP492 - Coroutine with async and await syntax](https://www.python.org/dev/peps/pep-0492/)加入async def、async with、async for、await语法及相对应的底层协议。为了以示区分，用这些语法构成的协程称之为原生协程。原生协程不可以await一个非协程生成器，彻底将生成器与协程的界限划分开来。
 
 # Additional
 源代码：
