@@ -188,13 +188,18 @@ if __name__ == '__main__':
     server.serve_forever()
 ```
 
-每秒处理的请求数为`16807.0229190064 message/sec`，甚至原生协程比它还高一点。在David的线程测试的时候它和原生协程的效率是差不多的。
+在python3.6下它的每秒处理的请求数为`16807.0229190064 message/sec`，原生协程甚至比它还高一点。在David的线程测试的时候，他调用了python2.7的环境，使它和原生协程的效率是差不多。
 
 # 结语
 asyncio库其实有很大的历史包袱。python中的协程从单纯的yield生成器开始，经历了一个一个版本的变迁，生成器得到可以用`send`、`yield`，`throw`与外界通信的功能成为了意义上的协程；之后python3.3版本中加入的`yield from`给予了生成器协程更多的便利与可能；为期三年的郁金香项目逐渐孵化出asyncio又结合了以上的这些协程生成器组件及futures、callback、polling在3.4版本给我们带来了新的async模块。但要演化出这么一个模块所经历的一切实在是太久太长，我们面临的问题是：经过了这么多版本和这么久的时间变迁后是否它是最好的呢？有没有一个一步到位的协程来让我们使用呢？
 
 在3.5版本中原生协程出现了，经过上面的实验我们可以初步判断它是一个更具效率的协程实现方案。这也让python有了新的优良特性，也让python在aync方向前进了一大步。
 
+>在[How the heck does async/await work in Python 3.5?](https://snarky.ca/how-the-heck-does-async-await-work-in-python-3-5/)一文中详细的介绍了python async的历史：
+受到[Icon语言](https://www2.cs.arizona.edu/icon/)的启发，python2.2中生成器首次被[PEP255 - simple generators](https://www.python.org/dev/peps/pep-0255/)引入。
+而python2.5中yield语法的加入使得这一使用更少内存来迭代序列的想法更加实用。在这一版本中，[PEP342 - coroutine via enhanced generators](https://www.python.org/dev/peps/pep-0342/)使得python中的生成器不再试一点单纯的迭代器，被暂停的生成器也拥有了可以被send信息，与外界交互的能力。
+生成器协程在相安无事了数个版本之后，终于在python3.3版本中[PEP380 - syntax for delegating to a subgenerator](https://www.python.org/dev/peps/pep-0380/)增加了新的语法yield from简化了协程之间的管道式调用。同一个版本中Guido主导的asyncio库作为实验性发布，并且在python3.4中正式成为标准库的一员。
+python3.5中协程迎来了新的纪元，加入async def、async with、async for、await语法及相对应的底层协议。为了以示区分，用这些语法构成的协程称之为原生协程。原生协程不可以await一个非协程生成器，彻底讲生成器与协程的界限划分开来。
 
 # Additional
 源代码：
