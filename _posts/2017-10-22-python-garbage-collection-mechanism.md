@@ -99,7 +99,7 @@ once when and only when nextoffset > maxnextoffset.
 ## Arena
 Arena（内存空间）是由64个池组成的在堆上的256k的空间，同样也是双向链表。它的结构如下：
 
-```code
+```c
 struct arena_object {
     uintptr_t address;
     block* pool_address;
@@ -177,7 +177,7 @@ True
 
 当某一代加入的对象数量超过一个阈值时，就会触发`gc`处理这一代及更新代的对象。这一阈值可以使用`gc.get_threshold`方法获得，如标准的阈值为(700,10,10)分别对应新中老三代的阈值。值得一提的是，为了提升性能，对第三代的‘长寿’对象的收集（即全局垃圾收集）需要达到[一个特性的标准](https://github.com/python/cpython/blob/051295a8c57cc649fa5eaa43526143984a147411/Modules/gcmodule.c#L94)————`long_lived_pending / long_lived_total`的比例大于25%。`long_lived_total`为在最近一次全局`gc`中存活下来的对象的数量，`long_lived_pending`为在所有非全局`gc`中存活下来的，现在处在老年代的对象的数量。
 
-其次我们要探讨的是python中 **找出引用循环的算法**。我们经常看到对该算法的描述为：找到系统的 *根* 对象，从该对象开始遍历所有被追踪的容器对象，这些可到达的对象是活着的；释放所有其他对象。然而因为我们无法完全找到拓展模块的 *根* 对象，这种传统的方式已经不能再当今版本的python中使用了，因此我们得采取一种新的处理引用循环的算法。我们只需要处理被追踪的容器对象，得益于这点，我们可以以较小的代价将所有被追踪的对象用双向链表串联起来（减少在任意位置插入或删除节点的代价），并做如下处理：
+其次我们要探讨的是python中 **找出引用循环的算法**。我们经常看到对该算法的描述为：找到系统的 **根** 对象，从该对象开始遍历所有被追踪的容器对象，这些可到达的对象是活着的；释放所有其他对象。然而因为我们无法完全找到拓展模块的 **根** 对象，这种传统的方式已经不能再当今版本的python中使用了，因此我们得采取一种新的处理引用循环的算法。我们只需要处理被追踪的容器对象，得益于这点，我们可以以较小的代价将所有被追踪的对象用双向链表串联起来（减少在任意位置插入或删除节点的代价），并做如下处理：
 
 1. 对链表中的每个对象，设置一个`gc_ref`s字段使其等于该对象的引用计数值；
 2. 对于链表中的每个对象，找到它所引用的目标对象并减1该容器的`gc_refs`值；
@@ -191,7 +191,7 @@ True
 另外，引用计数是一个我们不能控制的机制，但分代垃圾收集机制确是可以用`gc`模块hack的。我们可以使用`gc.disable()`来关闭分代垃圾收集器，并且使用`gc.collect()`函数来手动触发垃圾收集。但很多从业人员并不提倡这一点。
 
 # Additional
-参考：
+参考文献：
 1. [Things you need to know about garbage collection in Python](https://rushter.com/blog/python-garbage-collector/)
 2. [Python internals: Memory management](https://rushter.com/blog/python-memory-managment/)
 3. [Objects, Types and Reference Counts](https://docs.python.org/3.6/c-api/intro.html#objects-types-and-reference-counts)
