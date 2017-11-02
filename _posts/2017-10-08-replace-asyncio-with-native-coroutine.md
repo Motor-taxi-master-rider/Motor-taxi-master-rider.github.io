@@ -11,7 +11,7 @@ description: note of David Beazley's lecture Topics of Interest(Python Asyncio).
 
 
 # Description
-在David Beazley的`Topics of Interest(Python Asyncio)`[演讲](http://pyvideo.org/python-brasil-2015/keynote-david-beazley-topics-of-interest-python-asyncio.html)中，他介绍了由于async在python中的种种历史遗留，asyncio库在`aync/await`语句加入之后已经不是一种最直接有效的python async实现。在写了一个简单程序替代asyncio库并与其及gevent库的效率做比较之后，我们发现了python3.5版本中引入的原声协程在处理异步方面具有非常高的效率。在演讲的最后他提出，可能我们需要的async并不是一个库而更像是一些api来供我们更有效地做底层的使用。
+在David Beazley的`Topics of Interest(Python Asyncio)`[演讲](http://pyvideo.org/python-brasil-2015/keynote-david-beazley-topics-of-interest-python-asyncio.html)中，他介绍了由于async在python中的种种历史遗留，asyncio库在`aync/await`语句加入之后已经不是一种最直接有效的python async实现。在写了一个简单程序替代asyncio库并与其及gevent库的效率做比较之后，我们发现了python3.5版本中引入的原生协程在处理异步方面具有非常高的效率。在演讲的最后他提出，可能我们需要的async并不是一个库而更像是一些api来供我们更有效地做底层的使用。
 
 这次的演讲启迪了我许多，但碍于并没有相关的ppt和材料提供下载（有部分是David在台上光速Live coding的原因），我只能将其代码誊写下来，以供检验及研究，作为个人的读书笔记。
 
