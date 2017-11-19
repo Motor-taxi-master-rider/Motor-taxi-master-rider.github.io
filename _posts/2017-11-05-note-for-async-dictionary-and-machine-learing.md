@@ -23,21 +23,21 @@ Jesse举了纽约三种餐厅的例子作为三种不同场景。
 
 第一个是三明治商店。顾客到柜台排队，厨师接到订单就开始制作三明治直到完成三明治。这个例子描述的是cpu密集型服务的机制，这里没有也无法使用异步机制，整个服务的吞吐量受到计算能力的限制。
 
-<img src="https://motor-taxi-master-rider.github.io/assets/img/async_sample_subs.png"  title="{{Sandwich}}"/>
+<img src="https://motor-taxi-master-rider.github.io/assets/img/async_sample_subs.png"  title="Sandwich"/>
 
 第二个是披萨店。顾客点单后，厨师需要将制作好的披萨用微波炉加热后交给顾客。由于需要等待披萨的加热，因此就有了异步操作的必要性。这种服务的吞吐量受到内存的限制，服务器也需要后台来处理pending的请求。
 
-<img src="https://motor-taxi-master-rider.github.io/assets/img/async_sample_pizza.png"  title="{{Pizza}}"/>
+<img src="https://motor-taxi-master-rider.github.io/assets/img/async_sample_pizza.png"  title="Pizza"/>
 
 第三个是一种寿司店。在这里顾客的需求由服务员告知厨房，同时厨房完成的寿司也需要服务器送到客户面前。现实中这样服务的例子就是谷歌邮箱服务：当客户登录谷歌邮箱之后并不会做太多动作，当客户收到邮件的这一事件发生的时候服务器才会将数据推到客户的面前。这就致使了大量长连接的产生。这些链接大部分的时间处于空闲状态，如果对每个链接都创建一个线程的话很快就会消耗完系统的内存。而异步正是为了最小化每个链接消耗的资源而诞生的。
 
-<img src="https://motor-taxi-master-rider.github.io/assets/img/async_sample_omakase.png"  title="{{Omakase}}"/>
+<img src="https://motor-taxi-master-rider.github.io/assets/img/async_sample_omakase.png"  title="Omakase"/>
 
 协程相对线程另一个区别与优点就是，当我们进行多线程编程时要时时注意竞态，导致我们不得不用锁来控制共享资源。这是由于线程是程序员并没有对线程的完全控制权导致的，我们并不能知道线程什么时候切换，什么时候运行和阻塞——我们将这些都交给操作系统来完成了。而协程则只会在yield处暂停和接受输入，我们完全可以控制整个异步过程。
 
 在演讲的最后，Jesse告诉了我们哪类服务适合async而哪类不适合：
 
-<img src="https://motor-taxi-master-rider.github.io/assets/img/async_should_use.png"  title="{{Should I Use It?}}"/>
+<img src="https://motor-taxi-master-rider.github.io/assets/img/async_should_use.png"  title="Should I Use It?"/>
 
 他认为第二和第三种类型的服务是适合async的服务。这里也也指出了async的不足之处，async要求服务处理时至上而下每一部分都是异步的。因此我们的DB driver也需要支持异步，否则它将会阻塞整个程序。还有一点，async程序与线程编程将会非常不同，因此当你要实现一个异步服务时，一个async专家是必不可少的。
 
