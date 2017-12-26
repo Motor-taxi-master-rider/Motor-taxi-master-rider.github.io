@@ -20,11 +20,6 @@ description: 年终惯例.
 
 <p>So, without further ado, here it goes!</p>
 
-<figure>
-  <img src="/images/blog/social/2017-12-19-top-10-python-libraries-2017.png">
-
-</figure>
-
 
 <h2 id="1-pipenv-https-github-com-pypa-pipenv">1. <a href="https://github.com/pypa/pipenv">Pipenv</a></h2>
 
