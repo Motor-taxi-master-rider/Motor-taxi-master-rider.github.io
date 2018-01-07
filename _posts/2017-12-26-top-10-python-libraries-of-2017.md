@@ -2,10 +2,10 @@
 layout: post
 title: Top 10 Python libraries of 2017
 tags:
-- Pythn
+- Python
 categories:
 - Python
-description: 年终惯例.
+description: End of year.
 ---
 
 
