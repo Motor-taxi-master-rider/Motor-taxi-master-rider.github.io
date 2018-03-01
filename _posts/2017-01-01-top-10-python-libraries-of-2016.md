@@ -2,10 +2,7 @@
 title: Top 10 Python libraries of 2016
 date: 2017-05-06 00:00:00
 tags:
-- Python
-categories:
-- Python
-description: we try to avoid most established choices such as Django, Flask, etc. that are kind of standard nowadays. Also, some of these libraries date prior to 2016, but either they had an explosion in popularity this year or we think they are great enough to deserve the spot. Here we go!
+    - Python
 ---
 We try to avoid most established choices such as Django, Flask, etc. that are kind of standard nowadays. Also, some of these libraries date prior to 2016, but either they had an explosion in popularity this year or we think they are great enough to deserve the spot. Here we go!
 

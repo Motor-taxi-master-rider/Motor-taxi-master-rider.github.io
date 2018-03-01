@@ -3,8 +3,6 @@ layout: post
 title: Build a circular list and regex trie
 tags:
 - Algorithm
-categories:
-- Python
 description: two interesting algorithm question.
 ---
 
