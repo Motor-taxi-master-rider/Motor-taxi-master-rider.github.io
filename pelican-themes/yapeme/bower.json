@@ -1,0 +1,20 @@
+{
+  "name": "yapeme",
+  "homepage": "https://github.com/kplaube/yapeme",
+  "authors": [
+    "Klaus Laube <kplaube@gmail.com>"
+  ],
+  "description": "",
+  "directory": "static/",
+  "main": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "share-bar": "^3.1.2"
+  }
+}

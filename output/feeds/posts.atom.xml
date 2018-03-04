@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Tower of Babel - posts</title><link href="https://motor-taxi-master-rider.github.io/blog/" rel="alternate"></link><link href="https://motor-taxi-master-rider.github.io/blog/feeds/posts.atom.xml" rel="self"></link><id>https://motor-taxi-master-rider.github.io/blog/</id><updated>2018-01-06T00:00:00+08:00</updated><entry><title>Build a circular list and regex trie</title><link href="https://motor-taxi-master-rider.github.io/blog/build-a-circular-list-and-regex-trie.html" rel="alternate"></link><published>2018-01-06T00:00:00+08:00</published><updated>2018-01-06T00:00:00+08:00</updated><author><name>Charlie Hu</name></author><id>tag:motor-taxi-master-rider.github.io,2018-01-06:/blog/build-a-circular-list-and-regex-trie.html</id><summary type="html">&lt;h3&gt;Dancing programs&lt;/h3&gt;
+&lt;p&gt;这个问题来自&lt;code&gt;Advent of code&lt;/code&gt;的&lt;a href="http://adventofcode.com/2017/day/16"&gt;第十六日&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;解决代码如下:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;solution&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lst&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;order&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="c1"&gt;# 循环数组，start为头指针&lt;/span&gt;
+    &lt;span class="n"&gt;result_list&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;order&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="c1"&gt;# 减少Partner时间复杂度的字典&lt;/span&gt;
+    &lt;span class="n"&gt;result_dict&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;enumerate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;result_list&lt;/span&gt;&lt;span class="p"&gt;)}&lt;/span&gt;
+    &lt;span class="n"&gt;length&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;result_list&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;start&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;action&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;lst&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;action&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;startswith&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;s&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="n"&gt;start&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;start&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;length&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;length&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;action&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:])&lt;/span&gt;
+            &lt;span class="k"&gt;continue&lt;/span&gt;
+
+        &lt;span class="k"&gt;if …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h3&gt;Dancing programs&lt;/h3&gt;
+&lt;p&gt;这个问题来自&lt;code&gt;Advent of code&lt;/code&gt;的&lt;a href="http://adventofcode.com/2017/day/16"&gt;第十六日&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;解决代码如下:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;solution&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lst&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;order&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="c1"&gt;# 循环数组，start为头指针&lt;/span&gt;
+    &lt;span class="n"&gt;result_list&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;order&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="c1"&gt;# 减少Partner时间复杂度的字典&lt;/span&gt;
+    &lt;span class="n"&gt;result_dict&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;enumerate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;result_list&lt;/span&gt;&lt;span class="p"&gt;)}&lt;/span&gt;
+    &lt;span class="n"&gt;length&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;result_list&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;start&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;action&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;lst&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;action&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;startswith&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;s&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="n"&gt;start&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;start&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;length&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;length&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;action&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:])&lt;/span&gt;
+            &lt;span class="k"&gt;continue&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;action&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;startswith&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;x&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;action&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;x_real&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;start&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;length&lt;/span&gt;
+            &lt;span class="n"&gt;y_real&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;start&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;length&lt;/span&gt;
+        &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="n"&gt;action&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;startswith&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;p&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;action&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;x_real&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;result_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+            &lt;span class="n"&gt;y_real&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;result_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="n"&gt;result_list&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x_real&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;result_list&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;y_real&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;result_list&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;y_real&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;result_list&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x_real&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="n"&gt;result_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;result_list&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x_real&lt;/span&gt;&lt;span class="p"&gt;]],&lt;/span&gt; &lt;span class="n"&gt;result_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;result_list&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;y_real&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;result_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;result_list&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;y_real&lt;/span&gt;&lt;span class="p"&gt;]],&lt;/span&gt; \
+                                                                             &lt;span class="n"&gt;result_dict&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;result_list&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x_real&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;result_list&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;length&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;start&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;start&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;length&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;solution2&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lst&lt;/span&gt;&lt;span class="err"&gt;，&lt;/span&gt;&lt;span class="n"&gt;order&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;orders&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;order&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;orders&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;orders&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;order&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;order&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;solution&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;lst&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;order&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;orders&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1000000000&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;orders&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;对于第一部分涉及到的三个操作。第一个操作Spin &lt;em&gt;sX&lt;/em&gt; ，只需将头指针后移X位。对于第二个操作Exchange和第三个操作Partner，由于涉及到index和值的比较，因此我们通过建立{值：index}字典的形式来减少Partner操作的时间复杂度。&lt;/p&gt;
+&lt;p&gt;第二部分问题由于要循环一亿次，全部遍历时间复杂度过高。测试发现当输入相同的操作序列时，多次遍历后会出现循环的情况，因此有解法二。&lt;/p&gt;
+&lt;h3&gt;Regex replacement&lt;/h3&gt;
+&lt;p&gt;来源于Stack Overflow的一个问题: &lt;a href="https://stackoverflow.com/questions/42742810/speed-up-millions-of-regex-replacements-in-python-3"&gt;Speed up millions of regex replacements in Python 3&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;赞同最多的&lt;code&gt;"\b(word1|word2|word3)\b"&lt;/code&gt;方法其实不是最好的算法，正则并集会带来O(1)的最好时间复杂度，O(n)的平均及最差时间复杂度。验证代码如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;re&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;timeit&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;random&lt;/span&gt;
+
+&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/usr/share/dict/american-english&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;wordbook&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;english_words&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;strip&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lower&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;wordbook&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;random&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shuffle&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;english_words&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;First 10 words :&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;english_words&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+&lt;span class="n"&gt;test_words&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Surely not a word&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;#surely_NöTäWORD_so_regex_engine_can_return_fast&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;First word&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;english_words&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]),&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Last word&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;english_words&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]),&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Almost a word&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;couldbeaword&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;]&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fun&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;union&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;match&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;fun&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;exp&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;Union of &lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s2"&gt; words&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;exp&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;union&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;compile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;r&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;\b(&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s2"&gt;)\b&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;|&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;english_words&lt;/span&gt;&lt;span class="p"&gt;[:&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;exp&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;description&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;test_word&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;test_words&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;time&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;timeit&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;timeit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;test_word&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;number&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;  &lt;/span&gt;&lt;span class="si"&gt;%-17s&lt;/span&gt;&lt;span class="s2"&gt; : &lt;/span&gt;&lt;span class="si"&gt;%.1f&lt;/span&gt;&lt;span class="s2"&gt;ms&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;description&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Output:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;First&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="n"&gt;words&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;geritol&amp;#39;s&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;sunstroke&amp;#39;s&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;fib&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;fergus&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;charms&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;canning&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;supervisor&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;fallaciously&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;heritage&amp;#39;s&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;pastime&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="n"&gt;Union&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="n"&gt;words&lt;/span&gt;
+  &lt;span class="n"&gt;Surely&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.7&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;
+  &lt;span class="n"&gt;First&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;        &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.8&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;
+  &lt;span class="n"&gt;Last&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;         &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.7&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;
+  &lt;span class="n"&gt;Almost&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;     &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.7&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;
+
+&lt;span class="n"&gt;Union&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt; &lt;span class="n"&gt;words&lt;/span&gt;
+  &lt;span class="n"&gt;Surely&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.7&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;
+  &lt;span class="n"&gt;First&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;        &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.1&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;
+  &lt;span class="n"&gt;Last&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;         &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.2&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;
+  &lt;span class="n"&gt;Almost&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;     &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.2&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;
+
+&lt;span class="n"&gt;Union&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="mi"&gt;1000&lt;/span&gt; &lt;span class="n"&gt;words&lt;/span&gt;
+  &lt;span class="n"&gt;Surely&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.7&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;
+  &lt;span class="n"&gt;First&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;        &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.8&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;
+  &lt;span class="n"&gt;Last&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;         &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;9.6&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;
+  &lt;span class="n"&gt;Almost&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;     &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;10.1&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;
+
+&lt;span class="n"&gt;Union&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="mi"&gt;10000&lt;/span&gt; &lt;span class="n"&gt;words&lt;/span&gt;
+  &lt;span class="n"&gt;Surely&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.4&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;
+  &lt;span class="n"&gt;First&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;        &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1.8&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;
+  &lt;span class="n"&gt;Last&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;         &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;96.3&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;
+  &lt;span class="n"&gt;Almost&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;     &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;116.6&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;
+
+&lt;span class="n"&gt;Union&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="mi"&gt;100000&lt;/span&gt; &lt;span class="n"&gt;words&lt;/span&gt;
+  &lt;span class="n"&gt;Surely&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt; &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.7&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;
+  &lt;span class="n"&gt;First&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;        &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.8&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;
+  &lt;span class="n"&gt;Last&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;         &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1227.1&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;
+  &lt;span class="n"&gt;Almost&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;     &lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;1404.1&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这会导致整体算法的时间复杂度变为O(n^2),因此有如下两个解法：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;re&lt;/span&gt;
+&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/usr/share/dict/american-english&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;wordbook&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;banned_words&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;strip&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lower&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;wordbook&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;delete_banned_words&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;matchobj&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;word&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;matchobj&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;group&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lower&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;banned_words&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;
+
+&lt;span class="n"&gt;sentences&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;I&amp;#39;m eric. Welcome here!&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Another boring sentence.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+             &lt;span class="s2"&gt;&amp;quot;GiraffeElephantBoat&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;sfgsdg sdwerha aswertwe&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;250000&lt;/span&gt;
+
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;sentence&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;sentences&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;sentence&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sub&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;\w+&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;delete_banned_words&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sentence&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这个解法时间发复杂度为O(n)，但是会在去掉单词时留下空格。因为它是扫描&lt;code&gt;\w+&lt;/code&gt;的，因此无法避免这个问题。&lt;/p&gt;
+&lt;p&gt;一个对之前正则并集的改进是通过字典树的方式创建正则并集，该算法的时间复杂度也为O(n)。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Trie&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Regex::Trie in Python. Creates a Trie out of a list of words. The trie can be exported to a Regex pattern.&lt;/span&gt;
+&lt;span class="sd"&gt;    The corresponding Regex should match much faster than a simple Regex union.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;ref&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;char&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;ref&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;char&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;char&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;ref&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;ref&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;char&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+            &lt;span class="n"&gt;ref&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ref&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;char&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="n"&gt;ref&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;dump&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;quote&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;char&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;escape&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;char&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;_pattern&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pData&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pData&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keys&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
+
+        &lt;span class="n"&gt;alt&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+        &lt;span class="n"&gt;cc&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+        &lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;char&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;sorted&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;keys&lt;/span&gt;&lt;span class="p"&gt;()):&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;isinstance&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;char&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="nb"&gt;dict&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+                &lt;span class="n"&gt;recurse&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_pattern&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;char&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;recurse&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                    &lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;quote&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;char&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;recurse&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                    &lt;span class="n"&gt;cc&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;quote&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;char&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+            &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+        &lt;span class="n"&gt;cconly&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cc&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cc&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cc&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+            &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;[&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cc&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;]&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;(?:&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;|&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;alt&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;)&amp;quot;&lt;/span&gt;
+
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;cconly&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;?&amp;quot;&lt;/span&gt;
+            &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+                &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;(?:&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s2"&gt;)?&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;pattern&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_pattern&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dump&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;这段代码首先会生成所有被ban单词的字典树，然后parse该树生成像如下这样的正则表达式：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;(?:a(?:(?:\&amp;#39;s|a(?:\&amp;#39;s|chen|liyah(?:\&amp;#39;s)?|r(?:dvark(?:(?:\&amp;#39;s|s))?|on))|b(?:\&amp;#39;s|a(?:c(?:us(?:(?:\&amp;#39;s|es))?|[ik])|ft|lone(?:(?:\&amp;#39;s|s))?|ndon(?:(?:ed|ing|ment(?:\&amp;#39;s)?|s))?|s(?:e(?:(?:ment(?:\&amp;#39;s)?|[ds]))?|h(?:(?:e[ds]|ing))?|ing)|t(?:e(?:(?:ment(?:\&amp;#39;s)?|[ds]))?|ing|toir(?:(?:\&amp;#39;s|s))?))|b(?:as(?:id)?|e(?:ss(?:(?:\&amp;#39;s|es))?|y(?:(?:\&amp;#39;s|s))?)|ot(?:(?:\&amp;#39;s|t(?:\&amp;#39;s)?|s))?|reviat(?:e[ds]?|i(?:ng|on(?:(?:\&amp;#39;s|s))?))|y(?:\&amp;#39;s)?|\é(?:(?:\&amp;#39;s|s))?)|d(?:icat(?:e[ds]?|i(?:ng|on(?:(?:\&amp;#39;s|s))?))|om(?:en(?:(?:\&amp;#39;s|s))?|inal)|u(?:ct(?:(?:ed|i(?:ng|on(?:(?:\&amp;#39;s|s))?)|or(?:(?:\&amp;#39;s|s))?|s))?|l(?:\&amp;#39;s)?))|e(?:(?:\&amp;#39;s|am|l(?:(?:\&amp;#39;s|ard|son(?:\&amp;#39;s)?))?|r(?:deen(?:\&amp;#39;s)?|nathy(?:\&amp;#39;s)?|ra(?:nt|tion(?:(?:\&amp;#39;s|s))?))|t(?:(?:t(?:e(?:r(?:(?:\&amp;#39;s|s))?|d)|ing|or(?:(?:\&amp;#39;s|s))?)|s))?|yance(?:\&amp;#39;s)?|d))?|hor(?:(?:r(?:e(?:n(?:ce(?:\&amp;#39;s)?|t)|d)|ing)|s))?|i(?:d(?:e[ds]?|ing|jan(?:\&amp;#39;s)?)|gail|l(?:ene|it(?:ies|y(?:\&amp;#39;s)?)))|j(?:ect(?:ly)?|ur(?:ation(?:(?:\&amp;#39;s|s))?|e[ds]?|ing))|l(?:a(?:tive(?:(?:\&amp;#39;s|s))?|ze)|e(?:(?:st|r))?|oom|ution(?:(?:\&amp;#39;s|s))?|y)|m\&amp;#39;s|n(?:e(?:gat(?:e[ds]?|i(?:ng|on(?:\&amp;#39;s)?))|r(?:\&amp;#39;s)?)|ormal(?:(?:it(?:ies|y(?:\&amp;#39;s)?)|ly))?)|o(?:ard|de(?:(?:\&amp;#39;s|s))?|li(?:sh(?:(?:e[ds]|ing))?|tion(?:(?:\&amp;#39;s|ist(?:(?:\&amp;#39;s|s))?))?)|mina(?:bl[ey]|t(?:e[ds]?|i(?:ng|on(?:(?:\&amp;#39;s|s))?)))|r(?:igin(?:al(?:(?:\&amp;#39;s|s))?|e(?:(?:\&amp;#39;s|s))?)|t(?:(?:ed|i(?:ng|on(?:(?:\&amp;#39;s|ist(?:(?:\&amp;#39;s|s))?|s))?|ve)|s))?)|u(?:nd(?:(?:ed|ing|s))?|t)|ve(?:(?:\&amp;#39;s|board))?)|r(?:a(?:cadabra(?:\&amp;#39;s)?|d(?:e[ds]?|ing)|ham(?:\&amp;#39;s)?|m(?:(?:\&amp;#39;s|s))?|si(?:on(?:(?:\&amp;#39;s|s))?|ve(?:(?:\&amp;#39;s|ly|ness(?:\&amp;#39;s)?|s))?))|east|idg(?:e(?:(?:ment(?:(?:\&amp;#39;s|s))?|[ds]))?|ing|ment(?:(?:\&amp;#39;s|s))?)|o(?:ad|gat(?:e[ds]?|i(?:ng|on(?:(?:\&amp;#39;s|s))?)))|upt(?:(?:e(?:st|r)|ly|ness(?:\&amp;#39;s)?))?)|s(?:alom|c(?:ess(?:(?:\&amp;#39;s|e[ds]|ing))?|issa(?:(?:\&amp;#39;s|[es]))?|ond(?:(?:ed|ing|s))?)|en(?:ce(?:(?:\&amp;#39;s|s))?|t(?:(?:e(?:e(?:(?:\&amp;#39;s|ism(?:\&amp;#39;s)?|s))?|d)|ing|ly|s))?)|inth(?:(?:\&amp;#39;s|e(?:\&amp;#39;s)?))?|o(?:l(?:ut(?:e(?:(?:\&amp;#39;s|ly|st?))?|i(?:on(?:\&amp;#39;s)?|sm(?:\&amp;#39;s)?))|v(?:e[ds]?|ing))|r(?:b(?:(?:e(?:n(?:cy(?:\&amp;#39;s)?|t(?:(?:\&amp;#39;s|s))?)|d)|ing|s))?|pti...
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Additional&lt;/h3&gt;</content><category term="Algorithm"></category></entry><entry><title>Python 单例实现的几种方式</title><link href="https://motor-taxi-master-rider.github.io/blog/python-dan-li-shi-xian-de-ji-chong-fang-shi.html" rel="alternate"></link><published>2017-06-07T00:00:00+08:00</published><updated>2017-06-07T00:00:00+08:00</updated><author><name>Charlie Hu</name></author><id>tag:motor-taxi-master-rider.github.io,2017-06-07:/blog/python-dan-li-shi-xian-de-ji-chong-fang-shi.html</id><summary type="html">&lt;ul&gt;
+&lt;li&gt;Python&lt;/li&gt;
+&lt;li&gt;Singleton&lt;/li&gt;
+&lt;li&gt;Metaclass&lt;/li&gt;
+&lt;li&gt;Decorator
+category: &lt;/li&gt;
+&lt;li&gt;Python
+  make all array elements equal, where a move is incrementing a selected element
+  by 1 or decrementing a selected element by 1.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3&gt;Description&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;单例模式&lt;/strong&gt;，也叫 &lt;strong&gt;单子模式&lt;/strong&gt;，是一种常用的软件设计模式。在应用这个模式时，单例对象的类必须保证只有一个实例存在。许多时候整个系统只需要拥有一个的全局对象，这样有利于我们协调系统整体的行为。比如在某个服务器程序中，该服务器的配置信息存放在一个文件中，这些配置数据由一个单例对象统一读取，然后服务进程中的其他对象再通过这个单例对象获取这些配置信息。这种方式简化了在复杂环境下的配置管理。 实现单例模式的思路是：一个类能返回对象一个引用(永远是同一个)和一个获得该实例的方法（必须是静态方法，通常使用getInstance这个名称）；当我们调用这个方法时，如果类持有的引用不为空就返回这个引用 …&lt;/p&gt;</summary><content type="html">&lt;ul&gt;
+&lt;li&gt;Python&lt;/li&gt;
+&lt;li&gt;Singleton&lt;/li&gt;
+&lt;li&gt;Metaclass&lt;/li&gt;
+&lt;li&gt;Decorator
+category: &lt;/li&gt;
+&lt;li&gt;Python
+  make all array elements equal, where a move is incrementing a selected element
+  by 1 or decrementing a selected element by 1.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3&gt;Description&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;单例模式&lt;/strong&gt;，也叫 &lt;strong&gt;单子模式&lt;/strong&gt;，是一种常用的软件设计模式。在应用这个模式时，单例对象的类必须保证只有一个实例存在。许多时候整个系统只需要拥有一个的全局对象，这样有利于我们协调系统整体的行为。比如在某个服务器程序中，该服务器的配置信息存放在一个文件中，这些配置数据由一个单例对象统一读取，然后服务进程中的其他对象再通过这个单例对象获取这些配置信息。这种方式简化了在复杂环境下的配置管理。 实现单例模式的思路是：一个类能返回对象一个引用(永远是同一个)和一个获得该实例的方法（必须是静态方法，通常使用getInstance这个名称）；当我们调用这个方法时，如果类持有的引用不为空就返回这个引用，如果类保持的引用为空就创建该类的实例并将实例的引用赋予该类保持的引用；同时我们还将该类的构造函数定义为私有方法，这样其他处的代码就无法通过调用该类的构造函数来实例化该类的对象，只有通过该类提供的静态方法来得到该类的唯一实例。&lt;/p&gt;
+&lt;p&gt;单例模式在多线程的应用场合下必须小心使用。如果当唯一实例尚未创建时，有两个线程同时调用创建方法，那么它们同时没有检测到唯一实例的存在，从而同时各自创建了一个实例，这样就有两个实例被构造出来，从而违反了单例模式中实例唯一的原则。 解决这个问题的办法是为指示类是否已经实例化的变量提供一个互斥锁(虽然这样会降低效率)。&lt;/p&gt;
+&lt;h3&gt;Implementation&lt;/h3&gt;
+&lt;h2&gt;new方法&lt;/h2&gt;
+&lt;p&gt;new方法&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Singleton&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__new__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kw&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="nb"&gt;hasattr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;_instance&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="n"&gt;orig&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;super&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Singleton&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_instance&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;orig&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="fm"&gt;__new__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kw&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_instance&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MyClass&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Singleton&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;metaclass方法&lt;/h2&gt;
+&lt;p&gt;覆盖&lt;strong&gt;init&lt;/strong&gt;类&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Singleton&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__instance&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
+        &lt;span class="nb"&gt;super&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__call__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__instance&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__instance&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;super&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="fm"&gt;__call__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__instance&lt;/span&gt;
+
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Spam&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;metaclass&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;Singleton&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Creating Spam&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Spam&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Spam&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;覆盖&lt;strong&gt;new&lt;/strong&gt;类&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Singleton&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;type&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__new__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dct&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;dct&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;_instance&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;super&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="fm"&gt;__new__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;base&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;dct&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__call__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_instance&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_instance&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;super&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="fm"&gt;__call__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_instance&lt;/span&gt;
+
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Spam&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;metaclass&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;Singleton&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Creating Spam&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Spam&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Spam&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;decorator方法&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;singleton&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kw&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;instances&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;getinstance&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="bp"&gt;cls&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;instances&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;instances&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kw&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;instances&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="bp"&gt;cls&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;getinstance&lt;/span&gt;
+
+&lt;span class="nd"&gt;@singleton&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MyClass&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+  &lt;span class="o"&gt;...&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;import方法&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;### mysingleton.py&lt;/span&gt;
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;My_Singleton&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;foo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;pass&lt;/span&gt;
+
+&lt;span class="n"&gt;my_singleton&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;My_Singleton&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="c1"&gt;### to use&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;mysingleton&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;my_singleton&lt;/span&gt;
+
+&lt;span class="n"&gt;my_singleton&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;foo&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Additional&lt;/h3&gt;</content></entry><entry><title>Top 10 Python libraries of 2016</title><link href="https://motor-taxi-master-rider.github.io/blog/top-10-python-libraries-of-2016.html" rel="alternate"></link><published>2017-05-06T00:00:00+08:00</published><updated>2017-05-06T00:00:00+08:00</updated><author><name>Charlie Hu</name></author><id>tag:motor-taxi-master-rider.github.io,2017-05-06:/blog/top-10-python-libraries-of-2016.html</id><summary type="html">&lt;p&gt;We try to avoid most established choices such as Django, Flask, etc. that are kind of standard nowadays. Also, some of these libraries date prior to 2016, but either they had an explosion in popularity this year or we think they are great enough to deserve the spot. Here we …&lt;/p&gt;</summary><content type="html">&lt;p&gt;We try to avoid most established choices such as Django, Flask, etc. that are kind of standard nowadays. Also, some of these libraries date prior to 2016, but either they had an explosion in popularity this year or we think they are great enough to deserve the spot. Here we go!&lt;/p&gt;
+&lt;div class="post"&gt;
+    &lt;p&gt;Last year, we did a recap with what we thought were the &lt;a href="https://tryolabs.com/blog/2015/12/15/top-10-python-libraries-of-2015/"&gt;best Python libraries of 2015&lt;/a&gt;, which was widely shared within the Python community (see post in&lt;a href="https://www.reddit.com/r/Python/comments/3wyiuv/top_10_python_libraries_of_2015/"&gt;r/Python&lt;/a&gt;).
+        A year has gone by, and again it is time to give due credit for the awesome work that has been done by the &lt;strong&gt;open source community&lt;/strong&gt; this year.&lt;/p&gt;
+    &lt;p&gt;Again, we try to avoid most established choices such as Django, Flask, etc. that are kind of standard nowadays. Also, some of these libraries date prior to 2016, but either they had an explosion in popularity this year or we think they are great enough
+        to deserve the spot. Here we go!&lt;/p&gt;
+    &lt;h2&gt;1. &lt;a href="https://www.zappa.io/"&gt;Zappa&lt;/a&gt;&lt;/h2&gt;
+    &lt;p&gt;Since the release of &lt;a href="https://aws.amazon.com/lambda/details/"&gt;AWS Lambda&lt;/a&gt; (and &lt;a href="https://cloud.google.com/functions/docs/"&gt;others&lt;/a&gt; that &lt;a href="https://azure.microsoft.com/en-us/services/functions/"&gt;have&lt;/a&gt; &lt;a href="https://www.ibm.com/cloud-computing/bluemix/openwhisk"&gt;followed&lt;/a&gt;),
+        all the rage has been about &lt;a href="http://martinfowler.com/articles/serverless.html"&gt;serverless architectures&lt;/a&gt;. These allow microservices to be deployed in the cloud, in a fully managed environment where one doesn’t have to care about managing
+        any server, but is assigned stateless, ephemeral &lt;em&gt;computing containers&lt;/em&gt; that are fully managed by a provider. With this paradigm, events (such as a traffic spike) can trigger the execution of more of these &lt;em&gt;containers&lt;/em&gt; and therefore
+        give the possibility to handle “infinite” horizontal scaling.&lt;/p&gt;
+    &lt;p&gt;Zappa is &lt;strong&gt;the serverless framework for Python&lt;/strong&gt;, although (at least for the moment) it only has support for AWS Lambda and AWS API Gateway. It makes building so-architectured apps very simple, freeing you from most of the tedious setup
+        you would have to do through the AWS Console or API, and has all sort of commands to ease deployment and managing different environments.&lt;/p&gt;
+    &lt;h2&gt;2. &lt;a href="https://github.com/channelcat/sanic"&gt;Sanic&lt;/a&gt; + &lt;a href="https://magic.io/blog/uvloop-blazing-fast-python-networking/"&gt;uvloop&lt;/a&gt;&lt;/h2&gt;
+    &lt;p&gt;Who said Python couldn’t be fast? Apart from competing for the &lt;a href="http://knowyourmeme.com/memes/sanic-hegehog"&gt;best name&lt;/a&gt; of a software library ever, Sanic also competes for the fastest Python web framework ever, and appears to be the winner
+        by a clear margin. It is a Flask-like Python 3.5+ web server that is designed for speed. Another library, &lt;em&gt;uvloop&lt;/em&gt;, is an ultra fast drop-in replacement for &lt;em&gt;asyncio&lt;/em&gt;’s event loop that uses &lt;a href="https://github.com/libuv/libuv"&gt;libuv&lt;/a&gt;        under the hood. Together, these two things make a great combination!&lt;/p&gt;
+    &lt;p&gt;According to the Sanic author’s &lt;a href="https://github.com/channelcat/sanic#benchmarks"&gt;benchmark&lt;/a&gt;, &lt;em&gt;uvloop&lt;/em&gt; could power this beast to handle more than &lt;strong&gt;33k requests/s&lt;/strong&gt; which is just insane (and faster than &lt;em&gt;node.js&lt;/em&gt;).
+        Your code can benefit from the new &lt;em&gt;async/await&lt;/em&gt; syntax so it will look neat too; besides we love the Flask-style API. Make sure to give Sanic a try, and if you are using &lt;em&gt;asyncio&lt;/em&gt;, you can surely benefit from &lt;em&gt;uvloop&lt;/em&gt; with
+        very little change in your code!&lt;/p&gt;
+    &lt;h2&gt;3. &lt;a href="https://github.com/MagicStack/asyncpg"&gt;asyncpg&lt;/a&gt;&lt;/h2&gt;
+    &lt;p&gt;In line with recent developments for the &lt;em&gt;asyncio&lt;/em&gt; framework, the folks from&lt;a href="https://magic.io/"&gt;MagicStack&lt;/a&gt; bring us this efficient asynchronous (currently CPython 3.5 only) database interface library designed specifically for PostgreSQL.
+        It has zero dependencies, meaning there is no need to have &lt;em&gt;libpq&lt;/em&gt; installed. In contrast with &lt;em&gt;psycopg2&lt;/em&gt; (the most popular PostgreSQL adapter for Python) which exchanges data with the database server in text format, &lt;em&gt;asyncpg&lt;/em&gt;        implements PostgreSQL &lt;strong&gt;binary I/O protocol&lt;/strong&gt;, which not only allows support for generic types but also comes with numerous performance benefits.&lt;/p&gt;
+    &lt;p&gt;The benchmarks are clear: &lt;em&gt;asyncpg&lt;/em&gt; is on average, at least &lt;strong&gt;3x faster&lt;/strong&gt; than &lt;em&gt;psycopg2&lt;/em&gt; (or &lt;em&gt;aiopg&lt;/em&gt;), and faster than the &lt;em&gt;node.js&lt;/em&gt; and &lt;em&gt;Go&lt;/em&gt; implementations.&lt;/p&gt;
+    &lt;h2&gt;4. &lt;a href="https://github.com/boto/boto3"&gt;boto3&lt;/a&gt;&lt;/h2&gt;
+    &lt;p&gt;If you have your infrastructure on AWS or otherwise make use of their services (such as S3), you should be very happy that &lt;a href="https://github.com/boto/boto"&gt;boto&lt;/a&gt;, the Python interface for AWS API, got a completely rewrite from the ground
+        up. The great thing is that you don’t need to migrate your app all at once: you can use &lt;em&gt;boto3&lt;/em&gt; and &lt;em&gt;boto&lt;/em&gt; (2) &lt;em&gt;at the same time&lt;/em&gt;; for example using boto3 only for new parts of your application.&lt;/p&gt;
+    &lt;p&gt;The new implementation is much &lt;strong&gt;more consistent&lt;/strong&gt; between different services, and since it uses a data-driven approach to generate classes at runtime from JSON description files, it will always get fast updates. No more lagging behind
+        new Amazon API features, move to &lt;em&gt;boto3&lt;/em&gt;!&lt;/p&gt;
+    &lt;h2&gt;5. &lt;a href="https://www.tensorflow.org/"&gt;TensorFlow&lt;/a&gt;&lt;/h2&gt;
+    &lt;p&gt;Do we even need an introduction here? Since it was released by Google in November 2015, this library has gained a huge momentum and has become the #1 trendiest GitHub Python repository. In case you have been living under a rock for the past year,
+        TensorFlow is a library for &lt;strong&gt;numerical computation&lt;/strong&gt; using data flow graphs, which can run over GPU or CPU.&lt;/p&gt;
+    &lt;p&gt;We have quickly witnessed it become a trend in the Machine Learning community (especially Deep Learning, see our post on &lt;a href="https://tryolabs.com/blog/2016/11/18/10-main-takeaways-from-mlconf/"&gt;10 main takeaways from MLconf&lt;/a&gt;), not only growing
+        its uses in research but also being widely used in production applications. If you are doing Deep Learning and want to use it through a higher level interface, you can try using it as a backend for &lt;a href="https://keras.io/"&gt;Keras&lt;/a&gt; (which
+        made it to last years post) or the newer &lt;a href="https://github.com/tensorflow/tensorflow/tree/master/tensorflow/contrib/slim"&gt;TensorFlow-Slim&lt;/a&gt;.&lt;/p&gt;
+    &lt;h2&gt;6. &lt;a href="https://gym.openai.com/"&gt;gym&lt;/a&gt; + &lt;a href="https://universe.openai.com/"&gt;universe&lt;/a&gt;&lt;/h2&gt;
+    &lt;p&gt;If you are into AI, you surely have heard about the &lt;a href="https://openai.com/"&gt;OpenAI&lt;/a&gt; non-profit artificial intelligence research company (backed by Elon Musk et al.). The researchers have open sourced some Python code this year! Gym is a toolkit
+        for developing and comparing &lt;a href="https://en.wikipedia.org/wiki/Reinforcement_learning"&gt;reinforcement learning&lt;/a&gt; algorithms. It consists of an open-source library with a collection of test problems (environments) that can be used to test
+        reinforcement learning algorithms, and a site and API that allows to compare the performance of trained algorithms (agents). Since it doesn’t care about the implementation of the agent, you can build them with the computation library of your choice:
+        bare numpy, TensorFlow, Theano, etc.&lt;/p&gt;
+    &lt;p&gt;We also have the recently released &lt;em&gt;universe&lt;/em&gt;, a software platform for researching into &lt;strong&gt;general intelligence&lt;/strong&gt; across games, websites and other applications. This fits perfectly with &lt;em&gt;gym&lt;/em&gt;, since it allows any real-world
+        application to be turned into a &lt;em&gt;gym&lt;/em&gt; environment. Researchers hope that this limitless possibility will &lt;strong&gt;accelerate research&lt;/strong&gt; into smarter agents that can solve general purpose tasks.&lt;/p&gt;
+    &lt;h2&gt;7. &lt;a href="http://bokeh.pydata.org/"&gt;Bokeh&lt;/a&gt;&lt;/h2&gt;
+    &lt;p&gt;You may be familiar with some of the libraries Python has to offer for data visualization; the most popular of which are &lt;a href="http://matplotlib.org/"&gt;matplotlib&lt;/a&gt; and &lt;a href="http://seaborn.pydata.org/"&gt;seaborn&lt;/a&gt;. Bokeh, however, is created
+        for &lt;strong&gt;interactive visualization&lt;/strong&gt;, and targets modern web browsers for the presentation. This means Bokeh can create a plot which lets you_explore_ the data from a web browser. The great thing is that it integrates tightly with
+        &lt;a
+            href="https://jupyter.org/"&gt;Jupyter Notebooks&lt;/a&gt;, so you can use it with your probably go-to tool for your research. There is also an optional server component, &lt;code class="highlighter-rouge"&gt;bokeh-server&lt;/code&gt;, with many powerful capabilities like server-side downsampling
+            of large dataset (no more slow network tranfers/browser!), streaming data, transformations, etc.&lt;/p&gt;
+    &lt;p&gt;Make sure to check the &lt;a href="http://bokeh.pydata.org/en/latest/docs/gallery.html"&gt;gallery&lt;/a&gt; for examples of what you can create. They look awesome!&lt;/p&gt;
+    &lt;h2&gt;8. &lt;a href="https://blaze.readthedocs.io/en/latest/index.html"&gt;Blaze&lt;/a&gt;&lt;/h2&gt;
+    &lt;p&gt;Sometimes, you want to run &lt;strong&gt;analytics&lt;/strong&gt; over a dataset too big to fit your computer’s RAM. If you cannot rely on numpy or Pandas, you usually turn to other tools like PostgreSQL, MongoDB, Hadoop, Spark, or many others. Depending on the
+        use case, one or more of these tools can make sense, each with their own strengths and weaknesses. The problem? There is a big overhead here because you need to learn how each of these systems work and how to insert data in the proper form.&lt;/p&gt;
+    &lt;p&gt;Blaze provides a &lt;strong&gt;uniform interface&lt;/strong&gt; that abstracts you away from several database technologies. At the core, the library provides a way to &lt;strong&gt;express computations&lt;/strong&gt;. Blaze itself doesn’t actually do any computation: it
+        just knows how to instruct a specific &lt;em&gt;backend&lt;/em&gt; who will be in charge of performing it. There is so much more to Blaze (thus the ecosystem), as libraries that have come out of its development. For example, &lt;a href="http://dask.pydata.org/en/latest/"&gt;Dask&lt;/a&gt;        implements a drop-in replacement for NumPy array that can handle content larger than memory and leverage multiple cores, and also comes with dynamic task scheduling. Interesting stuff.&lt;/p&gt;
+    &lt;h2&gt;9. &lt;a href="https://github.com/crsmithdev/arrow"&gt;arrow&lt;/a&gt;&lt;/h2&gt;
+    &lt;p&gt;There is a famous saying that there are only two hard problems in Computer Science: cache invalidation and naming things. I think the saying is clearly missing one thing: &lt;strong&gt;managing datetimes&lt;/strong&gt;. If you have ever tried to do that in Python,
+        you will know that the standard library has a gazillion modules and types: &lt;code class="highlighter-rouge"&gt;datetime&lt;/code&gt;,&lt;code class="highlighter-rouge"&gt;date&lt;/code&gt;, &lt;code class="highlighter-rouge"&gt;calendar&lt;/code&gt;, &lt;code class="highlighter-rouge"&gt;tzinfo&lt;/code&gt;,
+        &lt;code class="highlighter-rouge"&gt;timedelta&lt;/code&gt;, &lt;code class="highlighter-rouge"&gt;relativedelta&lt;/code&gt;, &lt;code class="highlighter-rouge"&gt;pytz&lt;/code&gt;, etc. Worse, it is timezone naive by default.&lt;/p&gt;
+    &lt;p&gt;Arrow is “datetime for humans”, offering a sensible approach to creating, manipulating, formatting and converting dates, times, and timestamps. It is a&lt;strong&gt;replacement&lt;/strong&gt; for the &lt;code class="highlighter-rouge"&gt;datetime&lt;/code&gt; type that supports
+        Python 2 or 3, and provides a much nicer interface as well as filling the gaps with new functionality (such as&lt;code class="highlighter-rouge"&gt;humanize&lt;/code&gt;). Even if you don’t really &lt;em&gt;need&lt;/em&gt; arrow, using it can greatly reduce the boilerplate
+        in your code.&lt;/p&gt;
+    &lt;h2&gt;10. &lt;a href="http://www.hug.rest/"&gt;hug&lt;/a&gt;&lt;/h2&gt;
+    &lt;p&gt;Expose your internal API externally, drastically simplifying &lt;strong&gt;Python API&lt;/strong&gt;development. Hug is a next-generation Python 3 (only) library that will provide you with the cleanest way to create HTTP REST APIs in Python. It is not a web framework
+        per se (although that is a function it performs exceptionally well), but only focuses on exposing idiomatically correct and standard internal Python APIs externally. The idea is simple: you define logic and structure once, and you can expose your
+        API through &lt;strong&gt;multiple means&lt;/strong&gt;. Currently, it supports exposing REST API or command line interface.&lt;/p&gt;
+    &lt;p&gt;You can use type annotations that let &lt;em&gt;hug&lt;/em&gt; not only generate &lt;strong&gt;documentation&lt;/strong&gt; for your API but also provide with &lt;strong&gt;validation&lt;/strong&gt; and clean error messages that will make your life (and your API user’s) a lot easier.
+        Hug is built on &lt;a href="https://github.com/falconry/falcon"&gt;Falcon’s&lt;/a&gt; high performance HTTP library, which means you can deploy this to production using any wsgi-compatible server such as &lt;a href="http://gunicorn.org/"&gt;gunicorn&lt;/a&gt;.&lt;/p&gt;
+    &lt;p&gt;Follow the discussion of this post on: &lt;a href="https://www.reddit.com/r/Python/comments/5jf64k/top_10_python_libraries_of_2016/"&gt;Reddit&lt;/a&gt;&lt;/p&gt;
+    &lt;hr&gt;
+    &lt;p&gt;&lt;em&gt;Original source:&lt;/em&gt; &lt;a href="https://tryolabs.com/blog/2016/12/20/top-10-python-libraries-of-2016/"&gt;&lt;em&gt;https://tryolabs.com/blog/2016/12/20/top-10-python…&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;</content><category term="Python"></category></entry></feed>

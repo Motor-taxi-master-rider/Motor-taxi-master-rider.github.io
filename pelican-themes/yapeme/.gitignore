@@ -1,0 +1,6 @@
+.python-version
+.sass-cache/
+env/
+node_modules/
+*.map
+static/share-bar/

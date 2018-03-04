@@ -1,0 +1,8 @@
+body,
+.pure-g [class *="pure-u"] {
+	font-family: map-get($font-family, roboto);
+}
+
+a {
+  color: $link-color;
+}

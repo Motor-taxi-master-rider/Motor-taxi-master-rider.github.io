@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Tower of Babel</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+<style type="text/css">
+
+/*some stuff for output/input prompts*/
+div.cell{border:1px solid transparent;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch}div.cell.selected{border-radius:4px;border:thin #ababab solid}
+div.cell.edit_mode{border-radius:4px;border:thin #008000 solid}
+div.cell{width:100%;padding:5px 5px 5px 0;margin:0;outline:none}
+div.prompt{min-width:11ex;padding:.4em;margin:0;font-family:monospace;text-align:right;line-height:1.21429em}
+@media (max-width:480px){div.prompt{text-align:left}}div.inner_cell{display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch;-webkit-box-flex:1;-moz-box-flex:1;box-flex:1;flex:1}
+div.input_area{border:1px solid #cfcfcf;border-radius:4px;background:#f7f7f7;line-height:1.21429em}
+div.prompt:empty{padding-top:0;padding-bottom:0}
+div.input{page-break-inside:avoid;display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:horizontal;-moz-box-align:stretch;display:box;box-orient:horizontal;box-align:stretch;}
+div.inner_cell{width:90%;}
+div.input_area{border:1px solid #cfcfcf;border-radius:4px;background:#f7f7f7;}
+div.input_prompt{color:navy;border-top:1px solid transparent;}
+div.output_wrapper{margin-top:5px;position:relative;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;width:100%;}
+div.output_scroll{height:24em;width:100%;overflow:auto;border-radius:4px;-webkit-box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);-moz-box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);}
+div.output_collapsed{margin:0px;padding:0px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;width:100%;}
+div.out_prompt_overlay{height:100%;padding:0px 0.4em;position:absolute;border-radius:4px;}
+div.out_prompt_overlay:hover{-webkit-box-shadow:inset 0 0 1px #000000;-moz-box-shadow:inset 0 0 1px #000000;box-shadow:inset 0 0 1px #000000;background:rgba(240, 240, 240, 0.5);}
+div.output_prompt{color:darkred;}
+
+a.anchor-link:link{text-decoration:none;padding:0px 20px;visibility:hidden;}
+h1:hover .anchor-link,h2:hover .anchor-link,h3:hover .anchor-link,h4:hover .anchor-link,h5:hover .anchor-link,h6:hover .anchor-link{visibility:visible;}
+/* end stuff for output/input prompts*/
+
+
+.highlight-ipynb .hll { background-color: #ffffcc }
+.highlight-ipynb  { background: #f8f8f8; }
+.highlight-ipynb .c { color: #408080; font-style: italic } /* Comment */
+.highlight-ipynb .err { border: 1px solid #FF0000 } /* Error */
+.highlight-ipynb .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight-ipynb .o { color: #666666 } /* Operator */
+.highlight-ipynb .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight-ipynb .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight-ipynb .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight-ipynb .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight-ipynb .gd { color: #A00000 } /* Generic.Deleted */
+.highlight-ipynb .ge { font-style: italic } /* Generic.Emph */
+.highlight-ipynb .gr { color: #FF0000 } /* Generic.Error */
+.highlight-ipynb .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight-ipynb .gi { color: #00A000 } /* Generic.Inserted */
+.highlight-ipynb .go { color: #888888 } /* Generic.Output */
+.highlight-ipynb .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight-ipynb .gs { font-weight: bold } /* Generic.Strong */
+.highlight-ipynb .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight-ipynb .gt { color: #0044DD } /* Generic.Traceback */
+.highlight-ipynb .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight-ipynb .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight-ipynb .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight-ipynb .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight-ipynb .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight-ipynb .kt { color: #B00040 } /* Keyword.Type */
+.highlight-ipynb .m { color: #666666 } /* Literal.Number */
+.highlight-ipynb .s { color: #BA2121 } /* Literal.String */
+.highlight-ipynb .na { color: #7D9029 } /* Name.Attribute */
+.highlight-ipynb .nb { color: #008000 } /* Name.Builtin */
+.highlight-ipynb .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight-ipynb .no { color: #880000 } /* Name.Constant */
+.highlight-ipynb .nd { color: #AA22FF } /* Name.Decorator */
+.highlight-ipynb .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight-ipynb .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight-ipynb .nf { color: #0000FF } /* Name.Function */
+.highlight-ipynb .nl { color: #A0A000 } /* Name.Label */
+.highlight-ipynb .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight-ipynb .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight-ipynb .nv { color: #19177C } /* Name.Variable */
+.highlight-ipynb .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight-ipynb .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight-ipynb .mf { color: #666666 } /* Literal.Number.Float */
+.highlight-ipynb .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight-ipynb .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight-ipynb .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight-ipynb .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight-ipynb .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight-ipynb .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight-ipynb .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight-ipynb .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight-ipynb .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight-ipynb .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight-ipynb .sx { color: #008000 } /* Literal.String.Other */
+.highlight-ipynb .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight-ipynb .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight-ipynb .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight-ipynb .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight-ipynb .vc { color: #19177C } /* Name.Variable.Class */
+.highlight-ipynb .vg { color: #19177C } /* Name.Variable.Global */
+.highlight-ipynb .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight-ipynb .il { color: #666666 } /* Literal.Number.Integer.Long */
+</style>
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+div.entry-content {
+  overflow: visible;
+  padding: 8px;
+}
+.input_area {
+  padding: 0.2em;
+}
+
+a.heading-anchor {
+ white-space: normal;
+}
+
+.rendered_html
+code {
+ font-size: .8em;
+}
+
+pre.ipynb {
+  color: black;
+  background: #f7f7f7;
+  border: none;
+  box-shadow: none;
+  margin-bottom: 0;
+  padding: 0;
+  margin: 0px;
+  font-size: 13px;
+}
+
+/* remove the prompt div from text cells */
+div.text_cell .prompt {
+    display: none;
+}
+
+/* remove horizontal padding from text cells, */
+/* so it aligns with outer body text */
+div.text_cell_render {
+    padding: 0.5em 0em;
+}
+
+img.anim_icon{padding:0; border:0; vertical-align:middle; -webkit-box-shadow:none; -box-shadow:none}
+
+div.collapseheader {
+    width=100%;
+    padding: 2px;
+    cursor: pointer;
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+</style>
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+<script type="text/javascript">
+init_mathjax = function() {
+    if (window.MathJax) {
+        // MathJax loaded
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+            },
+            displayAlign: 'left', // Change this to 'center' to center equations.
+            "HTML-CSS": {
+                styles: {'.MathJax_Display': {"margin": 0}}
+            }
+        });
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    }
+}
+init_mathjax();
+</script>
+    <link href="./assets/favicon.ico" rel="icon">
+
+<link rel="canonical" href=".">
+        <meta name="author" content="Charlie Hu" />
+
+    <!-- Open Graph tags -->
+        <meta property="og:site_name" content="Tower of Babel" />
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="Tower of Babel"/>
+        <meta property="og:url" content="."/>
+        <meta property="og:description" content="Tower of Babel"/>
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="./theme/css/bootstrap.flatly.min.css" type="text/css"/>
+    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="./theme/css/pygments/native.css" rel="stylesheet">
+    <link href="./theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" href="./theme/css/style.css" type="text/css"/>
+        <link href="./static/css/custom.css" rel="stylesheet">
+
+        <link href="./feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Tower of Babel ATOM Feed"/>
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="./" class="navbar-brand">
+Tower of Babel            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                         <li><a href="./pages/about.html">
+                             About
+                          </a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><span>
+                <form class="navbar-search" action="/search.html">
+                  <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
+                </form></span>
+              </li>
+              <li><a href="./archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+            <article>
+                <h2><a href="./leetcode-integer-break.html">LeetCode - Integer Break</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-09-26T00:00:00+08:00"> 周二 26 九月 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="./tag/leetcode.html">Leetcode</a>
+        /
+	<a href="./tag/math.html">Math</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><h3>Description</h3>
+<p>Given a positive integer n, break it into the sum of <strong>at least</strong> two positive integers and maximize the product of those integers. Return the maximum product you can get.</p>
+<p>For example, given n = 2, return 1 (2 = 1 + 1); given n = 10, return 36 (10 = 3 + 3 + 4 …</p>
+                    <a class="btn btn-default btn-xs" href="./leetcode-integer-break.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="./python-descriptor-behavior-ii.html">Python Descriptor Behavior II</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-09-25T00:00:00+08:00"> 周一 25 九月 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="./tag/descriptor.html">Descriptor</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><h3>Description</h3>
+<p>在之前一篇<a href="https://motor-taxi-master-rider.github.io/python/2017/08/05/python-descriptor">文章</a>中我们讨论了python描述符以及其行为，也做了一些总结。但个人能力有限，对描述符访问的优先规则解释的不是非常清楚。</p>
+<p>近日看到一篇文章：<a href="http://fanchunke.me/Python/Python%E4%B8%AD%E7%9A%84%E5%B1%9E%E6%80%A7%E8%AE%BF%E9%97%AE%E4%B8%8E%E6%8F%8F%E8%BF%B0%E7%AC%A6/">Python中的属性访问与描述符</a>中对于属性访问优先规则的部分解释的很清晰，遂记录下来学习。</p>
+<h3>属性访问的优先规则</h3>
+<p>属性访问的入口点是<code>__getattribute__</code>方法。它的实现中定义了Python中属性访问的优先规则。Python官方文档中对<code>__getattribute__</code>的底层实现有相关的介绍，本文暂时只是讨论属性查找的规则，相关规则可见下图：</p>
+<p><img src="https://motor-taxi-master-rider.github.io/assets/img/python_descriptor.png"  title="{{site.title }}"/></p>
+<p>上图是查找b.x这样一个属性的过程。在这里要对此图进行简单的介绍：</p>
+<ol>
+<li>
+<p>查找属性的第一步是搜索基类列表，即type(b).<strong>mro</strong>，直到找到该属性的第一个定义，并将该属性的值赋值给<code>descr</code></p>
+</li>
+<li>
+<p>判断descr的类型。它的类型可分为数据描述符、非数据描述符、普通属性、未找到等类型。若descr为数据描述符，则调用desc.<strong>get</strong>(b, type(b))，并将结果返回，结束执行。否则进行下一步</p>
+</li>
+<li>
+<p>如果<code>descr</code>为非数据描述符、普通属性、未找到等类型 …</p></li></ol>
+                    <a class="btn btn-default btn-xs" href="./python-descriptor-behavior-ii.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="./leetcode-maximum-xor-of-two-numbers-in-an-array.html">LeetCode - Maximum XOR of Two Numbers in an Array</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-09-17T00:00:00+08:00"> 周日 17 九月 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="./tag/leetcode.html">Leetcode</a>
+        /
+	<a href="./tag/bit_manipulaion.html">Bit_manipulaion</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><h3>Description</h3>
+<p>Given a <strong>non-empty</strong> array of numbers,</p>
+<div class="math">$$ a_0, a_1, a_2, … , a_{n-1}, where 0 ≤ a_i &lt; 2^{31} $$</div>
+<p>.</p>
+<p>Find the maximum result of a_i <code>XOR</code> a_j, where <code>0 ≤ i, j &lt; n</code>.</p>
+<p>Could you do this in <code>O(n)</code> runtime?</p>
+<p><strong>Example:</strong></p>
+<div class="highlight"><pre><span></span>Input: [3, 10, 5, 25, 2, 8]
+
+Output: 28
+
+Explanation: The …</pre></div><script type='text/javascript'>if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+                    <a class="btn btn-default btn-xs" href="./leetcode-maximum-xor-of-two-numbers-in-an-array.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="./leetcode-total-hamming-distance.html">LeetCode - Total Hamming Distance</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-09-09T00:00:00+08:00"> 周六 09 九月 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="./tag/leetcode.html">Leetcode</a>
+        /
+	<a href="./tag/hamming_distance.html">Hamming_distance</a>
+        /
+	<a href="./tag/bit_manipulaion.html">Bit_manipulaion</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><h3>Description</h3>
+<p>The Hamming distance between two integers is the number of positions at which the corresponding bits are different.
+Now your job is to find the total Hamming distance between all pairs of the given numbers.</p>
+<p><strong>Example:</strong></p>
+<div class="highlight"><pre><span></span><span class="n">Input</span><span class="o">:</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">14</span><span class="o">,</span> <span class="mi">2</span>
+
+<span class="n">Output</span><span class="o">:</span> <span class="mi">6</span>
+
+<span class="n">Explanation</span><span class="o">:</span> <span class="n">In</span> <span class="n">binary</span> <span class="n">representation</span><span class="o">,</span> <span class="n">the</span> <span class="mi">4</span> <span class="k">is …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="./leetcode-total-hamming-distance.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="./leetcode-maximum-length-of-pair-chain.html">LeetCode - Maximum Length of Pair Chain</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-09-03T00:00:00+08:00"> 周日 03 九月 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="./tag/leetcode.html">LeetCode</a>
+        /
+	<a href="./tag/math.html">Math</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><h3>Description</h3>
+<p>You are given <code>n</code> pairs of numbers. In every pair, the first number is always smaller than the second number.</p>
+<p>Now, we define a pair <code>(c, d)</code> can follow another pair <code>(a, b)</code> if and only if <code>b &lt; c</code>. Chain of pairs can be formed in this fashion.</p>
+<p>Given …</p>
+                    <a class="btn btn-default btn-xs" href="./leetcode-maximum-length-of-pair-chain.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+
+        <ul class="pagination">
+                <li class="prev"><a href="./index2.html">&laquo;</a>
+                </li>
+                    <li class=""><a
+                            href="./index.html">1</a></li>
+                    <li class=""><a
+                            href="./index2.html">2</a></li>
+                    <li class="active"><a
+                            href="./index3.html">3</a></li>
+                    <li class=""><a
+                            href="./index4.html">4</a></li>
+                    <li class=""><a
+                            href="./index5.html">5</a></li>
+                    <li class=""><a
+                            href="./index6.html">6</a></li>
+                    <li class=""><a
+                            href="./index7.html">7</a></li>
+                    <li class=""><a
+                            href="./index8.html">8</a></li>
+                    <li class=""><a
+                            href="./index9.html">9</a></li>
+                    <li class=""><a
+                            href="./index10.html">10</a></li>
+                    <li class=""><a
+                            href="./index11.html">11</a></li>
+                    <li class=""><a
+                            href="./index12.html">12</a></li>
+                    <li class=""><a
+                            href="./index13.html">13</a></li>
+                    <li class=""><a
+                            href="./index14.html">14</a></li>
+                <li class="next"><a
+                        href="./index4.html">&raquo;</a></li>
+        </ul>
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<div id="aboutme">
+        <p>
+            <img width="100%" class="img-thumbnail" src="./assets/img/avatar.png"/>
+        </p>
+    <p>
+      <strong>About Charlie Hu</strong><br/>
+        Software engineer, Geeker. Here I mostly blog about Python, algorithm and how programing can be intersting.
+    </p>
+</div><!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="http://www.linkedin.com/in/danieldebie"><i class="fa fa-linkedin-square fa-lg"></i> linkedin</a></li>
+    <li class="list-group-item"><a href="https://github.com/Motor-taxi-master-rider"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Recent Posts -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
+  <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="./build-a-circular-list-and-regex-trie.html">Build a circular list and regex trie</a></li>
+    <li class="list-group-item"><a href="./top-10-python-libraries-of-2017.html">Top 10 Python libraries of 2017</a></li>
+    <li class="list-group-item"><a href="./find-longest-word-in-dictionary-that-is-a-subsequence-of-a-given-string.html">Find longest word in dictionary that is a subsequence of a given string</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Recent Posts -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="./"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <ul class="list-group list-inline tagcloud" id="tags">
+    <li class="list-group-item tag-3">
+      <a href="./tag/algorithms.html">Algorithms</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="./tag/bit_manipulation.html">Bit_manipulation</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="./tag/coroutine.html">Coroutine</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="./tag/descriptor.html">Descriptor</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="./tag/leetcode.html">Leetcode</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="./tag/math.html">Math</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="./tag/python.html">Python</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="./tag/stack.html">Stack</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="./tag/string.html">String</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="./tag/tree.html">Tree</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/Github -->
+<li class="list-group-item">
+  <h4><i class="fa fa-github fa-lg"></i><span class="icon-label">GitHub Repos</span></h4>
+  <div id="gh_repos">
+    <p class="list-group-item">Status updating...</p>
+  </div>
+  <a href="https://github.com/Motor-taxi-master-rider">@Motor-taxi-master-rider</a> on GitHub
+</li>
+<!-- End Sidebar/Github -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="http://getpelican.com/" target="_blank">Pelican</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://python.org/" target="_blank">Python.org</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2018 Charlie Hu
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="./theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="./theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="./theme/js/respond.min.js"></script>
+
+    <script src="./static/js/custom.js"></script>
+
+
+<!-- GitHub JS Code -->
+<script type="text/javascript">
+$(document).ready(function () {
+  if (!window.jXHR) {
+    var jxhr = document.createElement('script');
+    jxhr.type = 'text/javascript';
+    jxhr.src = './theme/js/jXHR.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(jxhr, s);
+  }
+
+  github.showRepos({
+    user: 'Motor-taxi-master-rider',
+    count: 3,
+    skip_forks: true,
+    target: '#gh_repos'
+  });
+});
+</script>
+<script src="./theme/js/github.js" type="text/javascript"></script>
+<!-- End GitHub JS Code -->
+
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+    $("div.collapseheader").click(function () {
+    $header = $(this).children("span").first();
+    $codearea = $(this).children(".input_area");
+    console.log($(this).children());
+    $codearea.slideToggle(500, function () {
+        $header.text(function () {
+            return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+        });
+    });
+});
+});
+</script>
+</body>
+</html>
