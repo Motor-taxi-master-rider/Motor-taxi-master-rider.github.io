@@ -10,7 +10,7 @@ import sys
 sys.path.append(os.curdir)
 from pelicanconf import *
 
-SITEURL = 'https://motor-taxi-master-rider.github.io'
+SITEURL = 'https://motor-taxi-master-rider.github.io/staticsite'
 RELATIVE_URLS = True
 
 FEED_ALL_ATOM = 'feeds/all.atom.xml'
