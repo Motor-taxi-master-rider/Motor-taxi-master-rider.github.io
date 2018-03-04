@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Tower of Babel</title>
+    <title>Top 10 Python libraries of 2016 - Tower of Babel</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -174,15 +174,21 @@ init_mathjax();
 </script>
     <link href="./assets/favicon.ico" rel="icon">
 
-<link rel="canonical" href=".">
-        <meta name="author" content="Charlie Hu" />
+<link rel="canonical" href="./top-10-python-libraries-of-2016.html">
 
-    <!-- Open Graph tags -->
+        <meta name="author" content="Charlie Hu" />
+        <meta name="keywords" content="Python" />
+        <meta name="description" content="We try to avoid most established choices such as Django, Flask, etc. that are kind of standard nowadays. Also, some of these libraries date prior to 2016, but either they had an explosion in popularity this year or we think they are great enough to deserve the spot. Here we …" />
+
         <meta property="og:site_name" content="Tower of Babel" />
-        <meta property="og:type" content="website"/>
-        <meta property="og:title" content="Tower of Babel"/>
-        <meta property="og:url" content="."/>
-        <meta property="og:description" content="Tower of Babel"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Top 10 Python libraries of 2016"/>
+        <meta property="og:url" content="./top-10-python-libraries-of-2016.html"/>
+        <meta property="og:description" content="We try to avoid most established choices such as Django, Flask, etc. that are kind of standard nowadays. Also, some of these libraries date prior to 2016, but either they had an explosion in popularity this year or we think they are great enough to deserve the spot. Here we …"/>
+        <meta property="article:published_time" content="2017-05-06" />
+            <meta property="article:section" content="posts" />
+            <meta property="article:tag" content="Python" />
+            <meta property="article:author" content="Charlie Hu" />
 
 
 
@@ -200,6 +206,8 @@ init_mathjax();
 
 
 
+        <link href="./feeds/posts.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Tower of Babel posts ATOM Feed"/>
 
 </head>
 <body>
@@ -239,51 +247,29 @@ Tower of Babel            </a>
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
-            <article>
-                <h2><a href="./build-a-circular-list-and-regex-trie.html">Build a circular list and regex trie</a></h2>
-                    <div class="well well-sm">
+            <ol class="breadcrumb">
+                <li><a href="." title="Tower of Babel"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="./category/posts.html" title="posts">posts</a></li>
+                <li class="active">Top 10 Python libraries of 2016</li>
+            </ol>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="./top-10-python-libraries-of-2016.html"
+                       rel="bookmark"
+                       title="Permalink to Top 10 Python libraries of 2016">
+                        Top 10 Python libraries of 2016
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2018-01-06T00:00:00+08:00"> 周六 06 一月 2018</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="./tag/algorithm.html">Algorithm</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Dancing programs</h3>
-<p>这个问题来自<code>Advent of code</code>的<a href="http://adventofcode.com/2017/day/16">第十六日</a>。</p>
-<p>解决代码如下:</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
-    <span class="c1"># 循环数组，start为头指针</span>
-    <span class="n">result_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
-    <span class="c1"># 减少Partner时间复杂度的字典</span>
-    <span class="n">result_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">s</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">result_list</span><span class="p">)}</span>
-    <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">result_list</span><span class="p">)</span>
-    <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
-
-    <span class="k">for</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">action</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">):</span>
-            <span class="n">start</span> <span class="o">=</span> <span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="n">length</span><span class="p">)</span> <span class="o">%</span> <span class="n">length</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">action</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
-            <span class="k">continue</span>
-
-        <span class="k">if …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="./build-a-circular-list-and-regex-trie.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./top-10-python-libraries-of-2017.html">Top 10 Python libraries of 2017</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-12-26T00:00:00+08:00"> 周二 26 十二月 2017</time>
+        <i class="fa fa-calendar"></i><time datetime="2017-05-06T00:00:00+08:00"> 周六 06 五月 2017</time>
     </span>
 
 
@@ -294,130 +280,90 @@ Tower of Babel            </a>
 	<a href="./tag/python.html">Python</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary"><section class="blog-single-post__content">
-
-<p>December is the time when you sit back and think about the accomplishments of the past year. For us programmers, this is often looking at the <strong>open source libraries</strong> that were either released this year (or close enough), or whose popularity has recently boomed because they are simply great tools …</p></section>
-                    <a class="btn btn-default btn-xs" href="./top-10-python-libraries-of-2017.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./find-longest-word-in-dictionary-that-is-a-subsequence-of-a-given-string.html">Find longest word in dictionary that is a subsequence of a given string</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-12-09T00:00:00+08:00"> 周六 09 十二月 2017</time>
-    </span>
+                <p>We try to avoid most established choices such as Django, Flask, etc. that are kind of standard nowadays. Also, some of these libraries date prior to 2016, but either they had an explosion in popularity this year or we think they are great enough to deserve the spot. Here we go!</p>
+<div class="post">
+    <p>Last year, we did a recap with what we thought were the <a href="https://tryolabs.com/blog/2015/12/15/top-10-python-libraries-of-2015/">best Python libraries of 2015</a>, which was widely shared within the Python community (see post in<a href="https://www.reddit.com/r/Python/comments/3wyiuv/top_10_python_libraries_of_2015/">r/Python</a>).
+        A year has gone by, and again it is time to give due credit for the awesome work that has been done by the <strong>open source community</strong> this year.</p>
+    <p>Again, we try to avoid most established choices such as Django, Flask, etc. that are kind of standard nowadays. Also, some of these libraries date prior to 2016, but either they had an explosion in popularity this year or we think they are great enough
+        to deserve the spot. Here we go!</p>
+    <h2>1. <a href="https://www.zappa.io/">Zappa</a></h2>
+    <p>Since the release of <a href="https://aws.amazon.com/lambda/details/">AWS Lambda</a> (and <a href="https://cloud.google.com/functions/docs/">others</a> that <a href="https://azure.microsoft.com/en-us/services/functions/">have</a> <a href="https://www.ibm.com/cloud-computing/bluemix/openwhisk">followed</a>),
+        all the rage has been about <a href="http://martinfowler.com/articles/serverless.html">serverless architectures</a>. These allow microservices to be deployed in the cloud, in a fully managed environment where one doesn’t have to care about managing
+        any server, but is assigned stateless, ephemeral <em>computing containers</em> that are fully managed by a provider. With this paradigm, events (such as a traffic spike) can trigger the execution of more of these <em>containers</em> and therefore
+        give the possibility to handle “infinite” horizontal scaling.</p>
+    <p>Zappa is <strong>the serverless framework for Python</strong>, although (at least for the moment) it only has support for AWS Lambda and AWS API Gateway. It makes building so-architectured apps very simple, freeing you from most of the tedious setup
+        you would have to do through the AWS Console or API, and has all sort of commands to ease deployment and managing different environments.</p>
+    <h2>2. <a href="https://github.com/channelcat/sanic">Sanic</a> + <a href="https://magic.io/blog/uvloop-blazing-fast-python-networking/">uvloop</a></h2>
+    <p>Who said Python couldn’t be fast? Apart from competing for the <a href="http://knowyourmeme.com/memes/sanic-hegehog">best name</a> of a software library ever, Sanic also competes for the fastest Python web framework ever, and appears to be the winner
+        by a clear margin. It is a Flask-like Python 3.5+ web server that is designed for speed. Another library, <em>uvloop</em>, is an ultra fast drop-in replacement for <em>asyncio</em>’s event loop that uses <a href="https://github.com/libuv/libuv">libuv</a>        under the hood. Together, these two things make a great combination!</p>
+    <p>According to the Sanic author’s <a href="https://github.com/channelcat/sanic#benchmarks">benchmark</a>, <em>uvloop</em> could power this beast to handle more than <strong>33k requests/s</strong> which is just insane (and faster than <em>node.js</em>).
+        Your code can benefit from the new <em>async/await</em> syntax so it will look neat too; besides we love the Flask-style API. Make sure to give Sanic a try, and if you are using <em>asyncio</em>, you can surely benefit from <em>uvloop</em> with
+        very little change in your code!</p>
+    <h2>3. <a href="https://github.com/MagicStack/asyncpg">asyncpg</a></h2>
+    <p>In line with recent developments for the <em>asyncio</em> framework, the folks from<a href="https://magic.io/">MagicStack</a> bring us this efficient asynchronous (currently CPython 3.5 only) database interface library designed specifically for PostgreSQL.
+        It has zero dependencies, meaning there is no need to have <em>libpq</em> installed. In contrast with <em>psycopg2</em> (the most popular PostgreSQL adapter for Python) which exchanges data with the database server in text format, <em>asyncpg</em>        implements PostgreSQL <strong>binary I/O protocol</strong>, which not only allows support for generic types but also comes with numerous performance benefits.</p>
+    <p>The benchmarks are clear: <em>asyncpg</em> is on average, at least <strong>3x faster</strong> than <em>psycopg2</em> (or <em>aiopg</em>), and faster than the <em>node.js</em> and <em>Go</em> implementations.</p>
+    <h2>4. <a href="https://github.com/boto/boto3">boto3</a></h2>
+    <p>If you have your infrastructure on AWS or otherwise make use of their services (such as S3), you should be very happy that <a href="https://github.com/boto/boto">boto</a>, the Python interface for AWS API, got a completely rewrite from the ground
+        up. The great thing is that you don’t need to migrate your app all at once: you can use <em>boto3</em> and <em>boto</em> (2) <em>at the same time</em>; for example using boto3 only for new parts of your application.</p>
+    <p>The new implementation is much <strong>more consistent</strong> between different services, and since it uses a data-driven approach to generate classes at runtime from JSON description files, it will always get fast updates. No more lagging behind
+        new Amazon API features, move to <em>boto3</em>!</p>
+    <h2>5. <a href="https://www.tensorflow.org/">TensorFlow</a></h2>
+    <p>Do we even need an introduction here? Since it was released by Google in November 2015, this library has gained a huge momentum and has become the #1 trendiest GitHub Python repository. In case you have been living under a rock for the past year,
+        TensorFlow is a library for <strong>numerical computation</strong> using data flow graphs, which can run over GPU or CPU.</p>
+    <p>We have quickly witnessed it become a trend in the Machine Learning community (especially Deep Learning, see our post on <a href="https://tryolabs.com/blog/2016/11/18/10-main-takeaways-from-mlconf/">10 main takeaways from MLconf</a>), not only growing
+        its uses in research but also being widely used in production applications. If you are doing Deep Learning and want to use it through a higher level interface, you can try using it as a backend for <a href="https://keras.io/">Keras</a> (which
+        made it to last years post) or the newer <a href="https://github.com/tensorflow/tensorflow/tree/master/tensorflow/contrib/slim">TensorFlow-Slim</a>.</p>
+    <h2>6. <a href="https://gym.openai.com/">gym</a> + <a href="https://universe.openai.com/">universe</a></h2>
+    <p>If you are into AI, you surely have heard about the <a href="https://openai.com/">OpenAI</a> non-profit artificial intelligence research company (backed by Elon Musk et al.). The researchers have open sourced some Python code this year! Gym is a toolkit
+        for developing and comparing <a href="https://en.wikipedia.org/wiki/Reinforcement_learning">reinforcement learning</a> algorithms. It consists of an open-source library with a collection of test problems (environments) that can be used to test
+        reinforcement learning algorithms, and a site and API that allows to compare the performance of trained algorithms (agents). Since it doesn’t care about the implementation of the agent, you can build them with the computation library of your choice:
+        bare numpy, TensorFlow, Theano, etc.</p>
+    <p>We also have the recently released <em>universe</em>, a software platform for researching into <strong>general intelligence</strong> across games, websites and other applications. This fits perfectly with <em>gym</em>, since it allows any real-world
+        application to be turned into a <em>gym</em> environment. Researchers hope that this limitless possibility will <strong>accelerate research</strong> into smarter agents that can solve general purpose tasks.</p>
+    <h2>7. <a href="http://bokeh.pydata.org/">Bokeh</a></h2>
+    <p>You may be familiar with some of the libraries Python has to offer for data visualization; the most popular of which are <a href="http://matplotlib.org/">matplotlib</a> and <a href="http://seaborn.pydata.org/">seaborn</a>. Bokeh, however, is created
+        for <strong>interactive visualization</strong>, and targets modern web browsers for the presentation. This means Bokeh can create a plot which lets you_explore_ the data from a web browser. The great thing is that it integrates tightly with
+        <a
+            href="https://jupyter.org/">Jupyter Notebooks</a>, so you can use it with your probably go-to tool for your research. There is also an optional server component, <code class="highlighter-rouge">bokeh-server</code>, with many powerful capabilities like server-side downsampling
+            of large dataset (no more slow network tranfers/browser!), streaming data, transformations, etc.</p>
+    <p>Make sure to check the <a href="http://bokeh.pydata.org/en/latest/docs/gallery.html">gallery</a> for examples of what you can create. They look awesome!</p>
+    <h2>8. <a href="https://blaze.readthedocs.io/en/latest/index.html">Blaze</a></h2>
+    <p>Sometimes, you want to run <strong>analytics</strong> over a dataset too big to fit your computer’s RAM. If you cannot rely on numpy or Pandas, you usually turn to other tools like PostgreSQL, MongoDB, Hadoop, Spark, or many others. Depending on the
+        use case, one or more of these tools can make sense, each with their own strengths and weaknesses. The problem? There is a big overhead here because you need to learn how each of these systems work and how to insert data in the proper form.</p>
+    <p>Blaze provides a <strong>uniform interface</strong> that abstracts you away from several database technologies. At the core, the library provides a way to <strong>express computations</strong>. Blaze itself doesn’t actually do any computation: it
+        just knows how to instruct a specific <em>backend</em> who will be in charge of performing it. There is so much more to Blaze (thus the ecosystem), as libraries that have come out of its development. For example, <a href="http://dask.pydata.org/en/latest/">Dask</a>        implements a drop-in replacement for NumPy array that can handle content larger than memory and leverage multiple cores, and also comes with dynamic task scheduling. Interesting stuff.</p>
+    <h2>9. <a href="https://github.com/crsmithdev/arrow">arrow</a></h2>
+    <p>There is a famous saying that there are only two hard problems in Computer Science: cache invalidation and naming things. I think the saying is clearly missing one thing: <strong>managing datetimes</strong>. If you have ever tried to do that in Python,
+        you will know that the standard library has a gazillion modules and types: <code class="highlighter-rouge">datetime</code>,<code class="highlighter-rouge">date</code>, <code class="highlighter-rouge">calendar</code>, <code class="highlighter-rouge">tzinfo</code>,
+        <code class="highlighter-rouge">timedelta</code>, <code class="highlighter-rouge">relativedelta</code>, <code class="highlighter-rouge">pytz</code>, etc. Worse, it is timezone naive by default.</p>
+    <p>Arrow is “datetime for humans”, offering a sensible approach to creating, manipulating, formatting and converting dates, times, and timestamps. It is a<strong>replacement</strong> for the <code class="highlighter-rouge">datetime</code> type that supports
+        Python 2 or 3, and provides a much nicer interface as well as filling the gaps with new functionality (such as<code class="highlighter-rouge">humanize</code>). Even if you don’t really <em>need</em> arrow, using it can greatly reduce the boilerplate
+        in your code.</p>
+    <h2>10. <a href="http://www.hug.rest/">hug</a></h2>
+    <p>Expose your internal API externally, drastically simplifying <strong>Python API</strong>development. Hug is a next-generation Python 3 (only) library that will provide you with the cleanest way to create HTTP REST APIs in Python. It is not a web framework
+        per se (although that is a function it performs exceptionally well), but only focuses on exposing idiomatically correct and standard internal Python APIs externally. The idea is simple: you define logic and structure once, and you can expose your
+        API through <strong>multiple means</strong>. Currently, it supports exposing REST API or command line interface.</p>
+    <p>You can use type annotations that let <em>hug</em> not only generate <strong>documentation</strong> for your API but also provide with <strong>validation</strong> and clean error messages that will make your life (and your API user’s) a lot easier.
+        Hug is built on <a href="https://github.com/falconry/falcon">Falcon’s</a> high performance HTTP library, which means you can deploy this to production using any wsgi-compatible server such as <a href="http://gunicorn.org/">gunicorn</a>.</p>
+    <p>Follow the discussion of this post on: <a href="https://www.reddit.com/r/Python/comments/5jf64k/top_10_python_libraries_of_2016/">Reddit</a></p>
+    <hr>
+    <p><em>Original source:</em> <a href="https://tryolabs.com/blog/2016/12/20/top-10-python-libraries-of-2016/"><em>https://tryolabs.com/blog/2016/12/20/top-10-python…</em></a></p>
+</div>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="./top-10-python-libraries-of-2017.html">Top 10 Python libraries of 2017</a></li>
+        <li><a href="./leetcode-queue-reconstruction-by-height.html">LeetCode - Queue Reconstruction by Height</a></li>
+        <li><a href="./leetcode-island-perimeter.html">LeetCode - Island Perimeter</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
 
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="./tag/algorithm.html">Algorithm</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Description</h3>
-<p>Given a string <code>S</code> and a set of words <code>D</code>, find the longest word in <code>D</code> that is a subsequence of <code>S</code>.</p>
-<p>Word <code>W</code> is a subsequence of <code>S</code> if some number of characters, possibly zero, can be deleted from <code>S</code> to form <code>W</code>, without reordering the remaining characters …</p>
-                    <a class="btn btn-default btn-xs" href="./find-longest-word-in-dictionary-that-is-a-subsequence-of-a-given-string.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./pyjion-python-debug-pandasyou-hua-bi-ji.html">Pyjion、python debug、pandas优化笔记</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-11-18T00:00:00+08:00"> 周六 18 十一月 2017</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="./tag/jit.html">JIT</a>
-        /
-	<a href="./tag/debug.html">Debug</a>
-        /
-	<a href="./tag/pandas.html">Pandas</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Description</h3>
-<p>Brett Cannon和Dino Viehland在 <strong>Pycon2016</strong> 的<a href="https://www.youtube.com/watch?v=1DAIzO3QXcA">Pyjion: who doesn’t want faster for free?</a>演讲中介绍了Microsoft为cpython提供JIT的c++项目<code>Pyjion</code>。之后我也在talkpython的往期访谈中找到与Brett Cannon的<code>Pyjion</code>相关的访谈，其中的很多看法让我大受脾益。</p>
-<p>Elizaveta Shashkova在 <strong>Pycon2017</strong> 的<a href="https://www.youtube.com/watch?v=NdObDUbLjdg&amp;feature=youtu.be">Debugging in Python 3 6 Better, Faster, Stronger</a>演讲非常令人印象深刻。她在开发pycharm的JetBrains公司工作，而pycharm因为它优秀的debug功能成为了我最喜欢的IDE，没有之一。虽然俄罗斯老姐有一点口音，但并不影响这是一次让人感到Bingo的演讲。</p>
-<p>同样在 <strong>Pycon2017</strong> 上，美丽的Sofia Heisler告诉了我们<a href="https://www.youtube.com/watch?v=HN5d490_KKk&amp;feature=youtu.be">No More Sad Pandas Optimizing …</a></p>
-                    <a class="btn btn-default btn-xs" href="./pyjion-python-debug-pandasyou-hua-bi-ji.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./instagram-python-migrationbi-ji.html">Instagram python migration笔记</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-11-11T00:00:00+08:00"> 周六 11 十一月 2017</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="./tag/async.html">Async</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Description</h3>
-<p>Lisa Guo和Hui Ding在 <strong>Pycon2017</strong> 的<a href="https://www.youtube.com/watch?v=66XoCk79kjM">keynote</a>分享了Instagram成功从python2.7、Django1.3升级到python3.6、Django1.8的经历。</p>
-<p>在Talk Python fm之前的episode中，我惊喜地发现了有一期Michael Kennedy邀请到了<a href="https://talkpython.fm/episodes/transcript/107/python-concurrency-with-curio">David Beazley</a>。在哪一期节目中他们畅谈了python concurrency相关及David在Github上的async项目<a href="https://github.com/dabeaz/curio">Curio</a>。</p>
-<h3>Instagram</h3>
-<p>很难想象Instagram能在保持产品功能高速迭代的同时完成从python2.7版本到3.5版本的跨越。他们在版本更新途中在代码层面遇到的主要有以下几类问题。</p>
-<h2>Unicode</h2>
-<p>Python3最显著的改动就是严格化了UNICODE/STR/BYTE的转换。Instagram编写了一些功能函数（<code>ensure_binary</code>,<code>ensure_str</code>,<code>ensure_text</code>）来确保之前代码里的输入和输出符合python3的标准。</p>
-<h2>Data format incompatib</h2>
-<p>在Instagram中经常用到了<code>pickle</code>模块。该模块在python2和3中的区别是：python3的pickle的协议最高版本提升到了4。他们发现即使将协议版本hardcode到python2里的2，由于版本2和3的同时存在，他们之间的相互序列化的转化也会存在问题。因此他们将不同版本的pickle结果隔离 …</p>
-                    <a class="btn btn-default btn-xs" href="./instagram-python-migrationbi-ji.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-
-        <ul class="pagination">
-                <li class="prev disabled"><a href="#">&laquo;</a></li>
-                    <li class="active"><a
-                            href="./index.html">1</a></li>
-                    <li class=""><a
-                            href="./index2.html">2</a></li>
-                    <li class=""><a
-                            href="./index3.html">3</a></li>
-                    <li class=""><a
-                            href="./index4.html">4</a></li>
-                    <li class=""><a
-                            href="./index5.html">5</a></li>
-                    <li class=""><a
-                            href="./index6.html">6</a></li>
-                    <li class=""><a
-                            href="./index7.html">7</a></li>
-                    <li class=""><a
-                            href="./index8.html">8</a></li>
-                    <li class=""><a
-                            href="./index9.html">9</a></li>
-                    <li class=""><a
-                            href="./index10.html">10</a></li>
-                    <li class=""><a
-                            href="./index11.html">11</a></li>
-                    <li class=""><a
-                            href="./index12.html">12</a></li>
-                    <li class=""><a
-                            href="./index13.html">13</a></li>
-                    <li class=""><a
-                            href="./index14.html">14</a></li>
-                <li class="next"><a
-                        href="./index2.html">&raquo;</a></li>
-        </ul>
         </div>
         <div class="col-sm-3" id="sidebar">
             <aside>

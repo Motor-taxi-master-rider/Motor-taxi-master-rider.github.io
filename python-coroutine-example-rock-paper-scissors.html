@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Tower of Babel</title>
+    <title>Python Coroutine Example -- Rock Paper Scissors - Tower of Babel</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -174,15 +174,21 @@ init_mathjax();
 </script>
     <link href="./assets/favicon.ico" rel="icon">
 
-<link rel="canonical" href=".">
-        <meta name="author" content="Charlie Hu" />
+<link rel="canonical" href="./python-coroutine-example-rock-paper-scissors.html">
 
-    <!-- Open Graph tags -->
+        <meta name="author" content="Charlie Hu" />
+        <meta name="keywords" content="Coroutine" />
+        <meta name="description" content="Description 本代码来自Ian Ward的Jupyter Notebook -- “Iterables, Iterators, and Generators” 教程，实现了剪刀石头布的游戏。 预激协程 The flow is always the same when working with generators. a generator object is created by the caller the caller starts the generator the generator passes data to the caller (or signals the end of the sequence) the caller …" />
+
         <meta property="og:site_name" content="Tower of Babel" />
-        <meta property="og:type" content="website"/>
-        <meta property="og:title" content="Tower of Babel"/>
-        <meta property="og:url" content="."/>
-        <meta property="og:description" content="Tower of Babel"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Python Coroutine Example -- Rock Paper Scissors"/>
+        <meta property="og:url" content="./python-coroutine-example-rock-paper-scissors.html"/>
+        <meta property="og:description" content="Description 本代码来自Ian Ward的Jupyter Notebook -- “Iterables, Iterators, and Generators” 教程，实现了剪刀石头布的游戏。 预激协程 The flow is always the same when working with generators. a generator object is created by the caller the caller starts the generator the generator passes data to the caller (or signals the end of the sequence) the caller …"/>
+        <meta property="article:published_time" content="2017-07-24" />
+            <meta property="article:section" content="Python" />
+            <meta property="article:tag" content="Coroutine" />
+            <meta property="article:author" content="Charlie Hu" />
 
 
 
@@ -200,6 +206,8 @@ init_mathjax();
 
 
 
+        <link href="./feeds/python.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Tower of Babel Python ATOM Feed"/>
 
 </head>
 <body>
@@ -239,13 +247,29 @@ Tower of Babel            </a>
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
-            <article>
-                <h2><a href="./build-a-circular-list-and-regex-trie.html">Build a circular list and regex trie</a></h2>
-                    <div class="well well-sm">
+            <ol class="breadcrumb">
+                <li><a href="." title="Tower of Babel"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="./category/python.html" title="Python">Python</a></li>
+                <li class="active">Python Coroutine Example -- Rock Paper Scissors</li>
+            </ol>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="./python-coroutine-example-rock-paper-scissors.html"
+                       rel="bookmark"
+                       title="Permalink to Python Coroutine Example -- Rock Paper Scissors">
+                        Python Coroutine Example -- Rock Paper Scissors
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2018-01-06T00:00:00+08:00"> 周六 06 一月 2018</time>
+        <i class="fa fa-calendar"></i><time datetime="2017-07-24T00:00:00+08:00"> 周一 24 七月 2017</time>
     </span>
 
 
@@ -253,171 +277,92 @@ Tower of Babel            </a>
 
 
 <span class="label label-default">Tags</span>
-	<a href="./tag/algorithm.html">Algorithm</a>
+	<a href="./tag/coroutine.html">Coroutine</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Dancing programs</h3>
-<p>这个问题来自<code>Advent of code</code>的<a href="http://adventofcode.com/2017/day/16">第十六日</a>。</p>
-<p>解决代码如下:</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
-    <span class="c1"># 循环数组，start为头指针</span>
-    <span class="n">result_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
-    <span class="c1"># 减少Partner时间复杂度的字典</span>
-    <span class="n">result_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">s</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">result_list</span><span class="p">)}</span>
-    <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">result_list</span><span class="p">)</span>
-    <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
-
-    <span class="k">for</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">action</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">):</span>
-            <span class="n">start</span> <span class="o">=</span> <span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="n">length</span><span class="p">)</span> <span class="o">%</span> <span class="n">length</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">action</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
-            <span class="k">continue</span>
-
-        <span class="k">if …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="./build-a-circular-list-and-regex-trie.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./top-10-python-libraries-of-2017.html">Top 10 Python libraries of 2017</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-12-26T00:00:00+08:00"> 周二 26 十二月 2017</time>
-    </span>
+                <h3>Description</h3>
+<p>本代码来自Ian Ward的Jupyter Notebook -- “Iterables, Iterators, and Generators” 教程，实现了剪刀石头布的游戏。</p>
+<h3>预激协程</h3>
+<p>The flow is always the same when working with generators.
+a generator object is created by the caller
+the caller starts the generator
+the generator passes data to the caller (or signals the end of the sequence)
+the caller passes data to the generator
+repeat from (3)</p>
+<p>For generators that are driven by input to .send() no data is transferred in the first 3 steps above.</p>
+<p>This is a decorator that arranges for .next() to be called once immediately after a generator is created. This will turn a generator function into a function that returns a generator immediately ready to receive data (step 4).</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">advance_generator_once</span><span class="p">(</span><span class="n">original_fn</span><span class="p">):</span>
+    <span class="s2">&quot;decorator to advance a generator once immediately after it is created&quot;</span>
+    <span class="k">def</span> <span class="nf">actual_call</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">gen</span> <span class="o">=</span> <span class="n">original_fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">gen</span><span class="o">.</span><span class="n">next</span><span class="p">()</span> <span class="ow">is</span> <span class="bp">None</span>
+        <span class="k">return</span> <span class="n">gen</span>
+    <span class="k">return</span> <span class="n">actual_call</span>
+</pre></div>
 
 
+<h2>实例协程</h2>
+<p>As shown, one of the ways to pass a message to a generator is with .send(). This interface allows you to pass a single object to a generator. For this object we can pass tuples, dicts or anything else we choose.</p>
+<p>You decide the protocol for your generator by documenting the types and values of objects you will send from caller to generator and yield from generator to caller.</p>
+<p>Tuples are perfect for a generator that needs two objects each time, e.g. a player number and a key press.</p>
+<p>This is a Rock-Paper-Scissors game where each player's play is passed in separately, and once both players have played the result of the game is yielded. Players can change their mind choose a different play if the other player hasn't chosen yet. Games will continue indefinitately.</p>
+<p>This generator uses a common pattern of storing the result that will be yielded in a local variable so that there are fewer yield statements in the generator function. Having fewer yield statements makes it easier to understand where it is possible for execution to be paused within the generator function.</p>
+<p>The outer while loop runs once for each full game. The inner while loop collects input from the users until the game result can be decided.</p>
+<div class="highlight"><pre><span></span><span class="nd">@advance_generator_once</span>
+<span class="k">def</span> <span class="nf">rock_paper_scissors</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    coroutine for playing rock-paper-scissors</span>
+
+<span class="sd">    yields: &#39;invalid key&#39;: invalid input was sent</span>
+<span class="sd">            (&#39;win&#39;, player, choice0, choice1): when a player wins</span>
+<span class="sd">            (&#39;tie&#39;, None, choice0, choice1): when there is a tie</span>
+<span class="sd">            None: when waiting for more input</span>
+
+<span class="sd">    accepts to .send(): (player, key):</span>
+<span class="sd">        player is 0 or 1, key is a character in &#39;rps&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">valid</span> <span class="o">=</span> <span class="s1">&#39;rps&#39;</span>
+    <span class="n">wins</span> <span class="o">=</span> <span class="s1">&#39;rs&#39;</span><span class="p">,</span> <span class="s1">&#39;sp&#39;</span><span class="p">,</span> <span class="s1">&#39;pr&#39;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">chosen</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">]</span>
+        <span class="k">while</span> <span class="bp">None</span> <span class="ow">in</span> <span class="n">chosen</span><span class="p">:</span>
+            <span class="n">player</span><span class="p">,</span> <span class="n">play</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">result</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="k">if</span> <span class="n">play</span> <span class="ow">in</span> <span class="n">valid</span><span class="p">:</span>
+                <span class="n">chosen</span><span class="p">[</span><span class="n">player</span><span class="p">]</span> <span class="o">=</span> <span class="n">play</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="s1">&#39;invalid key&#39;</span>
+
+        <span class="k">if</span> <span class="n">chosen</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">chosen</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">wins</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;win&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">chosen</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">chosen</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">chosen</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">wins</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;win&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">chosen</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;tie&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">chosen</span><span class="p">)</span>
+</pre></div>
 
 
+<h3>Additional</h3>
+<p>参考文献:
+1. <a href="http://nbviewer.ipython.org/github/wardi/iterables-iterators-generators/blob/master/Iterables,%20Iterators,%20Generators.ipynb">源教程</a></p>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="./python-yield-tutorial-markdown.html">Python yield tutorial markdown</a></li>
+        <li><a href="./replace-asyncio-with-native-coroutine.html">Replace asyncio with native coroutine</a></li>
+        <li><a href="./yi-ge-jian-dan-de-wen-ben-jie-xi-ji-suan-qi.html">一个简单的文本解析计算器</a></li>
+        <li><a href="./python-coroutine-example-game-of-life.html">Python Coroutine Example -- Game of life</a></li>
+        <li><a href="./flunet-python-167-coroutine-understading.html">Flunet Python 16.7 coroutine understading</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
 
-<span class="label label-default">Tags</span>
-	<a href="./tag/python.html">Python</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><section class="blog-single-post__content">
-
-<p>December is the time when you sit back and think about the accomplishments of the past year. For us programmers, this is often looking at the <strong>open source libraries</strong> that were either released this year (or close enough), or whose popularity has recently boomed because they are simply great tools …</p></section>
-                    <a class="btn btn-default btn-xs" href="./top-10-python-libraries-of-2017.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./find-longest-word-in-dictionary-that-is-a-subsequence-of-a-given-string.html">Find longest word in dictionary that is a subsequence of a given string</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-12-09T00:00:00+08:00"> 周六 09 十二月 2017</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="./tag/algorithm.html">Algorithm</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Description</h3>
-<p>Given a string <code>S</code> and a set of words <code>D</code>, find the longest word in <code>D</code> that is a subsequence of <code>S</code>.</p>
-<p>Word <code>W</code> is a subsequence of <code>S</code> if some number of characters, possibly zero, can be deleted from <code>S</code> to form <code>W</code>, without reordering the remaining characters …</p>
-                    <a class="btn btn-default btn-xs" href="./find-longest-word-in-dictionary-that-is-a-subsequence-of-a-given-string.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./pyjion-python-debug-pandasyou-hua-bi-ji.html">Pyjion、python debug、pandas优化笔记</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-11-18T00:00:00+08:00"> 周六 18 十一月 2017</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="./tag/jit.html">JIT</a>
-        /
-	<a href="./tag/debug.html">Debug</a>
-        /
-	<a href="./tag/pandas.html">Pandas</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Description</h3>
-<p>Brett Cannon和Dino Viehland在 <strong>Pycon2016</strong> 的<a href="https://www.youtube.com/watch?v=1DAIzO3QXcA">Pyjion: who doesn’t want faster for free?</a>演讲中介绍了Microsoft为cpython提供JIT的c++项目<code>Pyjion</code>。之后我也在talkpython的往期访谈中找到与Brett Cannon的<code>Pyjion</code>相关的访谈，其中的很多看法让我大受脾益。</p>
-<p>Elizaveta Shashkova在 <strong>Pycon2017</strong> 的<a href="https://www.youtube.com/watch?v=NdObDUbLjdg&amp;feature=youtu.be">Debugging in Python 3 6 Better, Faster, Stronger</a>演讲非常令人印象深刻。她在开发pycharm的JetBrains公司工作，而pycharm因为它优秀的debug功能成为了我最喜欢的IDE，没有之一。虽然俄罗斯老姐有一点口音，但并不影响这是一次让人感到Bingo的演讲。</p>
-<p>同样在 <strong>Pycon2017</strong> 上，美丽的Sofia Heisler告诉了我们<a href="https://www.youtube.com/watch?v=HN5d490_KKk&amp;feature=youtu.be">No More Sad Pandas Optimizing …</a></p>
-                    <a class="btn btn-default btn-xs" href="./pyjion-python-debug-pandasyou-hua-bi-ji.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./instagram-python-migrationbi-ji.html">Instagram python migration笔记</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-11-11T00:00:00+08:00"> 周六 11 十一月 2017</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="./tag/async.html">Async</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Description</h3>
-<p>Lisa Guo和Hui Ding在 <strong>Pycon2017</strong> 的<a href="https://www.youtube.com/watch?v=66XoCk79kjM">keynote</a>分享了Instagram成功从python2.7、Django1.3升级到python3.6、Django1.8的经历。</p>
-<p>在Talk Python fm之前的episode中，我惊喜地发现了有一期Michael Kennedy邀请到了<a href="https://talkpython.fm/episodes/transcript/107/python-concurrency-with-curio">David Beazley</a>。在哪一期节目中他们畅谈了python concurrency相关及David在Github上的async项目<a href="https://github.com/dabeaz/curio">Curio</a>。</p>
-<h3>Instagram</h3>
-<p>很难想象Instagram能在保持产品功能高速迭代的同时完成从python2.7版本到3.5版本的跨越。他们在版本更新途中在代码层面遇到的主要有以下几类问题。</p>
-<h2>Unicode</h2>
-<p>Python3最显著的改动就是严格化了UNICODE/STR/BYTE的转换。Instagram编写了一些功能函数（<code>ensure_binary</code>,<code>ensure_str</code>,<code>ensure_text</code>）来确保之前代码里的输入和输出符合python3的标准。</p>
-<h2>Data format incompatib</h2>
-<p>在Instagram中经常用到了<code>pickle</code>模块。该模块在python2和3中的区别是：python3的pickle的协议最高版本提升到了4。他们发现即使将协议版本hardcode到python2里的2，由于版本2和3的同时存在，他们之间的相互序列化的转化也会存在问题。因此他们将不同版本的pickle结果隔离 …</p>
-                    <a class="btn btn-default btn-xs" href="./instagram-python-migrationbi-ji.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-
-        <ul class="pagination">
-                <li class="prev disabled"><a href="#">&laquo;</a></li>
-                    <li class="active"><a
-                            href="./index.html">1</a></li>
-                    <li class=""><a
-                            href="./index2.html">2</a></li>
-                    <li class=""><a
-                            href="./index3.html">3</a></li>
-                    <li class=""><a
-                            href="./index4.html">4</a></li>
-                    <li class=""><a
-                            href="./index5.html">5</a></li>
-                    <li class=""><a
-                            href="./index6.html">6</a></li>
-                    <li class=""><a
-                            href="./index7.html">7</a></li>
-                    <li class=""><a
-                            href="./index8.html">8</a></li>
-                    <li class=""><a
-                            href="./index9.html">9</a></li>
-                    <li class=""><a
-                            href="./index10.html">10</a></li>
-                    <li class=""><a
-                            href="./index11.html">11</a></li>
-                    <li class=""><a
-                            href="./index12.html">12</a></li>
-                    <li class=""><a
-                            href="./index13.html">13</a></li>
-                    <li class=""><a
-                            href="./index14.html">14</a></li>
-                <li class="next"><a
-                        href="./index2.html">&raquo;</a></li>
-        </ul>
         </div>
         <div class="col-sm-3" id="sidebar">
             <aside>

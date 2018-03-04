@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Tower of Babel</title>
+    <title>Instagram python migration笔记 - Tower of Babel</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -174,15 +174,21 @@ init_mathjax();
 </script>
     <link href="./assets/favicon.ico" rel="icon">
 
-<link rel="canonical" href=".">
-        <meta name="author" content="Charlie Hu" />
+<link rel="canonical" href="./instagram-python-migrationbi-ji.html">
 
-    <!-- Open Graph tags -->
+        <meta name="author" content="Charlie Hu" />
+        <meta name="keywords" content="Async" />
+        <meta name="description" content="Description Lisa Guo和Hui Ding在 Pycon2017 的keynote分享了Instagram成功从python2.7、Django1.3升级到python3.6、Django1.8的经历。 在Talk Python fm之前的episode中，我惊喜地发现了有一期Michael Kennedy邀请到了David Beazley。在哪一期节目中他们畅谈了python concurrency相关及David在Github上的async项目Curio。 Instagram 很难想象Instagram能在保持产品功能高速迭代的同时完成从python2.7版本到3.5版本的跨越。他们在版本更新途中在代码层面遇到的主要有以下几类问题。 Unicode Python3最显著的改动就是严格化了UNICODE/STR/BYTE的转换。Instagram编写了一些功能函数（ensure_binary,ensure_str,ensure_text）来确保之前代码里的输入和输出符合python3的标准。 Data format incompatib 在Instagram中经常用到了pickle模块。该模块在python2和3中的区别是：python3的pickle的协议最高版本提升到了4。他们发现即使将协议版本hardcode到python2里的2，由于版本2和3的同时存在，他们之间的相互序列化的转化也会存在问题。因此他们将不同版本的pickle结果隔离 …" />
+
         <meta property="og:site_name" content="Tower of Babel" />
-        <meta property="og:type" content="website"/>
-        <meta property="og:title" content="Tower of Babel"/>
-        <meta property="og:url" content="."/>
-        <meta property="og:description" content="Tower of Babel"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Instagram python migration笔记"/>
+        <meta property="og:url" content="./instagram-python-migrationbi-ji.html"/>
+        <meta property="og:description" content="Description Lisa Guo和Hui Ding在 Pycon2017 的keynote分享了Instagram成功从python2.7、Django1.3升级到python3.6、Django1.8的经历。 在Talk Python fm之前的episode中，我惊喜地发现了有一期Michael Kennedy邀请到了David Beazley。在哪一期节目中他们畅谈了python concurrency相关及David在Github上的async项目Curio。 Instagram 很难想象Instagram能在保持产品功能高速迭代的同时完成从python2.7版本到3.5版本的跨越。他们在版本更新途中在代码层面遇到的主要有以下几类问题。 Unicode Python3最显著的改动就是严格化了UNICODE/STR/BYTE的转换。Instagram编写了一些功能函数（ensure_binary,ensure_str,ensure_text）来确保之前代码里的输入和输出符合python3的标准。 Data format incompatib 在Instagram中经常用到了pickle模块。该模块在python2和3中的区别是：python3的pickle的协议最高版本提升到了4。他们发现即使将协议版本hardcode到python2里的2，由于版本2和3的同时存在，他们之间的相互序列化的转化也会存在问题。因此他们将不同版本的pickle结果隔离 …"/>
+        <meta property="article:published_time" content="2017-11-11" />
+            <meta property="article:section" content="Python" />
+            <meta property="article:tag" content="Async" />
+            <meta property="article:author" content="Charlie Hu" />
 
 
 
@@ -200,6 +206,8 @@ init_mathjax();
 
 
 
+        <link href="./feeds/python.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Tower of Babel Python ATOM Feed"/>
 
 </head>
 <body>
@@ -239,124 +247,25 @@ Tower of Babel            </a>
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
-            <article>
-                <h2><a href="./build-a-circular-list-and-regex-trie.html">Build a circular list and regex trie</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2018-01-06T00:00:00+08:00"> 周六 06 一月 2018</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="./tag/algorithm.html">Algorithm</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Dancing programs</h3>
-<p>这个问题来自<code>Advent of code</code>的<a href="http://adventofcode.com/2017/day/16">第十六日</a>。</p>
-<p>解决代码如下:</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
-    <span class="c1"># 循环数组，start为头指针</span>
-    <span class="n">result_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
-    <span class="c1"># 减少Partner时间复杂度的字典</span>
-    <span class="n">result_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">s</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">result_list</span><span class="p">)}</span>
-    <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">result_list</span><span class="p">)</span>
-    <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
-
-    <span class="k">for</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">action</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">):</span>
-            <span class="n">start</span> <span class="o">=</span> <span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="n">length</span><span class="p">)</span> <span class="o">%</span> <span class="n">length</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">action</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
-            <span class="k">continue</span>
-
-        <span class="k">if …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="./build-a-circular-list-and-regex-trie.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./top-10-python-libraries-of-2017.html">Top 10 Python libraries of 2017</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-12-26T00:00:00+08:00"> 周二 26 十二月 2017</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="./tag/python.html">Python</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><section class="blog-single-post__content">
-
-<p>December is the time when you sit back and think about the accomplishments of the past year. For us programmers, this is often looking at the <strong>open source libraries</strong> that were either released this year (or close enough), or whose popularity has recently boomed because they are simply great tools …</p></section>
-                    <a class="btn btn-default btn-xs" href="./top-10-python-libraries-of-2017.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./find-longest-word-in-dictionary-that-is-a-subsequence-of-a-given-string.html">Find longest word in dictionary that is a subsequence of a given string</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-12-09T00:00:00+08:00"> 周六 09 十二月 2017</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="./tag/algorithm.html">Algorithm</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Description</h3>
-<p>Given a string <code>S</code> and a set of words <code>D</code>, find the longest word in <code>D</code> that is a subsequence of <code>S</code>.</p>
-<p>Word <code>W</code> is a subsequence of <code>S</code> if some number of characters, possibly zero, can be deleted from <code>S</code> to form <code>W</code>, without reordering the remaining characters …</p>
-                    <a class="btn btn-default btn-xs" href="./find-longest-word-in-dictionary-that-is-a-subsequence-of-a-given-string.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./pyjion-python-debug-pandasyou-hua-bi-ji.html">Pyjion、python debug、pandas优化笔记</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-11-18T00:00:00+08:00"> 周六 18 十一月 2017</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="./tag/jit.html">JIT</a>
-        /
-	<a href="./tag/debug.html">Debug</a>
-        /
-	<a href="./tag/pandas.html">Pandas</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Description</h3>
-<p>Brett Cannon和Dino Viehland在 <strong>Pycon2016</strong> 的<a href="https://www.youtube.com/watch?v=1DAIzO3QXcA">Pyjion: who doesn’t want faster for free?</a>演讲中介绍了Microsoft为cpython提供JIT的c++项目<code>Pyjion</code>。之后我也在talkpython的往期访谈中找到与Brett Cannon的<code>Pyjion</code>相关的访谈，其中的很多看法让我大受脾益。</p>
-<p>Elizaveta Shashkova在 <strong>Pycon2017</strong> 的<a href="https://www.youtube.com/watch?v=NdObDUbLjdg&amp;feature=youtu.be">Debugging in Python 3 6 Better, Faster, Stronger</a>演讲非常令人印象深刻。她在开发pycharm的JetBrains公司工作，而pycharm因为它优秀的debug功能成为了我最喜欢的IDE，没有之一。虽然俄罗斯老姐有一点口音，但并不影响这是一次让人感到Bingo的演讲。</p>
-<p>同样在 <strong>Pycon2017</strong> 上，美丽的Sofia Heisler告诉了我们<a href="https://www.youtube.com/watch?v=HN5d490_KKk&amp;feature=youtu.be">No More Sad Pandas Optimizing …</a></p>
-                    <a class="btn btn-default btn-xs" href="./pyjion-python-debug-pandasyou-hua-bi-ji.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./instagram-python-migrationbi-ji.html">Instagram python migration笔记</a></h2>
-                    <div class="well well-sm">
+            <ol class="breadcrumb">
+                <li><a href="." title="Tower of Babel"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="./category/python.html" title="Python">Python</a></li>
+                <li class="active">Instagram python migration笔记</li>
+            </ol>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="./instagram-python-migrationbi-ji.html"
+                       rel="bookmark"
+                       title="Permalink to Instagram python migration笔记">
+                        Instagram python migration笔记
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
@@ -371,7 +280,8 @@ Tower of Babel            </a>
 	<a href="./tag/async.html">Async</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Description</h3>
+                </div>
+                <h3>Description</h3>
 <p>Lisa Guo和Hui Ding在 <strong>Pycon2017</strong> 的<a href="https://www.youtube.com/watch?v=66XoCk79kjM">keynote</a>分享了Instagram成功从python2.7、Django1.3升级到python3.6、Django1.8的经历。</p>
 <p>在Talk Python fm之前的episode中，我惊喜地发现了有一期Michael Kennedy邀请到了<a href="https://talkpython.fm/episodes/transcript/107/python-concurrency-with-curio">David Beazley</a>。在哪一期节目中他们畅谈了python concurrency相关及David在Github上的async项目<a href="https://github.com/dabeaz/curio">Curio</a>。</p>
 <h3>Instagram</h3>
@@ -379,45 +289,60 @@ Tower of Babel            </a>
 <h2>Unicode</h2>
 <p>Python3最显著的改动就是严格化了UNICODE/STR/BYTE的转换。Instagram编写了一些功能函数（<code>ensure_binary</code>,<code>ensure_str</code>,<code>ensure_text</code>）来确保之前代码里的输入和输出符合python3的标准。</p>
 <h2>Data format incompatib</h2>
-<p>在Instagram中经常用到了<code>pickle</code>模块。该模块在python2和3中的区别是：python3的pickle的协议最高版本提升到了4。他们发现即使将协议版本hardcode到python2里的2，由于版本2和3的同时存在，他们之间的相互序列化的转化也会存在问题。因此他们将不同版本的pickle结果隔离 …</p>
-                    <a class="btn btn-default btn-xs" href="./instagram-python-migrationbi-ji.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
+<p>在Instagram中经常用到了<code>pickle</code>模块。该模块在python2和3中的区别是：python3的pickle的协议最高版本提升到了4。他们发现即使将协议版本hardcode到python2里的2，由于版本2和3的同时存在，他们之间的相互序列化的转化也会存在问题。因此他们将不同版本的pickle结果隔离，做到自取自拿。</p>
+<h2>Iterator</h2>
+<p>Python3中的许多函数的返回值被修改成了迭代器（<code>map</code>,<code>filter</code>,<code>dict.item</code>），迭代器使得Instagram中那些会遍历两遍这些函数返回结果的代码全部失效。这其实非常难以调试，因此他们首先将所有该类函数的返回值用<code>list</code>方法还原成列表，然后将优化只迭代一遍的实例。</p>
+<h2>Dictionary ordering</h2>
+<p><a href="https://motor-taxi-master-rider.github.io/python/2017/11/05/note-for-async-dictionary-machine-learing">之前的一篇note</a>也讲过，由于python字典的版本改动，字典中的返回值将大大不同。</p>
+<div class="highlight"><pre><span></span><span class="n">testdict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="mi">3</span><span class="p">}</span>
+<span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">testdict</span><span class="p">)</span>
+</pre></div>
 
-        <ul class="pagination">
-                <li class="prev disabled"><a href="#">&laquo;</a></li>
-                    <li class="active"><a
-                            href="./index.html">1</a></li>
-                    <li class=""><a
-                            href="./index2.html">2</a></li>
-                    <li class=""><a
-                            href="./index3.html">3</a></li>
-                    <li class=""><a
-                            href="./index4.html">4</a></li>
-                    <li class=""><a
-                            href="./index5.html">5</a></li>
-                    <li class=""><a
-                            href="./index6.html">6</a></li>
-                    <li class=""><a
-                            href="./index7.html">7</a></li>
-                    <li class=""><a
-                            href="./index8.html">8</a></li>
-                    <li class=""><a
-                            href="./index9.html">9</a></li>
-                    <li class=""><a
-                            href="./index10.html">10</a></li>
-                    <li class=""><a
-                            href="./index11.html">11</a></li>
-                    <li class=""><a
-                            href="./index12.html">12</a></li>
-                    <li class=""><a
-                            href="./index13.html">13</a></li>
-                    <li class=""><a
-                            href="./index14.html">14</a></li>
-                <li class="next"><a
-                        href="./index2.html">&raquo;</a></li>
-        </ul>
+
+<p>各版本的返回结果大致为：</p>
+<div class="highlight"><pre><span></span>python2: {&#39;a&#39;:1, &#39;c&#39;:2, &#39;b&#39;:3} (hardcode hashcode)
+
+python3.5.1: (random)
+
+python3.6：{&#39;a&#39;:1, &#39;b&#39;:2, &#39;c&#39;:3} (keep order)
+</pre></div>
+
+
+<p>为了追求兼容性，他们对<code>json.dumps</code>函数加了参数：</p>
+<div class="highlight"><pre><span></span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">testdict</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+
+
+<p>另外他们也提到了以下的一个小的Unicode的改动将Instagram的性能提升了12%：</p>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">uwsgi</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;optimize_men&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;True&#39;</span>
+    <span class="n">optimize_men</span><span class="p">()</span>
+</pre></div>
+
+
+<p>to</p>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">uwsgi</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;optimize_men&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;True&#39;</span>
+    <span class="n">optimize_men</span><span class="p">()</span>
+</pre></div>
+
+
+<p>未来他们计划使用了python3完善好的特性type hints和mypy来提高他们codebase的健壮性，使用asyncio库用异步来处理之前的一些线程操作。</p>
+<h3>Curio</h3>
+<p>David Beazley一直是一位我非常喜欢的python授业者，同时也是python cookbook的作者。他在这次访谈中提到了在python中实现async的另一种思路，也就是他写<code>Curio</code>库的目的。</p>
+<p>在以教授python为业之前，他是教计算机科学系操作系统课程的教授。在课上他会告诉学生们如何用C语言来写操作系统的内核，内核做的事情主要就是多任务管理和IO，这和<code>asyncio</code>库所做的非常相似。既然<code>asyncio</code>库能将<code>callback</code>,<code>futures</code>,<code>coroutine</code>神奇地组合成一个奇妙的任务管理系统，为什么我们不能模仿系统内核也去实现一个任务管理系统呢？本身async编程也是一个焕发第二春的旧想法。</p>
+<p>David也提到，由于python3.5中<code>async/await</code>关键字的加入，他之前的许多演讲和教程都有些过时了。这使他觉得，我们或许不该关注aync底层到底是如何实现的：无论是用<code>callback</code>还是用其他技术，而是关注我们该如何利用async编程或者说是async应该在的的领域。</p>
+<p>可能现在async最大的问题就是它的传染性，一旦你代码中的一部分变成async，拿它所对应的整个代码生态链也必须是async的，否则小小的一段同步代码就会阻塞整个程序。虽然没有特别夸张，但是对于线程编程来说，这一点确实是值得考虑的。虽然asyncio库提供了一个函数作为对async中线程的支持，但是并没有将线程纳入<code>eventloop</code>处理的范畴之中，<code>coroutine</code>也不是线程安全的。David的设想就是在不远的将来能将线程和async统一结合起来，使得<code>eventloop</code>能同时兼任地处理协程和线程，这样对async的未来定是大有裨益。事实上David在<code>Curio</code>中已经完成了一个统一队列的组件（universal queue object）作为线程和协程的交流媒介。</p>
+<h3>Additional</h3>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="./python-asyncdictionarymachine-learning-moudlesbi-ji.html">Python async，dictionary，machine learning moudles笔记</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
+
         </div>
         <div class="col-sm-3" id="sidebar">
             <aside>

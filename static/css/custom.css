@@ -1,0 +1,16 @@
+.table {
+    width: inherit;
+    max-width: 100%;
+    margin-bottom: 21px;
+    padding: 6px 13px;    
+}
+
+#tipue_search_input {
+    border-radius: 4px;
+    margin: 10px;
+}
+
+article h2 a{
+    color: #18bc9c;
+    font-size: 36px;
+}

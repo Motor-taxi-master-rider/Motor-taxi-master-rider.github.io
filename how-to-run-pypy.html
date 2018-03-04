@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Tower of Babel</title>
+    <title>How to run PyPy - Tower of Babel</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -174,15 +174,21 @@ init_mathjax();
 </script>
     <link href="./assets/favicon.ico" rel="icon">
 
-<link rel="canonical" href=".">
-        <meta name="author" content="Charlie Hu" />
+<link rel="canonical" href="./how-to-run-pypy.html">
 
-    <!-- Open Graph tags -->
+        <meta name="author" content="Charlie Hu" />
+        <meta name="keywords" content="PyPy" />
+        <meta name="description" content="Description PyPy是目前速度最快的python解释器。先不说它惊人的用python来编写python解释器的理念，之前在planet python里看到一篇PyPy计划移除GIL的文章就已经让我惊为天人了。 听了David Beazley在2012年关于PyPy和Rpython的几个演讲之后(Additional 1,2,3)，就对这个项目起了浓厚的兴趣。 Download and install 可以在https://pypy.org/download.html下载到PyPy的最新版本。PyPy已经支持python2.7和3.5.3了，但基于python3的PyPy依旧是一个beta版本，并且声称比PyPy2的速度慢很多。因为我们选择安装了基于Ubuntu的64位PyPy。解压后，为了日后使用我们使用以下命令在/usr/local …" />
+
         <meta property="og:site_name" content="Tower of Babel" />
-        <meta property="og:type" content="website"/>
-        <meta property="og:title" content="Tower of Babel"/>
-        <meta property="og:url" content="."/>
-        <meta property="og:description" content="Tower of Babel"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="How to run PyPy"/>
+        <meta property="og:url" content="./how-to-run-pypy.html"/>
+        <meta property="og:description" content="Description PyPy是目前速度最快的python解释器。先不说它惊人的用python来编写python解释器的理念，之前在planet python里看到一篇PyPy计划移除GIL的文章就已经让我惊为天人了。 听了David Beazley在2012年关于PyPy和Rpython的几个演讲之后(Additional 1,2,3)，就对这个项目起了浓厚的兴趣。 Download and install 可以在https://pypy.org/download.html下载到PyPy的最新版本。PyPy已经支持python2.7和3.5.3了，但基于python3的PyPy依旧是一个beta版本，并且声称比PyPy2的速度慢很多。因为我们选择安装了基于Ubuntu的64位PyPy。解压后，为了日后使用我们使用以下命令在/usr/local …"/>
+        <meta property="article:published_time" content="2017-10-04" />
+            <meta property="article:section" content="Python" />
+            <meta property="article:tag" content="PyPy" />
+            <meta property="article:author" content="Charlie Hu" />
 
 
 
@@ -200,6 +206,8 @@ init_mathjax();
 
 
 
+        <link href="./feeds/python.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Tower of Babel Python ATOM Feed"/>
 
 </head>
 <body>
@@ -239,13 +247,29 @@ Tower of Babel            </a>
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
-            <article>
-                <h2><a href="./build-a-circular-list-and-regex-trie.html">Build a circular list and regex trie</a></h2>
-                    <div class="well well-sm">
+            <ol class="breadcrumb">
+                <li><a href="." title="Tower of Babel"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="./category/python.html" title="Python">Python</a></li>
+                <li class="active">How to run PyPy</li>
+            </ol>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="./how-to-run-pypy.html"
+                       rel="bookmark"
+                       title="Permalink to How to run PyPy">
+                        How to run PyPy
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2018-01-06T00:00:00+08:00"> 周六 06 一月 2018</time>
+        <i class="fa fa-calendar"></i><time datetime="2017-10-04T00:00:00+08:00"> 周三 04 十月 2017</time>
     </span>
 
 
@@ -253,171 +277,116 @@ Tower of Babel            </a>
 
 
 <span class="label label-default">Tags</span>
-	<a href="./tag/algorithm.html">Algorithm</a>
+	<a href="./tag/pypy.html">PyPy</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Dancing programs</h3>
-<p>这个问题来自<code>Advent of code</code>的<a href="http://adventofcode.com/2017/day/16">第十六日</a>。</p>
-<p>解决代码如下:</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
-    <span class="c1"># 循环数组，start为头指针</span>
-    <span class="n">result_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
-    <span class="c1"># 减少Partner时间复杂度的字典</span>
-    <span class="n">result_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">s</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">result_list</span><span class="p">)}</span>
-    <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">result_list</span><span class="p">)</span>
-    <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
-
-    <span class="k">for</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">action</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">):</span>
-            <span class="n">start</span> <span class="o">=</span> <span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="n">length</span><span class="p">)</span> <span class="o">%</span> <span class="n">length</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">action</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
-            <span class="k">continue</span>
-
-        <span class="k">if …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="./build-a-circular-list-and-regex-trie.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./top-10-python-libraries-of-2017.html">Top 10 Python libraries of 2017</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-12-26T00:00:00+08:00"> 周二 26 十二月 2017</time>
-    </span>
+                <h3>Description</h3>
+<p><code>PyPy</code>是目前速度最快的python解释器。先不说它惊人的用python来编写python解释器的理念，之前在planet python里看到一篇<code>PyPy</code>计划移除GIL的<a href="https://morepypy.blogspot.com/2017/08/lets-remove-global-interpreter-lock.html">文章</a>就已经让我惊为天人了。
+听了David Beazley在2012年关于<code>PyPy</code>和<code>Rpython</code>的几个演讲之后(<a href="#additional">Additional</a> 1,2,3)，就对这个项目起了浓厚的兴趣。</p>
+<h3>Download and install</h3>
+<p>可以在<a href="https://pypy.org/download.html">https://pypy.org/download.html</a>下载到<code>PyPy</code>的最新版本。<code>PyPy</code>已经支持python2.7和3.5.3了，但基于python3的<code>PyPy</code>依旧是一个beta版本，并且声称比<code>PyPy</code>2的速度慢很多。因为我们选择安装了基于Ubuntu的64位<code>PyPy</code>。解压后，为了日后使用我们使用以下命令在<code>/usr/local/bin</code>下创建一个软连接,其中第一个目录为<code>PyPy</code>的安装目录：</p>
+<div class="highlight"><pre><span></span>ln -s ~/Program/pypy2-v5.8.0-linux64/bin/pypy /usr/local/bin
+</pre></div>
 
 
+<p>现在我们可以用<code>pypy</code>命令进入<code>PyPy</code>的shell了。</p>
+<h3>Performance test</h3>
+<p>David给了一段斐波那契数列的测试代码,其中<code>PyPy</code>是将<code>target</code>函数为入口函数的。经过测试，这个<code>PyPy</code>版本已经不需要这个入口函数了，也不需要向David在<code>Pycon</code>的分享中那样用<code>translate.py</code>先进行编译再执行c源码。（当然也可能是只有<code>Rpython</code>需要这么做。）本文所用的斐波那契数列的源码如下：</p>
+<div class="highlight"><pre><span></span><span class="c1">#fib.py</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">n</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
 
 
-
-<span class="label label-default">Tags</span>
-	<a href="./tag/python.html">Python</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><section class="blog-single-post__content">
-
-<p>December is the time when you sit back and think about the accomplishments of the past year. For us programmers, this is often looking at the <strong>open source libraries</strong> that were either released this year (or close enough), or whose popularity has recently boomed because they are simply great tools …</p></section>
-                    <a class="btn btn-default btn-xs" href="./top-10-python-libraries-of-2017.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./find-longest-word-in-dictionary-that-is-a-subsequence-of-a-given-string.html">Find longest word in dictionary that is a subsequence of a given string</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-12-09T00:00:00+08:00"> 周六 09 十二月 2017</time>
-    </span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">argv</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">fib</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
+    <span class="k">return</span> <span class="mi">0</span>
 
 
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+        <span class="n">main</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+</pre></div>
 
 
+<p>我们用python2.7，python3.6，pypy5.8这三个环境做性能测试：</p>
+<ul>
+<li>python2.7</li>
+</ul>
+<div class="highlight"><pre><span></span>&gt;&gt;time python fib.py 41
 
-<span class="label label-default">Tags</span>
-	<a href="./tag/algorithm.html">Algorithm</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Description</h3>
-<p>Given a string <code>S</code> and a set of words <code>D</code>, find the longest word in <code>D</code> that is a subsequence of <code>S</code>.</p>
-<p>Word <code>W</code> is a subsequence of <code>S</code> if some number of characters, possibly zero, can be deleted from <code>S</code> to form <code>W</code>, without reordering the remaining characters …</p>
-                    <a class="btn btn-default btn-xs" href="./find-longest-word-in-dictionary-that-is-a-subsequence-of-a-given-string.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./pyjion-python-debug-pandasyou-hua-bi-ji.html">Pyjion、python debug、pandas优化笔记</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-11-18T00:00:00+08:00"> 周六 18 十一月 2017</time>
-    </span>
+165580141
+
+real    0m47.026s
+user    0m46.564s
+sys 0m0.024s
+</pre></div>
 
 
+<ul>
+<li>python3.6</li>
+</ul>
+<div class="highlight"><pre><span></span>&gt;&gt;time python fib.py 41
+
+165580141
+
+real    1m9.771s
+user    1m8.992s
+sys 0m0.004s
+</pre></div>
 
 
+<ul>
+<li>pypy5.8</li>
+</ul>
+<div class="highlight"><pre><span></span>&gt;&gt;time pypy fib.py 41
 
-<span class="label label-default">Tags</span>
-	<a href="./tag/jit.html">JIT</a>
-        /
-	<a href="./tag/debug.html">Debug</a>
-        /
-	<a href="./tag/pandas.html">Pandas</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Description</h3>
-<p>Brett Cannon和Dino Viehland在 <strong>Pycon2016</strong> 的<a href="https://www.youtube.com/watch?v=1DAIzO3QXcA">Pyjion: who doesn’t want faster for free?</a>演讲中介绍了Microsoft为cpython提供JIT的c++项目<code>Pyjion</code>。之后我也在talkpython的往期访谈中找到与Brett Cannon的<code>Pyjion</code>相关的访谈，其中的很多看法让我大受脾益。</p>
-<p>Elizaveta Shashkova在 <strong>Pycon2017</strong> 的<a href="https://www.youtube.com/watch?v=NdObDUbLjdg&amp;feature=youtu.be">Debugging in Python 3 6 Better, Faster, Stronger</a>演讲非常令人印象深刻。她在开发pycharm的JetBrains公司工作，而pycharm因为它优秀的debug功能成为了我最喜欢的IDE，没有之一。虽然俄罗斯老姐有一点口音，但并不影响这是一次让人感到Bingo的演讲。</p>
-<p>同样在 <strong>Pycon2017</strong> 上，美丽的Sofia Heisler告诉了我们<a href="https://www.youtube.com/watch?v=HN5d490_KKk&amp;feature=youtu.be">No More Sad Pandas Optimizing …</a></p>
-                    <a class="btn btn-default btn-xs" href="./pyjion-python-debug-pandasyou-hua-bi-ji.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./instagram-python-migrationbi-ji.html">Instagram python migration笔记</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-11-11T00:00:00+08:00"> 周六 11 十一月 2017</time>
-    </span>
+165580141
+
+real    0m4.208s
+user    0m3.392s
+sys 0m0.736s
+</pre></div>
 
 
+<p>以上结果是在虚拟机里测试的，仅供参考。可以发现<code>PyPy</code>的运算速度比<code>Cpython</code>快了非常多，但python3比python2还慢蛮多的确实让我很气啊。当然，这只是一个纯cpu密集型程序的运算结果，根据<code>PyPy</code>的网站所说，得益于JIT以及Stackless，<code>PyPy</code>的平均速度应该是<code>Cpython</code>的四倍左右。
+值得一提的是，David在<code>Pycon</code>演示的那个先编译再运行的<code>PyPy</code>版本，运行的斐波那契数列的速度甚至超过了未优化的c，一秒钟就你完成该运算，但在这个版本的pypy中没有编译的过程并且似乎没有了Daivd提到的<code>Restrict</code>数据类型的限制。</p>
+<h3>Type restrict feature</h3>
+<p>为了说明<code>PyPy</code>的缺乏动态类型的支持，Daivd举了以下的例子：</p>
+<div class="highlight"><pre><span></span><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;Hello&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">lst</span><span class="err">：</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+</pre></div>
 
 
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+  <span class="k">def</span> <span class="fm">__int__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
 
-<span class="label label-default">Tags</span>
-	<a href="./tag/async.html">Async</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Description</h3>
-<p>Lisa Guo和Hui Ding在 <strong>Pycon2017</strong> 的<a href="https://www.youtube.com/watch?v=66XoCk79kjM">keynote</a>分享了Instagram成功从python2.7、Django1.3升级到python3.6、Django1.8的经历。</p>
-<p>在Talk Python fm之前的episode中，我惊喜地发现了有一期Michael Kennedy邀请到了<a href="https://talkpython.fm/episodes/transcript/107/python-concurrency-with-curio">David Beazley</a>。在哪一期节目中他们畅谈了python concurrency相关及David在Github上的async项目<a href="https://github.com/dabeaz/curio">Curio</a>。</p>
-<h3>Instagram</h3>
-<p>很难想象Instagram能在保持产品功能高速迭代的同时完成从python2.7版本到3.5版本的跨越。他们在版本更新途中在代码层面遇到的主要有以下几类问题。</p>
-<h2>Unicode</h2>
-<p>Python3最显著的改动就是严格化了UNICODE/STR/BYTE的转换。Instagram编写了一些功能函数（<code>ensure_binary</code>,<code>ensure_str</code>,<code>ensure_text</code>）来确保之前代码里的输入和输出符合python3的标准。</p>
-<h2>Data format incompatib</h2>
-<p>在Instagram中经常用到了<code>pickle</code>模块。该模块在python2和3中的区别是：python3的pickle的协议最高版本提升到了4。他们发现即使将协议版本hardcode到python2里的2，由于版本2和3的同时存在，他们之间的相互序列化的转化也会存在问题。因此他们将不同版本的pickle结果隔离 …</p>
-                    <a class="btn btn-default btn-xs" href="./instagram-python-migrationbi-ji.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
+<span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">B</span><span class="p">(</span><span class="s1">&#39;Hello&#39;</span><span class="p">,</span> <span class="s1">&#39;world&#39;</span><span class="p">)</span>
+</pre></div>
 
-        <ul class="pagination">
-                <li class="prev disabled"><a href="#">&laquo;</a></li>
-                    <li class="active"><a
-                            href="./index.html">1</a></li>
-                    <li class=""><a
-                            href="./index2.html">2</a></li>
-                    <li class=""><a
-                            href="./index3.html">3</a></li>
-                    <li class=""><a
-                            href="./index4.html">4</a></li>
-                    <li class=""><a
-                            href="./index5.html">5</a></li>
-                    <li class=""><a
-                            href="./index6.html">6</a></li>
-                    <li class=""><a
-                            href="./index7.html">7</a></li>
-                    <li class=""><a
-                            href="./index8.html">8</a></li>
-                    <li class=""><a
-                            href="./index9.html">9</a></li>
-                    <li class=""><a
-                            href="./index10.html">10</a></li>
-                    <li class=""><a
-                            href="./index11.html">11</a></li>
-                    <li class=""><a
-                            href="./index12.html">12</a></li>
-                    <li class=""><a
-                            href="./index13.html">13</a></li>
-                    <li class=""><a
-                            href="./index14.html">14</a></li>
-                <li class="next"><a
-                        href="./index2.html">&raquo;</a></li>
-        </ul>
+
+<p>这些代码是通不过当时版本<code>PyPy</code>的编译的，然而在现在版本中可以正常运行，这点着实让我惊讶。David提到的一个<code>PyPy</code>的独特处理方式，就是讲纯python代码和rpython代码分开编译，我想这大概是其中原因。</p>
+<p><img src="https://motor-taxi-master-rider.github.io/assets/img/pypy_compile_1.png"  title="PyPy处理方式"/></p>
+<h3>Additional</h3>
+<ol>
+<li><a href="https://www.youtube.com/watch?v=GjnRLG8ATn4">Understanding RPython</a></li>
+<li><a href="https://www.youtube.com/watch?v=kkt_BtR9Kzk">Low Level RPython</a></li>
+<li><a href="https://www.youtube.com/watch?v=kkt_BtR9Kzk">Let's Talk About PyPy</a></li>
+<li><a href="http://doc.pypy.org/en/latest/release-1.2.0.html">PyPy documentation</a></li>
+</ol>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
         </div>
         <div class="col-sm-3" id="sidebar">
             <aside>

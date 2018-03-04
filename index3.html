@@ -240,12 +240,12 @@ Tower of Babel            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
-                <h2><a href="./build-a-circular-list-and-regex-trie.html">Build a circular list and regex trie</a></h2>
+                <h2><a href="./leetcode-integer-break.html">LeetCode - Integer Break</a></h2>
                     <div class="well well-sm">
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2018-01-06T00:00:00+08:00"> 周六 06 一月 2018</time>
+        <i class="fa fa-calendar"></i><time datetime="2017-09-26T00:00:00+08:00"> 周二 26 九月 2017</time>
     </span>
 
 
@@ -253,114 +253,25 @@ Tower of Babel            </a>
 
 
 <span class="label label-default">Tags</span>
-	<a href="./tag/algorithm.html">Algorithm</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Dancing programs</h3>
-<p>这个问题来自<code>Advent of code</code>的<a href="http://adventofcode.com/2017/day/16">第十六日</a>。</p>
-<p>解决代码如下:</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
-    <span class="c1"># 循环数组，start为头指针</span>
-    <span class="n">result_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
-    <span class="c1"># 减少Partner时间复杂度的字典</span>
-    <span class="n">result_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">s</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">result_list</span><span class="p">)}</span>
-    <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">result_list</span><span class="p">)</span>
-    <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
-
-    <span class="k">for</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">action</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">):</span>
-            <span class="n">start</span> <span class="o">=</span> <span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="n">length</span><span class="p">)</span> <span class="o">%</span> <span class="n">length</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">action</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
-            <span class="k">continue</span>
-
-        <span class="k">if …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="./build-a-circular-list-and-regex-trie.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./top-10-python-libraries-of-2017.html">Top 10 Python libraries of 2017</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-12-26T00:00:00+08:00"> 周二 26 十二月 2017</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="./tag/python.html">Python</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><section class="blog-single-post__content">
-
-<p>December is the time when you sit back and think about the accomplishments of the past year. For us programmers, this is often looking at the <strong>open source libraries</strong> that were either released this year (or close enough), or whose popularity has recently boomed because they are simply great tools …</p></section>
-                    <a class="btn btn-default btn-xs" href="./top-10-python-libraries-of-2017.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./find-longest-word-in-dictionary-that-is-a-subsequence-of-a-given-string.html">Find longest word in dictionary that is a subsequence of a given string</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-12-09T00:00:00+08:00"> 周六 09 十二月 2017</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="./tag/algorithm.html">Algorithm</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Description</h3>
-<p>Given a string <code>S</code> and a set of words <code>D</code>, find the longest word in <code>D</code> that is a subsequence of <code>S</code>.</p>
-<p>Word <code>W</code> is a subsequence of <code>S</code> if some number of characters, possibly zero, can be deleted from <code>S</code> to form <code>W</code>, without reordering the remaining characters …</p>
-                    <a class="btn btn-default btn-xs" href="./find-longest-word-in-dictionary-that-is-a-subsequence-of-a-given-string.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./pyjion-python-debug-pandasyou-hua-bi-ji.html">Pyjion、python debug、pandas优化笔记</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-11-18T00:00:00+08:00"> 周六 18 十一月 2017</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="./tag/jit.html">JIT</a>
+	<a href="./tag/leetcode.html">Leetcode</a>
         /
-	<a href="./tag/debug.html">Debug</a>
-        /
-	<a href="./tag/pandas.html">Pandas</a>
+	<a href="./tag/math.html">Math</a>
     
 </footer><!-- /.post-info -->                    </div>
                 <div class="summary"><h3>Description</h3>
-<p>Brett Cannon和Dino Viehland在 <strong>Pycon2016</strong> 的<a href="https://www.youtube.com/watch?v=1DAIzO3QXcA">Pyjion: who doesn’t want faster for free?</a>演讲中介绍了Microsoft为cpython提供JIT的c++项目<code>Pyjion</code>。之后我也在talkpython的往期访谈中找到与Brett Cannon的<code>Pyjion</code>相关的访谈，其中的很多看法让我大受脾益。</p>
-<p>Elizaveta Shashkova在 <strong>Pycon2017</strong> 的<a href="https://www.youtube.com/watch?v=NdObDUbLjdg&amp;feature=youtu.be">Debugging in Python 3 6 Better, Faster, Stronger</a>演讲非常令人印象深刻。她在开发pycharm的JetBrains公司工作，而pycharm因为它优秀的debug功能成为了我最喜欢的IDE，没有之一。虽然俄罗斯老姐有一点口音，但并不影响这是一次让人感到Bingo的演讲。</p>
-<p>同样在 <strong>Pycon2017</strong> 上，美丽的Sofia Heisler告诉了我们<a href="https://www.youtube.com/watch?v=HN5d490_KKk&amp;feature=youtu.be">No More Sad Pandas Optimizing …</a></p>
-                    <a class="btn btn-default btn-xs" href="./pyjion-python-debug-pandasyou-hua-bi-ji.html">more ...</a>
+<p>Given a positive integer n, break it into the sum of <strong>at least</strong> two positive integers and maximize the product of those integers. Return the maximum product you can get.</p>
+<p>For example, given n = 2, return 1 (2 = 1 + 1); given n = 10, return 36 (10 = 3 + 3 + 4 …</p>
+                    <a class="btn btn-default btn-xs" href="./leetcode-integer-break.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="./instagram-python-migrationbi-ji.html">Instagram python migration笔记</a></h2>
+                <h2><a href="./python-descriptor-behavior-ii.html">Python Descriptor Behavior II</a></h2>
                     <div class="well well-sm">
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-11-11T00:00:00+08:00"> 周六 11 十一月 2017</time>
+        <i class="fa fa-calendar"></i><time datetime="2017-09-25T00:00:00+08:00"> 周一 25 九月 2017</time>
     </span>
 
 
@@ -368,30 +279,188 @@ Tower of Babel            </a>
 
 
 <span class="label label-default">Tags</span>
-	<a href="./tag/async.html">Async</a>
+	<a href="./tag/descriptor.html">Descriptor</a>
     
 </footer><!-- /.post-info -->                    </div>
                 <div class="summary"><h3>Description</h3>
-<p>Lisa Guo和Hui Ding在 <strong>Pycon2017</strong> 的<a href="https://www.youtube.com/watch?v=66XoCk79kjM">keynote</a>分享了Instagram成功从python2.7、Django1.3升级到python3.6、Django1.8的经历。</p>
-<p>在Talk Python fm之前的episode中，我惊喜地发现了有一期Michael Kennedy邀请到了<a href="https://talkpython.fm/episodes/transcript/107/python-concurrency-with-curio">David Beazley</a>。在哪一期节目中他们畅谈了python concurrency相关及David在Github上的async项目<a href="https://github.com/dabeaz/curio">Curio</a>。</p>
-<h3>Instagram</h3>
-<p>很难想象Instagram能在保持产品功能高速迭代的同时完成从python2.7版本到3.5版本的跨越。他们在版本更新途中在代码层面遇到的主要有以下几类问题。</p>
-<h2>Unicode</h2>
-<p>Python3最显著的改动就是严格化了UNICODE/STR/BYTE的转换。Instagram编写了一些功能函数（<code>ensure_binary</code>,<code>ensure_str</code>,<code>ensure_text</code>）来确保之前代码里的输入和输出符合python3的标准。</p>
-<h2>Data format incompatib</h2>
-<p>在Instagram中经常用到了<code>pickle</code>模块。该模块在python2和3中的区别是：python3的pickle的协议最高版本提升到了4。他们发现即使将协议版本hardcode到python2里的2，由于版本2和3的同时存在，他们之间的相互序列化的转化也会存在问题。因此他们将不同版本的pickle结果隔离 …</p>
-                    <a class="btn btn-default btn-xs" href="./instagram-python-migrationbi-ji.html">more ...</a>
+<p>在之前一篇<a href="https://motor-taxi-master-rider.github.io/python/2017/08/05/python-descriptor">文章</a>中我们讨论了python描述符以及其行为，也做了一些总结。但个人能力有限，对描述符访问的优先规则解释的不是非常清楚。</p>
+<p>近日看到一篇文章：<a href="http://fanchunke.me/Python/Python%E4%B8%AD%E7%9A%84%E5%B1%9E%E6%80%A7%E8%AE%BF%E9%97%AE%E4%B8%8E%E6%8F%8F%E8%BF%B0%E7%AC%A6/">Python中的属性访问与描述符</a>中对于属性访问优先规则的部分解释的很清晰，遂记录下来学习。</p>
+<h3>属性访问的优先规则</h3>
+<p>属性访问的入口点是<code>__getattribute__</code>方法。它的实现中定义了Python中属性访问的优先规则。Python官方文档中对<code>__getattribute__</code>的底层实现有相关的介绍，本文暂时只是讨论属性查找的规则，相关规则可见下图：</p>
+<p><img src="https://motor-taxi-master-rider.github.io/assets/img/python_descriptor.png"  title="{{site.title }}"/></p>
+<p>上图是查找b.x这样一个属性的过程。在这里要对此图进行简单的介绍：</p>
+<ol>
+<li>
+<p>查找属性的第一步是搜索基类列表，即type(b).<strong>mro</strong>，直到找到该属性的第一个定义，并将该属性的值赋值给<code>descr</code></p>
+</li>
+<li>
+<p>判断descr的类型。它的类型可分为数据描述符、非数据描述符、普通属性、未找到等类型。若descr为数据描述符，则调用desc.<strong>get</strong>(b, type(b))，并将结果返回，结束执行。否则进行下一步</p>
+</li>
+<li>
+<p>如果<code>descr</code>为非数据描述符、普通属性、未找到等类型 …</p></li></ol>
+                    <a class="btn btn-default btn-xs" href="./python-descriptor-behavior-ii.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="./leetcode-maximum-xor-of-two-numbers-in-an-array.html">LeetCode - Maximum XOR of Two Numbers in an Array</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-09-17T00:00:00+08:00"> 周日 17 九月 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="./tag/leetcode.html">Leetcode</a>
+        /
+	<a href="./tag/bit_manipulaion.html">Bit_manipulaion</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><h3>Description</h3>
+<p>Given a <strong>non-empty</strong> array of numbers,</p>
+<div class="math">$$ a_0, a_1, a_2, … , a_{n-1}, where 0 ≤ a_i &lt; 2^{31} $$</div>
+<p>.</p>
+<p>Find the maximum result of a_i <code>XOR</code> a_j, where <code>0 ≤ i, j &lt; n</code>.</p>
+<p>Could you do this in <code>O(n)</code> runtime?</p>
+<p><strong>Example:</strong></p>
+<div class="highlight"><pre><span></span>Input: [3, 10, 5, 25, 2, 8]
+
+Output: 28
+
+Explanation: The …</pre></div><script type='text/javascript'>if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+                    <a class="btn btn-default btn-xs" href="./leetcode-maximum-xor-of-two-numbers-in-an-array.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="./leetcode-total-hamming-distance.html">LeetCode - Total Hamming Distance</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-09-09T00:00:00+08:00"> 周六 09 九月 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="./tag/leetcode.html">Leetcode</a>
+        /
+	<a href="./tag/hamming_distance.html">Hamming_distance</a>
+        /
+	<a href="./tag/bit_manipulaion.html">Bit_manipulaion</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><h3>Description</h3>
+<p>The Hamming distance between two integers is the number of positions at which the corresponding bits are different.
+Now your job is to find the total Hamming distance between all pairs of the given numbers.</p>
+<p><strong>Example:</strong></p>
+<div class="highlight"><pre><span></span><span class="n">Input</span><span class="o">:</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">14</span><span class="o">,</span> <span class="mi">2</span>
+
+<span class="n">Output</span><span class="o">:</span> <span class="mi">6</span>
+
+<span class="n">Explanation</span><span class="o">:</span> <span class="n">In</span> <span class="n">binary</span> <span class="n">representation</span><span class="o">,</span> <span class="n">the</span> <span class="mi">4</span> <span class="k">is …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="./leetcode-total-hamming-distance.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="./leetcode-maximum-length-of-pair-chain.html">LeetCode - Maximum Length of Pair Chain</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-09-03T00:00:00+08:00"> 周日 03 九月 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="./tag/leetcode.html">LeetCode</a>
+        /
+	<a href="./tag/math.html">Math</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><h3>Description</h3>
+<p>You are given <code>n</code> pairs of numbers. In every pair, the first number is always smaller than the second number.</p>
+<p>Now, we define a pair <code>(c, d)</code> can follow another pair <code>(a, b)</code> if and only if <code>b &lt; c</code>. Chain of pairs can be formed in this fashion.</p>
+<p>Given …</p>
+                    <a class="btn btn-default btn-xs" href="./leetcode-maximum-length-of-pair-chain.html">more ...</a>
                 </div>
             </article>
             <hr/>
 
         <ul class="pagination">
-                <li class="prev disabled"><a href="#">&laquo;</a></li>
-                    <li class="active"><a
+                <li class="prev"><a href="./index2.html">&laquo;</a>
+                </li>
+                    <li class=""><a
                             href="./index.html">1</a></li>
                     <li class=""><a
                             href="./index2.html">2</a></li>
-                    <li class=""><a
+                    <li class="active"><a
                             href="./index3.html">3</a></li>
                     <li class=""><a
                             href="./index4.html">4</a></li>
@@ -416,7 +485,7 @@ Tower of Babel            </a>
                     <li class=""><a
                             href="./index14.html">14</a></li>
                 <li class="next"><a
-                        href="./index2.html">&raquo;</a></li>
+                        href="./index4.html">&raquo;</a></li>
         </ul>
         </div>
         <div class="col-sm-3" id="sidebar">

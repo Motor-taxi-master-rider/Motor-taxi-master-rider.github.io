@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Tower of Babel</title>
+    <title>LeetCode - Replace Words - Tower of Babel</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -174,15 +174,24 @@ init_mathjax();
 </script>
     <link href="./assets/favicon.ico" rel="icon">
 
-<link rel="canonical" href=".">
-        <meta name="author" content="Charlie Hu" />
+<link rel="canonical" href="./leetcode-replace-words.html">
 
-    <!-- Open Graph tags -->
+        <meta name="author" content="Charlie Hu" />
+        <meta name="keywords" content="LeetCode,Tire,Defaultdict,Lambda" />
+        <meta name="description" content="Description In English, we have a concept called root, which can be followed by some other words to form another longer word - let&#39;s call this word successor. For example, the root an, followed by other, which can form another word another. Now, given a dictionary consisting of many roots and …" />
+
         <meta property="og:site_name" content="Tower of Babel" />
-        <meta property="og:type" content="website"/>
-        <meta property="og:title" content="Tower of Babel"/>
-        <meta property="og:url" content="."/>
-        <meta property="og:description" content="Tower of Babel"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="LeetCode - Replace Words"/>
+        <meta property="og:url" content="./leetcode-replace-words.html"/>
+        <meta property="og:description" content="Description In English, we have a concept called root, which can be followed by some other words to form another longer word - let&#39;s call this word successor. For example, the root an, followed by other, which can form another word another. Now, given a dictionary consisting of many roots and …"/>
+        <meta property="article:published_time" content="2017-08-22" />
+            <meta property="article:section" content="Python" />
+            <meta property="article:tag" content="LeetCode" />
+            <meta property="article:tag" content="Tire" />
+            <meta property="article:tag" content="Defaultdict" />
+            <meta property="article:tag" content="Lambda" />
+            <meta property="article:author" content="Charlie Hu" />
 
 
 
@@ -200,6 +209,8 @@ init_mathjax();
 
 
 
+        <link href="./feeds/python.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Tower of Babel Python ATOM Feed"/>
 
 </head>
 <body>
@@ -239,13 +250,29 @@ Tower of Babel            </a>
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
-            <article>
-                <h2><a href="./build-a-circular-list-and-regex-trie.html">Build a circular list and regex trie</a></h2>
-                    <div class="well well-sm">
+            <ol class="breadcrumb">
+                <li><a href="." title="Tower of Babel"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="./category/python.html" title="Python">Python</a></li>
+                <li class="active">LeetCode - Replace Words</li>
+            </ol>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="./leetcode-replace-words.html"
+                       rel="bookmark"
+                       title="Permalink to LeetCode - Replace Words">
+                        LeetCode - Replace Words
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2018-01-06T00:00:00+08:00"> 周六 06 一月 2018</time>
+        <i class="fa fa-calendar"></i><time datetime="2017-08-22T00:00:00+08:00"> 周二 22 八月 2017</time>
     </span>
 
 
@@ -253,171 +280,99 @@ Tower of Babel            </a>
 
 
 <span class="label label-default">Tags</span>
-	<a href="./tag/algorithm.html">Algorithm</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Dancing programs</h3>
-<p>这个问题来自<code>Advent of code</code>的<a href="http://adventofcode.com/2017/day/16">第十六日</a>。</p>
-<p>解决代码如下:</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
-    <span class="c1"># 循环数组，start为头指针</span>
-    <span class="n">result_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
-    <span class="c1"># 减少Partner时间复杂度的字典</span>
-    <span class="n">result_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">s</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">result_list</span><span class="p">)}</span>
-    <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">result_list</span><span class="p">)</span>
-    <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
-
-    <span class="k">for</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">action</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">):</span>
-            <span class="n">start</span> <span class="o">=</span> <span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="n">length</span><span class="p">)</span> <span class="o">%</span> <span class="n">length</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">action</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
-            <span class="k">continue</span>
-
-        <span class="k">if …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="./build-a-circular-list-and-regex-trie.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./top-10-python-libraries-of-2017.html">Top 10 Python libraries of 2017</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-12-26T00:00:00+08:00"> 周二 26 十二月 2017</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="./tag/python.html">Python</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><section class="blog-single-post__content">
-
-<p>December is the time when you sit back and think about the accomplishments of the past year. For us programmers, this is often looking at the <strong>open source libraries</strong> that were either released this year (or close enough), or whose popularity has recently boomed because they are simply great tools …</p></section>
-                    <a class="btn btn-default btn-xs" href="./top-10-python-libraries-of-2017.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./find-longest-word-in-dictionary-that-is-a-subsequence-of-a-given-string.html">Find longest word in dictionary that is a subsequence of a given string</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-12-09T00:00:00+08:00"> 周六 09 十二月 2017</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="./tag/algorithm.html">Algorithm</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Description</h3>
-<p>Given a string <code>S</code> and a set of words <code>D</code>, find the longest word in <code>D</code> that is a subsequence of <code>S</code>.</p>
-<p>Word <code>W</code> is a subsequence of <code>S</code> if some number of characters, possibly zero, can be deleted from <code>S</code> to form <code>W</code>, without reordering the remaining characters …</p>
-                    <a class="btn btn-default btn-xs" href="./find-longest-word-in-dictionary-that-is-a-subsequence-of-a-given-string.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./pyjion-python-debug-pandasyou-hua-bi-ji.html">Pyjion、python debug、pandas优化笔记</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-11-18T00:00:00+08:00"> 周六 18 十一月 2017</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="./tag/jit.html">JIT</a>
+	<a href="./tag/leetcode.html">LeetCode</a>
         /
-	<a href="./tag/debug.html">Debug</a>
+	<a href="./tag/tire.html">Tire</a>
         /
-	<a href="./tag/pandas.html">Pandas</a>
+	<a href="./tag/defaultdict.html">Defaultdict</a>
+        /
+	<a href="./tag/lambda.html">Lambda</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Description</h3>
-<p>Brett Cannon和Dino Viehland在 <strong>Pycon2016</strong> 的<a href="https://www.youtube.com/watch?v=1DAIzO3QXcA">Pyjion: who doesn’t want faster for free?</a>演讲中介绍了Microsoft为cpython提供JIT的c++项目<code>Pyjion</code>。之后我也在talkpython的往期访谈中找到与Brett Cannon的<code>Pyjion</code>相关的访谈，其中的很多看法让我大受脾益。</p>
-<p>Elizaveta Shashkova在 <strong>Pycon2017</strong> 的<a href="https://www.youtube.com/watch?v=NdObDUbLjdg&amp;feature=youtu.be">Debugging in Python 3 6 Better, Faster, Stronger</a>演讲非常令人印象深刻。她在开发pycharm的JetBrains公司工作，而pycharm因为它优秀的debug功能成为了我最喜欢的IDE，没有之一。虽然俄罗斯老姐有一点口音，但并不影响这是一次让人感到Bingo的演讲。</p>
-<p>同样在 <strong>Pycon2017</strong> 上，美丽的Sofia Heisler告诉了我们<a href="https://www.youtube.com/watch?v=HN5d490_KKk&amp;feature=youtu.be">No More Sad Pandas Optimizing …</a></p>
-                    <a class="btn btn-default btn-xs" href="./pyjion-python-debug-pandasyou-hua-bi-ji.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="./instagram-python-migrationbi-ji.html">Instagram python migration笔记</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-11-11T00:00:00+08:00"> 周六 11 十一月 2017</time>
-    </span>
+                <h3>Description</h3>
+<p>In English, we have a concept called <code>root</code>, which can be followed by some other words to form another longer word - let's call this word <code>successor</code>. For example, the root <code>an</code>, followed by <code>other</code>, which can form <code>another</code> word another.</p>
+<p>Now, given a dictionary consisting of many roots and a sentence. You need to replace all the <code>successor</code> in the sentence with the <code>root</code> forming it. If a <code>successor</code> has many <code>roots</code> can form it, replace it with the root with the shortest length.</p>
+<p>You need to output the sentence after the replacement.</p>
+<p><strong>Example 1:</strong></p>
+<div class="highlight"><pre><span></span><span class="n">Input</span><span class="o">:</span> <span class="n">dict</span> <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;cat&quot;</span><span class="o">,</span> <span class="s2">&quot;bat&quot;</span><span class="o">,</span> <span class="s2">&quot;rat&quot;</span><span class="o">]</span>
+<span class="n">sentence</span> <span class="o">=</span> <span class="s2">&quot;the cattle was rattled by the battery&quot;</span>
+<span class="n">Output</span><span class="o">:</span> <span class="s2">&quot;the cat was rat by the bat&quot;</span>
+</pre></div>
 
 
+<p><strong>Note:</strong>
+1. The input will only have lower-case letters.
+2. 1 &lt;= dict words number &lt;= 1000
+3. 1 &lt;= sentence words number &lt;= 1000
+4. 1 &lt;= root length &lt;= 100
+5. 1 &lt;= sentence words length &lt;= 1000</p>
+<p><a href="https://leetcode.com/problems/replace-words/description/">Source link</a></p>
+<h3>Best practice</h3>
+<blockquote>
+<p>在这里用到的数据结构是Tire树。
+Trie树，即字典树，又称单词查找树或键树，是一种树形结构，是一种哈希树的变种。典型应用是用于统计和排序大量的字符串（但不仅限于字符串），所以经常被搜索引擎系统用于文本词频统计。它的优点是：最大限度地减少无谓的字符串比较，查询效率比哈希表高。
+Trie的核心思想是空间换时间。利用字符串的公共前缀来降低查询时间的开销以达到提高效率的目的。</p>
+</blockquote>
+<p>python version</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">import</span> <span class="nn">functools</span>
 
 
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">replaceWords</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">sentence</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :type dict: List[str]</span>
+<span class="sd">        :type sentence: str</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">IS_WORD</span> <span class="o">=</span> <span class="bp">True</span>  <span class="c1">#Tire树中表示节点为单词末字母的标识符，这里额外存储完整单词</span>
 
-<span class="label label-default">Tags</span>
-	<a href="./tag/async.html">Async</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Description</h3>
-<p>Lisa Guo和Hui Ding在 <strong>Pycon2017</strong> 的<a href="https://www.youtube.com/watch?v=66XoCk79kjM">keynote</a>分享了Instagram成功从python2.7、Django1.3升级到python3.6、Django1.8的经历。</p>
-<p>在Talk Python fm之前的episode中，我惊喜地发现了有一期Michael Kennedy邀请到了<a href="https://talkpython.fm/episodes/transcript/107/python-concurrency-with-curio">David Beazley</a>。在哪一期节目中他们畅谈了python concurrency相关及David在Github上的async项目<a href="https://github.com/dabeaz/curio">Curio</a>。</p>
-<h3>Instagram</h3>
-<p>很难想象Instagram能在保持产品功能高速迭代的同时完成从python2.7版本到3.5版本的跨越。他们在版本更新途中在代码层面遇到的主要有以下几类问题。</p>
-<h2>Unicode</h2>
-<p>Python3最显著的改动就是严格化了UNICODE/STR/BYTE的转换。Instagram编写了一些功能函数（<code>ensure_binary</code>,<code>ensure_str</code>,<code>ensure_text</code>）来确保之前代码里的输入和输出符合python3的标准。</p>
-<h2>Data format incompatib</h2>
-<p>在Instagram中经常用到了<code>pickle</code>模块。该模块在python2和3中的区别是：python3的pickle的协议最高版本提升到了4。他们发现即使将协议版本hardcode到python2里的2，由于版本2和3的同时存在，他们之间的相互序列化的转化也会存在问题。因此他们将不同版本的pickle结果隔离 …</p>
-                    <a class="btn btn-default btn-xs" href="./instagram-python-migrationbi-ji.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
+        <span class="k">def</span> <span class="nf">generateTire</span><span class="p">(</span><span class="n">dct</span><span class="p">):</span>
+            <span class="c1">#这是一个很强大的递归生成defaultdict树的表达式</span>
+            <span class="n">_tire</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">defaultdict</span><span class="p">(</span><span class="n">_tire</span><span class="p">)</span>
+            <span class="n">tire</span> <span class="o">=</span> <span class="n">_tire</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">dct</span><span class="p">:</span>
+                <span class="n">node</span> <span class="o">=</span> <span class="n">tire</span>
+                <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+                    <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="n">char</span><span class="p">]</span>
+                <span class="n">node</span><span class="p">[</span><span class="n">IS_WORD</span><span class="p">]</span> <span class="o">=</span> <span class="n">word</span>
+            <span class="k">return</span> <span class="n">tire</span>
 
-        <ul class="pagination">
-                <li class="prev disabled"><a href="#">&laquo;</a></li>
-                    <li class="active"><a
-                            href="./index.html">1</a></li>
-                    <li class=""><a
-                            href="./index2.html">2</a></li>
-                    <li class=""><a
-                            href="./index3.html">3</a></li>
-                    <li class=""><a
-                            href="./index4.html">4</a></li>
-                    <li class=""><a
-                            href="./index5.html">5</a></li>
-                    <li class=""><a
-                            href="./index6.html">6</a></li>
-                    <li class=""><a
-                            href="./index7.html">7</a></li>
-                    <li class=""><a
-                            href="./index8.html">8</a></li>
-                    <li class=""><a
-                            href="./index9.html">9</a></li>
-                    <li class=""><a
-                            href="./index10.html">10</a></li>
-                    <li class=""><a
-                            href="./index11.html">11</a></li>
-                    <li class=""><a
-                            href="./index12.html">12</a></li>
-                    <li class=""><a
-                            href="./index13.html">13</a></li>
-                    <li class=""><a
-                            href="./index14.html">14</a></li>
-                <li class="next"><a
-                        href="./index2.html">&raquo;</a></li>
-        </ul>
+        <span class="k">def</span> <span class="nf">searchWord</span><span class="p">(</span><span class="n">tire</span><span class="p">,</span> <span class="n">word</span><span class="p">):</span>
+            <span class="c1">#在tire树种查找到最短的单词successor，这里</span>
+            <span class="c1">#只要遇到IS_WORD键就返回查到的单词</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">tire</span>
+            <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">char</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">node</span><span class="p">:</span> <span class="k">break</span>
+                <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="n">char</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">IS_WORD</span> <span class="ow">in</span> <span class="n">node</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">node</span><span class="p">[</span><span class="n">IS_WORD</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">word</span>
+
+        <span class="c1">#利用partial方法构造map函数</span>
+        <span class="n">replace</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">searchWord</span><span class="p">,</span> <span class="n">generateTire</span><span class="p">(</span><span class="nb">dict</span><span class="p">))</span>
+        <span class="k">return</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">replace</span><span class="p">,</span> <span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span>
+</pre></div>
+
+
+<p><strong>Mark:</strong> 116 ms</p>
+<h3>Additional</h3>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="./leetcode-integer-break.html">LeetCode - Integer Break</a></li>
+        <li><a href="./leetcode-maximum-xor-of-two-numbers-in-an-array.html">LeetCode - Maximum XOR of Two Numbers in an Array</a></li>
+        <li><a href="./leetcode-total-hamming-distance.html">LeetCode - Total Hamming Distance</a></li>
+        <li><a href="./leetcode-maximum-length-of-pair-chain.html">LeetCode - Maximum Length of Pair Chain</a></li>
+        <li><a href="./leetcode-linked-list-random-node.html">LeetCode - Linked List Random Node</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
+
         </div>
         <div class="col-sm-3" id="sidebar">
             <aside>
