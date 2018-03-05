@@ -1,7 +1,7 @@
 _site/*
 _theme_packages/*
 _posts/draft_*.md
-__pycache__
+__pycache__/*
 output/*
 
 Thumbs.db
