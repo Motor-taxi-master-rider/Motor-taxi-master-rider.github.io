@@ -15,16 +15,16 @@ Lisa Guo和Hui Ding在 **Pycon2017** 的[keynote](https://www.youtube.com/watch?
 ### Instagram
 很难想象Instagram能在保持产品功能高速迭代的同时完成从python2.7版本到3.5版本的跨越。他们在版本更新途中在代码层面遇到的主要有以下几类问题。
 
-## Unicode
+#### Unicode
 Python3最显著的改动就是严格化了UNICODE/STR/BYTE的转换。Instagram编写了一些功能函数（`ensure_binary`,`ensure_str`,`ensure_text`）来确保之前代码里的输入和输出符合python3的标准。
 
-## Data format incompatib
+#### Data format incompatible
 在Instagram中经常用到了`pickle`模块。该模块在python2和3中的区别是：python3的pickle的协议最高版本提升到了4。他们发现即使将协议版本hardcode到python2里的2，由于版本2和3的同时存在，他们之间的相互序列化的转化也会存在问题。因此他们将不同版本的pickle结果隔离，做到自取自拿。
 
-## Iterator
+#### Iterator
 Python3中的许多函数的返回值被修改成了迭代器（`map`,`filter`,`dict.item`），迭代器使得Instagram中那些会遍历两遍这些函数返回结果的代码全部失效。这其实非常难以调试，因此他们首先将所有该类函数的返回值用`list`方法还原成列表，然后将优化只迭代一遍的实例。
 
-## Dictionary ordering
+#### Dictionary ordering
 [之前的一篇note](https://motor-taxi-master-rider.github.io/python/2017/11/05/note-for-async-dictionary-machine-learing)也讲过，由于python字典的版本改动，字典中的返回值将大大不同。
 
 ```python

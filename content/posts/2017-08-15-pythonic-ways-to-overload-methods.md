@@ -17,7 +17,7 @@ Python单分发器（Singledispatch）是实现泛型函数的一种形式，由
 
 ### 代码示例
 
-## Singledispatch
+#### Singledispatch
 >Python 3.4 新增的 functools.singledispatch 装饰器可以把整体方案拆分成多个模块，甚至可以为你无法修改的类提供专门的函数。使用 @singledispatch 装饰的普通函数会变成泛函数（generic function）：根据第一个参数的类型，以不同方式执行相同操作的一组函数。以下是fluent python中关于singledispatch的示例。
 
 ```python
@@ -48,7 +48,7 @@ def _(seq):
 ```
 >singledispatch 机制的一个显著特征是，你可以在系统的任何地方和任何模块中注册专门函数。如果后来在新的模块中定义了新的类型，可以轻松地添加一个新的专门函数来处理那个类型。此外，你还可以为不是自己编写的或者不能修改的类添加自定义函数。
 
-## Multidispatch
+#### Multidispatch
 >这是两个python cookbook中利用annotation对多参数方法的重载的示例。在第一个示例中我们利用元类来生成支持参数重载的类。在__prepare__方法中将类的字典变成自定义的MultiDict字典。
 
 ### 使用元类实现

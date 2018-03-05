@@ -36,12 +36,12 @@ __________________________________   __________________________________
 
 python中占用内存较大的对象会被分配到标准的c内存分配器，小对象分配器则由三个级别的抽象构成`Arena`、`Pool`、`Block`。
 
-## Block
+#### Block
 Block（块）是固定大小（8-512k）的内存块。为了方便起见，这些块被分为64类：
 
 <table><thead><tr><th>Request in bytes</th><th>Size of allocated block</th><th>size class idx</th></tr></thead><tbody><tr><td>1-8</td><td>8</td><td>0</td></tr><tr><td>9-16</td><td>16</td><td>1</td></tr><tr><td>17-24</td><td>24</td><td>2</td></tr><tr><td>25-32</td><td>32</td><td>3</td></tr><tr><td>33-40</td><td>40</td><td>4</td></tr><tr><td>41-48</td><td>48</td><td>5</td></tr><tr><td>...</td><td>...</td><td>...</td></tr><tr><td>505-512</td><td>512</td><td>63</td></tr></tbody></table>
 
-## Pool
+#### Pool
 Pool（池）是相同大小Block（块）的集合。通常来说，池的大小等于内存页的大小。固定块的大小能减少内存碎片的产生————当一个对象被销毁的时候，内存管理器能轻松地将相同大小的对象装载入块中。
 
 在cpython中，池被定义为如下结构：
@@ -92,7 +92,7 @@ once when and only when nextoffset > maxnextoffset.
 
 值得注意的是，块和池并不是直接分配内存，它们所分配的内存来自于其所在的Arena（内存空间）。
 
-## Arena
+#### Arena
 Arena（内存空间）是由64个池组成的在堆上的256k的空间，同样也是双向链表。它的结构如下：
 
 ```c
@@ -121,7 +121,7 @@ python中的垃圾处理机制由两部分组成：
 
 <img src="https://motor-taxi-master-rider.github.io/assets/img/reachability_analysis_algorithm.png"  title="可达性算法示例"/>
 
-## 引用计数
+#### 引用计数
 在python的[c api文档中](https://docs.python.org/3.6/c-api/intro.html#objects-types-and-reference-counts)描述了cpython中引用计数的底层实现。
 
 cpython中通过[Py_INCREF](https://docs.python.org/3.6/c-api/refcounting.html#c.Py_INCREF)和[Py_DECREF](https://docs.python.org/3.6/c-api/refcounting.html#c.Py_DECREF)两个宏来控制引用计数的增加和减少。对象析构器会触发`Py_DECREF`宏，该宏会检查对象的引用计数是否会被降为0————为0时则立刻释放该对象的内存，这就使得引用计数释放内存具有即时性。
@@ -147,7 +147,7 @@ bar(foo)
 print(sys.getrefcount(foo))
 ```
 
-## 分代垃圾收集器
+#### 分代垃圾收集器
 引用计数这个简单的机制会带来许多问题，如无法解决循环引用、需要线程锁及效率低下。为了解决循环引用的问题，[gc模块](https://docs.python.org/3.6/library/gc.html)在python 1.5版本中被加入。
 
 由于循环引用只会在container容器类型中发生，所以`gc`模块并不会追踪python中所有的对象。我们可以使用`gc.is_tracked`函数来判断某个对象是否被追踪：

@@ -19,7 +19,7 @@ category:
 
 ### Implementation
 
-## new方法
+#### new方法
 
 new方法
 ```python
@@ -34,7 +34,7 @@ class MyClass(Singleton):
     a = 1
 ```
 
-## metaclass方法
+#### metaclass方法
 
 覆盖**init**类
 
@@ -84,7 +84,7 @@ b = Spam()
 print(a is b)
 ```
 
-## decorator方法
+#### decorator方法
 
 ```python
 def singleton(cls, *args, **kw):
@@ -100,7 +100,7 @@ class MyClass:
   ...
 ```
 
-## import方法
+#### import方法
 
 ```python
 ### mysingleton.py

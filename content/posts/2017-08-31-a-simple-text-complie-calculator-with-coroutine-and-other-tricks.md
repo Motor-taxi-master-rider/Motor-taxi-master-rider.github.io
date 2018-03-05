@@ -32,7 +32,7 @@ cal.caculate('1+2*4-5^2')
 
 接下来我们就来一步一步实现这一简易编译器。
 
-## 准备工作
+#### 准备工作
 
 本文代码环境为python3.6。
 
@@ -149,7 +149,7 @@ class Calculator:
 
 对于计算器类，我们开放了caculate api接受传入的字符串，并经过上文论述的三个步骤来输出结果。当然我们也可以直接调用这三个步骤的方法来进行调试和维护，我们接下来的任务就是分别实现这三个方法。
 
-## Tokenize
+#### Tokenize
 
 ```python
 def _tokenize(self, text):
@@ -186,7 +186,7 @@ Token(type='POWER', value='^')
 Token(type='NUM', value='2')
 ```
 
-## Parse
+#### Parse
 
 ```python
 def _parse(self, toks):
@@ -247,7 +247,7 @@ cal.text='1+2*4-5^2'
 print(cal._parse(cal._tokenize(cal.text)))
 ```
 
-## Evaluate
+#### Evaluate
 
 ```python
 def _evaluate(self, node):

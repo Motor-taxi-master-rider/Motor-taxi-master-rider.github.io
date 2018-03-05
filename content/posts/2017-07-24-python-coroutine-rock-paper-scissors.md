@@ -31,7 +31,7 @@ def advance_generator_once(original_fn):
     return actual_call
 ```
 
-## 实例协程
+#### 实例协程
 As shown, one of the ways to pass a message to a generator is with .send(). This interface allows you to pass a single object to a generator. For this object we can pass tuples, dicts or anything else we choose.
 
 You decide the protocol for your generator by documenting the types and values of objects you will send from caller to generator and yield from generator to caller.

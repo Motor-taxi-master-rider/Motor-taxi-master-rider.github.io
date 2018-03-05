@@ -10,7 +10,7 @@ category: Python
 
 ### An introduction to Python yield
 
-## WHAT
+#### WHAT
 
 ### A function and a generater
 
@@ -221,7 +221,7 @@ avg.send(30)
 - A **caller** should **schedule** the coroutine when it suspended
 - When a coroutine suspended, it will **return control** to the **caller**
 
-## WHY
+#### WHY
 
 ### A tornado example
 
@@ -258,7 +258,7 @@ app = tornado.web.Application([
 
 Refer to documentation [Frequently Asked Questions](http://www.tornadoweb.org/en/stable/faq.html).
 
-## HOW
+#### HOW
 
 ### Use coroutine to simplfy your context manager
 
@@ -547,7 +547,7 @@ for i in range(5):
     do_func(i,i)
 ```
 
-## Additional: How coroutine work
+#### Additional: How coroutine work
 
 
 ```python
@@ -806,7 +806,7 @@ gen1.send('world')
     Got: 6
 
 
-## Reference
+#### Reference
 
 1. [Generators: The Final Frontier](http://www.dabeaz.com/finalgenerator/)
 2. [Effective Python：Consider Coroutines to Run Many Functions Concurrently](http://www.effectivepython.com/2015/03/10/consider-coroutines-to-run-many-functions-concurrently/)

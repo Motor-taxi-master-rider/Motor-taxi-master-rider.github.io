@@ -13,7 +13,7 @@ category: Python
 
 ### Core programing of async server
 
-## 准备工作
+#### 准备工作
 本文测试环境为python3.6版本，Intel Core i5-6500,8G RAM，win10。
 
 David用了以下程序来做async服务器的测试。该程序会发送10000个请求并计算服务器处理请求的速率：
@@ -37,7 +37,7 @@ def benchmark(addr,nmessages):
 benchmark(('localhost',25000),100000)
 ```
 
-## asyncio服务器
+#### asyncio服务器
 首先我们用asyncio来搭建一个异步服务器，代码如下：
 
 ```python
@@ -77,7 +77,7 @@ loop.run_forever()
 
 让我们启动服务并运行`benchmark.py`做测试，得到的结果为`9660.489944352334 message/sec`。
 
-## 原生协程实现eventloop
+#### 原生协程实现eventloop
 观察以上asyncio服务器的代码，不难发现其中不仅有asyncio的eventloop（底层用生成器协程和`yield from`实现）还有新引入的`aync/await`原生协程，是一种跨界组合的状态。那么能不能将eventloop也用原生协程也实现呢？David给出了一个简单的方案：
 
 ```python
@@ -158,7 +158,7 @@ loop=native.Loop()
 
 运行`benchmark.py`发现每秒请求处理数变为了`19515.515222278125 message/sec`，效率提升了超过了100%。
 
-## gevent服务器
+#### gevent服务器
 为了做平行测试，David又用了gevent这个底层由c实现的库来检测原生协程的效率究竟如何，代码如下：
 
 ```python

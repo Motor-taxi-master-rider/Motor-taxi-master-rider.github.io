@@ -21,7 +21,7 @@ For example, given the input of `S = "abppplee"` and `D = {"able", "ale", "apple
 
 
 ### Solution
-## Check each dictionary word using a greedy algorithm
+#### Check each dictionary word using a greedy algorithm
 一个比较容易想到的方法就是将字典中的单词与`S`逐个比较，这样最差时间复杂度为O(N*W*M)。`W`位字典中的单词数量，`M`为单词的平均长度。虽然可以将字典中的单词按长度降序排列来减少一般状态下的运行时间，但不会减少最差时间复杂度。将`L`设为字典中所有单词字母长度之和，时间复杂度也可以表示为O(N*L)。
 
 代码如下：
@@ -55,7 +55,7 @@ def solution(s, d):
 print(solution(s, d))
 ```
 
-## Improving the greedy approach
+#### Improving the greedy approach
 我们也可以对`S`做一些预处理操作，记录其中字母的出现：
 
 ```
@@ -112,7 +112,7 @@ if __name__ == '__main__':
     print subdict(sys.argv[1], sys.argv[2:])
 ```
 
-## An optimal O(N + L) approach for any alphabet
+#### An optimal O(N + L) approach for any alphabet
 首先是一个基于上述算法的，适用于`S`的长度不长的情况的优化方案。我们将`p -> [2, 3, 4]`拓展成`p -> [2, 2, 3, 4, -1, -1, -1, -1]`，其中列表的每个元素对应`S`中该位置后出现该列表key的字母的序号（包括该位置的序号）。如果不存在就以`-1`表示。这样我们就不用二分法来查找列表，但随之带来的问题是：算法的实际复杂度变为O(N*A + L)，`A`为`S`的字母集合的长度，并且消耗O（NA）的空间。因此当`S`过长时并非一个很好的优化。
 
 除此之外，我们还可以通过同时遍历所有`D`中的单词来压榨我们的时间复杂度。字典中的每个单词放入(w,i)元组。其中w为单词本身，i记录了序号为i的字母已经达成匹配。这样我们就可以形成类似这样的数据结构：
