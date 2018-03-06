@@ -139,7 +139,7 @@ g = generator()
 g.send(None)
 ```
 
-<img src="https://github.com/Motor-taxi-master-rider/Python/tree/master/Script/generator_send_data.PNG">
+<img src="https://github.com/Motor-taxi-master-rider/Python/blob/master/Script/generator_send_data.PNG?raw=true">
 
 Send data
 
@@ -484,7 +484,7 @@ def do_func(x, y):
    print('Got:', result)
 Inspired by @contextmanager：
 
-<img src="https://github.com/Motor-taxi-master-rider/Python/tree/master/Script/inline_yield.PNG">
+<img src="https://github.com/Motor-taxi-master-rider/Python/blob/master/Script/inline_yield.PNG?raw=true">
 
 
 ```python
@@ -668,7 +668,7 @@ gen1.gi_code.co_name
 
 
 
-<img src="https://github.com/Motor-taxi-master-rider/Python/blob/master/Script/generator_object.PNG">
+<img src="https://github.com/Motor-taxi-master-rider/Python/blob/master/Script/generator_object.PNG?raw=true">
 
 All generators from calls to gen_fn point to this same code. But each has its own stack frame. This stack frame is not on any actual stack, it sits in heap memory.
 
