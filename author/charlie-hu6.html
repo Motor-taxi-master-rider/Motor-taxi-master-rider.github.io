@@ -172,7 +172,7 @@ init_mathjax = function() {
 }
 init_mathjax();
 </script>
-    <link href="../assets/favicon.ico" rel="icon">
+    <link href="/assets/favicon.ico" rel="icon">
 
 
         <meta name="author" content="Charlie Hu" />
@@ -181,22 +181,20 @@ init_mathjax();
         <meta property="og:site_name" content="Tower of Babel" />
         <meta property="og:type" content="website"/>
         <meta property="og:title" content="Tower of Babel"/>
-        <meta property="og:url" content=".."/>
+        <meta property="og:url" content=""/>
         <meta property="og:description" content="Tower of Babel"/>
 
 
 
     <!-- Bootstrap -->
-        <link rel="stylesheet" href="../theme/css/bootstrap.flatly.min.css" type="text/css"/>
-    <link href="../theme/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/theme/css/bootstrap.flatly.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="../theme/css/pygments/native.css" rel="stylesheet">
-    <link href="../theme/tipuesearch/tipuesearch.css" rel="stylesheet">
-    <link rel="stylesheet" href="../theme/css/style.css" type="text/css"/>
-        <link href="../static/css/custom.css" rel="stylesheet">
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link href="/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+        <link href="/static/css/custom.css" rel="stylesheet">
 
-        <link href="../feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Tower of Babel ATOM Feed"/>
 
 
 
@@ -213,12 +211,12 @@ init_mathjax();
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="../" class="navbar-brand">
+            <a href="/" class="navbar-brand">
 Tower of Babel            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                         <li><a href="../pages/about.html">
+                         <li><a href="/pages/about.html">
                              About
                           </a></li>
             </ul>
@@ -228,7 +226,7 @@ Tower of Babel            </a>
                   <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
                 </form></span>
               </li>
-              <li><a href="../archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+              <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -240,17 +238,17 @@ Tower of Babel            </a>
     <div class="row">
         <div class="col-sm-9">
         <ol class="breadcrumb">
-            <li><a href=".." title="Tower of Babel"><i class="fa fa-home fa-lg"></i></a></li>
-            <li><a href="../authors.html" title="Authors">Authors</a></li>
+            <li><a href="" title="Tower of Babel"><i class="fa fa-home fa-lg"></i></a></li>
+            <li><a href="/authors.html" title="Authors">Authors</a></li>
             <li class="active">Charlie Hu</li>
         </ol>
             <article>
-                <h2><a href="../flunet-python-167-coroutine-understading.html">Flunet Python 16.7 coroutine understading</a></h2>
+                <h2><a href="/python-coroutine-example-rock-paper-scissors.html">Python Coroutine Example -- Rock Paper Scissors</a></h2>
                     <div class="well well-sm">
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-07-18T00:00:00+08:00"> 周二 18 七月 2017</time>
+        <i class="fa fa-calendar"></i><time datetime="2017-07-24T00:00:00+08:00"> Mon 24 July 2017</time>
     </span>
 
 
@@ -258,9 +256,77 @@ Tower of Babel            </a>
 
 
 <span class="label label-default">Tags</span>
-	<a href="../tag/fluent_python.html">Fluent_Python</a>
+	<a href="/tag/coroutine.html">Coroutine</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><h3>Description</h3>
+<p>本代码来自Ian Ward的Jupyter Notebook -- “Iterables, Iterators, and Generators” 教程，实现了剪刀石头布的游戏。</p>
+<h3>预激协程</h3>
+<p>The flow is always the same when working with generators.
+a generator object is created by the caller
+the caller starts the generator
+the generator passes data to the caller (or signals the end of the sequence)
+the caller …</p>
+                    <a class="btn btn-default btn-xs" href="/python-coroutine-example-rock-paper-scissors.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/python-coroutine-example-game-of-life.html">Python Coroutine Example -- Game of life</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-07-22T00:00:00+08:00"> Sat 22 July 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/coroutine.html">Coroutine</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><h3>Description</h3>
+<p>本文所列代码实现了 John Conway 发明的“生命游戏”（https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life），使用协程管理游戏运行过程中各个细胞的状态。
+源自Brett Slatkin 写的《Effective Python：编写高质量 Python 代码的 59 个有效方法》一书。</p>
+<h3>代码及注释</h3>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+
+<span class="n">ALIVE</span> <span class="o">=</span> <span class="s1">&#39;*&#39;</span>
+<span class="n">EMPTY</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span>
+<span class="n">TICK</span> <span class="o">=</span> <span class="nb">object</span><span class="p">()</span>
+
+<span class="n">Query</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Query&#39;</span><span class="p">,</span> <span class="s1">&#39;y x&#39;</span><span class="p">)</span>
+
+<span class="n">Transition</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Transition&#39;</span><span class="p">,</span> <span class="s1">&#39;y x state&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">count_neighbors</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  获取邻居状态的子协程 …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/python-coroutine-example-game-of-life.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/flunet-python-167-coroutine-understading.html">Flunet Python 16.7 coroutine understading</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-07-18T00:00:00+08:00"> Tue 18 July 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/fluent_python.html">Fluent_Python</a>
         /
-	<a href="../tag/coroutine.html">Coroutine</a>
+	<a href="/tag/coroutine.html">Coroutine</a>
     
 </footer><!-- /.post-info -->                    </div>
                 <div class="summary"><h3>Description</h3>
@@ -284,17 +350,17 @@ Tower of Babel            </a>
         <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">average</span> <span class="o">=</span> <span class="n">total</span><span class="o">/</span><span class="n">count</span>
     <span class="k">return …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="../flunet-python-167-coroutine-understading.html">more ...</a>
+                    <a class="btn btn-default btn-xs" href="/flunet-python-167-coroutine-understading.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="../linklist-problems-summary.html">Linklist Problems Summary</a></h2>
+                <h2><a href="/linklist-problems-summary.html">Linklist Problems Summary</a></h2>
                     <div class="well well-sm">
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-07-08T00:00:00+08:00"> 周六 08 七月 2017</time>
+        <i class="fa fa-calendar"></i><time datetime="2017-07-08T00:00:00+08:00"> Sat 08 July 2017</time>
     </span>
 
 
@@ -302,9 +368,9 @@ Tower of Babel            </a>
 
 
 <span class="label label-default">Tags</span>
-	<a href="../tag/linklist.html">Linklist</a>
+	<a href="/tag/linklist.html">Linklist</a>
         /
-	<a href="../tag/data_structure.html">Data_Structure</a>
+	<a href="/tag/data_structure.html">Data_Structure</a>
     
 </footer><!-- /.post-info -->                    </div>
                 <div class="summary"><h3>Description</h3>
@@ -336,17 +402,17 @@ Tower of Babel            </a>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="../linklist-problems-summary.html">more ...</a>
+                    <a class="btn btn-default btn-xs" href="/linklist-problems-summary.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="../leetcode-next-greater-element-ii.html">LeetCode - Next Greater Element II</a></h2>
+                <h2><a href="/leetcode-next-greater-element-ii.html">LeetCode - Next Greater Element II</a></h2>
                     <div class="well well-sm">
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-07-06T00:00:00+08:00"> 周四 06 七月 2017</time>
+        <i class="fa fa-calendar"></i><time datetime="2017-07-06T00:00:00+08:00"> Thu 06 July 2017</time>
     </span>
 
 
@@ -354,122 +420,60 @@ Tower of Babel            </a>
 
 
 <span class="label label-default">Tags</span>
-	<a href="../tag/leetcode.html">LeetCode</a>
+	<a href="/tag/leetcode.html">LeetCode</a>
         /
-	<a href="../tag/stack.html">Stack</a>
+	<a href="/tag/stack.html">Stack</a>
         /
-	<a href="../tag/circular_array.html">Circular_array</a>
+	<a href="/tag/circular_array.html">Circular_array</a>
     
 </footer><!-- /.post-info -->                    </div>
                 <div class="summary"><h3>Description</h3>
 <p>Given a circular array (the next element of the last element is the first element of the array), print the Next Greater Number for every element. The Next Greater Number of a number x is the first greater number to its traversing-order next in the array, which means you …</p>
-                    <a class="btn btn-default btn-xs" href="../leetcode-next-greater-element-ii.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../leetcode-database-problems-summary.html">LeetCode - Database Problems Summary</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-07-05T00:00:00+08:00"> 周三 05 七月 2017</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="../tag/leetcode.html">LeetCode</a>
-        /
-	<a href="../tag/mysql.html">Mysql</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Description</h3>
-<p>Here is a summary of LeetCode Database section.</p>
-<p><a href="https://leetcode.com/problemset/database/">Source link</a></p>
-<h3>删除重复数据</h3>
-<p>Write a SQL query to delete all duplicate email entries in a table named Person, keeping only unique emails based on its smallest Id.</p>
-<div class="highlight"><pre><span></span>+----+------------------+
-| Id | Email            |
-+----+------------------+
-| 1  | john@example.com |
-| 2  | bob@example.com  |
-| 3  | john@example.com …</pre></div>
-                    <a class="btn btn-default btn-xs" href="../leetcode-database-problems-summary.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../leetcode-construct-the-rectangle.html">LeetCode - Construct the Rectangle</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-07-01T00:00:00+08:00"> 周六 01 七月 2017</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="../tag/leetcode.html">LeetCode</a>
-        /
-	<a href="../tag/math.html">Math</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Description</h3>
-<p>For a web developer, it is very important to know how to design a web page's size. So, given a specific rectangular web page’s area, your job by now is to design a rectangular web page, whose length L and width W satisfy the following requirements:</p>
-<ol>
-<li>
-<p>The area …</p></li></ol>
-                    <a class="btn btn-default btn-xs" href="../leetcode-construct-the-rectangle.html">more ...</a>
+                    <a class="btn btn-default btn-xs" href="/leetcode-next-greater-element-ii.html">more ...</a>
                 </div>
             </article>
             <hr/>
 
         <ul class="pagination">
-                <li class="prev"><a href="../author/charlie-hu5.html">&laquo;</a>
+                <li class="prev"><a href="/author/charlie-hu5.html">&laquo;</a>
                 </li>
                     <li class=""><a
-                            href="../author/charlie-hu.html">1</a></li>
+                            href="/author/charlie-hu.html">1</a></li>
                     <li class=""><a
-                            href="../author/charlie-hu2.html">2</a></li>
+                            href="/author/charlie-hu2.html">2</a></li>
                     <li class=""><a
-                            href="../author/charlie-hu3.html">3</a></li>
+                            href="/author/charlie-hu3.html">3</a></li>
                     <li class=""><a
-                            href="../author/charlie-hu4.html">4</a></li>
+                            href="/author/charlie-hu4.html">4</a></li>
                     <li class=""><a
-                            href="../author/charlie-hu5.html">5</a></li>
+                            href="/author/charlie-hu5.html">5</a></li>
                     <li class="active"><a
-                            href="../author/charlie-hu6.html">6</a></li>
+                            href="/author/charlie-hu6.html">6</a></li>
                     <li class=""><a
-                            href="../author/charlie-hu7.html">7</a></li>
+                            href="/author/charlie-hu7.html">7</a></li>
                     <li class=""><a
-                            href="../author/charlie-hu8.html">8</a></li>
+                            href="/author/charlie-hu8.html">8</a></li>
                     <li class=""><a
-                            href="../author/charlie-hu9.html">9</a></li>
+                            href="/author/charlie-hu9.html">9</a></li>
                     <li class=""><a
-                            href="../author/charlie-hu10.html">10</a></li>
+                            href="/author/charlie-hu10.html">10</a></li>
                     <li class=""><a
-                            href="../author/charlie-hu11.html">11</a></li>
+                            href="/author/charlie-hu11.html">11</a></li>
                     <li class=""><a
-                            href="../author/charlie-hu12.html">12</a></li>
+                            href="/author/charlie-hu12.html">12</a></li>
                     <li class=""><a
-                            href="../author/charlie-hu13.html">13</a></li>
+                            href="/author/charlie-hu13.html">13</a></li>
                     <li class=""><a
-                            href="../author/charlie-hu14.html">14</a></li>
+                            href="/author/charlie-hu14.html">14</a></li>
                 <li class="next"><a
-                        href="../author/charlie-hu7.html">&raquo;</a></li>
+                        href="/author/charlie-hu7.html">&raquo;</a></li>
         </ul>
         </div>
         <div class="col-sm-3" id="sidebar">
             <aside>
 <div id="aboutme">
         <p>
-            <img width="100%" class="img-thumbnail" src="../assets/img/avatar.png"/>
+            <img width="100%" class="img-thumbnail" src="/assets/img/avatar.png"/>
         </p>
     <p>
       <strong>About Charlie Hu</strong><br/>
@@ -483,8 +487,8 @@ Tower of Babel            </a>
 <li class="list-group-item">
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
   <ul class="list-group" id="social">
-    <li class="list-group-item"><a href="http://www.linkedin.com/in/danieldebie"><i class="fa fa-linkedin-square fa-lg"></i> linkedin</a></li>
     <li class="list-group-item"><a href="https://github.com/Motor-taxi-master-rider"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+    <li class="list-group-item"><a href="https://weibo.com/u/3025131943"><i class="fa fa-weibo fa-lg"></i> weibo</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Social -->
@@ -493,46 +497,46 @@ Tower of Babel            </a>
 <li class="list-group-item">
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
   <ul class="list-group" id="recentposts">
-    <li class="list-group-item"><a href="../build-a-circular-list-and-regex-trie.html">Build a circular list and regex trie</a></li>
-    <li class="list-group-item"><a href="../top-10-python-libraries-of-2017.html">Top 10 Python libraries of 2017</a></li>
-    <li class="list-group-item"><a href="../find-longest-word-in-dictionary-that-is-a-subsequence-of-a-given-string.html">Find longest word in dictionary that is a subsequence of a given string</a></li>
+    <li class="list-group-item"><a href="/review-guess-word-and-hangman-game.html">[Review] Guess word and hangman game</a></li>
+    <li class="list-group-item"><a href="/stackoverflow-list-generator-algorithms.html">StackOverflow list generator algorithms</a></li>
+    <li class="list-group-item"><a href="/build-a-circular-list-and-regex-trie.html">Build a circular list and regex trie</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Recent Posts -->
 
 <!-- Sidebar/Tag Cloud -->
 <li class="list-group-item">
-  <a href="../"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
   <ul class="list-group list-inline tagcloud" id="tags">
-    <li class="list-group-item tag-3">
-      <a href="../tag/algorithms.html">Algorithms</a>
+    <li class="list-group-item tag-4">
+      <a href="/tag/algorithm.html">Algorithm</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="../tag/bit_manipulation.html">Bit_manipulation</a>
+      <a href="/tag/algorithms.html">Algorithms</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="/tag/bit_manipulation.html">Bit_manipulation</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="../tag/coroutine.html">Coroutine</a>
+      <a href="/tag/coroutine.html">Coroutine</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="../tag/descriptor.html">Descriptor</a>
+      <a href="/tag/descriptor.html">Descriptor</a>
     </li>
     <li class="list-group-item tag-1">
-      <a href="../tag/leetcode.html">Leetcode</a>
+      <a href="/tag/leetcode.html">Leetcode</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="../tag/math.html">Math</a>
+      <a href="/tag/math.html">Math</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="../tag/python.html">Python</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="../tag/stack.html">Stack</a>
+      <a href="/tag/python.html">Python</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="../tag/string.html">String</a>
+      <a href="/tag/string.html">String</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="../tag/tree.html">Tree</a>
+      <a href="/tag/tree.html">Tree</a>
     </li>
   </ul>
 </li>
@@ -582,15 +586,15 @@ Tower of Babel            </a>
       </div>
    </div>
 </footer>
-<script src="../theme/js/jquery.min.js"></script>
+<script src="/theme/js/jquery.min.js"></script>
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="../theme/js/bootstrap.min.js"></script>
+<script src="/theme/js/bootstrap.min.js"></script>
 
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="../theme/js/respond.min.js"></script>
+<script src="/theme/js/respond.min.js"></script>
 
-    <script src="../static/js/custom.js"></script>
+    <script src="/static/js/custom.js"></script>
 
 
 <!-- GitHub JS Code -->
@@ -599,7 +603,7 @@ $(document).ready(function () {
   if (!window.jXHR) {
     var jxhr = document.createElement('script');
     jxhr.type = 'text/javascript';
-    jxhr.src = '../theme/js/jXHR.js';
+    jxhr.src = '/theme/js/jXHR.js';
     var s = document.getElementsByTagName('script')[0];
     s.parentNode.insertBefore(jxhr, s);
   }
@@ -612,7 +616,7 @@ $(document).ready(function () {
   });
 });
 </script>
-<script src="../theme/js/github.js" type="text/javascript"></script>
+<script src="/theme/js/github.js" type="text/javascript"></script>
 <!-- End GitHub JS Code -->
 
 <script type="text/javascript">

@@ -172,7 +172,7 @@ init_mathjax = function() {
 }
 init_mathjax();
 </script>
-    <link href="../assets/favicon.ico" rel="icon">
+    <link href="/assets/favicon.ico" rel="icon">
 
 
         <meta name="author" content="Charlie Hu" />
@@ -181,22 +181,20 @@ init_mathjax();
         <meta property="og:site_name" content="Tower of Babel" />
         <meta property="og:type" content="website"/>
         <meta property="og:title" content="Tower of Babel"/>
-        <meta property="og:url" content=".."/>
+        <meta property="og:url" content=""/>
         <meta property="og:description" content="Tower of Babel"/>
 
 
 
     <!-- Bootstrap -->
-        <link rel="stylesheet" href="../theme/css/bootstrap.flatly.min.css" type="text/css"/>
-    <link href="../theme/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/theme/css/bootstrap.flatly.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="../theme/css/pygments/native.css" rel="stylesheet">
-    <link href="../theme/tipuesearch/tipuesearch.css" rel="stylesheet">
-    <link rel="stylesheet" href="../theme/css/style.css" type="text/css"/>
-        <link href="../static/css/custom.css" rel="stylesheet">
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link href="/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+        <link href="/static/css/custom.css" rel="stylesheet">
 
-        <link href="../feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Tower of Babel ATOM Feed"/>
 
 
 
@@ -213,12 +211,12 @@ init_mathjax();
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="../" class="navbar-brand">
+            <a href="/" class="navbar-brand">
 Tower of Babel            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                         <li><a href="../pages/about.html">
+                         <li><a href="/pages/about.html">
                              About
                           </a></li>
             </ul>
@@ -228,7 +226,7 @@ Tower of Babel            </a>
                   <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
                 </form></span>
               </li>
-              <li><a href="../archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+              <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -240,17 +238,17 @@ Tower of Babel            </a>
     <div class="row">
         <div class="col-sm-9">
         <ol class="breadcrumb">
-            <li><a href=".." title="Tower of Babel"><i class="fa fa-home fa-lg"></i></a></li>
-            <li><a href="../authors.html" title="Authors">Authors</a></li>
+            <li><a href="" title="Tower of Babel"><i class="fa fa-home fa-lg"></i></a></li>
+            <li><a href="/authors.html" title="Authors">Authors</a></li>
             <li class="active">Charlie Hu</li>
         </ol>
             <article>
-                <h2><a href="../leetcode-integer-break.html">LeetCode - Integer Break</a></h2>
+                <h2><a href="/replace-asyncio-with-native-coroutine.html">Replace asyncio with native coroutine</a></h2>
                     <div class="well well-sm">
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-09-26T00:00:00+08:00"> 周二 26 九月 2017</time>
+        <i class="fa fa-calendar"></i><time datetime="2017-10-08T00:00:00+08:00"> Sun 08 October 2017</time>
     </span>
 
 
@@ -258,25 +256,85 @@ Tower of Babel            </a>
 
 
 <span class="label label-default">Tags</span>
-	<a href="../tag/leetcode.html">Leetcode</a>
+	<a href="/tag/asyncio.html">Asyncio</a>
         /
-	<a href="../tag/math.html">Math</a>
+	<a href="/tag/coroutine.html">Coroutine</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><h3>Description</h3>
+<p>在David Beazley的<code>Topics of Interest(Python Asyncio)</code><a href="http://pyvideo.org/python-brasil-2015/keynote-david-beazley-topics-of-interest-python-asyncio.html">演讲</a>中，他介绍了由于async在python中的种种历史遗留，asyncio库在<code>aync/await</code>语句加入之后已经不是一种最直接有效的python async实现。在写了一个简单程序替代asyncio库并与其及gevent库的效率做比较之后，我们发现了python3.5版本中引入的原生协程在处理异步方面具有非常高的效率。在演讲的最后他提出，可能我们需要的async并不是一个库而更像是一些api来供我们更有效地做底层的使用。</p>
+<p>这次的演讲启迪了我许多，但碍于并没有相关的ppt和材料提供下载（有部分是David在台上光速Live coding的原因），我只能将其代码誊写下来，以供检验及研究，作为个人的读书笔记。</p>
+<h3>Core programing of async server</h3>
+<h4>准备工作</h4>
+<p>本文测试环境为python3.6版本，Intel Core i5-6500,8G RAM，win10。</p>
+<p>David用了以下程序来做async服务器的测试。该程序会发送10000个请求并计算服务器处理请求的速率：</p>
+<div class="highlight"><pre><span></span><span class="c1">#benchmark.py</span>
+
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">socket …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/replace-asyncio-with-native-coroutine.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/how-to-run-pypy.html">How to run PyPy</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-10-04T00:00:00+08:00"> Wed 04 October 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/pypy.html">PyPy</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><h3>Description</h3>
+<p><code>PyPy</code>是目前速度最快的python解释器。先不说它惊人的用python来编写python解释器的理念，之前在planet python里看到一篇<code>PyPy</code>计划移除GIL的<a href="https://morepypy.blogspot.com/2017/08/lets-remove-global-interpreter-lock.html">文章</a>就已经让我惊为天人了。
+听了David Beazley在2012年关于<code>PyPy</code>和<code>Rpython</code>的几个演讲之后(<a href="#additional">Additional</a> 1,2,3)，就对这个项目起了浓厚的兴趣。</p>
+<h3>Download and install</h3>
+<p>可以在<a href="https://pypy.org/download.html">https://pypy.org/download.html</a>下载到<code>PyPy</code>的最新版本。<code>PyPy</code>已经支持python2.7和3.5.3了，但基于python3的<code>PyPy</code>依旧是一个beta版本，并且声称比<code>PyPy</code>2的速度慢很多。因为我们选择安装了基于Ubuntu的64位<code>PyPy</code>。解压后，为了日后使用我们使用以下命令在<code>/usr/local …</code></p>
+                    <a class="btn btn-default btn-xs" href="/how-to-run-pypy.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/leetcode-integer-break.html">LeetCode - Integer Break</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-09-26T00:00:00+08:00"> Tue 26 September 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/leetcode.html">Leetcode</a>
+        /
+	<a href="/tag/math.html">Math</a>
     
 </footer><!-- /.post-info -->                    </div>
                 <div class="summary"><h3>Description</h3>
 <p>Given a positive integer n, break it into the sum of <strong>at least</strong> two positive integers and maximize the product of those integers. Return the maximum product you can get.</p>
 <p>For example, given n = 2, return 1 (2 = 1 + 1); given n = 10, return 36 (10 = 3 + 3 + 4 …</p>
-                    <a class="btn btn-default btn-xs" href="../leetcode-integer-break.html">more ...</a>
+                    <a class="btn btn-default btn-xs" href="/leetcode-integer-break.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="../python-descriptor-behavior-ii.html">Python Descriptor Behavior II</a></h2>
+                <h2><a href="/python-descriptor-behavior-ii.html">Python Descriptor Behavior II</a></h2>
                     <div class="well well-sm">
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-09-25T00:00:00+08:00"> 周一 25 九月 2017</time>
+        <i class="fa fa-calendar"></i><time datetime="2017-09-25T00:00:00+08:00"> Mon 25 September 2017</time>
     </span>
 
 
@@ -284,7 +342,7 @@ Tower of Babel            </a>
 
 
 <span class="label label-default">Tags</span>
-	<a href="../tag/descriptor.html">Descriptor</a>
+	<a href="/tag/descriptor.html">Descriptor</a>
     
 </footer><!-- /.post-info -->                    </div>
                 <div class="summary"><h3>Description</h3>
@@ -303,17 +361,17 @@ Tower of Babel            </a>
 </li>
 <li>
 <p>如果<code>descr</code>为非数据描述符、普通属性、未找到等类型 …</p></li></ol>
-                    <a class="btn btn-default btn-xs" href="../python-descriptor-behavior-ii.html">more ...</a>
+                    <a class="btn btn-default btn-xs" href="/python-descriptor-behavior-ii.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="../leetcode-maximum-xor-of-two-numbers-in-an-array.html">LeetCode - Maximum XOR of Two Numbers in an Array</a></h2>
+                <h2><a href="/leetcode-maximum-xor-of-two-numbers-in-an-array.html">LeetCode - Maximum XOR of Two Numbers in an Array</a></h2>
                     <div class="well well-sm">
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-09-17T00:00:00+08:00"> 周日 17 九月 2017</time>
+        <i class="fa fa-calendar"></i><time datetime="2017-09-17T00:00:00+08:00"> Sun 17 September 2017</time>
     </span>
 
 
@@ -321,9 +379,9 @@ Tower of Babel            </a>
 
 
 <span class="label label-default">Tags</span>
-	<a href="../tag/leetcode.html">Leetcode</a>
+	<a href="/tag/leetcode.html">Leetcode</a>
         /
-	<a href="../tag/bit_manipulaion.html">Bit_manipulaion</a>
+	<a href="/tag/bit_manipulaion.html">Bit_manipulaion</a>
     
 </footer><!-- /.post-info -->                    </div>
                 <div class="summary"><h3>Description</h3>
@@ -337,167 +395,52 @@ Tower of Babel            </a>
 
 Output: 28
 
-Explanation: The …</pre></div><script type='text/javascript'>if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
-
-    if (false) {
-        align = (screen.width < 768) ? "left" : align;
-        indent = (screen.width < 768) ? "0em" : indent;
-        linebreak = (screen.width < 768) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
-    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: true," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-</script>
-                    <a class="btn btn-default btn-xs" href="../leetcode-maximum-xor-of-two-numbers-in-an-array.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../leetcode-total-hamming-distance.html">LeetCode - Total Hamming Distance</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-09-09T00:00:00+08:00"> 周六 09 九月 2017</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="../tag/leetcode.html">Leetcode</a>
-        /
-	<a href="../tag/hamming_distance.html">Hamming_distance</a>
-        /
-	<a href="../tag/bit_manipulaion.html">Bit_manipulaion</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Description</h3>
-<p>The Hamming distance between two integers is the number of positions at which the corresponding bits are different.
-Now your job is to find the total Hamming distance between all pairs of the given numbers.</p>
-<p><strong>Example:</strong></p>
-<div class="highlight"><pre><span></span><span class="n">Input</span><span class="o">:</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">14</span><span class="o">,</span> <span class="mi">2</span>
-
-<span class="n">Output</span><span class="o">:</span> <span class="mi">6</span>
-
-<span class="n">Explanation</span><span class="o">:</span> <span class="n">In</span> <span class="n">binary</span> <span class="n">representation</span><span class="o">,</span> <span class="n">the</span> <span class="mi">4</span> <span class="k">is …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="../leetcode-total-hamming-distance.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="../leetcode-maximum-length-of-pair-chain.html">LeetCode - Maximum Length of Pair Chain</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-09-03T00:00:00+08:00"> 周日 03 九月 2017</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="../tag/leetcode.html">LeetCode</a>
-        /
-	<a href="../tag/math.html">Math</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Description</h3>
-<p>You are given <code>n</code> pairs of numbers. In every pair, the first number is always smaller than the second number.</p>
-<p>Now, we define a pair <code>(c, d)</code> can follow another pair <code>(a, b)</code> if and only if <code>b &lt; c</code>. Chain of pairs can be formed in this fashion.</p>
-<p>Given …</p>
-                    <a class="btn btn-default btn-xs" href="../leetcode-maximum-length-of-pair-chain.html">more ...</a>
+Explanation: The …</pre></div>
+                    <a class="btn btn-default btn-xs" href="/leetcode-maximum-xor-of-two-numbers-in-an-array.html">more ...</a>
                 </div>
             </article>
             <hr/>
 
         <ul class="pagination">
-                <li class="prev"><a href="../author/charlie-hu2.html">&laquo;</a>
+                <li class="prev"><a href="/author/charlie-hu2.html">&laquo;</a>
                 </li>
                     <li class=""><a
-                            href="../author/charlie-hu.html">1</a></li>
+                            href="/author/charlie-hu.html">1</a></li>
                     <li class=""><a
-                            href="../author/charlie-hu2.html">2</a></li>
+                            href="/author/charlie-hu2.html">2</a></li>
                     <li class="active"><a
-                            href="../author/charlie-hu3.html">3</a></li>
+                            href="/author/charlie-hu3.html">3</a></li>
                     <li class=""><a
-                            href="../author/charlie-hu4.html">4</a></li>
+                            href="/author/charlie-hu4.html">4</a></li>
                     <li class=""><a
-                            href="../author/charlie-hu5.html">5</a></li>
+                            href="/author/charlie-hu5.html">5</a></li>
                     <li class=""><a
-                            href="../author/charlie-hu6.html">6</a></li>
+                            href="/author/charlie-hu6.html">6</a></li>
                     <li class=""><a
-                            href="../author/charlie-hu7.html">7</a></li>
+                            href="/author/charlie-hu7.html">7</a></li>
                     <li class=""><a
-                            href="../author/charlie-hu8.html">8</a></li>
+                            href="/author/charlie-hu8.html">8</a></li>
                     <li class=""><a
-                            href="../author/charlie-hu9.html">9</a></li>
+                            href="/author/charlie-hu9.html">9</a></li>
                     <li class=""><a
-                            href="../author/charlie-hu10.html">10</a></li>
+                            href="/author/charlie-hu10.html">10</a></li>
                     <li class=""><a
-                            href="../author/charlie-hu11.html">11</a></li>
+                            href="/author/charlie-hu11.html">11</a></li>
                     <li class=""><a
-                            href="../author/charlie-hu12.html">12</a></li>
+                            href="/author/charlie-hu12.html">12</a></li>
                     <li class=""><a
-                            href="../author/charlie-hu13.html">13</a></li>
+                            href="/author/charlie-hu13.html">13</a></li>
                     <li class=""><a
-                            href="../author/charlie-hu14.html">14</a></li>
+                            href="/author/charlie-hu14.html">14</a></li>
                 <li class="next"><a
-                        href="../author/charlie-hu4.html">&raquo;</a></li>
+                        href="/author/charlie-hu4.html">&raquo;</a></li>
         </ul>
         </div>
         <div class="col-sm-3" id="sidebar">
             <aside>
 <div id="aboutme">
         <p>
-            <img width="100%" class="img-thumbnail" src="../assets/img/avatar.png"/>
+            <img width="100%" class="img-thumbnail" src="/assets/img/avatar.png"/>
         </p>
     <p>
       <strong>About Charlie Hu</strong><br/>
@@ -511,8 +454,8 @@ Now your job is to find the total Hamming distance between all pairs of the give
 <li class="list-group-item">
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
   <ul class="list-group" id="social">
-    <li class="list-group-item"><a href="http://www.linkedin.com/in/danieldebie"><i class="fa fa-linkedin-square fa-lg"></i> linkedin</a></li>
     <li class="list-group-item"><a href="https://github.com/Motor-taxi-master-rider"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+    <li class="list-group-item"><a href="https://weibo.com/u/3025131943"><i class="fa fa-weibo fa-lg"></i> weibo</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Social -->
@@ -521,46 +464,46 @@ Now your job is to find the total Hamming distance between all pairs of the give
 <li class="list-group-item">
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
   <ul class="list-group" id="recentposts">
-    <li class="list-group-item"><a href="../build-a-circular-list-and-regex-trie.html">Build a circular list and regex trie</a></li>
-    <li class="list-group-item"><a href="../top-10-python-libraries-of-2017.html">Top 10 Python libraries of 2017</a></li>
-    <li class="list-group-item"><a href="../find-longest-word-in-dictionary-that-is-a-subsequence-of-a-given-string.html">Find longest word in dictionary that is a subsequence of a given string</a></li>
+    <li class="list-group-item"><a href="/review-guess-word-and-hangman-game.html">[Review] Guess word and hangman game</a></li>
+    <li class="list-group-item"><a href="/stackoverflow-list-generator-algorithms.html">StackOverflow list generator algorithms</a></li>
+    <li class="list-group-item"><a href="/build-a-circular-list-and-regex-trie.html">Build a circular list and regex trie</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Recent Posts -->
 
 <!-- Sidebar/Tag Cloud -->
 <li class="list-group-item">
-  <a href="../"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
   <ul class="list-group list-inline tagcloud" id="tags">
-    <li class="list-group-item tag-3">
-      <a href="../tag/algorithms.html">Algorithms</a>
+    <li class="list-group-item tag-4">
+      <a href="/tag/algorithm.html">Algorithm</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="../tag/bit_manipulation.html">Bit_manipulation</a>
+      <a href="/tag/algorithms.html">Algorithms</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="/tag/bit_manipulation.html">Bit_manipulation</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="../tag/coroutine.html">Coroutine</a>
+      <a href="/tag/coroutine.html">Coroutine</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="../tag/descriptor.html">Descriptor</a>
+      <a href="/tag/descriptor.html">Descriptor</a>
     </li>
     <li class="list-group-item tag-1">
-      <a href="../tag/leetcode.html">Leetcode</a>
+      <a href="/tag/leetcode.html">Leetcode</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="../tag/math.html">Math</a>
+      <a href="/tag/math.html">Math</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="../tag/python.html">Python</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="../tag/stack.html">Stack</a>
+      <a href="/tag/python.html">Python</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="../tag/string.html">String</a>
+      <a href="/tag/string.html">String</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="../tag/tree.html">Tree</a>
+      <a href="/tag/tree.html">Tree</a>
     </li>
   </ul>
 </li>
@@ -610,15 +553,15 @@ Now your job is to find the total Hamming distance between all pairs of the give
       </div>
    </div>
 </footer>
-<script src="../theme/js/jquery.min.js"></script>
+<script src="/theme/js/jquery.min.js"></script>
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="../theme/js/bootstrap.min.js"></script>
+<script src="/theme/js/bootstrap.min.js"></script>
 
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="../theme/js/respond.min.js"></script>
+<script src="/theme/js/respond.min.js"></script>
 
-    <script src="../static/js/custom.js"></script>
+    <script src="/static/js/custom.js"></script>
 
 
 <!-- GitHub JS Code -->
@@ -627,7 +570,7 @@ $(document).ready(function () {
   if (!window.jXHR) {
     var jxhr = document.createElement('script');
     jxhr.type = 'text/javascript';
-    jxhr.src = '../theme/js/jXHR.js';
+    jxhr.src = '/theme/js/jXHR.js';
     var s = document.getElementsByTagName('script')[0];
     s.parentNode.insertBefore(jxhr, s);
   }
@@ -640,7 +583,7 @@ $(document).ready(function () {
   });
 });
 </script>
-<script src="../theme/js/github.js" type="text/javascript"></script>
+<script src="/theme/js/github.js" type="text/javascript"></script>
 <!-- End GitHub JS Code -->
 
 <script type="text/javascript">

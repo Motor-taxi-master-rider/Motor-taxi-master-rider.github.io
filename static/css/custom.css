@@ -5,6 +5,10 @@
     padding: 6px 13px;    
 }
 
+blockquote{
+    font-size: 15px;
+}
+
 #tipue_search_input {
     border-radius: 4px;
     margin: 10px;
@@ -13,4 +17,9 @@
 article h2 a{
     color: #18bc9c;
     font-size: 36px;
+}
+
+h4, .h4, h5, .h5, h6, .h6{
+    margin-top: 25px;
+    margin-bottom: 10.5px;
 }

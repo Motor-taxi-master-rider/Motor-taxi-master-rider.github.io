@@ -172,9 +172,9 @@ init_mathjax = function() {
 }
 init_mathjax();
 </script>
-    <link href="./assets/favicon.ico" rel="icon">
+    <link href="/assets/favicon.ico" rel="icon">
 
-<link rel="canonical" href="./pythonzhuang-shi-qi-de-zheng-que-da-kai-fang-shi-1.html">
+<link rel="canonical" href="/pythonzhuang-shi-qi-de-zheng-que-da-kai-fang-shi-1.html">
 
         <meta name="author" content="Charlie Hu" />
         <meta name="keywords" content="Decorator,Wrapt,Descriptor" />
@@ -183,7 +183,7 @@ init_mathjax();
         <meta property="og:site_name" content="Tower of Babel" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="Python装饰器的正确打开方式(1)"/>
-        <meta property="og:url" content="./pythonzhuang-shi-qi-de-zheng-que-da-kai-fang-shi-1.html"/>
+        <meta property="og:url" content="/pythonzhuang-shi-qi-de-zheng-que-da-kai-fang-shi-1.html"/>
         <meta property="og:description" content="Description 装饰器是python语言的一个非常常用及pythonic的特性，但往往由于忽视python中的内省，我们会写出一些不是特别完美的自定义装饰器。Graham Dumpleton写了一系列博客，深入剖析了如何实现行为良好的装饰器。此外他还是wrapt模块的作者,他将他对装饰器的深厚知识充分应用到这个模块之中。这个模块的作用是简化装饰器和动态函数包装起的实现，使得多层装饰也支持内省且行为正确，既可以应用到方法上，也可以作为描述符使用。 本文拾取了Graham Dumpleton在wrapt模块中附带的一系列博文的牙慧，旨在带来对python装饰器更深的理解和更好的设计。 两类装饰器及内省缺陷 装饰器符@是一种语法糖，深究原理的话使用装饰器实际上是一种猴子补丁的实现方式。以下的两种方式是等价的： @function_wrapper def function(): pass 等价于 #在python2.4版本你会这么做 def function(): pass function = function_wrapper(function) 而对于装饰器的实现，我们有以下两种方式： 1.定义类 class function_wrapper: def __init__(self, wrapped): self.wrapped = wrapped …"/>
         <meta property="article:published_time" content="2017-08-18" />
             <meta property="article:section" content="Python" />
@@ -195,21 +195,17 @@ init_mathjax();
 
 
     <!-- Bootstrap -->
-        <link rel="stylesheet" href="./theme/css/bootstrap.flatly.min.css" type="text/css"/>
-    <link href="./theme/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/theme/css/bootstrap.flatly.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="./theme/css/pygments/native.css" rel="stylesheet">
-    <link href="./theme/tipuesearch/tipuesearch.css" rel="stylesheet">
-    <link rel="stylesheet" href="./theme/css/style.css" type="text/css"/>
-        <link href="./static/css/custom.css" rel="stylesheet">
-
-        <link href="./feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Tower of Babel ATOM Feed"/>
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link href="/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+        <link href="/static/css/custom.css" rel="stylesheet">
 
 
 
-        <link href="./feeds/python.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Tower of Babel Python ATOM Feed"/>
+
 
 </head>
 <body>
@@ -223,12 +219,12 @@ init_mathjax();
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="./" class="navbar-brand">
+            <a href="/" class="navbar-brand">
 Tower of Babel            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                         <li><a href="./pages/about.html">
+                         <li><a href="/pages/about.html">
                              About
                           </a></li>
             </ul>
@@ -238,7 +234,7 @@ Tower of Babel            </a>
                   <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
                 </form></span>
               </li>
-              <li><a href="./archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+              <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -250,15 +246,15 @@ Tower of Babel            </a>
     <div class="row">
         <div class="col-sm-9">
             <ol class="breadcrumb">
-                <li><a href="." title="Tower of Babel"><i class="fa fa-home fa-lg"></i></a></li>
-                <li><a href="./category/python.html" title="Python">Python</a></li>
+                <li><a href="" title="Tower of Babel"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="/category/python.html" title="Python">Python</a></li>
                 <li class="active">Python装饰器的正确打开方式(1)</li>
             </ol>
     <section id="content">
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="./pythonzhuang-shi-qi-de-zheng-que-da-kai-fang-shi-1.html"
+                    <a href="/pythonzhuang-shi-qi-de-zheng-que-da-kai-fang-shi-1.html"
                        rel="bookmark"
                        title="Permalink to Python装饰器的正确打开方式(1)">
                         Python装饰器的正确打开方式(1)
@@ -271,7 +267,7 @@ Tower of Babel            </a>
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-08-18T00:00:00+08:00"> 周五 18 八月 2017</time>
+        <i class="fa fa-calendar"></i><time datetime="2017-08-18T00:00:00+08:00"> Fri 18 August 2017</time>
     </span>
 
 
@@ -279,11 +275,11 @@ Tower of Babel            </a>
 
 
 <span class="label label-default">Tags</span>
-	<a href="./tag/decorator.html">Decorator</a>
+	<a href="/tag/decorator.html">Decorator</a>
         /
-	<a href="./tag/wrapt.html">Wrapt</a>
+	<a href="/tag/wrapt.html">Wrapt</a>
         /
-	<a href="./tag/descriptor.html">Descriptor</a>
+	<a href="/tag/descriptor.html">Descriptor</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -400,7 +396,7 @@ Tower of Babel            </a>
 </em> 保存函数获取源码的能力（<code>inspect.getsource()</code>）
 * 叠加附加在描述符上的能力</p>
 <h3>解决方案</h3>
-<h2>描述符装饰器</h2>
+<h4>描述符装饰器</h4>
 <p>解决问题的一个办法是为普通函数和类中函数分配各自的装饰方法，这样形成的装饰器也会是一种描述符。</p>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">bound_function_wrapper</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrapped</span><span class="p">):</span>
@@ -425,7 +421,7 @@ Tower of Babel            </a>
 <p>如果装饰器附加在一个普通函数上，会使用function_wrapper的__call__方法返回的函数。而如果是附加在类方法上的话，则会调用__get__方法返回一个绑定instance的wrapper，然后它的__call__方法则会被触发。这使得该装饰器能传递描述符协议。</p>
 </blockquote>
 <p>值得一提的是，每次当这个wrapper附加在类方法上被调用的时候，一个新的辅助wrapper将会被创建。这点无疑影响了效率。我们可能需要一个更加高效的方法来实现这种装饰器了。</p>
-<h2>透明对象代理</h2>
+<h4>透明对象代理</h4>
 <p>对于以上问题的解决方案被称为对象代理。以下是一个与被它包装的对象看上去很相似的wrapper：</p>
 <div class="highlight"><pre><span></span><span class="c1">#这个对象代理的例子只代理了一些基本的方法。</span>
 <span class="k">class</span> <span class="nc">object_proxy</span><span class="p">:</span>
@@ -473,7 +469,7 @@ Tower of Babel            </a>
 <p>这时__name__和__doc__ 之类的属性将会从代理对象中获取，inspect.getargspec()和inspect.getsource()也能够顺利工作。</p>
 </blockquote>
 <p>这个方案还存在的一个明显缺陷就是：每次我们要定义一个新装饰器便要继承object_proxy代理函数并写两个类的代码。为了让我们的装饰器更好用不妨用工厂函数来帮我们完成这项重复工作。</p>
-<h2>使用装饰器工厂来创建装饰器</h2>
+<h4>使用装饰器工厂来创建装饰器</h4>
 <p>在这节我们的目的是创建一个帮助我们更好地创建装饰器的装饰器。这可能听起来有些拗口，但这种设计确实能减少我们构建一个新的装饰器时候的代码。简而言之，我们的目标是让我们可以像这样创建一个装饰器：</p>
 <div class="highlight"><pre><span></span><span class="nd">@decorator</span>
 <span class="k">def</span> <span class="nf">my_function_wrapper</span><span class="p">(</span><span class="n">wrapped</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
@@ -571,7 +567,7 @@ Tower of Babel            </a>
 
 
 <p>我们也很绝望啊,所以只能改进啦。接下来我们会设计一个统一装饰器（宇宙装饰器）来对装饰器附加在普通函数、实例方法、类方法、静态函数甚至类上的情况分发对应的策略。</p>
-<h2>讲类方法和静态方法纳入疆界</h2>
+<h4>讲类方法和静态方法纳入疆界</h4>
 <p>在解决之前，我们先明确一下问题。我们的目标是让我们的装饰器能够区分以下三种不同的方法：
 <em> 通过类的途径运行的实例方法
 </em> 被classmethod装饰的类方法
@@ -659,9 +655,9 @@ Tower of Babel            </a>
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="./pythonzhuang-shi-qi-de-zheng-que-da-kai-fang-shi-2.html">Python装饰器的正确打开方式(2)</a></li>
-        <li><a href="./python-descriptor-behavior-ii.html">Python Descriptor Behavior II</a></li>
-        <li><a href="./python-descriptor-behavior.html">Python Descriptor Behavior</a></li>
+        <li><a href="/pythonzhuang-shi-qi-de-zheng-que-da-kai-fang-shi-2.html">Python装饰器的正确打开方式(2)</a></li>
+        <li><a href="/python-descriptor-behavior-ii.html">Python Descriptor Behavior II</a></li>
+        <li><a href="/python-descriptor-behavior.html">Python Descriptor Behavior</a></li>
     </ul>
 </section>
         </article>
@@ -672,7 +668,7 @@ Tower of Babel            </a>
             <aside>
 <div id="aboutme">
         <p>
-            <img width="100%" class="img-thumbnail" src="./assets/img/avatar.png"/>
+            <img width="100%" class="img-thumbnail" src="/assets/img/avatar.png"/>
         </p>
     <p>
       <strong>About Charlie Hu</strong><br/>
@@ -686,8 +682,8 @@ Tower of Babel            </a>
 <li class="list-group-item">
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
   <ul class="list-group" id="social">
-    <li class="list-group-item"><a href="http://www.linkedin.com/in/danieldebie"><i class="fa fa-linkedin-square fa-lg"></i> linkedin</a></li>
     <li class="list-group-item"><a href="https://github.com/Motor-taxi-master-rider"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+    <li class="list-group-item"><a href="https://weibo.com/u/3025131943"><i class="fa fa-weibo fa-lg"></i> weibo</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Social -->
@@ -696,46 +692,46 @@ Tower of Babel            </a>
 <li class="list-group-item">
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
   <ul class="list-group" id="recentposts">
-    <li class="list-group-item"><a href="./build-a-circular-list-and-regex-trie.html">Build a circular list and regex trie</a></li>
-    <li class="list-group-item"><a href="./top-10-python-libraries-of-2017.html">Top 10 Python libraries of 2017</a></li>
-    <li class="list-group-item"><a href="./find-longest-word-in-dictionary-that-is-a-subsequence-of-a-given-string.html">Find longest word in dictionary that is a subsequence of a given string</a></li>
+    <li class="list-group-item"><a href="/review-guess-word-and-hangman-game.html">[Review] Guess word and hangman game</a></li>
+    <li class="list-group-item"><a href="/stackoverflow-list-generator-algorithms.html">StackOverflow list generator algorithms</a></li>
+    <li class="list-group-item"><a href="/build-a-circular-list-and-regex-trie.html">Build a circular list and regex trie</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Recent Posts -->
 
 <!-- Sidebar/Tag Cloud -->
 <li class="list-group-item">
-  <a href="./"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
   <ul class="list-group list-inline tagcloud" id="tags">
-    <li class="list-group-item tag-3">
-      <a href="./tag/algorithms.html">Algorithms</a>
+    <li class="list-group-item tag-4">
+      <a href="/tag/algorithm.html">Algorithm</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="./tag/bit_manipulation.html">Bit_manipulation</a>
+      <a href="/tag/algorithms.html">Algorithms</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="/tag/bit_manipulation.html">Bit_manipulation</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="./tag/coroutine.html">Coroutine</a>
+      <a href="/tag/coroutine.html">Coroutine</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="./tag/descriptor.html">Descriptor</a>
+      <a href="/tag/descriptor.html">Descriptor</a>
     </li>
     <li class="list-group-item tag-1">
-      <a href="./tag/leetcode.html">Leetcode</a>
+      <a href="/tag/leetcode.html">Leetcode</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="./tag/math.html">Math</a>
+      <a href="/tag/math.html">Math</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="./tag/python.html">Python</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="./tag/stack.html">Stack</a>
+      <a href="/tag/python.html">Python</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="./tag/string.html">String</a>
+      <a href="/tag/string.html">String</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="./tag/tree.html">Tree</a>
+      <a href="/tag/tree.html">Tree</a>
     </li>
   </ul>
 </li>
@@ -785,15 +781,15 @@ Tower of Babel            </a>
       </div>
    </div>
 </footer>
-<script src="./theme/js/jquery.min.js"></script>
+<script src="/theme/js/jquery.min.js"></script>
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="./theme/js/bootstrap.min.js"></script>
+<script src="/theme/js/bootstrap.min.js"></script>
 
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="./theme/js/respond.min.js"></script>
+<script src="/theme/js/respond.min.js"></script>
 
-    <script src="./static/js/custom.js"></script>
+    <script src="/static/js/custom.js"></script>
 
 
 <!-- GitHub JS Code -->
@@ -802,7 +798,7 @@ $(document).ready(function () {
   if (!window.jXHR) {
     var jxhr = document.createElement('script');
     jxhr.type = 'text/javascript';
-    jxhr.src = './theme/js/jXHR.js';
+    jxhr.src = '/theme/js/jXHR.js';
     var s = document.getElementsByTagName('script')[0];
     s.parentNode.insertBefore(jxhr, s);
   }
@@ -815,7 +811,7 @@ $(document).ready(function () {
   });
 });
 </script>
-<script src="./theme/js/github.js" type="text/javascript"></script>
+<script src="/theme/js/github.js" type="text/javascript"></script>
 <!-- End GitHub JS Code -->
 
 <script type="text/javascript">

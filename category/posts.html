@@ -172,7 +172,7 @@ init_mathjax = function() {
 }
 init_mathjax();
 </script>
-    <link href="../assets/favicon.ico" rel="icon">
+    <link href="/assets/favicon.ico" rel="icon">
 
 
     <meta name="author" content="Charlie Hu" />
@@ -182,27 +182,23 @@ init_mathjax();
         <meta property="og:site_name" content="Tower of Babel" />
         <meta property="og:type" content="website"/>
         <meta property="og:title" content="Tower of Babel"/>
-        <meta property="og:url" content=".."/>
+        <meta property="og:url" content=""/>
         <meta property="og:description" content="Tower of Babel"/>
 
 
 
     <!-- Bootstrap -->
-        <link rel="stylesheet" href="../theme/css/bootstrap.flatly.min.css" type="text/css"/>
-    <link href="../theme/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/theme/css/bootstrap.flatly.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="../theme/css/pygments/native.css" rel="stylesheet">
-    <link href="../theme/tipuesearch/tipuesearch.css" rel="stylesheet">
-    <link rel="stylesheet" href="../theme/css/style.css" type="text/css"/>
-        <link href="../static/css/custom.css" rel="stylesheet">
-
-        <link href="../feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Tower of Babel ATOM Feed"/>
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link href="/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+        <link href="/static/css/custom.css" rel="stylesheet">
 
 
 
-        <link href="../feeds/posts.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Tower of Babel posts ATOM Feed"/>
+
 
 </head>
 <body>
@@ -216,12 +212,12 @@ init_mathjax();
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="../" class="navbar-brand">
+            <a href="/" class="navbar-brand">
 Tower of Babel            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                         <li><a href="../pages/about.html">
+                         <li><a href="/pages/about.html">
                              About
                           </a></li>
             </ul>
@@ -231,7 +227,7 @@ Tower of Babel            </a>
                   <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
                 </form></span>
               </li>
-              <li><a href="../archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+              <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -243,17 +239,17 @@ Tower of Babel            </a>
     <div class="row">
         <div class="col-sm-9">
     <ol class="breadcrumb">
-        <li><a href=".." title="Tower of Babel"><i class="fa fa-home fa-lg"></i></a></li>
-        <li><a href="../" title="Tower of Babel Categories">Categories</a></li>
+        <li><a href="" title="Tower of Babel"><i class="fa fa-home fa-lg"></i></a></li>
+        <li><a href="/" title="Tower of Babel Categories">Categories</a></li>
         <li class="active">posts</li>
     </ol>
             <article>
-                <h2><a href="../build-a-circular-list-and-regex-trie.html">Build a circular list and regex trie</a></h2>
+                <h2><a href="/review-guess-word-and-hangman-game.html">[Review] Guess word and hangman game</a></h2>
                     <div class="well well-sm">
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2018-01-06T00:00:00+08:00"> 周六 06 一月 2018</time>
+        <i class="fa fa-calendar"></i><time datetime="2018-06-13T00:00:00+08:00"> Wed 13 June 2018</time>
     </span>
 
 
@@ -261,7 +257,76 @@ Tower of Babel            </a>
 
 
 <span class="label label-default">Tags</span>
-	<a href="../tag/algorithm.html">Algorithm</a>
+	<a href="/tag/game.html">Game</a>
+        /
+	<a href="/tag/coroutine.html">Coroutine</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><h3>Guess max score word</h3>
+<p>这个游戏来自<a href="http://pybit.es/codechallenge02.html">Pybites</a>。</p>
+<p>整个游戏的流程是这样的：</p>
+<p>首先随机的给出十个英文字母，如<code>O, S, J, I, O, O, R, H, X, D</code>, 之后玩家以这些字母拼出合理的英文单词。以给出字母为例，可以组成<code>DOOR</code>，但无法使用超过给出字母数量的单词来组词。之后会根据字母的稀有度给玩家所组单词来打分，如<code>E</code>、<code>A</code>等字母为一分，而<code>Y</code>,<code>Z</code>等字母则算作八九分。系统同时计算出这些字母实际能组成的最高分的单词，并计算玩家的打分比例。如果我们猜测的值为<code>DOOR</code>，则我们获得的字母分为五分，而给出的字母能组成的最高分单词为<code>SHOJI</code>(商会)分值为十五分，我们的得分比例则为33%。</p>
+<p>该游戏的源码可在此<a href="https://github.com/Motor-taxi-master-rider/challenges/blob/master/02/game.py">获得</a>。</p>
+<p>在寻找给出字母能组成的最高分单词时，我们使用了以下代码:</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_possible_dict_words</span><span class="p">(</span><span class="n">draw …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/review-guess-word-and-hangman-game.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/stackoverflow-list-generator-algorithms.html">StackOverflow list generator algorithms</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2018-03-11T00:00:00+08:00"> Sun 11 March 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/algorithm.html">Algorithm</a>
+        /
+	<a href="/tag/generator.html">Generator</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><h3>Faltten nested lists with indices</h3>
+<p>这个问题来自<a href="http://adventofcode.com/2017/day/16">StackOverflow</a>。</p>
+<p>对于一个嵌套的列表L:</p>
+<div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="p">[[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]],</span> <span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,[</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]],</span> <span class="mi">10</span><span class="p">]</span>
+</pre></div>
+
+
+<p>希望有一个函数能够yield出每个元素的嵌套位置元组：</p>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0 …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/stackoverflow-list-generator-algorithms.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/build-a-circular-list-and-regex-trie.html">Build a circular list and regex trie</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2018-01-06T00:00:00+08:00"> Sat 06 January 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/algorithm.html">Algorithm</a>
     
 </footer><!-- /.post-info -->                    </div>
                 <div class="summary"><h3>Dancing programs</h3>
@@ -281,17 +346,17 @@ Tower of Babel            </a>
             <span class="k">continue</span>
 
         <span class="k">if …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="../build-a-circular-list-and-regex-trie.html">more ...</a>
+                    <a class="btn btn-default btn-xs" href="/build-a-circular-list-and-regex-trie.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="../python-dan-li-shi-xian-de-ji-chong-fang-shi.html">Python 单例实现的几种方式</a></h2>
+                <h2><a href="/python-dan-li-shi-xian-de-ji-chong-fang-shi.html">Python 单例实现的几种方式</a></h2>
                     <div class="well well-sm">
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-06-07T00:00:00+08:00"> 周三 07 六月 2017</time>
+        <i class="fa fa-calendar"></i><time datetime="2017-06-07T00:00:00+08:00"> Wed 07 June 2017</time>
     </span>
 
 
@@ -313,17 +378,17 @@ category: </li>
 <hr>
 <h3>Description</h3>
 <p><strong>单例模式</strong>，也叫 <strong>单子模式</strong>，是一种常用的软件设计模式。在应用这个模式时，单例对象的类必须保证只有一个实例存在。许多时候整个系统只需要拥有一个的全局对象，这样有利于我们协调系统整体的行为。比如在某个服务器程序中，该服务器的配置信息存放在一个文件中，这些配置数据由一个单例对象统一读取，然后服务进程中的其他对象再通过这个单例对象获取这些配置信息。这种方式简化了在复杂环境下的配置管理。 实现单例模式的思路是：一个类能返回对象一个引用(永远是同一个)和一个获得该实例的方法（必须是静态方法，通常使用getInstance这个名称）；当我们调用这个方法时，如果类持有的引用不为空就返回这个引用 …</p>
-                    <a class="btn btn-default btn-xs" href="../python-dan-li-shi-xian-de-ji-chong-fang-shi.html">more ...</a>
+                    <a class="btn btn-default btn-xs" href="/python-dan-li-shi-xian-de-ji-chong-fang-shi.html">more ...</a>
                 </div>
             </article>
             <hr/>
             <article>
-                <h2><a href="../top-10-python-libraries-of-2016.html">Top 10 Python libraries of 2016</a></h2>
+                <h2><a href="/top-10-python-libraries-of-2016.html">Top 10 Python libraries of 2016</a></h2>
                     <div class="well well-sm">
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-05-06T00:00:00+08:00"> 周六 06 五月 2017</time>
+        <i class="fa fa-calendar"></i><time datetime="2017-05-06T00:00:00+08:00"> Sat 06 May 2017</time>
     </span>
 
 
@@ -331,11 +396,11 @@ category: </li>
 
 
 <span class="label label-default">Tags</span>
-	<a href="../tag/python.html">Python</a>
+	<a href="/tag/python.html">Python</a>
     
 </footer><!-- /.post-info -->                    </div>
                 <div class="summary"><p>We try to avoid most established choices such as Django, Flask, etc. that are kind of standard nowadays. Also, some of these libraries date prior to 2016, but either they had an explosion in popularity this year or we think they are great enough to deserve the spot. Here we …</p>
-                    <a class="btn btn-default btn-xs" href="../top-10-python-libraries-of-2016.html">more ...</a>
+                    <a class="btn btn-default btn-xs" href="/top-10-python-libraries-of-2016.html">more ...</a>
                 </div>
             </article>
             <hr/>
@@ -345,7 +410,7 @@ category: </li>
             <aside>
 <div id="aboutme">
         <p>
-            <img width="100%" class="img-thumbnail" src="../assets/img/avatar.png"/>
+            <img width="100%" class="img-thumbnail" src="/assets/img/avatar.png"/>
         </p>
     <p>
       <strong>About Charlie Hu</strong><br/>
@@ -359,8 +424,8 @@ category: </li>
 <li class="list-group-item">
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
   <ul class="list-group" id="social">
-    <li class="list-group-item"><a href="http://www.linkedin.com/in/danieldebie"><i class="fa fa-linkedin-square fa-lg"></i> linkedin</a></li>
     <li class="list-group-item"><a href="https://github.com/Motor-taxi-master-rider"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+    <li class="list-group-item"><a href="https://weibo.com/u/3025131943"><i class="fa fa-weibo fa-lg"></i> weibo</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Social -->
@@ -369,46 +434,46 @@ category: </li>
 <li class="list-group-item">
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
   <ul class="list-group" id="recentposts">
-    <li class="list-group-item"><a href="../build-a-circular-list-and-regex-trie.html">Build a circular list and regex trie</a></li>
-    <li class="list-group-item"><a href="../python-dan-li-shi-xian-de-ji-chong-fang-shi.html">Python 单例实现的几种方式</a></li>
-    <li class="list-group-item"><a href="../top-10-python-libraries-of-2016.html">Top 10 Python libraries of 2016</a></li>
+    <li class="list-group-item"><a href="/review-guess-word-and-hangman-game.html">[Review] Guess word and hangman game</a></li>
+    <li class="list-group-item"><a href="/stackoverflow-list-generator-algorithms.html">StackOverflow list generator algorithms</a></li>
+    <li class="list-group-item"><a href="/build-a-circular-list-and-regex-trie.html">Build a circular list and regex trie</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Recent Posts -->
 
 <!-- Sidebar/Tag Cloud -->
 <li class="list-group-item">
-  <a href="../"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
   <ul class="list-group list-inline tagcloud" id="tags">
-    <li class="list-group-item tag-3">
-      <a href="../tag/algorithms.html">Algorithms</a>
+    <li class="list-group-item tag-4">
+      <a href="/tag/algorithm.html">Algorithm</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="../tag/bit_manipulation.html">Bit_manipulation</a>
+      <a href="/tag/algorithms.html">Algorithms</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="/tag/bit_manipulation.html">Bit_manipulation</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="../tag/coroutine.html">Coroutine</a>
+      <a href="/tag/coroutine.html">Coroutine</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="../tag/descriptor.html">Descriptor</a>
+      <a href="/tag/descriptor.html">Descriptor</a>
     </li>
     <li class="list-group-item tag-1">
-      <a href="../tag/leetcode.html">Leetcode</a>
+      <a href="/tag/leetcode.html">Leetcode</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="../tag/math.html">Math</a>
+      <a href="/tag/math.html">Math</a>
     </li>
     <li class="list-group-item tag-3">
-      <a href="../tag/python.html">Python</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="../tag/stack.html">Stack</a>
+      <a href="/tag/python.html">Python</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="../tag/string.html">String</a>
+      <a href="/tag/string.html">String</a>
     </li>
     <li class="list-group-item tag-2">
-      <a href="../tag/tree.html">Tree</a>
+      <a href="/tag/tree.html">Tree</a>
     </li>
   </ul>
 </li>
@@ -458,15 +523,15 @@ category: </li>
       </div>
    </div>
 </footer>
-<script src="../theme/js/jquery.min.js"></script>
+<script src="/theme/js/jquery.min.js"></script>
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="../theme/js/bootstrap.min.js"></script>
+<script src="/theme/js/bootstrap.min.js"></script>
 
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="../theme/js/respond.min.js"></script>
+<script src="/theme/js/respond.min.js"></script>
 
-    <script src="../static/js/custom.js"></script>
+    <script src="/static/js/custom.js"></script>
 
 
 <!-- GitHub JS Code -->
@@ -475,7 +540,7 @@ $(document).ready(function () {
   if (!window.jXHR) {
     var jxhr = document.createElement('script');
     jxhr.type = 'text/javascript';
-    jxhr.src = '../theme/js/jXHR.js';
+    jxhr.src = '/theme/js/jXHR.js';
     var s = document.getElementsByTagName('script')[0];
     s.parentNode.insertBefore(jxhr, s);
   }
@@ -488,7 +553,7 @@ $(document).ready(function () {
   });
 });
 </script>
-<script src="../theme/js/github.js" type="text/javascript"></script>
+<script src="/theme/js/github.js" type="text/javascript"></script>
 <!-- End GitHub JS Code -->
 
 <script type="text/javascript">
