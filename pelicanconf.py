@@ -23,8 +23,7 @@ LINKS = (('Pelican', 'http://getpelican.com/'),
          ('Jinja2', 'http://jinja.pocoo.org/'))
 
 # Social widget
-SOCIAL = (('linkedin', 'http://www.linkedin.com/in/charliehu'),
-          ('github', 'https://github.com/Motor-taxi-master-rider'),
+SOCIAL = (('github', 'https://github.com/Motor-taxi-master-rider'),
           ('weibo', 'https://weibo.com/u/3025131943'))
 
 DEFAULT_PAGINATION = 5
