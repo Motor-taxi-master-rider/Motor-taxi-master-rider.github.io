@@ -283,14 +283,14 @@ Tower of Babel            </a>
                 <h3>Description</h3>
 <p>A sequence of number is called arithmetic if it consists of at least three elements and if the difference between any two consecutive elements is the same.</p>
 <p>For example, these are arithmetic sequence:</p>
-<div class="highlight"><pre><span></span>1, 3, 5, 7, 9
-7, 7, 7, 7
-3, -1, -5, -9
+<div class="highlight"><pre><span></span><span class="err">1, 3, 5, 7, 9</span>
+<span class="err">7, 7, 7, 7</span>
+<span class="err">3, -1, -5, -9</span>
 </pre></div>
 
 
 <p>The following sequence is not arithmetic.</p>
-<div class="highlight"><pre><span></span>1, 1, 2, 5, 7
+<div class="highlight"><pre><span></span><span class="err">1, 1, 2, 5, 7</span>
 </pre></div>
 
 
@@ -299,9 +299,9 @@ Tower of Babel            </a>
 A[P], A[p + 1], ..., A[Q - 1], A[Q] is arithmetic. In particular, this means that P + 1 &lt; Q.</p>
 <p>The function should return the number of arithmetic slices in the array A.</p>
 <p><strong>Example:</strong></p>
-<div class="highlight"><pre><span></span>A = [1, 2, 3, 4]
+<div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
 
-return: 3, for 3 arithmetic slices in A: [1, 2, 3], [2, 3, 4] and [1, 2, 3, 4] itself.
+<span class="k">return</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="k">for</span> <span class="mi">3</span> <span class="n">arithmetic</span> <span class="n">slices</span> <span class="k">in</span> <span class="n">A</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span> <span class="k">and</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span> <span class="n">itself</span><span class="p">.</span>
 </pre></div>
 
 
@@ -317,7 +317,7 @@ return: 3, for 3 arithmetic slices in A: [1, 2, 3], [2, 3, 4] and [1, 2, 3, 4] i
 <span class="sd">        :rtype: int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">opt</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">1</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)):</span>
             <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">A</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">A</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">A</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]:</span>
                 <span class="n">opt</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">opt</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span>
                 <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -364,11 +364,11 @@ return: 3, for 3 arithmetic slices in A: [1, 2, 3], [2, 3, 4] and [1, 2, 3, 4] i
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/leetcode-maximum-length-of-pair-chain.html">LeetCode - Maximum Length of Pair Chain</a></li>
-        <li><a href="/leetcode-distribute-candies.html">LeetCode - Distribute Candies</a></li>
         <li><a href="/leetcode-integer-break.html">LeetCode - Integer Break</a></li>
-        <li><a href="/leetcode-move-zeroes.html">LeetCode - Move Zeroes</a></li>
-        <li><a href="/leetcode-convert-bst-to-greater-tree.html">LeetCode - Convert BST to Greater Tree</a></li>
+        <li><a href="/leetcode-island-perimeter.html">LeetCode - Island Perimeter</a></li>
+        <li><a href="/leetcode-beautiful-arrangement.html">LeetCode - Beautiful Arrangement</a></li>
+        <li><a href="/leetcode-find-bottom-left-tree-value.html">LeetCode - Find Bottom Left Tree Value</a></li>
+        <li><a href="/leetcode-queue-reconstruction-by-height.html">LeetCode - Queue Reconstruction by Height</a></li>
     </ul>
 </section>
         </article>
@@ -484,7 +484,7 @@ return: 3, for 3 arithmetic slices in A: [1, 2, 3], [2, 3, 4] and [1, 2, 3, 4] i
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2020 Charlie Hu
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

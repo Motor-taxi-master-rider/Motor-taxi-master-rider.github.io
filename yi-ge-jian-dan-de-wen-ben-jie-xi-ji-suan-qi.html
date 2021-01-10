@@ -329,7 +329,7 @@ Tower of Babel            </a>
     <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
         <span class="n">re_result</span> <span class="o">=</span> <span class="n">parameter_re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">re_result</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">SyntaxError</span><span class="p">(</span><span class="s1">&#39;Invalid parameter syntax：{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">SyntaxError</span><span class="p">(</span><span class="s1">&#39;Invalid parameter syntax：</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
         <span class="n">parameters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Parameter</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="n">Parameter</span><span class="o">.</span><span class="n">POSITIONAL_OR_KEYWORD</span><span class="p">,</span> <span class="o">**</span><span class="n">re_result</span><span class="o">.</span><span class="n">groupdict</span><span class="p">()))</span>  <span class="c1">#支持参数默认值和注释</span>
     <span class="k">return</span> <span class="n">Signature</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
 
@@ -385,7 +385,7 @@ Tower of Babel            </a>
     <span class="c1"># 储存字符类型和值的元组</span>
     <span class="n">Token</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Token&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">])</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">token</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">TOKENS</span> <span class="o">=</span> <span class="n">token</span>
         <span class="c1"># 预编译正则表达式</span>
@@ -426,7 +426,7 @@ Tower of Babel            </a>
       <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span>  <span class="n">e</span><span class="p">:</span>
           <span class="k">raise</span> <span class="n">e</span>
       <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Token</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">lastgroup</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">())</span>
-              <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="n">scan</span><span class="o">.</span><span class="n">match</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+              <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="n">scan</span><span class="o">.</span><span class="n">match</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
               <span class="k">if</span> <span class="n">m</span><span class="o">.</span><span class="n">lastgroup</span> <span class="o">!=</span> <span class="s1">&#39;WS&#39;</span><span class="p">)</span>
 </pre></div>
 
@@ -437,7 +437,7 @@ Tower of Babel            </a>
 <div class="highlight"><pre><span></span><span class="n">cal</span> <span class="o">=</span> <span class="n">Calculator</span><span class="p">()</span>
    <span class="n">cal</span><span class="o">.</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;1+2*4-5^2&#39;</span>
    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">cal</span><span class="o">.</span><span class="n">_tokenize</span><span class="p">(</span><span class="n">cal</span><span class="o">.</span><span class="n">text</span><span class="p">):</span>
-       <span class="k">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+       <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
 
 <span class="o">&gt;&gt;&gt;</span><span class="n">Token</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;NUM&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
 <span class="n">Token</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;PLUS&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">)</span>
@@ -454,14 +454,14 @@ Tower of Babel            </a>
 <h4>Parse</h4>
 <div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toks</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;将tokenize后的元素parse成树结构&quot;&quot;&quot;</span>
-        <span class="n">lookahead</span><span class="p">,</span> <span class="n">current</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">toks</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span> <span class="bp">None</span>
+        <span class="n">lookahead</span><span class="p">,</span> <span class="n">current</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">toks</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="kc">None</span>
 
         <span class="k">def</span> <span class="nf">accept</span><span class="p">(</span><span class="o">*</span><span class="n">toktypes</span><span class="p">):</span>
             <span class="sd">&quot;&quot;&quot;判断生成器toks的下个元素是否为传入类型&quot;&quot;&quot;</span>
-            <span class="n">nonlocal</span> <span class="n">lookahead</span><span class="p">,</span> <span class="n">current</span>
+            <span class="k">nonlocal</span> <span class="n">lookahead</span><span class="p">,</span> <span class="n">current</span>
             <span class="k">if</span> <span class="n">lookahead</span> <span class="ow">and</span> <span class="n">lookahead</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="n">toktypes</span><span class="p">:</span>
-                <span class="n">current</span><span class="p">,</span> <span class="n">lookahead</span> <span class="o">=</span> <span class="n">lookahead</span><span class="p">,</span> <span class="nb">next</span><span class="p">(</span><span class="n">toks</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-                <span class="k">return</span> <span class="bp">True</span>
+                <span class="n">current</span><span class="p">,</span> <span class="n">lookahead</span> <span class="o">=</span> <span class="n">lookahead</span><span class="p">,</span> <span class="nb">next</span><span class="p">(</span><span class="n">toks</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">True</span>
 
         <span class="c1"># 表达式结构：</span>
         <span class="c1"># expr ::= term { +|- term }*</span>
@@ -504,7 +504,7 @@ Tower of Babel            </a>
 <p>对于<code>1+2*4-5^2</code>我们可以这样生成树：</p>
 <div class="highlight"><pre><span></span><span class="n">cal</span> <span class="o">=</span> <span class="n">Calculator</span><span class="p">()</span>
 <span class="n">cal</span><span class="o">.</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;1+2*4-5^2&#39;</span>
-<span class="k">print</span><span class="p">(</span><span class="n">cal</span><span class="o">.</span><span class="n">_parse</span><span class="p">(</span><span class="n">cal</span><span class="o">.</span><span class="n">_tokenize</span><span class="p">(</span><span class="n">cal</span><span class="o">.</span><span class="n">text</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cal</span><span class="o">.</span><span class="n">_parse</span><span class="p">(</span><span class="n">cal</span><span class="o">.</span><span class="n">_tokenize</span><span class="p">(</span><span class="n">cal</span><span class="o">.</span><span class="n">text</span><span class="p">)))</span>
 </pre></div>
 
 
@@ -515,7 +515,7 @@ Tower of Babel            </a>
     <span class="k">def</span> <span class="nf">visit</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
         <span class="k">raise</span> <span class="bp">NotImplemented</span>
 
-    <span class="nd">@visit.register</span><span class="p">(</span><span class="n">BinOp</span><span class="p">)</span>
+    <span class="nd">@visit</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">BinOp</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">_</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        协程。</span>
@@ -532,11 +532,11 @@ Tower of Babel            </a>
             <span class="s1">&#39;^&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="n">y</span><span class="p">,</span>
         <span class="p">}</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">switch</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">op</span><span class="p">,</span> <span class="bp">None</span><span class="p">)(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>  <span class="c1"># 产生StopIteration并返回结果</span>
+            <span class="k">return</span> <span class="n">switch</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">op</span><span class="p">,</span> <span class="kc">None</span><span class="p">)(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>  <span class="c1"># 产生StopIteration并返回结果</span>
         <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="k">pass</span>
 
-    <span class="nd">@visit.register</span><span class="p">(</span><span class="n">Number</span><span class="p">)</span>
+    <span class="nd">@visit</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Number</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">_</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;visit method for number&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">node</span><span class="o">.</span><span class="n">value</span>
@@ -550,12 +550,12 @@ Tower of Babel            </a>
         <span class="k">return</span> <span class="p">(</span><span class="k">yield from</span> <span class="n">result</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">types</span><span class="o">.</span><span class="n">GeneratorType</span><span class="p">)</span> <span class="k">else</span> <span class="n">result</span>
 
     <span class="n">stack</span> <span class="o">=</span> <span class="p">[</span><span class="n">gen_visit</span><span class="p">(</span><span class="n">node</span><span class="p">)]</span>  <span class="c1"># 将根节点的协程放入栈</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">while</span> <span class="n">stack</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">node</span> <span class="o">=</span> <span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># send(None)预激协程，send（result）将计算好的值存入协程</span>
             <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gen_visit</span><span class="p">(</span><span class="n">node</span><span class="p">))</span>  <span class="c1"># 深度遍历添加协程，等待处理</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">except</span> <span class="ne">StopIteration</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
             <span class="n">result</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">value</span>  <span class="c1"># 取得number的值或表达式计算值</span>
@@ -565,18 +565,18 @@ Tower of Babel            </a>
 
 <p><code>Evalute</code>函数遍历<code>parse</code>所生成的树并计算结果。在这里我们用3.4新加入的<code>singledispatch</code>来替代原先Dabeaz使用的方式：</p>
 <div class="highlight"><pre><span></span><span class="n">methname</span> <span class="o">=</span> <span class="s1">&#39;visit_&#39;</span> <span class="o">+</span> <span class="nb">type</span><span class="p">(</span><span class="n">node</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
-<span class="n">meth</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">methname</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+<span class="n">meth</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">methname</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 </pre></div>
 
 
 <p>比较容易让人炸脑的是用list来管理栈的过程。以<code>1+2*4-5</code>这个表达式举例，传入<code>evaluate</code>方法的生成树是这样的。</p>
-<div class="highlight"><pre><span></span>第一层:
-              BinOp             &quot;-&quot;            Number
-第二层：
-      Number   &quot;+&quot;      BinOp                    5
-第三层：
-        1        Number  &quot;*&quot;  Number
-第四层：            2             4
+<div class="highlight"><pre><span></span><span class="err">第一层:</span>
+<span class="err">              BinOp             &quot;-&quot;            Number</span>
+<span class="err">第二层：</span>
+<span class="err">      Number   &quot;+&quot;      BinOp                    5</span>
+<span class="err">第三层：</span>
+<span class="err">        1        Number  &quot;*&quot;  Number</span>
+<span class="err">第四层：            2             4</span>
 </pre></div>
 
 
@@ -602,11 +602,11 @@ Tower of Babel            </a>
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/leetcode-invert-binary-tree.html">LeetCode - Invert binary tree</a></li>
-        <li><a href="/leetcode-merge-two-binary-trees.html">LeetCode - Merge Two Binary Trees</a></li>
+        <li><a href="/leetcode-add-one-row-to-tree.html">LeetCode - Add One Row to Tree</a></li>
+        <li><a href="/leetcode-construct-string-from-binary-tree.html">LeetCode - Construct String from Binary Tree</a></li>
         <li><a href="/leetcode-find-bottom-left-tree-value.html">LeetCode - Find Bottom Left Tree Value</a></li>
-        <li><a href="/pythonicde-fan-han-shu.html">Pythonic的泛函数</a></li>
-        <li><a href="/flunet-python-167-coroutine-understading.html">Flunet Python 16.7 coroutine understading</a></li>
+        <li><a href="/python-yield-tutorial-markdown.html">Python yield tutorial markdown</a></li>
+        <li><a href="/replace-asyncio-with-native-coroutine.html">Replace asyncio with native coroutine</a></li>
     </ul>
 </section>
         </article>
@@ -722,7 +722,7 @@ Tower of Babel            </a>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2020 Charlie Hu
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

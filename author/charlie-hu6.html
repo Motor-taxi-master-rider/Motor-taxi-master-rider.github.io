@@ -368,10 +368,10 @@ the caller …</p>
 <span class="k">def</span> <span class="nf">averager</span><span class="p">():</span>  <span class="c1"># &lt;1&gt;</span>
     <span class="n">total</span> <span class="o">=</span> <span class="mf">0.0</span>
     <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">average</span> <span class="o">=</span> <span class="bp">None</span>
-    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">average</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">term</span> <span class="o">=</span> <span class="k">yield</span>  <span class="c1"># &lt;2&gt;</span>
-        <span class="k">if</span> <span class="n">term</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>  <span class="c1"># &lt;3&gt;</span>
+        <span class="k">if</span> <span class="n">term</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># &lt;3&gt;</span>
             <span class="k">break</span>
         <span class="n">total</span> <span class="o">+=</span> <span class="n">term</span>
         <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -419,11 +419,11 @@ the caller …</p>
 <span class="sd">        遍历该节点开始的链表</span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">traversal</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        用于之后的if Linklist判断</span>
 <span class="sd">        :return:</span>
@@ -578,7 +578,7 @@ the caller …</p>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2020 Charlie Hu
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

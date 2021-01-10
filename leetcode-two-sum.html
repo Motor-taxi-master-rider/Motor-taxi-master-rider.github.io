@@ -287,10 +287,10 @@ Tower of Babel            </a>
 <p>Given an array of integers, return <strong>indices</strong> of the two numbers such that they add up to a specific target.
 You may assume that each input would have <strong>exactly</strong> one solution, and you may not use the same element twice.</p>
 <p>Example:</p>
-<div class="highlight"><pre><span></span>Given nums = [2, 7, 11, 15], target = 9,
+<div class="highlight"><pre><span></span><span class="n">Given</span> <span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span> <span class="n">target</span> <span class="o">=</span> <span class="mi">9</span><span class="p">,</span>
 
-Because nums[0] + nums[1] = 2 + 7 = 9,
-return [0, 1].
+<span class="n">Because</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">7</span> <span class="o">=</span> <span class="mi">9</span><span class="p">,</span>
+<span class="k">return</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">].</span>
 </pre></div>
 
 
@@ -308,7 +308,7 @@ return [0, 1].
 <span class="sd">        :rtype: List[int]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">False</span>
+            <span class="k">return</span> <span class="kc">False</span>
         <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
             <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="nb">dict</span><span class="p">:</span>
@@ -354,8 +354,8 @@ return [0, 1].
         <li><a href="/leetcode-distribute-candies.html">LeetCode - Distribute Candies</a></li>
         <li><a href="/leetcode-hamming-distance.html">LeetCode - Hamming Distance</a></li>
         <li><a href="/leetcode-array-partition-i.html">LeetCode - Array Partition I</a></li>
-        <li><a href="/leetcode-maximum-length-of-pair-chain.html">LeetCode - Maximum Length of Pair Chain</a></li>
         <li><a href="/leetcode-integer-break.html">LeetCode - Integer Break</a></li>
+        <li><a href="/leetcode-most-frequent-subtree-sum.html">LeetCode - Most Frequent Subtree Sum</a></li>
     </ul>
 </section>
         </article>
@@ -471,7 +471,7 @@ return [0, 1].
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2020 Charlie Hu
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

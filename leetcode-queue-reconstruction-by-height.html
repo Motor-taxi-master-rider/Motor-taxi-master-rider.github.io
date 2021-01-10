@@ -286,11 +286,11 @@ Tower of Babel            </a>
                 <h3>Description</h3>
 <p>Suppose you have a random list of people standing in a queue. Each person is described by a pair of integers <code>(h, k)</code>, where <code>h</code> is the height of the person and <code>k</code> is the number of people in front of this person who have a height greater than or equal to <code>h</code>. Write an algorithm to reconstruct the queue.</p>
 <p><strong>Example:</strong></p>
-<div class="highlight"><pre><span></span>Input:
-[[7,0], [4,4], [7,1], [5,0], [6,1], [5,2]]
+<div class="highlight"><pre><span></span><span class="k">Input</span><span class="p">:</span>
+<span class="p">[[</span><span class="mi">7</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">]]</span>
 
-Output:
-[[5,0], [7,0], [5,2], [6,1], [4,4], [7,1]]
+<span class="k">Output</span><span class="p">:</span>
+<span class="p">[[</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
 </pre></div>
 
 
@@ -318,7 +318,7 @@ Output:
         <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">people</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])):</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
-                <span class="k">return</span> <span class="bp">False</span>
+                <span class="k">return</span> <span class="kc">False</span>
             <span class="n">stack</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">item</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">stack</span>
 </pre></div>
@@ -331,11 +331,11 @@ Output:
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/leetcode-next-greater-element-i.html">LeetCode - Next Greater Element I</a></li>
         <li><a href="/leetcode-next-greater-element-ii.html">LeetCode - Next Greater Element II</a></li>
+        <li><a href="/leetcode-next-greater-element-i.html">LeetCode - Next Greater Element I</a></li>
         <li><a href="/leetcode-island-perimeter.html">LeetCode - Island Perimeter</a></li>
-        <li><a href="/leetcode-maximum-length-of-pair-chain.html">LeetCode - Maximum Length of Pair Chain</a></li>
-        <li><a href="/leetcode-distribute-candies.html">LeetCode - Distribute Candies</a></li>
+        <li><a href="/leetcode-integer-break.html">LeetCode - Integer Break</a></li>
+        <li><a href="/top-10-python-libraries-of-2017.html">Top 10 Python libraries of 2017</a></li>
     </ul>
 </section>
         </article>
@@ -451,7 +451,7 @@ Output:
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2020 Charlie Hu
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

@@ -347,9 +347,9 @@ The null node needs to be represented by empty parenthesis pair "()". And you ne
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">t</span><span class="p">:</span>
             <span class="k">return</span> <span class="s2">&quot;&quot;</span>
-        <span class="n">leftstring</span><span class="o">=</span><span class="s2">&quot;({})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tree2str</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">left</span><span class="p">))</span> <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">left</span>  <span class="ow">or</span> <span class="p">(</span><span class="ow">not</span> <span class="n">t</span><span class="o">.</span><span class="n">left</span> <span class="ow">and</span> <span class="n">t</span><span class="o">.</span><span class="n">right</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
-        <span class="n">rightstring</span><span class="o">=</span><span class="s2">&quot;({})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tree2str</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">right</span><span class="p">))</span> <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">right</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
-        <span class="k">return</span> <span class="s2">&quot;{}{}{}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">val</span><span class="p">,</span><span class="n">leftstring</span><span class="p">,</span><span class="n">rightstring</span><span class="p">)</span>
+        <span class="n">leftstring</span><span class="o">=</span><span class="s2">&quot;(</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tree2str</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">left</span><span class="p">))</span> <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">left</span>  <span class="ow">or</span> <span class="p">(</span><span class="ow">not</span> <span class="n">t</span><span class="o">.</span><span class="n">left</span> <span class="ow">and</span> <span class="n">t</span><span class="o">.</span><span class="n">right</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">rightstring</span><span class="o">=</span><span class="s2">&quot;(</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tree2str</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">right</span><span class="p">))</span> <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">right</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{}{}{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">val</span><span class="p">,</span><span class="n">leftstring</span><span class="p">,</span><span class="n">rightstring</span><span class="p">)</span>
 </pre></div>
 
 
@@ -360,11 +360,11 @@ The null node needs to be represented by empty parenthesis pair "()". And you ne
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/leetcode-add-one-row-to-tree.html">LeetCode - Add One Row to Tree</a></li>
-        <li><a href="/leetcode-longest-uncommon-subsequence-i.html">LeetCode - Longest Uncommon Subsequence I</a></li>
-        <li><a href="/leetcode-optimal-division.html">LeetCode - Optimal Division</a></li>
         <li><a href="/leetcode-find-bottom-left-tree-value.html">LeetCode - Find Bottom Left Tree Value</a></li>
-        <li><a href="/leetcode-merge-two-binary-trees.html">LeetCode - Merge Two Binary Trees</a></li>
+        <li><a href="/leetcode-add-one-row-to-tree.html">LeetCode - Add One Row to Tree</a></li>
+        <li><a href="/leetcode-find-largest-value-in-each-tree-row.html">LeetCode - Find Largest Value in Each Tree Row</a></li>
+        <li><a href="/leetcode-optimal-division.html">LeetCode - Optimal Division</a></li>
+        <li><a href="/leetcode-sort-characters-by-frequency.html">LeetCode - Sort Characters by Frequency</a></li>
     </ul>
 </section>
         </article>
@@ -480,7 +480,7 @@ The null node needs to be represented by empty parenthesis pair "()". And you ne
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2020 Charlie Hu
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

@@ -289,16 +289,16 @@ You need to return a string representing their multiplication. Note </p>
 <div class="math">$$i^2 = -1$$</div>
 <p> according to the definition.</p>
 <p><strong>Example 1:</strong></p>
-<div class="highlight"><pre><span></span>Input: &quot;1+1i&quot;, &quot;1+1i&quot;
-Output: &quot;0+2i&quot;
-Explanation: (1 + i) * (1 + i) = 1 + i2 + 2 * i = 2i, and you need convert it to the form of 0+2i.
+<div class="highlight"><pre><span></span><span class="c">Input: &quot;1+1i&quot;, &quot;1+1i&quot;</span>
+<span class="c">Output: &quot;0+2i&quot;</span>
+<span class="c">Explanation: (1 + i) * (1 + i) = 1 + i2 + 2 * i = 2i, and you need convert it to the form of 0+2i.</span>
 </pre></div>
 
 
 <p><strong>Example 2:</strong></p>
-<div class="highlight"><pre><span></span>Input: &quot;1+-1i&quot;, &quot;1+-1i&quot;
-Output: &quot;0+-2i&quot;
-Explanation: (1 - i) * (1 - i) = 1 + i2 - 2 * i = -2i, and you need convert it to the form of 0+-2i.
+<div class="highlight"><pre><span></span><span class="c">Input: &quot;1+-1i&quot;, &quot;1+-1i&quot;</span>
+<span class="c">Output: &quot;0+-2i&quot;</span>
+<span class="c">Explanation: (1 - i) * (1 - i) = 1 + i2 - 2 * i = -2i, and you need convert it to the form of 0+-2i.</span>
 </pre></div>
 
 
@@ -341,7 +341,7 @@ Explanation: (1 - i) * (1 - i) = 1 + i2 - 2 * i = -2i, and you need convert it t
         <span class="n">la</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">pattern</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">.</span><span class="n">groups</span><span class="p">()]</span>
         <span class="n">lb</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">pattern</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">groups</span><span class="p">()]</span>
         <span class="n">lc</span> <span class="o">=</span> <span class="p">[</span><span class="n">la</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">lb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">la</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">lb</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">la</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">lb</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">la</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">lb</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
-        <span class="k">return</span> <span class="s1">&#39;{}+{}i&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">lc</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">+</span><span class="si">{}</span><span class="s1">i&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">lc</span><span class="p">)</span>
 </pre></div>
 
 
@@ -408,10 +408,10 @@ Explanation: (1 - i) * (1 - i) = 1 + i2 - 2 * i = -2i, and you need convert it t
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="/leetcode-keyboard-row.html">LeetCode - Keyboard Row</a></li>
-        <li><a href="/leetcode-maximum-length-of-pair-chain.html">LeetCode - Maximum Length of Pair Chain</a></li>
-        <li><a href="/leetcode-distribute-candies.html">LeetCode - Distribute Candies</a></li>
         <li><a href="/leetcode-integer-break.html">LeetCode - Integer Break</a></li>
-        <li><a href="/leetcode-move-zeroes.html">LeetCode - Move Zeroes</a></li>
+        <li><a href="/leetcode-island-perimeter.html">LeetCode - Island Perimeter</a></li>
+        <li><a href="/leetcode-beautiful-arrangement.html">LeetCode - Beautiful Arrangement</a></li>
+        <li><a href="/leetcode-find-bottom-left-tree-value.html">LeetCode - Find Bottom Left Tree Value</a></li>
     </ul>
 </section>
         </article>
@@ -527,7 +527,7 @@ Explanation: (1 - i) * (1 - i) = 1 + i2 - 2 * i = -2i, and you need convert it t
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2020 Charlie Hu
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

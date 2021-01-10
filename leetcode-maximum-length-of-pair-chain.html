@@ -285,9 +285,9 @@ Tower of Babel            </a>
 <p>Now, we define a pair <code>(c, d)</code> can follow another pair <code>(a, b)</code> if and only if <code>b &lt; c</code>. Chain of pairs can be formed in this fashion.</p>
 <p>Given a set of pairs, find the length longest chain which can be formed. You needn't use up all the given pairs. You can select pairs in any order.</p>
 <p><strong>Example 1:</strong></p>
-<div class="highlight"><pre><span></span>Input: [[1,2], [2,3], [3,4]]
-Output: 2
-Explanation: The longest chain is [1,2] -&gt; [3,4]
+<div class="highlight"><pre><span></span><span class="c">Input: [[1,2], [2,3], [3,4]]</span>
+<span class="c">Output: 2</span>
+<span class="c">Explanation: The longest chain is [1,2] -&gt; [3,4]</span>
 </pre></div>
 
 
@@ -308,9 +308,9 @@ Explanation: The longest chain is [1,2] -&gt; [3,4]
 <span class="sd">        :type pairs: List[List[int]]</span>
 <span class="sd">        :rtype: int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">last</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="n">last</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">pairs</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">)):</span>
-            <span class="k">if</span> <span class="n">last</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">last</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">last</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">item</span><span class="p">,</span> <span class="mi">1</span>
             <span class="k">elif</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">last</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
                 <span class="n">last</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">item</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span>
@@ -327,9 +327,9 @@ Explanation: The longest chain is [1,2] -&gt; [3,4]
     <ul>
         <li><a href="/leetcode-integer-break.html">LeetCode - Integer Break</a></li>
         <li><a href="/leetcode-construct-the-rectangle.html">LeetCode - Construct the Rectangle</a></li>
-        <li><a href="/leetcode-distribute-candies.html">LeetCode - Distribute Candies</a></li>
-        <li><a href="/leetcode-move-zeroes.html">LeetCode - Move Zeroes</a></li>
-        <li><a href="/leetcode-convert-bst-to-greater-tree.html">LeetCode - Convert BST to Greater Tree</a></li>
+        <li><a href="/leetcode-minimum-moves-to-equal-array-elements-ii.html">LeetCode - Minimum Moves to Equal Array Elements II</a></li>
+        <li><a href="/leetcode-island-perimeter.html">LeetCode - Island Perimeter</a></li>
+        <li><a href="/leetcode-beautiful-arrangement.html">LeetCode - Beautiful Arrangement</a></li>
     </ul>
 </section>
         </article>
@@ -445,7 +445,7 @@ Explanation: The longest chain is [1,2] -&gt; [3,4]
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2020 Charlie Hu
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

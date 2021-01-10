@@ -306,29 +306,29 @@ Tower of Babel            </a>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">break</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">True</span>
-    <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span>
 
 
 <span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="nb">len</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="nb">len</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">compare</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">w</span>
 
 
-<span class="k">print</span><span class="p">(</span><span class="n">solution</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">solution</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
 </pre></div>
 
 
 <h4>Improving the greedy approach</h4>
 <p>我们也可以对<code>S</code>做一些预处理操作，记录其中字母的出现：</p>
-<div class="highlight"><pre><span></span>S = &quot;abppplee&quot;
+<div class="highlight"><pre><span></span><span class="n">S</span> <span class="o">=</span> <span class="ss">&quot;abppplee&quot;</span>
 
-a -&gt; [0]
-b -&gt; [1]
-p -&gt; [2, 3, 4]
-l -&gt; [5]
-e -&gt; [6, 7]
+<span class="n">a</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">p</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">l</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">e</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
 </pre></div>
 
 
@@ -354,7 +354,7 @@ e -&gt; [6, 7]
     <span class="c1"># “small”.  If letters are randomly present in the</span>
     <span class="c1"># search string, the log2 is about equal in speed to simple traversal</span>
     <span class="c1"># up to lengths of a few hundred characters.              </span>
-    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">word</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">letter</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">letter_positions</span><span class="p">:</span>
@@ -370,18 +370,18 @@ e -&gt; [6, 7]
             <span class="c1"># We didn&#39;t break out of the loop, so all letters have valid positions  </span>
             <span class="k">return</span> <span class="n">word</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="k">print</span> <span class="n">subdict</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
+    <span class="nb">print</span> <span class="n">subdict</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
 </pre></div>
 
 
 <h4>An optimal O(N + L) approach for any alphabet</h4>
 <p>首先是一个基于上述算法的，适用于<code>S</code>的长度不长的情况的优化方案。我们将<code>p -&gt; [2, 3, 4]</code>拓展成<code>p -&gt; [2, 2, 3, 4, -1, -1, -1, -1]</code>，其中列表的每个元素对应<code>S</code>中该位置后出现该列表key的字母的序号（包括该位置的序号）。如果不存在就以<code>-1</code>表示。这样我们就不用二分法来查找列表，但随之带来的问题是：算法的实际复杂度变为O(N*A + L)，<code>A</code>为<code>S</code>的字母集合的长度，并且消耗O（NA）的空间。因此当<code>S</code>过长时并非一个很好的优化。</p>
 <p>除此之外，我们还可以通过同时遍历所有<code>D</code>中的单词来压榨我们的时间复杂度。字典中的每个单词放入(w,i)元组。其中w为单词本身，i记录了序号为i的字母已经达成匹配。这样我们就可以形成类似这样的数据结构：</p>
-<div class="highlight"><pre><span></span>D = {&quot;able&quot;, &quot;ale&quot;, &quot;apple&quot;, &quot;bale&quot;, &quot;kangaroo&quot;}
+<div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="err">{</span><span class="ss">&quot;able&quot;</span><span class="p">,</span> <span class="ss">&quot;ale&quot;</span><span class="p">,</span> <span class="ss">&quot;apple&quot;</span><span class="p">,</span> <span class="ss">&quot;bale&quot;</span><span class="p">,</span> <span class="ss">&quot;kangaroo&quot;</span><span class="err">}</span>
 
-a -&gt; [(&quot;able&quot;, 0), (&quot;ale&quot;, 0), (&quot;apple&quot;, 0)]
-b -&gt; [(&quot;bale&quot;, 0)]
-k -&gt; [(&quot;kangaroo&quot;, 0)]
+<span class="n">a</span> <span class="o">-&gt;</span> <span class="p">[(</span><span class="ss">&quot;able&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="ss">&quot;ale&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="ss">&quot;apple&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>
+<span class="n">b</span> <span class="o">-&gt;</span> <span class="p">[(</span><span class="ss">&quot;bale&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>
+<span class="n">k</span> <span class="o">-&gt;</span> <span class="p">[(</span><span class="ss">&quot;kangaroo&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>
 </pre></div>
 
 
@@ -411,7 +411,7 @@ k -&gt; [(&quot;kangaroo&quot;, 0)]
     <span class="k">return</span> <span class="n">result</span>
 
 
-<span class="k">print</span><span class="p">(</span><span class="n">solution</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">solution</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
 </pre></div>
 
 
@@ -538,7 +538,7 @@ k -&gt; [(&quot;kangaroo&quot;, 0)]
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2020 Charlie Hu
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

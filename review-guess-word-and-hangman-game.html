@@ -306,12 +306,12 @@ Tower of Babel            </a>
 <h3>Hangman</h3>
 <p>这里还有另一个有意思的<a href="https://zh.wikipedia.org/wiki/%E7%8C%9C%E5%96%AE%E8%A9%9E%E9%81%8A%E6%88%B2">Hangman</a>小游戏。</p>
 <p>Hangman是一系列猜词游戏的简称。在我们的Hangman中，我们需要猜的是电源的英文名称。每次失败将都会在Hangman添加一笔，最终形成一副完整的Hangman图，游戏失败。</p>
-<div class="highlight"><pre><span></span>________      
-|      |      
-|      0      
-|     /|\     
-|     / \     
-|&quot;&quot;&quot;
+<div class="highlight"><pre><span></span><span class="err">________      </span>
+<span class="err">|      |      </span>
+<span class="err">|      0      </span>
+<span class="err">|     /|\     </span>
+<span class="err">|     / \     </span>
+<span class="err">|&quot;&quot;&quot;</span>
 </pre></div>
 
 
@@ -328,32 +328,32 @@ Tower of Babel            </a>
 
 <p>在此我们将所有的有效字母及其序号保存在字典中，如<code>tootsie</code>中的<code>o</code>则被保存为<code>o: (1, 2)</code>。此外，将谜面作为一个列表储存，还未揭晓的数字用<code>PlACEHOLDER</code>替代，则猜到<code>o</code>后的谜面为<code>['_', 'o', 'o', '_', '_', '_', '_']</code>。这样在之后玩家猜到字典中的字母时我们: 1.将该字母从字典里弹出；2.将谜面列表中所有该字母储存的序号的元素替换为该字母。当字典里没有元素时候，用户便猜出了相关单词。</p>
 <p>另外需要考虑的是用户猜测失败的例子，有两种情况会导致一次猜测的失败。一是用户所猜字母不在我们所给的谜底之中，这时我们输出一张Hangman的图片，如果用户的错误次数过多将导致游戏的失败。二是用户猜了一个之前猜过的字母，我们这时仁慈的弹出提示并给予用户一次额外的猜测机会。这部分实现的代码如下:</p>
-<div class="highlight"><pre><span></span><span class="nd">@types.coroutine</span>
+<div class="highlight"><pre><span></span><span class="nd">@types</span><span class="o">.</span><span class="n">coroutine</span>
 <span class="k">def</span> <span class="nf">_hangman_popper</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;print a hangman graph if guess is not right&quot;&quot;&quot;</span>
     <span class="n">guessed_character</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
     <span class="n">graphics</span> <span class="o">=</span> <span class="n">hang_graphics</span><span class="p">()</span>
     <span class="n">graph</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">graphics</span><span class="p">)</span>
 
-    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-        <span class="n">guess</span> <span class="o">=</span> <span class="k">yield</span> <span class="bp">False</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">guess</span> <span class="o">=</span> <span class="k">yield</span> <span class="kc">False</span>
         <span class="k">if</span> <span class="n">guess</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">guessed_character</span><span class="p">:</span>
             <span class="n">guessed_character</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">guess</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_word</span><span class="p">:</span>
-                <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{colored(len(self._word[guess]),&quot;green&quot;)} of {colored(guess,&quot;green&quot;)} in the word.&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;{colored(len(self._word[guess]),&quot;green&quot;)} of {colored(guess,&quot;green&quot;)} in the word.&#39;</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_word</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">guess</span><span class="p">):</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_guess</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">guess</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_word</span><span class="p">:</span>
-                    <span class="k">yield</span> <span class="bp">True</span>
+                    <span class="k">yield</span> <span class="kc">True</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{colored(guess,&quot;green&quot;)} is not in the word!</span><span class="se">\n</span><span class="s1">&#39;</span>
-                      <span class="n">f</span><span class="s1">&#39;{graph}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;{colored(guess,&quot;green&quot;)} is not in the word!</span><span class="se">\n</span><span class="s1">&#39;</span>
+                      <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{graph}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">graph</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">graphics</span><span class="p">)</span>
                 <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="n">NoChance</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;You have guessed {colored(guess,&quot;green&quot;)} before, please choose another character.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;You have guessed {colored(guess,&quot;green&quot;)} before, please choose another character.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 
 
@@ -365,11 +365,11 @@ Tower of Babel            </a>
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/yi-ge-jian-dan-de-wen-ben-jie-xi-ji-suan-qi.html">一个简单的文本解析计算器</a></li>
-        <li><a href="/flunet-python-167-coroutine-understading.html">Flunet Python 16.7 coroutine understading</a></li>
-        <li><a href="/python-coroutine-example-game-of-life.html">Python Coroutine Example -- Game of life</a></li>
         <li><a href="/python-yield-tutorial-markdown.html">Python yield tutorial markdown</a></li>
         <li><a href="/replace-asyncio-with-native-coroutine.html">Replace asyncio with native coroutine</a></li>
+        <li><a href="/yi-ge-jian-dan-de-wen-ben-jie-xi-ji-suan-qi.html">一个简单的文本解析计算器</a></li>
+        <li><a href="/python-coroutine-example-game-of-life.html">Python Coroutine Example -- Game of life</a></li>
+        <li><a href="/flunet-python-167-coroutine-understading.html">Flunet Python 16.7 coroutine understading</a></li>
     </ul>
 </section>
         </article>
@@ -485,7 +485,7 @@ Tower of Babel            </a>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2020 Charlie Hu
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

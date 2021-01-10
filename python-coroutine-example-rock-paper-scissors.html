@@ -292,7 +292,7 @@ repeat from (3)</p>
     <span class="s2">&quot;decorator to advance a generator once immediately after it is created&quot;</span>
     <span class="k">def</span> <span class="nf">actual_call</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">gen</span> <span class="o">=</span> <span class="n">original_fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="k">assert</span> <span class="n">gen</span><span class="o">.</span><span class="n">next</span><span class="p">()</span> <span class="ow">is</span> <span class="bp">None</span>
+        <span class="k">assert</span> <span class="n">gen</span><span class="o">.</span><span class="n">next</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="n">gen</span>
     <span class="k">return</span> <span class="n">actual_call</span>
 </pre></div>
@@ -320,13 +320,13 @@ repeat from (3)</p>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">valid</span> <span class="o">=</span> <span class="s1">&#39;rps&#39;</span>
     <span class="n">wins</span> <span class="o">=</span> <span class="s1">&#39;rs&#39;</span><span class="p">,</span> <span class="s1">&#39;sp&#39;</span><span class="p">,</span> <span class="s1">&#39;pr&#39;</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-        <span class="n">chosen</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">]</span>
-        <span class="k">while</span> <span class="bp">None</span> <span class="ow">in</span> <span class="n">chosen</span><span class="p">:</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">chosen</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="k">while</span> <span class="kc">None</span> <span class="ow">in</span> <span class="n">chosen</span><span class="p">:</span>
             <span class="n">player</span><span class="p">,</span> <span class="n">play</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">result</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">if</span> <span class="n">play</span> <span class="ow">in</span> <span class="n">valid</span><span class="p">:</span>
                 <span class="n">chosen</span><span class="p">[</span><span class="n">player</span><span class="p">]</span> <span class="o">=</span> <span class="n">play</span>
             <span class="k">else</span><span class="p">:</span>
@@ -337,7 +337,7 @@ repeat from (3)</p>
         <span class="k">elif</span> <span class="n">chosen</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">chosen</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">wins</span><span class="p">:</span>
             <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;win&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">chosen</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;tie&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">chosen</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;tie&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">chosen</span><span class="p">)</span>
 </pre></div>
 
 
@@ -349,11 +349,11 @@ repeat from (3)</p>
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/yi-ge-jian-dan-de-wen-ben-jie-xi-ji-suan-qi.html">一个简单的文本解析计算器</a></li>
-        <li><a href="/flunet-python-167-coroutine-understading.html">Flunet Python 16.7 coroutine understading</a></li>
-        <li><a href="/python-coroutine-example-game-of-life.html">Python Coroutine Example -- Game of life</a></li>
         <li><a href="/python-yield-tutorial-markdown.html">Python yield tutorial markdown</a></li>
         <li><a href="/replace-asyncio-with-native-coroutine.html">Replace asyncio with native coroutine</a></li>
+        <li><a href="/review-guess-word-and-hangman-game.html">[Review] Guess word and hangman game</a></li>
+        <li><a href="/yi-ge-jian-dan-de-wen-ben-jie-xi-ji-suan-qi.html">一个简单的文本解析计算器</a></li>
+        <li><a href="/python-coroutine-example-game-of-life.html">Python Coroutine Example -- Game of life</a></li>
     </ul>
 </section>
         </article>
@@ -469,7 +469,7 @@ repeat from (3)</p>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2020 Charlie Hu
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

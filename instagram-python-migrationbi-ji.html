@@ -296,27 +296,27 @@ Tower of Babel            </a>
 
 
 <p>各版本的返回结果大致为：</p>
-<div class="highlight"><pre><span></span>python2: {&#39;a&#39;:1, &#39;c&#39;:2, &#39;b&#39;:3} (hardcode hashcode)
+<div class="highlight"><pre><span></span><span class="n">python2</span><span class="p">:</span> <span class="err">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="mi">3</span><span class="err">}</span> <span class="p">(</span><span class="n">hardcode</span> <span class="n">hashcode</span><span class="p">)</span>
 
-python3.5.1: (random)
+<span class="n">python3</span><span class="p">.</span><span class="mi">5</span><span class="p">.</span><span class="mi">1</span><span class="p">:</span> <span class="p">(</span><span class="n">random</span><span class="p">)</span>
 
-python3.6：{&#39;a&#39;:1, &#39;b&#39;:2, &#39;c&#39;:3} (keep order)
+<span class="n">python3</span><span class="p">.</span><span class="mi">6</span><span class="err">：{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="mi">3</span><span class="err">}</span> <span class="p">(</span><span class="n">keep</span> <span class="k">order</span><span class="p">)</span>
 </pre></div>
 
 
 <p>为了追求兼容性，他们对<code>json.dumps</code>函数加了参数：</p>
-<div class="highlight"><pre><span></span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">testdict</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">testdict</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 
 
 <p>另外他们也提到了以下的一个小的Unicode的改动将Instagram的性能提升了12%：</p>
-<div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">uwsgi</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;optimize_men&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;True&#39;</span>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">uwsgi</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;optimize_men&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;True&#39;</span>
     <span class="n">optimize_men</span><span class="p">()</span>
 </pre></div>
 
 
 <p>to</p>
-<div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">uwsgi</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;optimize_men&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;True&#39;</span>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">uwsgi</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;optimize_men&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;True&#39;</span>
     <span class="n">optimize_men</span><span class="p">()</span>
 </pre></div>
 
@@ -449,7 +449,7 @@ python3.6：{&#39;a&#39;:1, &#39;b&#39;:2, &#39;c&#39;:3} (keep order)
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2020 Charlie Hu
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

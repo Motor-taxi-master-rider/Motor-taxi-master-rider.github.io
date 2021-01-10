@@ -302,8 +302,8 @@ Tower of Babel            </a>
 
 
 <p>如果给装饰器参数arg一个默认值的话，就能以<code>@with_arguments()</code>的方式调用它了。但这种调用方式会和我们之前使用装饰器的方式不一致。但是我们可以用参数默认值和<code>partial</code>函数结合的方法来实现这一前后的统一：</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">optional_arguments</span><span class="p">(</span><span class="n">wrapped</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">arg</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">wrapped</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">optional_arguments</span><span class="p">(</span><span class="n">wrapped</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">arg</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">wrapped</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">optional_arguments</span><span class="p">,</span> <span class="n">arg</span><span class="o">=</span><span class="n">arg</span><span class="p">)</span>
 
     <span class="nd">@decorator</span>
@@ -326,11 +326,11 @@ Tower of Babel            </a>
 <h3>给被装饰的函数添加缓存功能</h3>
 <p>很多时候，当我们多遍调用某个函数的时候就会希望该函数能够“记录”下来它之前所运行的结果，并且在下次传入相同参数的时候不再去做它内部那些复杂的运算而是直接返回缓存的值。这听起来是一个有些麻烦的需求。幸运的是，通过在装饰器中定义一个缓存结构，能让我们方便地让任意一个函数拥有这一神奇的功能。</p>
 <p>这里我们也用到了上一节所提到的默认参数和<code>partial</code>函数结合的装饰器设计：</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cache</span><span class="p">(</span><span class="n">wrapped</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">wrapped</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cache</span><span class="p">(</span><span class="n">wrapped</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">wrapped</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">cache</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">d</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">d</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="nd">@decorator</span>
@@ -384,29 +384,29 @@ Tower of Babel            </a>
 <h3>python中的同步装饰器</h3>
 <p>在Java中，如果我们希望一个方法是同步<code>(synchronized)</code>的，有两种方式给我们的代码增加同步特性：</p>
 <div class="highlight"><pre><span></span><span class="c1">//第一是使用synchronized关键字的方式使整个方法具有同步特性</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SynchronizedCounter</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">increment</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">c</span><span class="o">++;</span>
-    <span class="o">}</span>
-    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">decrement</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">c</span><span class="o">--;</span>
-    <span class="o">}</span>
-    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">int</span> <span class="nf">value</span><span class="o">()</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="n">c</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SynchronizedCounter</span> <span class="p">{</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">increment</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">c</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">void</span> <span class="nf">decrement</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">c</span><span class="o">--</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kd">public</span> <span class="kd">synchronized</span> <span class="kt">int</span> <span class="nf">value</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">c</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
 <span class="c1">//第二是使用synchronized语句使得被包裹的代码块具有同步特性</span>
 <span class="c1">//与第一个方法不同的是，我们必须制定一个提供内在锁的对象(这</span>
 <span class="c1">//里是this)</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">addName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kd">synchronized</span><span class="o">(</span><span class="k">this</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">lastName</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
-        <span class="n">nameCount</span><span class="o">++;</span>
-    <span class="o">}</span>
-    <span class="n">nameList</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">name</span><span class="o">);</span>
-<span class="o">}</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">addName</span><span class="p">(</span><span class="n">String</span> <span class="n">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">synchronized</span><span class="p">(</span><span class="k">this</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">lastName</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
+        <span class="n">nameCount</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">nameList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 
 
@@ -417,7 +417,7 @@ Tower of Babel            </a>
 
 <span class="k">def</span> <span class="nf">synchronized</span><span class="p">(</span><span class="n">wrapped</span><span class="p">):</span>
     <span class="n">lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">RLock</span><span class="p">()</span>
-    <span class="nd">@functools.wraps</span><span class="p">(</span><span class="n">wrapped</span><span class="p">)</span>
+    <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">wrapped</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">_wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">with</span> <span class="n">lock</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">wrapped</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -430,11 +430,11 @@ Tower of Babel            </a>
 
 
 <p>当然我们也可以用上之前提到的带参装饰器技术使我们的同步锁装饰器更加灵活,再加上<code>decorator</code>装饰器来获取之前的自省特性。</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">synchronized</span><span class="p">(</span><span class="n">wrapped</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">lock</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">wrapped</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">synchronized</span><span class="p">(</span><span class="n">wrapped</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lock</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">wrapped</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">synchronized</span><span class="p">,</span> <span class="n">lock</span><span class="o">=</span><span class="n">lock</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">lock</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">lock</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">RLock</span><span class="p">()</span>
 
     <span class="nd">@decorator</span>
@@ -464,22 +464,22 @@ Tower of Babel            </a>
 <p>答案是肯定的。让我们来看以下代码：</p>
 <div class="highlight"><pre><span></span><span class="nd">@decorator</span>
 <span class="k">def</span> <span class="nf">synchronized</span><span class="p">(</span><span class="n">wrapped</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">instance</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">instance</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">owner</span> <span class="o">=</span> <span class="n">wrapped</span>   <span class="c1">#当被装饰的位普通函数或静态方法时将同步锁绑在函数或方法上</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">owner</span> <span class="o">=</span> <span class="n">instance</span>    <span class="c1">#当被装饰的为实例方法或类方法时将同步锁绑在实例或类上</span>
 
-    <span class="n">lock</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="n">owner</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;_synchronized_lock&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="n">lock</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="n">owner</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;_synchronized_lock&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">lock</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">lock</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
       <span class="c1">#使用metalock来确保创建同步锁时不会出现竞争关系</span>
        <span class="n">meta_lock</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="n">synchronized</span><span class="p">)</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span>
                <span class="s1">&#39;_synchronized_meta_lock&#39;</span><span class="p">,</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">())</span>
 
        <span class="k">with</span> <span class="n">meta_lock</span><span class="p">:</span>
          <span class="c1">#再次确认锁的存在状态，防止在生成meta_lock时同步锁已经被其他线程生成</span>
-           <span class="n">lock</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="n">owner</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;_synchronized_lock&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-           <span class="k">if</span> <span class="n">lock</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+           <span class="n">lock</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="n">owner</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;_synchronized_lock&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+           <span class="k">if</span> <span class="n">lock</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                <span class="n">lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">RLock</span><span class="p">()</span>
                <span class="nb">setattr</span><span class="p">(</span><span class="n">owner</span><span class="p">,</span> <span class="s1">&#39;_synchronized_lock&#39;</span><span class="p">,</span> <span class="n">lock</span><span class="p">)</span>
 
@@ -520,13 +520,13 @@ Tower of Babel            </a>
 <p>至此为止，我们已经实现了java的同步的第一个功能了。对于第二个功能，在python中是一个和上下文管理器相似的行为。我们想让我们的synchronized装饰器能够这样使用来同步方法或函数中的部分代码：</p>
 <p>```python
  class Object(object):  </p>
-<div class="highlight"><pre><span></span>@synchronized
-def function_im_1(self):
-    pass
+<div class="highlight"><pre><span></span><span class="nv">@synchronized</span><span class="w"></span>
+<span class="n">def</span><span class="w"> </span><span class="n">function_im_1</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">pass</span><span class="w"></span>
 
-def function_im_2(self):
-    with synchronized(self):
-        pass
+<span class="n">def</span><span class="w"> </span><span class="n">function_im_2</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="k">with</span><span class="w"> </span><span class="n">synchronized</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">        </span><span class="n">pass</span><span class="w"></span>
 </pre></div>
 
 
@@ -536,25 +536,25 @@ def function_im_2(self):
  def synchronized(wrapped):
     def _synchronized_lock(owner):
         lock = vars(owner).get('_synchronized_lock', None)</p>
-<div class="highlight"><pre><span></span>    if lock is None:
-        meta_lock = vars(synchronized).setdefault(
-                &#39;_synchronized_meta_lock&#39;, threading.Lock())
+<div class="highlight"><pre><span></span>    <span class="k">if</span> <span class="k">lock</span> <span class="k">is</span> <span class="k">None</span><span class="p">:</span>
+        <span class="n">meta_lock</span> <span class="o">=</span> <span class="n">vars</span><span class="p">(</span><span class="n">synchronized</span><span class="p">).</span><span class="n">setdefault</span><span class="p">(</span>
+                <span class="s1">&#39;_synchronized_meta_lock&#39;</span><span class="p">,</span> <span class="n">threading</span><span class="p">.</span><span class="k">Lock</span><span class="p">())</span>
 
-        with meta_lock:
-            lock = vars(owner).get(&#39;_synchronized_lock&#39;, None)
-            if lock is None:
-                lock = threading.RLock()
-                setattr(owner, &#39;_synchronized_lock&#39;, lock)
+        <span class="k">with</span> <span class="n">meta_lock</span><span class="p">:</span>
+            <span class="k">lock</span> <span class="o">=</span> <span class="n">vars</span><span class="p">(</span><span class="k">owner</span><span class="p">).</span><span class="k">get</span><span class="p">(</span><span class="s1">&#39;_synchronized_lock&#39;</span><span class="p">,</span> <span class="k">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="k">lock</span> <span class="k">is</span> <span class="k">None</span><span class="p">:</span>
+                <span class="k">lock</span> <span class="o">=</span> <span class="n">threading</span><span class="p">.</span><span class="n">RLock</span><span class="p">()</span>
+                <span class="n">setattr</span><span class="p">(</span><span class="k">owner</span><span class="p">,</span> <span class="s1">&#39;_synchronized_lock&#39;</span><span class="p">,</span> <span class="k">lock</span><span class="p">)</span>
 
-    return lock
+    <span class="k">return</span> <span class="k">lock</span>
 
-#使用_synchronized_lock同步锁的自定义装饰器
-def _synchronized_wrapper(wrapped, instance, args, kwargs):
-    with _synchronized_lock(instance or wrapped):
-        return wrapped(*args, **kwargs)
+<span class="o">#</span><span class="err">使用</span><span class="n">_synchronized_lock</span><span class="err">同步锁的自定义装饰器</span>
+<span class="n">def</span> <span class="n">_synchronized_wrapper</span><span class="p">(</span><span class="n">wrapped</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">_synchronized_lock</span><span class="p">(</span><span class="n">instance</span> <span class="k">or</span> <span class="n">wrapped</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">wrapped</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-#直接使用function_wrapper自定义同步锁装饰器装饰到被装饰函数warpped上
-return function_wrapper(wrapped, _synchronized_wrapper)
+<span class="o">#</span><span class="err">直接使用</span><span class="n">function_wrapper</span><span class="err">自定义同步锁装饰器装饰到被装饰函数</span><span class="n">warpped</span><span class="err">上</span>
+<span class="k">return</span> <span class="n">function_wrapper</span><span class="p">(</span><span class="n">wrapped</span><span class="p">,</span> <span class="n">_synchronized_wrapper</span><span class="p">)</span>
 </pre></div>
 
 
@@ -563,15 +563,15 @@ return function_wrapper(wrapped, _synchronized_wrapper)
 <code>__enter__</code> and <code>__exit__</code>魔术方法来实现上下文管理器，这里我们继承了<code>function_wrapper</code>类:</p>
 <div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">synchronized</span><span class="p">(</span><span class="n">wrapped</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">_synchronized_lock</span><span class="p">(</span><span class="n">owner</span><span class="p">):</span>
-        <span class="n">lock</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="n">owner</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;_synchronized_lock&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">lock</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="n">owner</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;_synchronized_lock&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">lock</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">lock</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">meta_lock</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="n">synchronized</span><span class="p">)</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span>
                     <span class="s1">&#39;_synchronized_meta_lock&#39;</span><span class="p">,</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">())</span>
 
             <span class="k">with</span> <span class="n">meta_lock</span><span class="p">:</span>
-                <span class="n">lock</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="n">owner</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;_synchronized_lock&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">lock</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">lock</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="n">owner</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;_synchronized_lock&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">lock</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="n">lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">RLock</span><span class="p">()</span>
                     <span class="nb">setattr</span><span class="p">(</span><span class="n">owner</span><span class="p">,</span> <span class="s1">&#39;_synchronized_lock&#39;</span><span class="p">,</span> <span class="n">lock</span><span class="p">)</span>    <span class="c1">#为被装饰器装饰的方法加锁</span>
 
@@ -722,7 +722,7 @@ return function_wrapper(wrapped, _synchronized_wrapper)
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2020 Charlie Hu
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

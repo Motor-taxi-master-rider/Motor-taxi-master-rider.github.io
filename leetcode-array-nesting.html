@@ -287,13 +287,13 @@ S[K] = { A[K], A[A[K]], A[A[A[K]]], ... }.
 Sets S[K] are finite for each K and should NOT contain duplicates.
 Write a function that given an array A consisting of N integers, return the size of the largest set S[K] for this array.</p>
 <p><strong>Example 1:</strong></p>
-<div class="highlight"><pre><span></span><span class="n">Input</span><span class="o">:</span> <span class="n">A</span> <span class="o">=</span> <span class="o">[</span><span class="mi">5</span><span class="o">,</span><span class="mi">4</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">6</span><span class="o">,</span><span class="mi">2</span><span class="o">]</span>
-<span class="n">Output</span><span class="o">:</span> <span class="mi">4</span>
-<span class="n">Explanation</span><span class="o">:</span>
-<span class="n">A</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">5</span><span class="o">,</span> <span class="n">A</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="mi">4</span><span class="o">,</span> <span class="n">A</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">A</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span> <span class="o">=</span> <span class="mi">3</span><span class="o">,</span> <span class="n">A</span><span class="o">[</span><span class="mi">4</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">,</span> <span class="n">A</span><span class="o">[</span><span class="mi">5</span><span class="o">]</span> <span class="o">=</span> <span class="mi">6</span><span class="o">,</span> <span class="n">A</span><span class="o">[</span><span class="mi">6</span><span class="o">]</span> <span class="o">=</span> <span class="mi">2</span><span class="o">.</span>
+<div class="highlight"><pre><span></span><span class="k">Input</span><span class="err">:</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">5,4,0,3,1,6,2</span><span class="o">]</span><span class="w"></span>
+<span class="k">Output</span><span class="err">:</span><span class="w"> </span><span class="mi">4</span><span class="w"></span>
+<span class="nl">Explanation</span><span class="p">:</span><span class="w"></span>
+<span class="n">A</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="o">[</span><span class="n">1</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="o">[</span><span class="n">2</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="o">[</span><span class="n">3</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="o">[</span><span class="n">4</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="o">[</span><span class="n">5</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="o">[</span><span class="n">6</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.</span><span class="w"></span>
 
-<span class="n">One</span> <span class="n">of</span> <span class="n">the</span> <span class="n">longest</span> <span class="n">S</span><span class="o">[</span><span class="n">K</span><span class="o">]:</span>
-<span class="n">S</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="o">{</span><span class="n">A</span><span class="o">[</span><span class="mi">0</span><span class="o">],</span> <span class="n">A</span><span class="o">[</span><span class="mi">5</span><span class="o">],</span> <span class="n">A</span><span class="o">[</span><span class="mi">6</span><span class="o">],</span> <span class="n">A</span><span class="o">[</span><span class="mi">2</span><span class="o">]}</span> <span class="o">=</span> <span class="o">{</span><span class="mi">5</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">0</span><span class="o">}</span>
+<span class="n">One</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">longest</span><span class="w"> </span><span class="n">S</span><span class="o">[</span><span class="n">K</span><span class="o">]</span><span class="err">:</span><span class="w"></span>
+<span class="n">S</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="n">A</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="o">[</span><span class="n">5</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="o">[</span><span class="n">6</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="o">[</span><span class="n">2</span><span class="o">]</span><span class="err">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="err">}</span><span class="w"></span>
 </pre></div>
 
 
@@ -340,10 +340,10 @@ Write a function that given an array A consisting of N integers, return the size
 <span class="sd">        :rtype: int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ans</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
-        <span class="n">seen</span> <span class="o">=</span> <span class="p">[</span><span class="bp">False</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
+        <span class="n">seen</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
             <span class="k">while</span> <span class="ow">not</span> <span class="n">seen</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
-                <span class="n">seen</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+                <span class="n">seen</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
                 <span class="n">i</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">step</span> <span class="o">+</span> <span class="mi">1</span>
             <span class="n">ans</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
             <span class="n">step</span> <span class="o">=</span> <span class="mi">0</span>
@@ -359,10 +359,10 @@ Write a function that given an array A consisting of N integers, return the size
     <h4>Related Posts:</h4>
     <ul>
         <li><a href="/leetcode-move-zeroes.html">LeetCode - Move Zeroes</a></li>
-        <li><a href="/leetcode-maximum-length-of-pair-chain.html">LeetCode - Maximum Length of Pair Chain</a></li>
-        <li><a href="/leetcode-distribute-candies.html">LeetCode - Distribute Candies</a></li>
         <li><a href="/leetcode-integer-break.html">LeetCode - Integer Break</a></li>
-        <li><a href="/leetcode-convert-bst-to-greater-tree.html">LeetCode - Convert BST to Greater Tree</a></li>
+        <li><a href="/leetcode-island-perimeter.html">LeetCode - Island Perimeter</a></li>
+        <li><a href="/leetcode-beautiful-arrangement.html">LeetCode - Beautiful Arrangement</a></li>
+        <li><a href="/leetcode-find-bottom-left-tree-value.html">LeetCode - Find Bottom Left Tree Value</a></li>
     </ul>
 </section>
         </article>
@@ -478,7 +478,7 @@ Write a function that given an array A consisting of N integers, return the size
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2020 Charlie Hu
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

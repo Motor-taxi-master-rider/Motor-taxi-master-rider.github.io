@@ -299,16 +299,16 @@ Tower of Babel            </a>
 <span class="sd">        遍历该节点开始的链表</span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">traversal</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        用于之后的if Linklist判断</span>
 <span class="sd">        :return:</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="kc">True</span>
 
     <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -316,7 +316,7 @@ Tower of Babel            </a>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span>
-        <span class="k">while</span> <span class="n">node</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">while</span> <span class="n">node</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">next</span>
             <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">count</span>
@@ -325,7 +325,7 @@ Tower of Babel            </a>
 <span class="k">class</span> <span class="nc">SampleLinklist</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># 创建一个值为0-19的链表数组</span>
-        <span class="n">nodelist</span> <span class="o">=</span> <span class="p">[</span><span class="n">Linklist</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">)]</span>
+        <span class="n">nodelist</span> <span class="o">=</span> <span class="p">[</span><span class="n">Linklist</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">)]</span>
         <span class="c1"># 0-6为无环单链表；7-11为有环单链表（入口为8）；</span>
         <span class="c1"># 12-14交于无环单链表(入口为5)；15-19交于有环链表（入口为9）；</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nodelist</span><span class="p">):</span>
@@ -359,8 +359,8 @@ Tower of Babel            </a>
 
 
 <span class="k">def</span> <span class="nf">delete_specified_node</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
-    <span class="k">assert</span><span class="p">(</span><span class="n">node</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">next</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">node</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">next</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">storeNode</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">next</span>
         <span class="n">node</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">value</span>
         <span class="n">node</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span>
@@ -382,7 +382,7 @@ Tower of Babel            </a>
     <span class="c1"># 暂存头结点</span>
     <span class="n">header</span> <span class="o">=</span> <span class="n">revert_linklist</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">next</span><span class="p">)</span>
     <span class="n">node</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">node</span>
-    <span class="n">node</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">node</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">return</span> <span class="n">header</span>
 </pre></div>
 
@@ -398,7 +398,7 @@ Tower of Babel            </a>
 
 <span class="k">def</span> <span class="nf">find_last_nth</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">header</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">return</span> <span class="kc">None</span>
     <span class="c1"># 将fast和slow指针设至链表起点</span>
     <span class="n">fast</span> <span class="o">=</span> <span class="n">slow</span> <span class="o">=</span> <span class="n">header</span>
     <span class="c1"># 将fast走n个节点</span>
@@ -407,7 +407,7 @@ Tower of Babel            </a>
         <span class="n">n</span> <span class="o">-=</span> <span class="mi">1</span>
     <span class="c1"># n大于链表长度的情况</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">return</span> <span class="kc">None</span>
     <span class="k">while</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span><span class="p">:</span>
         <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span>
         <span class="n">slow</span> <span class="o">=</span> <span class="n">slow</span><span class="o">.</span><span class="n">next</span>
@@ -426,7 +426,7 @@ Tower of Babel            </a>
 
 <span class="k">def</span> <span class="nf">find_mid</span><span class="p">(</span><span class="n">header</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">header</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">return</span> <span class="kc">None</span>
     <span class="c1"># 将fast和slow指针设至链表起点</span>
     <span class="n">fast</span> <span class="o">=</span> <span class="n">slow</span> <span class="o">=</span> <span class="n">header</span>
     <span class="k">while</span>  <span class="n">fast</span> <span class="ow">and</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span><span class="p">:</span>
@@ -448,7 +448,7 @@ Tower of Babel            </a>
 
 <span class="k">def</span> <span class="nf">is_loop</span><span class="p">(</span><span class="n">header</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">header</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="kc">False</span>
     <span class="n">fast</span> <span class="o">=</span> <span class="n">slow</span> <span class="o">=</span> <span class="n">header</span>
     <span class="k">while</span> <span class="n">fast</span> <span class="ow">and</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span><span class="p">:</span>
         <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span>
@@ -457,7 +457,7 @@ Tower of Babel            </a>
         <span class="k">if</span> <span class="n">fast</span> <span class="o">==</span> <span class="n">slow</span><span class="p">:</span>
             <span class="k">break</span>
     <span class="k">if</span> <span class="n">fast</span> <span class="o">!=</span> <span class="n">slow</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">return</span> <span class="kc">None</span>
 
     <span class="c1"># 将fast发配回起点</span>
     <span class="n">fast</span> <span class="o">=</span> <span class="n">header</span>
@@ -481,16 +481,16 @@ Tower of Babel            </a>
 
 <span class="k">def</span> <span class="nf">is_intersect</span><span class="p">(</span><span class="n">header1</span><span class="p">,</span> <span class="n">header2</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">header1</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">header2</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="kc">False</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">is_loop</span><span class="p">(</span><span class="n">header1</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_loop</span><span class="p">(</span><span class="n">header2</span><span class="p">):</span>
         <span class="c1"># 两个无环链表的尾节点是否相等决定了它们是否相交</span>
         <span class="k">while</span> <span class="n">header1</span><span class="p">:</span>
             <span class="n">header1</span> <span class="o">=</span> <span class="n">header1</span><span class="o">.</span><span class="n">next</span>
         <span class="k">while</span> <span class="n">header2</span><span class="p">:</span>
             <span class="n">header2</span> <span class="o">=</span> <span class="n">header2</span><span class="o">.</span><span class="n">next</span>
-        <span class="k">return</span> <span class="bp">True</span> <span class="k">if</span> <span class="n">header1</span> <span class="o">==</span> <span class="n">header2</span> <span class="k">else</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">header1</span> <span class="o">==</span> <span class="n">header2</span> <span class="k">else</span> <span class="kc">False</span>
     <span class="k">elif</span> <span class="ow">not</span> <span class="n">is_loop</span><span class="p">(</span><span class="n">header1</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">is_loop</span><span class="p">(</span><span class="n">header2</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="kc">False</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="c1"># 两个带环链表的入口必然在它们的环内</span>
         <span class="n">intersect1</span> <span class="o">=</span> <span class="n">is_loop</span><span class="p">(</span><span class="n">header1</span><span class="p">)</span>
@@ -499,9 +499,9 @@ Tower of Babel            </a>
         <span class="c1"># 如果任意链表环中有另一列表的节点则相交</span>
         <span class="k">while</span> <span class="n">node</span> <span class="o">!=</span> <span class="n">intersect2</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">node</span> <span class="o">==</span> <span class="n">intersect1</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">True</span>
+                <span class="k">return</span> <span class="kc">True</span>
             <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">next</span>
-        <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">return</span> <span class="kc">False</span>
 </pre></div>
 
 
@@ -528,7 +528,7 @@ Tower of Babel            </a>
             <span class="k">return</span> <span class="n">header1</span>
         <span class="n">header1</span> <span class="o">=</span> <span class="n">header1</span><span class="o">.</span><span class="n">next</span>
         <span class="n">header2</span> <span class="o">=</span> <span class="n">header2</span><span class="o">.</span><span class="n">next</span>
-    <span class="k">return</span> <span class="bp">None</span>
+    <span class="k">return</span> <span class="kc">None</span>
 </pre></div>
 
 
@@ -652,7 +652,7 @@ Tower of Babel            </a>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2020 Charlie Hu
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

@@ -344,7 +344,7 @@ Tower of Babel            </a>
         <span class="n">child</span> <span class="o">=</span> <span class="p">[</span><span class="n">root</span><span class="p">]</span>
         <span class="k">while</span> <span class="nb">any</span><span class="p">(</span><span class="n">child</span><span class="p">):</span>
             <span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">max</span><span class="p">([</span><span class="n">item</span><span class="o">.</span><span class="n">val</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">child</span><span class="p">]))</span>
-            <span class="n">child</span><span class="o">=</span><span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">child</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">filter</span><span class="p">(</span><span class="bp">None</span><span class="p">,(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">,</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">))]</span>
+            <span class="n">child</span><span class="o">=</span><span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">child</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,(</span><span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">,</span><span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">))]</span>
         <span class="k">return</span> <span class="n">lst</span>
 </pre></div>
 
@@ -358,11 +358,11 @@ Tower of Babel            </a>
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/leetcode-add-one-row-to-tree.html">LeetCode - Add One Row to Tree</a></li>
         <li><a href="/leetcode-find-bottom-left-tree-value.html">LeetCode - Find Bottom Left Tree Value</a></li>
-        <li><a href="/leetcode-merge-two-binary-trees.html">LeetCode - Merge Two Binary Trees</a></li>
+        <li><a href="/leetcode-add-one-row-to-tree.html">LeetCode - Add One Row to Tree</a></li>
         <li><a href="/leetcode-construct-string-from-binary-tree.html">LeetCode - Construct String from Binary Tree</a></li>
-        <li><a href="/yi-ge-jian-dan-de-wen-ben-jie-xi-ji-suan-qi.html">一个简单的文本解析计算器</a></li>
+        <li><a href="/leetcode-merge-two-binary-trees.html">LeetCode - Merge Two Binary Trees</a></li>
+        <li><a href="/leetcode-integer-break.html">LeetCode - Integer Break</a></li>
     </ul>
 </section>
         </article>
@@ -478,7 +478,7 @@ Tower of Babel            </a>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2020 Charlie Hu
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

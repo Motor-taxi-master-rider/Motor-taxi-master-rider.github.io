@@ -310,7 +310,7 @@ Tower of Babel            </a>
     <span class="sd">&quot;&quot;&quot;memoryview测试&quot;&quot;&quot;</span>
     <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">FILENAME</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
     <span class="n">buf</span> <span class="o">=</span> <span class="nb">bytearray</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">FILENAME</span><span class="p">))</span>
-    <span class="n">mv</span> <span class="o">=</span> <span class="n">memoryview</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span>
+    <span class="n">mv</span> <span class="o">=</span> <span class="nb">memoryview</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span>
     <span class="n">f</span><span class="o">.</span><span class="n">readinto</span><span class="p">(</span><span class="n">mv</span><span class="p">)</span>
     <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">buf</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
@@ -327,13 +327,13 @@ Tower of Babel            </a>
 
 <span class="k">def</span> <span class="nf">load_tester</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;进行测试并输出结果&quot;&quot;&quot;</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;=&#39;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;=&#39;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
     <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;try {test_times} times, {name} avg running time: {avg_time}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;try </span><span class="si">{test_times}</span><span class="s1"> times, </span><span class="si">{name}</span><span class="s1"> avg running time: </span><span class="si">{avg_time}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
         <span class="n">test_times</span><span class="o">=</span><span class="n">n</span><span class="p">,</span>
         <span class="n">name</span><span class="o">=</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
         <span class="n">avg_time</span><span class="o">=</span><span class="nb">str</span><span class="p">((</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span><span class="p">)))</span>
@@ -349,27 +349,27 @@ Tower of Babel            </a>
 
 <p><a href="https://github.com/Motor-taxi-master-rider/Python/tree/master/Script/load_file_with_memoryview.py">source file</a></p>
 <p><strong>运行结果为：</strong></p>
-<div class="highlight"><pre><span></span>==================================================
-bytearray(b&#39;3\xed\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x9
-0\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x903\xed\xfa\x8e\xd5\xbc\x
-00|\xfb\xfcf1\xdbf1\xc9fSfQ\x06W\x8e\xdd\x8e\xc5R\xbe\x00|\xbf\x00\x06\xb9\x00\x
-01\xf3\xa5\xeaK\x06\x00\x00R\xb4A\xbb\xaaU1\xc90\xf6\xf9\xcd\x13r\x16\x81\xfbU\x
-aau\x10\x83\xe1\x01t&#39;)
-try 10 times, test_load_file_ba avg running time: 0.9056999921798706
-==================================================
-bytearray(b&#39;3\xed\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x9
-0\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x903\xed\xfa\x8e\xd5\xbc\x
-00|\xfb\xfcf1\xdbf1\xc9fSfQ\x06W\x8e\xdd\x8e\xc5R\xbe\x00|\xbf\x00\x06\xb9\x00\x
-01\xf3\xa5\xeaK\x06\x00\x00R\xb4A\xbb\xaaU1\xc90\xf6\xf9\xcd\x13r\x16\x81\xfbU\x
-aau\x10\x83\xe1\x01t&#39;)
-try 10 times, test_load_file_copy avg running time: 1.3784000158309937
-==================================================
-bytearray(b&#39;3\xed\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x9
-0\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x903\xed\xfa\x8e\xd5\xbc\x
-00|\xfb\xfcf1\xdbf1\xc9fSfQ\x06W\x8e\xdd\x8e\xc5R\xbe\x00|\xbf\x00\x06\xb9\x00\x
-01\xf3\xa5\xeaK\x06\x00\x00R\xb4A\xbb\xaaU1\xc90\xf6\xf9\xcd\x13r\x16\x81\xfbU\x
-aau\x10\x83\xe1\x01t&#39;)
-try 10 times, test_load_file_mv avg running time: 0.9180000066757202
+<div class="highlight"><pre><span></span><span class="err">==================================================</span>
+<span class="err">bytearray(b&#39;3\xed\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x9</span>
+<span class="err">0\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x903\xed\xfa\x8e\xd5\xbc\x</span>
+<span class="err">00|\xfb\xfcf1\xdbf1\xc9fSfQ\x06W\x8e\xdd\x8e\xc5R\xbe\x00|\xbf\x00\x06\xb9\x00\x</span>
+<span class="err">01\xf3\xa5\xeaK\x06\x00\x00R\xb4A\xbb\xaaU1\xc90\xf6\xf9\xcd\x13r\x16\x81\xfbU\x</span>
+<span class="err">aau\x10\x83\xe1\x01t&#39;)</span>
+<span class="err">try 10 times, test_load_file_ba avg running time: 0.9056999921798706</span>
+<span class="err">==================================================</span>
+<span class="err">bytearray(b&#39;3\xed\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x9</span>
+<span class="err">0\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x903\xed\xfa\x8e\xd5\xbc\x</span>
+<span class="err">00|\xfb\xfcf1\xdbf1\xc9fSfQ\x06W\x8e\xdd\x8e\xc5R\xbe\x00|\xbf\x00\x06\xb9\x00\x</span>
+<span class="err">01\xf3\xa5\xeaK\x06\x00\x00R\xb4A\xbb\xaaU1\xc90\xf6\xf9\xcd\x13r\x16\x81\xfbU\x</span>
+<span class="err">aau\x10\x83\xe1\x01t&#39;)</span>
+<span class="err">try 10 times, test_load_file_copy avg running time: 1.3784000158309937</span>
+<span class="err">==================================================</span>
+<span class="err">bytearray(b&#39;3\xed\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x9</span>
+<span class="err">0\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x90\x903\xed\xfa\x8e\xd5\xbc\x</span>
+<span class="err">00|\xfb\xfcf1\xdbf1\xc9fSfQ\x06W\x8e\xdd\x8e\xc5R\xbe\x00|\xbf\x00\x06\xb9\x00\x</span>
+<span class="err">01\xf3\xa5\xeaK\x06\x00\x00R\xb4A\xbb\xaaU1\xc90\xf6\xf9\xcd\x13r\x16\x81\xfbU\x</span>
+<span class="err">aau\x10\x83\xe1\x01t&#39;)</span>
+<span class="err">try 10 times, test_load_file_mv avg running time: 0.9180000066757202</span>
 </pre></div>
 
 
@@ -377,9 +377,9 @@ try 10 times, test_load_file_mv avg running time: 0.9180000066757202
 <p>我们可以简单将annotations(注解)当成函数参数说明文档。注解会被储存在函数的__annotations__属性中，因此我们也可以利用这个字典来做更多的事情：比如参数类型、有效性的检验。</p>
 <p><strong>代码：</strong></p>
 <div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="nb">locals</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">var</span><span class="p">,</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">func</span><span class="o">.</span><span class="n">__annotations__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">var</span><span class="p">,</span> <span class="n">test</span> <span class="ow">in</span> <span class="n">func</span><span class="o">.</span><span class="vm">__annotations__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="n">value</span> <span class="o">=</span> <span class="nb">locals</span><span class="p">[</span><span class="n">var</span><span class="p">]</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Var: {0}</span><span class="se">\t</span><span class="s1">Value: {1}</span><span class="se">\t</span><span class="s1">Test: {2.__name__}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">test</span><span class="p">)</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;Var: </span><span class="si">{0}</span><span class="se">\t</span><span class="s1">Value: </span><span class="si">{1}</span><span class="se">\t</span><span class="s1">Test: </span><span class="si">{2.__name__}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">test</span><span class="p">)</span>
         <span class="k">assert</span> <span class="n">test</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">msg</span>
 
 
@@ -393,15 +393,15 @@ try 10 times, test_load_file_mv avg running time: 0.9180000066757202
 
 <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">between</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">y</span><span class="p">:</span> <span class="n">is_int</span><span class="p">):</span>
     <span class="n">validate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="nb">locals</span><span class="p">())</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
 
 
 <p><strong>结果：</strong></p>
-<div class="highlight"><pre><span></span>&gt;&gt;&gt; f(0, 31.1)
-Traceback (most recent call last):
-   ...
-AssertionError: Var: y  Value: 31.1 Test: is_int
+<div class="highlight"><pre><span></span><span class="err">&gt;&gt;&gt; f(0, 31.1)</span>
+<span class="err">Traceback (most recent call last):</span>
+<span class="err">   ...</span>
+<span class="c">AssertionError: Var: y  Value: 31.1 Test: is_int</span>
 </pre></div>
 
 
@@ -524,7 +524,7 @@ AssertionError: Var: y  Value: 31.1 Test: is_int
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2020 Charlie Hu
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

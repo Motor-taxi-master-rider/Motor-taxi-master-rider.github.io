@@ -282,7 +282,7 @@ Tower of Babel            </a>
 听了David Beazley在2012年关于<code>PyPy</code>和<code>Rpython</code>的几个演讲之后(<a href="#additional">Additional</a> 1,2,3)，就对这个项目起了浓厚的兴趣。</p>
 <h3>Download and install</h3>
 <p>可以在<a href="https://pypy.org/download.html">https://pypy.org/download.html</a>下载到<code>PyPy</code>的最新版本。<code>PyPy</code>已经支持python2.7和3.5.3了，但基于python3的<code>PyPy</code>依旧是一个beta版本，并且声称比<code>PyPy</code>2的速度慢很多。因为我们选择安装了基于Ubuntu的64位<code>PyPy</code>。解压后，为了日后使用我们使用以下命令在<code>/usr/local/bin</code>下创建一个软连接,其中第一个目录为<code>PyPy</code>的安装目录：</p>
-<div class="highlight"><pre><span></span>ln -s ~/Program/pypy2-v5.8.0-linux64/bin/pypy /usr/local/bin
+<div class="highlight"><pre><span></span><span class="err">ln -s ~/Program/pypy2-v5.8.0-linux64/bin/pypy /usr/local/bin</span>
 </pre></div>
 
 
@@ -300,7 +300,7 @@ Tower of Babel            </a>
 
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">argv</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">fib</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">fib</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
     <span class="k">return</span> <span class="mi">0</span>
 
 
@@ -313,39 +313,39 @@ Tower of Babel            </a>
 <ul>
 <li>python2.7</li>
 </ul>
-<div class="highlight"><pre><span></span>&gt;&gt;time python fib.py 41
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">time</span> <span class="n">python</span> <span class="n">fib</span><span class="p">.</span><span class="n">py</span> <span class="mi">41</span>
 
-165580141
+<span class="mi">165580141</span>
 
-real    0m47.026s
-user    0m46.564s
-sys 0m0.024s
+<span class="nb">real</span>    <span class="mi">0</span><span class="n">m47</span><span class="p">.</span><span class="mi">026</span><span class="n">s</span>
+<span class="k">user</span>    <span class="mi">0</span><span class="n">m46</span><span class="p">.</span><span class="mi">564</span><span class="n">s</span>
+<span class="n">sys</span> <span class="mi">0</span><span class="n">m0</span><span class="p">.</span><span class="mi">024</span><span class="n">s</span>
 </pre></div>
 
 
 <ul>
 <li>python3.6</li>
 </ul>
-<div class="highlight"><pre><span></span>&gt;&gt;time python fib.py 41
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">time</span> <span class="n">python</span> <span class="n">fib</span><span class="p">.</span><span class="n">py</span> <span class="mi">41</span>
 
-165580141
+<span class="mi">165580141</span>
 
-real    1m9.771s
-user    1m8.992s
-sys 0m0.004s
+<span class="nb">real</span>    <span class="mi">1</span><span class="n">m9</span><span class="p">.</span><span class="mi">771</span><span class="n">s</span>
+<span class="k">user</span>    <span class="mi">1</span><span class="n">m8</span><span class="p">.</span><span class="mi">992</span><span class="n">s</span>
+<span class="n">sys</span> <span class="mi">0</span><span class="n">m0</span><span class="p">.</span><span class="mi">004</span><span class="n">s</span>
 </pre></div>
 
 
 <ul>
 <li>pypy5.8</li>
 </ul>
-<div class="highlight"><pre><span></span>&gt;&gt;time pypy fib.py 41
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="n">time</span> <span class="n">pypy</span> <span class="n">fib</span><span class="p">.</span><span class="n">py</span> <span class="mi">41</span>
 
-165580141
+<span class="mi">165580141</span>
 
-real    0m4.208s
-user    0m3.392s
-sys 0m0.736s
+<span class="nb">real</span>    <span class="mi">0</span><span class="n">m4</span><span class="p">.</span><span class="mi">208</span><span class="n">s</span>
+<span class="k">user</span>    <span class="mi">0</span><span class="n">m3</span><span class="p">.</span><span class="mi">392</span><span class="n">s</span>
+<span class="n">sys</span> <span class="mi">0</span><span class="n">m0</span><span class="p">.</span><span class="mi">736</span><span class="n">s</span>
 </pre></div>
 
 
@@ -355,7 +355,7 @@ sys 0m0.736s
 <p>为了说明<code>PyPy</code>的缺乏动态类型的支持，Daivd举了以下的例子：</p>
 <div class="highlight"><pre><span></span><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;Hello&#39;</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">lst</span><span class="err">：</span>
-  <span class="k">print</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
 </pre></div>
 
 
@@ -493,7 +493,7 @@ sys 0m0.736s
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2020 Charlie Hu
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

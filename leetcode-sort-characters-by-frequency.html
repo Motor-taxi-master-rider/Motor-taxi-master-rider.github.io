@@ -286,41 +286,41 @@ Tower of Babel            </a>
                 <h3>Description</h3>
 <p>Given a string, sort it in decreasing order based on the frequency of characters.</p>
 <p><strong>Example 1:</strong></p>
-<div class="highlight"><pre><span></span>Input:
-&quot;tree&quot;
+<div class="highlight"><pre><span></span><span class="k">Input</span><span class="p">:</span>
+<span class="ss">&quot;tree&quot;</span>
 
-Output:
-&quot;eert&quot;
+<span class="k">Output</span><span class="p">:</span>
+<span class="ss">&quot;eert&quot;</span>
 
-Explanation:
-&#39;e&#39; appears twice while &#39;r&#39; and &#39;t&#39; both appear once.
-So &#39;e&#39; must appear before both &#39;r&#39; and &#39;t&#39;. Therefore &quot;eetr&quot; is also a valid answer.
+<span class="n">Explanation</span><span class="p">:</span>
+<span class="s1">&#39;e&#39;</span> <span class="n">appears</span> <span class="n">twice</span> <span class="n">while</span> <span class="s1">&#39;r&#39;</span> <span class="k">and</span> <span class="s1">&#39;t&#39;</span> <span class="k">both</span> <span class="n">appear</span> <span class="n">once</span><span class="p">.</span>
+<span class="n">So</span> <span class="s1">&#39;e&#39;</span> <span class="n">must</span> <span class="n">appear</span> <span class="k">before</span> <span class="k">both</span> <span class="s1">&#39;r&#39;</span> <span class="k">and</span> <span class="s1">&#39;t&#39;</span><span class="p">.</span> <span class="n">Therefore</span> <span class="ss">&quot;eetr&quot;</span> <span class="k">is</span> <span class="n">also</span> <span class="n">a</span> <span class="k">valid</span> <span class="n">answer</span><span class="p">.</span>
 </pre></div>
 
 
 <p><strong>Example 2:</strong></p>
-<div class="highlight"><pre><span></span>Input:
-&quot;cccaaa&quot;
+<div class="highlight"><pre><span></span><span class="k">Input</span><span class="p">:</span>
+<span class="ss">&quot;cccaaa&quot;</span>
 
-Output:
-&quot;cccaaa&quot;
+<span class="k">Output</span><span class="p">:</span>
+<span class="ss">&quot;cccaaa&quot;</span>
 
-Explanation:
-Both &#39;c&#39; and &#39;a&#39; appear three times, so &quot;aaaccc&quot; is also a valid answer.
-Note that &quot;cacaca&quot; is incorrect, as the same characters must be together.
+<span class="n">Explanation</span><span class="p">:</span>
+<span class="k">Both</span> <span class="s1">&#39;c&#39;</span> <span class="k">and</span> <span class="s1">&#39;a&#39;</span> <span class="n">appear</span> <span class="n">three</span> <span class="n">times</span><span class="p">,</span> <span class="n">so</span> <span class="ss">&quot;aaaccc&quot;</span> <span class="k">is</span> <span class="n">also</span> <span class="n">a</span> <span class="k">valid</span> <span class="n">answer</span><span class="p">.</span>
+<span class="n">Note</span> <span class="n">that</span> <span class="ss">&quot;cacaca&quot;</span> <span class="k">is</span> <span class="n">incorrect</span><span class="p">,</span> <span class="k">as</span> <span class="n">the</span> <span class="n">same</span> <span class="n">characters</span> <span class="n">must</span> <span class="n">be</span> <span class="n">together</span><span class="p">.</span>
 </pre></div>
 
 
 <p><strong>Example 3:</strong></p>
-<div class="highlight"><pre><span></span>Input:
-&quot;Aabb&quot;
+<div class="highlight"><pre><span></span><span class="k">Input</span><span class="p">:</span>
+<span class="ss">&quot;Aabb&quot;</span>
 
-Output:
-&quot;bbAa&quot;
+<span class="k">Output</span><span class="p">:</span>
+<span class="ss">&quot;bbAa&quot;</span>
 
-Explanation:
-&quot;bbaA&quot; is also a valid answer, but &quot;Aabb&quot; is incorrect.
-Note that &#39;A&#39; and &#39;a&#39; are treated as two different characters.
+<span class="n">Explanation</span><span class="p">:</span>
+<span class="ss">&quot;bbaA&quot;</span> <span class="k">is</span> <span class="n">also</span> <span class="n">a</span> <span class="k">valid</span> <span class="n">answer</span><span class="p">,</span> <span class="n">but</span> <span class="ss">&quot;Aabb&quot;</span> <span class="k">is</span> <span class="n">incorrect</span><span class="p">.</span>
+<span class="n">Note</span> <span class="n">that</span> <span class="s1">&#39;A&#39;</span> <span class="k">and</span> <span class="s1">&#39;a&#39;</span> <span class="k">are</span> <span class="n">treated</span> <span class="k">as</span> <span class="n">two</span> <span class="n">different</span> <span class="n">characters</span><span class="p">.</span>
 </pre></div>
 
 
@@ -368,7 +368,7 @@ Note that &#39;A&#39; and &#39;a&#39; are treated as two different characters.
         <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
             <span class="n">dct</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">dct</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">dct</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">dct</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
             <span class="n">result</span> <span class="o">+=</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">result</span>
 </pre></div>
@@ -381,11 +381,11 @@ Note that &#39;A&#39; and &#39;a&#39; are treated as two different characters.
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/leetcode-longest-uncommon-subsequence-i.html">LeetCode - Longest Uncommon Subsequence I</a></li>
         <li><a href="/leetcode-optimal-division.html">LeetCode - Optimal Division</a></li>
         <li><a href="/leetcode-construct-string-from-binary-tree.html">LeetCode - Construct String from Binary Tree</a></li>
-        <li><a href="/leetcode-maximum-length-of-pair-chain.html">LeetCode - Maximum Length of Pair Chain</a></li>
-        <li><a href="/leetcode-distribute-candies.html">LeetCode - Distribute Candies</a></li>
+        <li><a href="/leetcode-longest-uncommon-subsequence-i.html">LeetCode - Longest Uncommon Subsequence I</a></li>
+        <li><a href="/leetcode-integer-break.html">LeetCode - Integer Break</a></li>
+        <li><a href="/leetcode-island-perimeter.html">LeetCode - Island Perimeter</a></li>
     </ul>
 </section>
         </article>
@@ -501,7 +501,7 @@ Note that &#39;A&#39; and &#39;a&#39; are treated as two different characters.
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2020 Charlie Hu
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

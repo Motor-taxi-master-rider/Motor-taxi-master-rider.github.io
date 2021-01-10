@@ -345,7 +345,7 @@ Tower of Babel            </a>
 <span class="sd">  为gird的每个元素抛出其自身及其邻居给客户程序。</span>
 <span class="sd">  TICK为终止条件。</span>
 <span class="sd">  &quot;&quot;&quot;</span>
-    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">height</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">width</span><span class="p">):</span>
                 <span class="k">yield from</span> <span class="n">step_cell</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
@@ -415,7 +415,7 @@ Tower of Babel            </a>
         <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
             <span class="n">row_count</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">row_count</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">splitlines</span><span class="p">())</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
         <span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">row_count</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">row_count</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
                 <span class="n">line</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()[</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span>
@@ -450,7 +450,7 @@ Tower of Babel            </a>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
          <span class="n">columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">grid</span><span class="p">))</span>
          <span class="n">grid</span> <span class="o">=</span> <span class="n">live_a_generation</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">sim</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
@@ -467,11 +467,11 @@ Tower of Babel            </a>
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/yi-ge-jian-dan-de-wen-ben-jie-xi-ji-suan-qi.html">一个简单的文本解析计算器</a></li>
-        <li><a href="/flunet-python-167-coroutine-understading.html">Flunet Python 16.7 coroutine understading</a></li>
         <li><a href="/python-yield-tutorial-markdown.html">Python yield tutorial markdown</a></li>
         <li><a href="/replace-asyncio-with-native-coroutine.html">Replace asyncio with native coroutine</a></li>
-        <li><a href="/python-coroutine-example-rock-paper-scissors.html">Python Coroutine Example -- Rock Paper Scissors</a></li>
+        <li><a href="/review-guess-word-and-hangman-game.html">[Review] Guess word and hangman game</a></li>
+        <li><a href="/yi-ge-jian-dan-de-wen-ben-jie-xi-ji-suan-qi.html">一个简单的文本解析计算器</a></li>
+        <li><a href="/flunet-python-167-coroutine-understading.html">Flunet Python 16.7 coroutine understading</a></li>
     </ul>
 </section>
         </article>
@@ -587,7 +587,7 @@ Tower of Babel            </a>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2020 Charlie Hu
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

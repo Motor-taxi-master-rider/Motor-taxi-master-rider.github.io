@@ -306,18 +306,18 @@ Tower of Babel            </a>
 
 
 <p>将得到这些字节码：</p>
-<div class="highlight"><pre><span></span>2           0 LOAD_FAST                0 (a)
-            2 LOAD_FAST                1 (b)
-            4 COMPARE_OP               4 (&gt;)
-            6 POP_JUMP_IF_FALSE       12
+<div class="highlight"><pre><span></span><span class="mi">2</span>           <span class="mi">0</span> <span class="n">LOAD_FAST</span>                <span class="mi">0</span> <span class="p">(</span><span class="n">a</span><span class="p">)</span>
+            <span class="mi">2</span> <span class="n">LOAD_FAST</span>                <span class="mi">1</span> <span class="p">(</span><span class="n">b</span><span class="p">)</span>
+            <span class="mi">4</span> <span class="n">COMPARE_OP</span>               <span class="mi">4</span> <span class="p">(</span><span class="o">&gt;</span><span class="p">)</span>
+            <span class="mi">6</span> <span class="n">POP_JUMP_IF_FALSE</span>       <span class="mi">12</span>
 
-3           8 LOAD_FAST                0 (a)
-           10 RETURN_VALUE
+<span class="mi">3</span>           <span class="mi">8</span> <span class="n">LOAD_FAST</span>                <span class="mi">0</span> <span class="p">(</span><span class="n">a</span><span class="p">)</span>
+           <span class="mi">10</span> <span class="n">RETURN_VALUE</span>
 
-5     &gt;&gt;   12 LOAD_FAST                1 (b)
-           14 RETURN_VALUE
-           16 LOAD_CONST               0 (None)
-           18 RETURN_VALUE
+<span class="mi">5</span>     <span class="o">&gt;&gt;</span>   <span class="mi">12</span> <span class="n">LOAD_FAST</span>                <span class="mi">1</span> <span class="p">(</span><span class="n">b</span><span class="p">)</span>
+           <span class="mi">14</span> <span class="n">RETURN_VALUE</span>
+           <span class="mi">16</span> <span class="n">LOAD_CONST</span>               <span class="mi">0</span> <span class="p">(</span><span class="k">None</span><span class="p">)</span>
+           <span class="mi">18</span> <span class="n">RETURN_VALUE</span>
 </pre></div>
 
 
@@ -331,11 +331,11 @@ Tower of Babel            </a>
 
 
 <p>字节码为：</p>
-<div class="highlight"><pre><span></span>0 LOAD_GLOBAL              0 (_stop_at_break)
-2 CALL_FUNCTION            0
-4 POP_TOP
-6 LOAD_CONST               0 (None)
-8 RETURN_VALUE
+<div class="highlight"><pre><span></span><span class="err">0 LOAD_GLOBAL              0 (_stop_at_break)</span>
+<span class="err">2 CALL_FUNCTION            0</span>
+<span class="err">4 POP_TOP</span>
+<span class="err">6 LOAD_CONST               0 (None)</span>
+<span class="err">8 RETURN_VALUE</span>
 </pre></div>
 
 
@@ -348,7 +348,7 @@ Tower of Babel            </a>
 <div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">frame_eval</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">exc</span><span class="p">):</span>
     <span class="n">func_name</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_code</span><span class="o">.</span><span class="n">co_name</span>
     <span class="n">line_number</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_lineno</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">line_number</span><span class="p">,</span> <span class="n">func_name</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line_number</span><span class="p">,</span> <span class="n">func_name</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">_PyEval_EvalFrameDefault</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">set_frame_eval</span><span class="p">():</span>
@@ -422,7 +422,7 @@ Tower of Babel            </a>
 <p>Sofia Heisler最后的实验是用Cython来优化函数本身的运算速度。因为如果有些原因我们不能将数据向量化亦或者向量化无法表达出原有的业务逻辑，那么我们就必须迭代我们的数据集了。为了提高效率我们将原函数写成这样然后用<code>apply</code>迭代：</p>
 <div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">cython</span> <span class="o">-</span><span class="n">a</span>
 <span class="c1">### Haversine cythonized</span>
-<span class="kn">from</span> <span class="nn">libc.math</span> <span class="nn">cimport</span> <span class="nn">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">acos</span><span class="p">,</span> <span class="n">asin</span><span class="p">,</span> <span class="n">sqrt</span>
+<span class="kn">from</span> <span class="nn">libc.math</span> <span class="n">cimport</span> <span class="n">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">acos</span><span class="p">,</span> <span class="n">asin</span><span class="p">,</span> <span class="n">sqrt</span>
 
 <span class="n">cdef</span> <span class="n">deg2rad_cy</span><span class="p">(</span><span class="nb">float</span> <span class="n">deg</span><span class="p">):</span>
     <span class="n">cdef</span> <span class="nb">float</span> <span class="n">rad</span>
@@ -572,7 +572,7 @@ Tower of Babel            </a>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2020 Charlie Hu
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

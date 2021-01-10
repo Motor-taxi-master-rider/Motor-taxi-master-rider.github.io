@@ -285,14 +285,14 @@ Tower of Babel            </a>
 <p>Follow up:
 What if the linked list is extremely large and its length is unknown to you? Could you solve this efficiently without using extra space?</p>
 <p><strong>Example:</strong></p>
-<div class="highlight"><pre><span></span>// Init a singly linked list [1,2,3].
-ListNode head = new ListNode(1);
-head.next = new ListNode(2);
-head.next.next = new ListNode(3);
-Solution solution = new Solution(head);
+<div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Init</span> <span class="n">a</span> <span class="n">singly</span> <span class="n">linked</span> <span class="n">list</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">].</span>
+<span class="n">ListNode</span> <span class="n">head</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">head</span><span class="p">.</span><span class="k">next</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">head</span><span class="p">.</span><span class="k">next</span><span class="p">.</span><span class="k">next</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="n">Solution</span> <span class="n">solution</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Solution</span><span class="p">(</span><span class="n">head</span><span class="p">);</span>
 
-// getRandom() should return either 1, 2, or 3 randomly. Each element should have equal probability of returning.
-solution.getRandom();
+<span class="o">//</span> <span class="n">getRandom</span><span class="p">()</span> <span class="n">should</span> <span class="k">return</span> <span class="n">either</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="k">or</span> <span class="mi">3</span> <span class="n">randomly</span><span class="p">.</span> <span class="k">Each</span> <span class="n">element</span> <span class="n">should</span> <span class="n">have</span> <span class="n">equal</span> <span class="n">probability</span> <span class="k">of</span> <span class="n">returning</span><span class="p">.</span>
+<span class="n">solution</span><span class="p">.</span><span class="n">getRandom</span><span class="p">();</span>
 </pre></div>
 
 
@@ -313,24 +313,24 @@ solution.getRandom();
 <p>替换掉被选中的元素。其中<code>i</code>是元素的序号。</p>
 <h4>算法证明</h4>
 <p>算法的成立是用数学归纳法证明的:</p>
-<div class="highlight"><pre><span></span>设每次都是以k/i的概率来选择。假设当前是i+1, 按照我们的规定，i+1这个元素被选中的概率是k/i+1，也即第 i+1 这个元素在蓄水池中出现的概率是k/i+1
-此时考虑前i个元素，如果前i个元素出现在蓄水池中的概率都是k/i+1的话，说明我们的算法是没有问题的。
+<div class="highlight"><pre><span></span><span class="err">设每次都是以</span><span class="n">k</span><span class="o">/</span><span class="n">i</span><span class="err">的概率来选择。假设当前是</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="err">按照我们的规定，</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="err">这个元素被选中的概率是</span><span class="n">k</span><span class="o">/</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="err">，也即第</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span> <span class="err">这个元素在蓄水池中出现的概率是</span><span class="n">k</span><span class="o">/</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span>
+<span class="err">此时考虑前</span><span class="n">i</span><span class="err">个元素，如果前</span><span class="n">i</span><span class="err">个元素出现在蓄水池中的概率都是</span><span class="n">k</span><span class="o">/</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="err">的话，说明我们的算法是没有问题的。</span>
 
-对这个问题可以用归纳法来证明：k &lt; i &lt;=N：
+<span class="err">对这个问题可以用归纳法来证明：</span><span class="n">k</span> <span class="o">&lt;</span> <span class="n">i</span> <span class="o">&lt;=</span><span class="n">N</span><span class="err">：</span>
 
-1.当i=k+1的时候，蓄水池的容量为k，第k+1个元素被选择的概率明显为k/(k+1), 此时前k个元素出现在蓄水池的概率为 k/(k+1), 很明显结论成立。
-2.假设当 j=i 的时候结论成立，此时以 k/i 的概率来选择第i个元素，前i-1个元素出现在蓄水池的概率都为k/i。
-证明当j=i+1的情况：
-即需要证明当以 k/i+1 的概率来选择第i+1个元素的时候，此时任一前i个元素出现在蓄水池的概率都为k/(i+1).
-前i个元素出现在蓄水池的概率有2部分组成, ①在第i+1次选择前得出现在蓄水池中，②得保证第i+1次选择的时候不被替换掉
-①.由2知道在第i+1次选择前，任一前i个元素出现在蓄水池的概率都为k/i
-②.考虑被替换的概率：
-首先要被替换得第 i+1 个元素被选中(不然不用替换了)概率为 k/i+1，其次是因为随机替换的池子中k个元素中任意一个，所以不幸被替换的概率是 1/k，故
-前i个元素(池中元素)中任一被替换的概率 = k/(i+1) * 1/k = 1/i+1
-则(池中元素中)没有被替换的概率为: 1 - 1/(i+1) = i/i+1
-综合① ②,通过乘法规则
-得到前i个元素出现在蓄水池的概率为 k/i * i/(i+1) = k/i+1
-故证明成立
+<span class="mi">1</span><span class="p">.</span><span class="err">当</span><span class="n">i</span><span class="o">=</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="err">的时候，蓄水池的容量为</span><span class="n">k</span><span class="err">，第</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="err">个元素被选择的概率明显为</span><span class="n">k</span><span class="o">/</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="err">此时前</span><span class="n">k</span><span class="err">个元素出现在蓄水池的概率为</span> <span class="n">k</span><span class="o">/</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="err">很明显结论成立。</span>
+<span class="mi">2</span><span class="p">.</span><span class="err">假设当</span> <span class="n">j</span><span class="o">=</span><span class="n">i</span> <span class="err">的时候结论成立，此时以</span> <span class="n">k</span><span class="o">/</span><span class="n">i</span> <span class="err">的概率来选择第</span><span class="n">i</span><span class="err">个元素，前</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="err">个元素出现在蓄水池的概率都为</span><span class="n">k</span><span class="o">/</span><span class="n">i</span><span class="err">。</span>
+<span class="err">证明当</span><span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="err">的情况：</span>
+<span class="err">即需要证明当以</span> <span class="n">k</span><span class="o">/</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span> <span class="err">的概率来选择第</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="err">个元素的时候，此时任一前</span><span class="n">i</span><span class="err">个元素出现在蓄水池的概率都为</span><span class="n">k</span><span class="o">/</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">).</span>
+<span class="err">前</span><span class="n">i</span><span class="err">个元素出现在蓄水池的概率有</span><span class="mi">2</span><span class="err">部分组成</span><span class="p">,</span> <span class="err">①在第</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="err">次选择前得出现在蓄水池中，②得保证第</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="err">次选择的时候不被替换掉</span>
+<span class="err">①</span><span class="p">.</span><span class="err">由</span><span class="mi">2</span><span class="err">知道在第</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="err">次选择前，任一前</span><span class="n">i</span><span class="err">个元素出现在蓄水池的概率都为</span><span class="n">k</span><span class="o">/</span><span class="n">i</span>
+<span class="err">②</span><span class="p">.</span><span class="err">考虑被替换的概率：</span>
+<span class="err">首先要被替换得第</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span> <span class="err">个元素被选中</span><span class="p">(</span><span class="err">不然不用替换了</span><span class="p">)</span><span class="err">概率为</span> <span class="n">k</span><span class="o">/</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="err">，其次是因为随机替换的池子中</span><span class="n">k</span><span class="err">个元素中任意一个，所以不幸被替换的概率是</span> <span class="mi">1</span><span class="o">/</span><span class="n">k</span><span class="err">，故</span>
+<span class="err">前</span><span class="n">i</span><span class="err">个元素</span><span class="p">(</span><span class="err">池中元素</span><span class="p">)</span><span class="err">中任一被替换的概率</span> <span class="o">=</span> <span class="n">k</span><span class="o">/</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1</span><span class="o">/</span><span class="n">k</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span>
+<span class="err">则</span><span class="p">(</span><span class="err">池中元素中</span><span class="p">)</span><span class="err">没有被替换的概率为</span><span class="p">:</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="n">i</span><span class="o">/</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span>
+<span class="err">综合①</span> <span class="err">②</span><span class="p">,</span><span class="err">通过乘法规则</span>
+<span class="err">得到前</span><span class="n">i</span><span class="err">个元素出现在蓄水池的概率为</span> <span class="n">k</span><span class="o">/</span><span class="n">i</span> <span class="o">*</span> <span class="n">i</span><span class="o">/</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="n">k</span><span class="o">/</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span>
+<span class="err">故证明成立</span>
 </pre></div>
 
 
@@ -415,28 +415,28 @@ solution.getRandom();
 <p>.</p>
 <p><strong>Algorithm A-Res</strong></p>
 <div class="highlight"><pre><span></span><span class="p">(</span><span class="o">*</span>
-  S is a stream of items to <span class="kp">sample</span><span class="p">,</span> R will contain the result
-  S.Current returns current item <span class="kr">in</span> stream
-  S.Weight  returns weight of current item <span class="kr">in</span> stream
-  S.Next advances stream to <span class="kr">next</span> position
-  The power operator is represented by <span class="o">^</span>
-  <span class="kp">min</span><span class="o">-</span>priority<span class="o">-</span>queue supports<span class="o">:</span>
-    Count <span class="o">-&gt;</span> number of items <span class="kr">in</span> priority queue
-    Minimum<span class="p">()</span> <span class="o">-&gt;</span> returns minimum key value of all items
-    Extract<span class="o">-</span>Min<span class="p">()</span> <span class="o">-&gt;</span> Remove the item with minimum key
-    Insert<span class="p">(</span>key<span class="p">,</span> Item<span class="p">)</span> <span class="o">-&gt;</span> Adds item with specified key
+  <span class="n">S</span> <span class="n">is</span> <span class="n">a</span> <span class="n">stream</span> <span class="n">of</span> <span class="n">items</span> <span class="n">to</span> <span class="n">sample</span><span class="p">,</span> <span class="n">R</span> <span class="n">will</span> <span class="n">contain</span> <span class="n">the</span> <span class="n">result</span>
+  <span class="n">S.Current</span> <span class="n">returns</span> <span class="n">current</span> <span class="n">item</span> <span class="n">in</span> <span class="n">stream</span>
+  <span class="n">S.Weight</span>  <span class="n">returns</span> <span class="n">weight</span> <span class="n">of</span> <span class="n">current</span> <span class="n">item</span> <span class="n">in</span> <span class="n">stream</span>
+  <span class="n">S.Next</span> <span class="n">advances</span> <span class="n">stream</span> <span class="n">to</span> <span class="n">next</span> <span class="n">position</span>
+  <span class="n">The</span> <span class="n">power</span> <span class="n">operator</span> <span class="n">is</span> <span class="n">represented</span> <span class="n">by</span> <span class="n">^</span>
+  <span class="n">min</span><span class="o">-</span><span class="n">priority</span><span class="o">-</span><span class="n">queue</span> <span class="n">supports</span><span class="o">:</span>
+    <span class="n">Count</span> <span class="o">-&gt;</span> <span class="n">number</span> <span class="n">of</span> <span class="n">items</span> <span class="n">in</span> <span class="n">priority</span> <span class="n">queue</span>
+    <span class="nf">Minimum</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">returns</span> <span class="n">minimum</span> <span class="n">key</span> <span class="n">value</span> <span class="n">of</span> <span class="n">all</span> <span class="n">items</span>
+    <span class="n">Extract</span><span class="o">-</span><span class="nf">Min</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Remove</span> <span class="n">the</span> <span class="n">item</span> <span class="n">with</span> <span class="n">minimum</span> <span class="n">key</span>
+    <span class="nf">Insert</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">Item</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Adds</span> <span class="n">item</span> <span class="n">with</span> <span class="n">specified</span> <span class="n">key</span>
  <span class="o">*</span><span class="p">)</span>
-ReservoirSample<span class="p">(</span>S<span class="p">[</span><span class="m">1..</span><span class="o">?</span><span class="p">],</span> R<span class="p">[</span><span class="m">1..</span>k<span class="p">])</span>
-  H <span class="o">=</span> new <span class="kp">min</span><span class="o">-</span>priority<span class="o">-</span>queue
-  <span class="kr">while</span> S has data
-    r <span class="o">=</span> Random<span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">)</span> <span class="o">^</span> <span class="p">(</span><span class="m">1</span><span class="o">/</span>S.Weight<span class="p">)</span>  <span class="o">//</span> important<span class="o">:</span> inclusive <span class="kp">range</span>
-    <span class="kr">if</span> H.Count <span class="o">&lt;</span> k
-      H.Insert<span class="p">(</span>r<span class="p">,</span> S.Current<span class="p">)</span>
-    <span class="kp">else</span>
-      <span class="kr">if</span> H.Minimum <span class="o">&lt;</span> r
-        H.Extract<span class="o">-</span>Min<span class="p">()</span>
-        H.Insert<span class="p">(</span>r<span class="p">,</span> S.Current<span class="p">)</span>
-    S.Next
+<span class="nf">ReservoirSample</span><span class="p">(</span><span class="n">S[1..</span><span class="o">?</span><span class="n">]</span><span class="p">,</span> <span class="n">R[1..k]</span><span class="p">)</span>
+  <span class="n">H</span> <span class="o">=</span> <span class="n">new</span> <span class="n">min</span><span class="o">-</span><span class="n">priority</span><span class="o">-</span><span class="n">queue</span>
+  <span class="n">while</span> <span class="n">S</span> <span class="n">has</span> <span class="n">data</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="nf">Random</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">)</span> <span class="nf">^ </span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="n">S.Weight</span><span class="p">)</span>  <span class="o">//</span> <span class="n">important</span><span class="o">:</span> <span class="n">inclusive</span> <span class="n">range</span>
+    <span class="n">if</span> <span class="n">H.Count</span> <span class="o">&lt;</span> <span class="n">k</span>
+      <span class="nf">H.Insert</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">S.Current</span><span class="p">)</span>
+    <span class="n">else</span>
+      <span class="n">if</span> <span class="n">H.Minimum</span> <span class="o">&lt;</span> <span class="n">r</span>
+        <span class="n">H.Extract</span><span class="o">-</span><span class="nf">Min</span><span class="p">()</span>
+        <span class="nf">H.Insert</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">S.Current</span><span class="p">)</span>
+    <span class="n">S.Next</span>
 </pre></div>
 
 
@@ -505,11 +505,11 @@ ReservoirSample<span class="p">(</span>S<span class="p">[</span><span class="m">
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/leetcode-maximum-length-of-pair-chain.html">LeetCode - Maximum Length of Pair Chain</a></li>
-        <li><a href="/leetcode-distribute-candies.html">LeetCode - Distribute Candies</a></li>
         <li><a href="/leetcode-integer-break.html">LeetCode - Integer Break</a></li>
-        <li><a href="/leetcode-move-zeroes.html">LeetCode - Move Zeroes</a></li>
-        <li><a href="/leetcode-convert-bst-to-greater-tree.html">LeetCode - Convert BST to Greater Tree</a></li>
+        <li><a href="/leetcode-island-perimeter.html">LeetCode - Island Perimeter</a></li>
+        <li><a href="/leetcode-beautiful-arrangement.html">LeetCode - Beautiful Arrangement</a></li>
+        <li><a href="/leetcode-find-bottom-left-tree-value.html">LeetCode - Find Bottom Left Tree Value</a></li>
+        <li><a href="/leetcode-queue-reconstruction-by-height.html">LeetCode - Queue Reconstruction by Height</a></li>
     </ul>
 </section>
         </article>
@@ -625,7 +625,7 @@ ReservoirSample<span class="p">(</span>S<span class="p">[</span><span class="m">
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2020 Charlie Hu
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

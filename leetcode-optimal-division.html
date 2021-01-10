@@ -284,18 +284,18 @@ Tower of Babel            </a>
 <p>Given a list of <strong>positive integers</strong>, the adjacent integers will perform the float division. For example, [2,3,4] -&gt; 2 / 3 / 4.</p>
 <p>However, you can add any number of parenthesis at any position to change the priority of operations. You should find out how to add parenthesis to get the <strong>maximum</strong> result, and return the corresponding expression in string format. <strong>Your expression should NOT contain redundant parenthesis</strong>.</p>
 <p><strong>Example:</strong></p>
-<div class="highlight"><pre><span></span>**Input**: [1000,100,10,2]
-**Output**: &quot;1000/(100/10/2)&quot;
-**Explanation**:
-1000/(100/10/2) = 1000/((100/10)/2) = 200
-However, the bold parenthesis in &quot;1000/((100/10)/2)&quot; are redundant,
-since they don&#39;t influence the operation priority. So you should return &quot;1000/(100/10/2)&quot;.
+<div class="highlight"><pre><span></span><span class="o">**</span><span class="k">Input</span><span class="o">**</span><span class="p">:</span> <span class="p">[</span><span class="mi">1000</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="o">**</span><span class="k">Output</span><span class="o">**</span><span class="p">:</span> <span class="ss">&quot;1000/(100/10/2)&quot;</span>
+<span class="o">**</span><span class="n">Explanation</span><span class="o">**</span><span class="p">:</span>
+<span class="mi">1000</span><span class="o">/</span><span class="p">(</span><span class="mi">100</span><span class="o">/</span><span class="mi">10</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1000</span><span class="o">/</span><span class="p">((</span><span class="mi">100</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">However</span><span class="p">,</span> <span class="n">the</span> <span class="n">bold</span> <span class="n">parenthesis</span> <span class="k">in</span> <span class="ss">&quot;1000/((100/10)/2)&quot;</span> <span class="k">are</span> <span class="n">redundant</span><span class="p">,</span>
+<span class="n">since</span> <span class="n">they</span> <span class="n">don</span><span class="err">&#39;</span><span class="n">t</span> <span class="n">influence</span> <span class="n">the</span> <span class="k">operation</span> <span class="n">priority</span><span class="p">.</span> <span class="n">So</span> <span class="n">you</span> <span class="n">should</span> <span class="k">return</span> <span class="ss">&quot;1000/(100/10/2)&quot;</span><span class="p">.</span>
 
-Other cases:
-1000/(100/10)/2 = 50
-1000/(100/(10/2)) = 50
-1000/100/10/2 = 0.5
-1000/100/(10/2) = 2
+<span class="n">Other</span> <span class="n">cases</span><span class="p">:</span>
+<span class="mi">1000</span><span class="o">/</span><span class="p">(</span><span class="mi">100</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="mi">1000</span><span class="o">/</span><span class="p">(</span><span class="mi">100</span><span class="o">/</span><span class="p">(</span><span class="mi">10</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="mi">1000</span><span class="o">/</span><span class="mi">100</span><span class="o">/</span><span class="mi">10</span><span class="o">/</span><span class="mi">2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">.</span><span class="mi">5</span>
+<span class="mi">1000</span><span class="o">/</span><span class="mi">100</span><span class="o">/</span><span class="p">(</span><span class="mi">10</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="mi">2</span>
 </pre></div>
 
 
@@ -311,7 +311,7 @@ Other cases:
     <span class="k">def</span> <span class="nf">optimalDivision</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">A</span><span class="p">):</span>
         <span class="n">A</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span> <span class="k">return</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-        <span class="k">return</span> <span class="s1">&#39;{}/({})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">/(</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
 </pre></div>
 
 
@@ -339,11 +339,11 @@ Other cases:
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/leetcode-longest-uncommon-subsequence-i.html">LeetCode - Longest Uncommon Subsequence I</a></li>
         <li><a href="/leetcode-construct-string-from-binary-tree.html">LeetCode - Construct String from Binary Tree</a></li>
         <li><a href="/leetcode-sort-characters-by-frequency.html">LeetCode - Sort Characters by Frequency</a></li>
-        <li><a href="/leetcode-maximum-length-of-pair-chain.html">LeetCode - Maximum Length of Pair Chain</a></li>
-        <li><a href="/leetcode-distribute-candies.html">LeetCode - Distribute Candies</a></li>
+        <li><a href="/leetcode-longest-uncommon-subsequence-i.html">LeetCode - Longest Uncommon Subsequence I</a></li>
+        <li><a href="/leetcode-integer-break.html">LeetCode - Integer Break</a></li>
+        <li><a href="/leetcode-island-perimeter.html">LeetCode - Island Perimeter</a></li>
     </ul>
 </section>
         </article>
@@ -459,7 +459,7 @@ Other cases:
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2020 Charlie Hu
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

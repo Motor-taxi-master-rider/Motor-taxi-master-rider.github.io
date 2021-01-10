@@ -285,175 +285,175 @@ Tower of Babel            </a>
 <p><a href="https://leetcode.com/problemset/database/">Source link</a></p>
 <h3>删除重复数据</h3>
 <p>Write a SQL query to delete all duplicate email entries in a table named Person, keeping only unique emails based on its smallest Id.</p>
-<div class="highlight"><pre><span></span>+----+------------------+
-| Id | Email            |
-+----+------------------+
-| 1  | john@example.com |
-| 2  | bob@example.com  |
-| 3  | john@example.com |
-+----+------------------+
-Id is the primary key column for this table.
+<div class="highlight"><pre><span></span><span class="err">+----+------------------+</span>
+<span class="err">| Id | Email            |</span>
+<span class="err">+----+------------------+</span>
+<span class="err">| 1  | john@example.com |</span>
+<span class="err">| 2  | bob@example.com  |</span>
+<span class="err">| 3  | john@example.com |</span>
+<span class="err">+----+------------------+</span>
+<span class="err">Id is the primary key column for this table.</span>
 </pre></div>
 
 
 <p>For example, after running your query, the above Person table should have the following rows:</p>
-<div class="highlight"><pre><span></span>+----+------------------+
-| Id | Email            |
-+----+------------------+
-| 1  | john@example.com |
-| 2  | bob@example.com  |
-+----+------------------+
+<div class="highlight"><pre><span></span><span class="err">+----+------------------+</span>
+<span class="err">| Id | Email            |</span>
+<span class="err">+----+------------------+</span>
+<span class="err">| 1  | john@example.com |</span>
+<span class="err">| 2  | bob@example.com  |</span>
+<span class="err">+----+------------------+</span>
 </pre></div>
 
 
 <blockquote>
 <p>删除重复数据是非常普遍和基础的操作。首先我们可以用连接自身以及where条件过滤来完成。</p>
 </blockquote>
-<div class="highlight"><pre><span></span>delete p1
-from Person p1,Person p2
-where p1.Email=p2.Email
-and p1.id&gt;p2.id
+<div class="highlight"><pre><span></span><span class="err">delete p1</span>
+<span class="err">from Person p1,Person p2</span>
+<span class="err">where p1.Email=p2.Email</span>
+<span class="err">and p1.id&gt;p2.id</span>
 </pre></div>
 
 
 <blockquote>
 <p>用子查询和min选出每个同名组中最小的id号，删除除了这些id以外的行。</p>
 </blockquote>
-<div class="highlight"><pre><span></span>delete  from Person
-where id not in (select b.id from (select min(id) as id from Person group by Email) b)
+<div class="highlight"><pre><span></span><span class="err">delete  from Person</span>
+<span class="err">where id not in (select b.id from (select min(id) as id from Person group by Email) b)</span>
 </pre></div>
 
 
 <h3>排序问题</h3>
 <p>Write a SQL query to rank scores. If there is a tie between two scores, both should have the same ranking. Note that after a tie, the next ranking number should be the next consecutive integer value. In other words, there should be no "holes" between ranks.</p>
-<div class="highlight"><pre><span></span>+----+-------+
-| Id | Score |
-+----+-------+
-| 1  | 3.50  |
-| 2  | 3.65  |
-| 3  | 4.00  |
-| 4  | 3.85  |
-| 5  | 4.00  |
-| 6  | 3.65  |
-+----+-------+
+<div class="highlight"><pre><span></span><span class="err">+----+-------+</span>
+<span class="err">| Id | Score |</span>
+<span class="err">+----+-------+</span>
+<span class="err">| 1  | 3.50  |</span>
+<span class="err">| 2  | 3.65  |</span>
+<span class="err">| 3  | 4.00  |</span>
+<span class="err">| 4  | 3.85  |</span>
+<span class="err">| 5  | 4.00  |</span>
+<span class="err">| 6  | 3.65  |</span>
+<span class="err">+----+-------+</span>
 </pre></div>
 
 
 <p>For example, given the above Scores table, your query should generate the following report (order by highest score):</p>
-<div class="highlight"><pre><span></span>+-------+------+
-| Score | Rank |
-+-------+------+
-| 4.00  | 1    |
-| 4.00  | 1    |
-| 3.85  | 2    |
-| 3.65  | 3    |
-| 3.65  | 3    |
-| 3.50  | 4    |
-+-------+------+
+<div class="highlight"><pre><span></span><span class="err">+-------+------+</span>
+<span class="err">| Score | Rank |</span>
+<span class="err">+-------+------+</span>
+<span class="err">| 4.00  | 1    |</span>
+<span class="err">| 4.00  | 1    |</span>
+<span class="err">| 3.85  | 2    |</span>
+<span class="err">| 3.65  | 3    |</span>
+<span class="err">| 3.65  | 3    |</span>
+<span class="err">| 3.50  | 4    |</span>
+<span class="err">+-------+------+</span>
 </pre></div>
 
 
 <blockquote>
 <p>这里用结果集中大于等于当前score的distinct行数来表示某分数在整个结果集中的序列。</p>
 </blockquote>
-<div class="highlight"><pre><span></span>select s.Score, (select count(*) from (select distinct Score from Scores) s2 where s2.Score&gt;=s.Score) Rank
-from Scores s
-order by Rank asc
+<div class="highlight"><pre><span></span><span class="err">select s.Score, (select count(*) from (select distinct Score from Scores) s2 where s2.Score&gt;=s.Score) Rank</span>
+<span class="err">from Scores s</span>
+<span class="err">order by Rank asc</span>
 </pre></div>
 
 
 <h3>分组比较问题</h3>
 <p>The Trips table holds all taxi trips. Each trip has a unique Id, while Client_Id and Driver_Id are both foreign keys to the Users_Id at the Users table. Status is an ENUM type of (‘completed’, ‘cancelled_by_driver’, ‘cancelled_by_client’).</p>
-<div class="highlight"><pre><span></span>+----+-----------+-----------+---------+--------------------+----------+
-| Id | Client_Id | Driver_Id | City_Id |        Status      |Request_at|
-+----+-----------+-----------+---------+--------------------+----------+
-| 1  |     1     |    10     |    1    |     completed      |2013-10-01|
-| 2  |     2     |    11     |    1    | cancelled_by_driver|2013-10-01|
-| 3  |     3     |    12     |    6    |     completed      |2013-10-01|
-| 4  |     4     |    13     |    6    | cancelled_by_client|2013-10-01|
-| 5  |     1     |    10     |    1    |     completed      |2013-10-02|
-| 6  |     2     |    11     |    6    |     completed      |2013-10-02|
-| 7  |     3     |    12     |    6    |     completed      |2013-10-02|
-| 8  |     2     |    12     |    12   |     completed      |2013-10-03|
-| 9  |     3     |    10     |    12   |     completed      |2013-10-03|
-| 10 |     4     |    13     |    12   | cancelled_by_driver|2013-10-03|
-+----+-----------+-----------+---------+--------------------+----------+
+<div class="highlight"><pre><span></span><span class="err">+----+-----------+-----------+---------+--------------------+----------+</span>
+<span class="err">| Id | Client_Id | Driver_Id | City_Id |        Status      |Request_at|</span>
+<span class="err">+----+-----------+-----------+---------+--------------------+----------+</span>
+<span class="err">| 1  |     1     |    10     |    1    |     completed      |2013-10-01|</span>
+<span class="err">| 2  |     2     |    11     |    1    | cancelled_by_driver|2013-10-01|</span>
+<span class="err">| 3  |     3     |    12     |    6    |     completed      |2013-10-01|</span>
+<span class="err">| 4  |     4     |    13     |    6    | cancelled_by_client|2013-10-01|</span>
+<span class="err">| 5  |     1     |    10     |    1    |     completed      |2013-10-02|</span>
+<span class="err">| 6  |     2     |    11     |    6    |     completed      |2013-10-02|</span>
+<span class="err">| 7  |     3     |    12     |    6    |     completed      |2013-10-02|</span>
+<span class="err">| 8  |     2     |    12     |    12   |     completed      |2013-10-03|</span>
+<span class="err">| 9  |     3     |    10     |    12   |     completed      |2013-10-03|</span>
+<span class="err">| 10 |     4     |    13     |    12   | cancelled_by_driver|2013-10-03|</span>
+<span class="err">+----+-----------+-----------+---------+--------------------+----------+</span>
 </pre></div>
 
 
 <p>The Users table holds all users. Each user has an unique Users_Id, and Role is an ENUM type of (‘client’, ‘driver’, ‘partner’).</p>
-<div class="highlight"><pre><span></span>+----------+--------+--------+
-| Users_Id | Banned |  Role  |
-+----------+--------+--------+
-|    1     |   No   | client |
-|    2     |   Yes  | client |
-|    3     |   No   | client |
-|    4     |   No   | client |
-|    10    |   No   | driver |
-|    11    |   No   | driver |
-|    12    |   No   | driver |
-|    13    |   No   | driver |
-+----------+--------+--------+
+<div class="highlight"><pre><span></span><span class="err">+----------+--------+--------+</span>
+<span class="err">| Users_Id | Banned |  Role  |</span>
+<span class="err">+----------+--------+--------+</span>
+<span class="err">|    1     |   No   | client |</span>
+<span class="err">|    2     |   Yes  | client |</span>
+<span class="err">|    3     |   No   | client |</span>
+<span class="err">|    4     |   No   | client |</span>
+<span class="err">|    10    |   No   | driver |</span>
+<span class="err">|    11    |   No   | driver |</span>
+<span class="err">|    12    |   No   | driver |</span>
+<span class="err">|    13    |   No   | driver |</span>
+<span class="err">+----------+--------+--------+</span>
 </pre></div>
 
 
 <p>Write a SQL query to find the cancellation rate of requests made by unbanned clients between Oct 1, 2013 and Oct 3, 2013. For the above tables, your SQL query should return the following rows with the cancellation rate being rounded to two decimal places.</p>
-<div class="highlight"><pre><span></span>+------------+-------------------+
-|     Day    | Cancellation Rate |
-+------------+-------------------+
-| 2013-10-01 |       0.33        |
-| 2013-10-02 |       0.00        |
-| 2013-10-03 |       0.50        |
-+------------+-------------------+
+<div class="highlight"><pre><span></span><span class="err">+------------+-------------------+</span>
+<span class="err">|     Day    | Cancellation Rate |</span>
+<span class="err">+------------+-------------------+</span>
+<span class="err">| 2013-10-01 |       0.33        |</span>
+<span class="err">| 2013-10-02 |       0.00        |</span>
+<span class="err">| 2013-10-03 |       0.50        |</span>
+<span class="err">+------------+-------------------+</span>
 </pre></div>
 
 
 <blockquote>
 <p>将数据集以时间分组，利用case when 来判断是否计入取消订单数。也可以用if语句。</p>
 </blockquote>
-<div class="highlight"><pre><span></span>select t.Request_at as Day,
-round((sum(case when t.Status in (&quot;cancelled_by_driver&quot;,&quot;cancelled_by_client&quot;) then 1 else 0 end)/count(*)),2) as &quot;Cancellation Rate&quot;
-from Trips t inner join Users u on t.Client_Id =u.Users_Id
-where u.Banned &lt;&gt; &quot;Yes&quot;
-and t.Request_at between &quot;2013-10-01&quot; and &quot;2013-10-03&quot;
-group by t.Request_at
+<div class="highlight"><pre><span></span><span class="err">select t.Request_at as Day,</span>
+<span class="err">round((sum(case when t.Status in (&quot;cancelled_by_driver&quot;,&quot;cancelled_by_client&quot;) then 1 else 0 end)/count(*)),2) as &quot;Cancellation Rate&quot;</span>
+<span class="err">from Trips t inner join Users u on t.Client_Id =u.Users_Id</span>
+<span class="err">where u.Banned &lt;&gt; &quot;Yes&quot;</span>
+<span class="err">and t.Request_at between &quot;2013-10-01&quot; and &quot;2013-10-03&quot;</span>
+<span class="err">group by t.Request_at</span>
 </pre></div>
 
 
 <p>The Employee table holds all employees. Every employee has an Id, and there is also a column for the department Id.</p>
-<div class="highlight"><pre><span></span>+----+-------+--------+--------------+
-| Id | Name  | Salary | DepartmentId |
-+----+-------+--------+--------------+
-| 1  | Joe   | 70000  | 1            |
-| 2  | Henry | 80000  | 2            |
-| 3  | Sam   | 60000  | 2            |
-| 4  | Max   | 90000  | 1            |
-| 5  | Janet | 69000  | 1            |
-| 6  | Randy | 85000  | 1            |
-+----+-------+--------+--------------+
+<div class="highlight"><pre><span></span><span class="err">+----+-------+--------+--------------+</span>
+<span class="err">| Id | Name  | Salary | DepartmentId |</span>
+<span class="err">+----+-------+--------+--------------+</span>
+<span class="err">| 1  | Joe   | 70000  | 1            |</span>
+<span class="err">| 2  | Henry | 80000  | 2            |</span>
+<span class="err">| 3  | Sam   | 60000  | 2            |</span>
+<span class="err">| 4  | Max   | 90000  | 1            |</span>
+<span class="err">| 5  | Janet | 69000  | 1            |</span>
+<span class="err">| 6  | Randy | 85000  | 1            |</span>
+<span class="err">+----+-------+--------+--------------+</span>
 </pre></div>
 
 
 <p>The Department table holds all departments of the company.</p>
-<div class="highlight"><pre><span></span>+----+----------+
-| Id | Name     |
-+----+----------+
-| 1  | IT       |
-| 2  | Sales    |
-+----+----------+
+<div class="highlight"><pre><span></span><span class="err">+----+----------+</span>
+<span class="err">| Id | Name     |</span>
+<span class="err">+----+----------+</span>
+<span class="err">| 1  | IT       |</span>
+<span class="err">| 2  | Sales    |</span>
+<span class="err">+----+----------+</span>
 </pre></div>
 
 
 <p>Write a SQL query to find employees who earn the top three salaries in each of the department. For the above tables, your SQL query should return the following rows.</p>
-<div class="highlight"><pre><span></span>+------------+----------+--------+
-| Department | Employee | Salary |
-+------------+----------+--------+
-| IT         | Max      | 90000  |
-| IT         | Randy    | 85000  |
-| IT         | Joe      | 70000  |
-| Sales      | Henry    | 80000  |
-| Sales      | Sam      | 60000  |
-+------------+----------+--------+
+<div class="highlight"><pre><span></span><span class="err">+------------+----------+--------+</span>
+<span class="err">| Department | Employee | Salary |</span>
+<span class="err">+------------+----------+--------+</span>
+<span class="err">| IT         | Max      | 90000  |</span>
+<span class="err">| IT         | Randy    | 85000  |</span>
+<span class="err">| IT         | Joe      | 70000  |</span>
+<span class="err">| Sales      | Henry    | 80000  |</span>
+<span class="err">| Sales      | Sam      | 60000  |</span>
+<span class="err">+------------+----------+--------+</span>
 </pre></div>
 
 
@@ -461,26 +461,26 @@ group by t.Request_at
 <p>取top3的分组数据和取最大分组salary有所不同。后者可以用where salary in （select max(salary) ..group by ）子查询语句来实现。
 这里运用了排序问题中的思想。将当前salary与同一group中（表现为departmentid相等），大于等于当前distinct的salary的数量作为该salary的rank。其他限制条件就迎刃而解了。</p>
 </blockquote>
-<div class="highlight"><pre><span></span>select d.Name Department, e1.Name Employee, e1.Salary
-from Employee e1
-join Department d
-on e1.DepartmentId = d.Id
-where 3 &gt; (select count(distinct(e2.Salary))
-                  from Employee e2
-                  where e2.Salary &gt; e1.Salary
-                  and e1.DepartmentId = e2.DepartmentId
-                  );
+<div class="highlight"><pre><span></span><span class="err">select d.Name Department, e1.Name Employee, e1.Salary</span>
+<span class="err">from Employee e1</span>
+<span class="err">join Department d</span>
+<span class="err">on e1.DepartmentId = d.Id</span>
+<span class="err">where 3 &gt; (select count(distinct(e2.Salary))</span>
+<span class="err">                  from Employee e2</span>
+<span class="err">                  where e2.Salary &gt; e1.Salary</span>
+<span class="err">                  and e1.DepartmentId = e2.DepartmentId</span>
+<span class="err">                  );</span>
 </pre></div>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/leetcode-maximum-length-of-pair-chain.html">LeetCode - Maximum Length of Pair Chain</a></li>
-        <li><a href="/leetcode-distribute-candies.html">LeetCode - Distribute Candies</a></li>
         <li><a href="/leetcode-integer-break.html">LeetCode - Integer Break</a></li>
-        <li><a href="/leetcode-move-zeroes.html">LeetCode - Move Zeroes</a></li>
-        <li><a href="/leetcode-convert-bst-to-greater-tree.html">LeetCode - Convert BST to Greater Tree</a></li>
+        <li><a href="/leetcode-island-perimeter.html">LeetCode - Island Perimeter</a></li>
+        <li><a href="/leetcode-beautiful-arrangement.html">LeetCode - Beautiful Arrangement</a></li>
+        <li><a href="/leetcode-find-bottom-left-tree-value.html">LeetCode - Find Bottom Left Tree Value</a></li>
+        <li><a href="/leetcode-queue-reconstruction-by-height.html">LeetCode - Queue Reconstruction by Height</a></li>
     </ul>
 </section>
         </article>
@@ -596,7 +596,7 @@ where 3 &gt; (select count(distinct(e2.Salary))
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2020 Charlie Hu
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

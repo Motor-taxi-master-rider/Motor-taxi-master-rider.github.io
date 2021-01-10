@@ -284,25 +284,25 @@ Tower of Babel            </a>
 <p>本文环境为python3.6。与c中拥有的malloc和free不同，python中的内存是编译器自动完成，因此我们并不需要时刻关心内存的使用情况。在<a href="https://rushter.com/blog/python-garbage-collector/">Things you need to know about garbage collection in Python</a>一文中给我们详细介绍了python gc的具体实现及细节，本文主要参考该博客来对python垃圾处理机制做一些总结。</p>
 <h3>内存管理</h3>
 <p>在python中小于512k的对象是会在内存中缓存的，这就导致小于256的整形及一些短字符串在程序中实际共享了同一个内存地址。像这样，python为了提高对内存操作的效率及减少碎片，在通用内存分配器上假设了一个特殊的管理器————<code>PyMalloc</code>。在<a href="https://github.com/python/cpython/blob/ad051cbce1360ad3055a048506c09bc2a5442474/Objects/obmalloc.c#L534">cpython</a>中，内存模型被形容为大致如下：</p>
-<div class="highlight"><pre><span></span>_____   ______   ______       ________
-[ int ] [ dict ] [ list ] ... [ string ]       Python core         |
-+3 | &lt;----- Object-specific memory -----&gt; | &lt;-- Non-object memory --&gt; |
-_______________________________       |                           |
-[   Python&#39;s object allocator   ]      |                           |
-+2 | ####### Object memory ####### | &lt;------ Internal buffers ------&gt; |
-______________________________________________________________    |
-[          Python&#39;s raw memory allocator (PyMem_ API)          ]   |
-+1 | &lt;----- Python memory (under PyMem manager&#39;s control) ------&gt; |   |
-__________________________________________________________________
-[    Underlying general-purpose allocator (ex: C library malloc)   ]
-0 | &lt;------ Virtual memory allocated for the python process -------&gt; |
-=========================================================================
-_______________________________________________________________________
-[                OS-specific Virtual Memory Manager (VMM)               ]
--1 | &lt;--- Kernel dynamic storage allocation &amp; management (page-based) ---&gt; |
-__________________________________   __________________________________
-[                                  ] [                                  ]
--2 | &lt;-- Physical memory: ROM/RAM --&gt; | | &lt;-- Secondary storage (swap) --&gt; |
+<div class="highlight"><pre><span></span><span class="err">_____   ______   ______       ________</span>
+<span class="err">[ int ] [ dict ] [ list ] ... [ string ]       Python core         |</span>
+<span class="err">+3 | &lt;----- Object-specific memory -----&gt; | &lt;-- Non-object memory --&gt; |</span>
+<span class="err">_______________________________       |                           |</span>
+<span class="err">[   Python&#39;s object allocator   ]      |                           |</span>
+<span class="err">+2 | ####### Object memory ####### | &lt;------ Internal buffers ------&gt; |</span>
+<span class="err">______________________________________________________________    |</span>
+<span class="err">[          Python&#39;s raw memory allocator (PyMem_ API)          ]   |</span>
+<span class="err">+1 | &lt;----- Python memory (under PyMem manager&#39;s control) ------&gt; |   |</span>
+<span class="err">__________________________________________________________________</span>
+<span class="err">[    Underlying general-purpose allocator (ex: C library malloc)   ]</span>
+<span class="err">0 | &lt;------ Virtual memory allocated for the python process -------&gt; |</span>
+<span class="err">=========================================================================</span>
+<span class="err">_______________________________________________________________________</span>
+<span class="err">[                OS-specific Virtual Memory Manager (VMM)               ]</span>
+<span class="err">-1 | &lt;--- Kernel dynamic storage allocation &amp; management (page-based) ---&gt; |</span>
+<span class="err">__________________________________   __________________________________</span>
+<span class="err">[                                  ] [                                  ]</span>
+<span class="err">-2 | &lt;-- Physical memory: ROM/RAM --&gt; | | &lt;-- Secondary storage (swap) --&gt; |</span>
 </pre></div>
 
 
@@ -330,24 +330,24 @@ __________________________________   __________________________________
 
 
 <p>池使用的是双向链表的结构，<code>nextpool</code>和<code>prevpool</code>字段指向链表节点。<code>szidx</code>字段保存了上文提到的该池的大小类别的序号（size class index），而<code>ref.count</code>字段则储存了被占用了的块的数量。<code>arenaindex</code>储存了该池在所在的内存空间的序号。对于<code>freeblock</code>则是这么解释的：</p>
-<div class="highlight"><pre><span></span>pool-&gt;freeblock points to the start of a singly-linked list of free blocks within the pool.  
-When a block is freed, it&#39;s inserted at the front of its pool&#39;s freeblock list.  Note
-that the available blocks in a pool are *not* linked all together when a pool
-is initialized.  Instead only &quot;the first two&quot; (lowest addresses) blocks are
-set up, returning the first such block, and setting pool-&gt;freeblock to a
-one-block list holding the second such block.  This is consistent with that
-pymalloc strives at all levels (arena, pool, and block) never to touch a piece
-of memory until it&#39;s actually needed.
+<div class="highlight"><pre><span></span><span class="n">pool</span><span class="o">-&gt;</span><span class="n">freeblock</span> <span class="n">points</span> <span class="k">to</span> <span class="n">the</span> <span class="k">start</span> <span class="k">of</span> <span class="n">a</span> <span class="n">singly</span><span class="o">-</span><span class="n">linked</span> <span class="n">list</span> <span class="k">of</span> <span class="k">free</span> <span class="n">blocks</span> <span class="n">within</span> <span class="n">the</span> <span class="n">pool</span><span class="p">.</span>  
+<span class="k">When</span> <span class="n">a</span> <span class="n">block</span> <span class="k">is</span> <span class="n">freed</span><span class="p">,</span> <span class="n">it</span><span class="s1">&#39;s inserted at the front of its pool&#39;</span><span class="n">s</span> <span class="n">freeblock</span> <span class="n">list</span><span class="p">.</span>  <span class="n">Note</span>
+<span class="n">that</span> <span class="n">the</span> <span class="n">available</span> <span class="n">blocks</span> <span class="k">in</span> <span class="n">a</span> <span class="n">pool</span> <span class="k">are</span> <span class="o">*</span><span class="k">not</span><span class="o">*</span> <span class="n">linked</span> <span class="k">all</span> <span class="n">together</span> <span class="k">when</span> <span class="n">a</span> <span class="n">pool</span>
+<span class="k">is</span> <span class="n">initialized</span><span class="p">.</span>  <span class="k">Instead</span> <span class="k">only</span> <span class="ss">&quot;the first two&quot;</span> <span class="p">(</span><span class="n">lowest</span> <span class="n">addresses</span><span class="p">)</span> <span class="n">blocks</span> <span class="k">are</span>
+<span class="k">set</span> <span class="n">up</span><span class="p">,</span> <span class="n">returning</span> <span class="n">the</span> <span class="k">first</span> <span class="n">such</span> <span class="n">block</span><span class="p">,</span> <span class="k">and</span> <span class="n">setting</span> <span class="n">pool</span><span class="o">-&gt;</span><span class="n">freeblock</span> <span class="k">to</span> <span class="n">a</span>
+<span class="n">one</span><span class="o">-</span><span class="n">block</span> <span class="n">list</span> <span class="n">holding</span> <span class="n">the</span> <span class="k">second</span> <span class="n">such</span> <span class="n">block</span><span class="p">.</span>  <span class="n">This</span> <span class="k">is</span> <span class="n">consistent</span> <span class="k">with</span> <span class="n">that</span>
+<span class="n">pymalloc</span> <span class="n">strives</span> <span class="k">at</span> <span class="k">all</span> <span class="n">levels</span> <span class="p">(</span><span class="n">arena</span><span class="p">,</span> <span class="n">pool</span><span class="p">,</span> <span class="k">and</span> <span class="n">block</span><span class="p">)</span> <span class="n">never</span> <span class="k">to</span> <span class="n">touch</span> <span class="n">a</span> <span class="n">piece</span>
+<span class="k">of</span> <span class="n">memory</span> <span class="k">until</span> <span class="n">it</span><span class="s1">&#39;s actually needed.</span>
 
-So long as a pool is in the used state, we&#39;re certain there *is* a block
-available for allocating, and pool-&gt;freeblock is not NULL.  If pool-&gt;freeblock
-points to the end of the free list before we&#39;ve carved the entire pool into
-blocks, that means we simply haven&#39;t yet gotten to one of the higher-address
-blocks.  The offset from the pool_header to the start of &quot;the next&quot; virgin
-block is stored in the pool_header nextoffset member, and the largest value
-of nextoffset that makes sense is stored in the maxnextoffset member when a
-pool is initialized.  All the blocks in a pool have been passed out at least
-once when and only when nextoffset &gt; maxnextoffset.
+<span class="s1">So long as a pool is in the used state, we&#39;</span><span class="n">re</span> <span class="n">certain</span> <span class="n">there</span> <span class="o">*</span><span class="k">is</span><span class="o">*</span> <span class="n">a</span> <span class="n">block</span>
+<span class="n">available</span> <span class="k">for</span> <span class="n">allocating</span><span class="p">,</span> <span class="k">and</span> <span class="n">pool</span><span class="o">-&gt;</span><span class="n">freeblock</span> <span class="k">is</span> <span class="k">not</span> <span class="k">NULL</span><span class="p">.</span>  <span class="k">If</span> <span class="n">pool</span><span class="o">-&gt;</span><span class="n">freeblock</span>
+<span class="n">points</span> <span class="k">to</span> <span class="n">the</span> <span class="k">end</span> <span class="k">of</span> <span class="n">the</span> <span class="k">free</span> <span class="n">list</span> <span class="k">before</span> <span class="n">we</span><span class="s1">&#39;ve carved the entire pool into</span>
+<span class="s1">blocks, that means we simply haven&#39;</span><span class="n">t</span> <span class="n">yet</span> <span class="n">gotten</span> <span class="k">to</span> <span class="n">one</span> <span class="k">of</span> <span class="n">the</span> <span class="n">higher</span><span class="o">-</span><span class="n">address</span>
+<span class="n">blocks</span><span class="p">.</span>  <span class="n">The</span> <span class="k">offset</span> <span class="k">from</span> <span class="n">the</span> <span class="n">pool_header</span> <span class="k">to</span> <span class="n">the</span> <span class="k">start</span> <span class="k">of</span> <span class="ss">&quot;the next&quot;</span> <span class="n">virgin</span>
+<span class="n">block</span> <span class="k">is</span> <span class="n">stored</span> <span class="k">in</span> <span class="n">the</span> <span class="n">pool_header</span> <span class="n">nextoffset</span> <span class="n">member</span><span class="p">,</span> <span class="k">and</span> <span class="n">the</span> <span class="n">largest</span> <span class="n">value</span>
+<span class="k">of</span> <span class="n">nextoffset</span> <span class="n">that</span> <span class="n">makes</span> <span class="n">sense</span> <span class="k">is</span> <span class="n">stored</span> <span class="k">in</span> <span class="n">the</span> <span class="n">maxnextoffset</span> <span class="n">member</span> <span class="k">when</span> <span class="n">a</span>
+<span class="n">pool</span> <span class="k">is</span> <span class="n">initialized</span><span class="p">.</span>  <span class="k">All</span> <span class="n">the</span> <span class="n">blocks</span> <span class="k">in</span> <span class="n">a</span> <span class="n">pool</span> <span class="n">have</span> <span class="n">been</span> <span class="n">passed</span> <span class="k">out</span> <span class="k">at</span> <span class="n">least</span>
+<span class="n">once</span> <span class="k">when</span> <span class="k">and</span> <span class="k">only</span> <span class="k">when</span> <span class="n">nextoffset</span> <span class="o">&gt;</span> <span class="n">maxnextoffset</span><span class="p">.</span>
 </pre></div>
 
 
@@ -389,16 +389,16 @@ once when and only when nextoffset &gt; maxnextoffset.
 <span class="n">foo</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="c1">### 2 references, 1 from the foo var and 1 from getrefcount</span>
-<span class="k">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">getrefcount</span><span class="p">(</span><span class="n">foo</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">getrefcount</span><span class="p">(</span><span class="n">foo</span><span class="p">))</span>
 
 <span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
     <span class="c1"># 4 references</span>
     <span class="c1"># from the foo var, function argument, getrefcount and Python&#39;s function stack</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">getrefcount</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">getrefcount</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
 
 <span class="n">bar</span><span class="p">(</span><span class="n">foo</span><span class="p">)</span>
 <span class="c1">### 2 references, the function scope is destroyed</span>
-<span class="k">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">getrefcount</span><span class="p">(</span><span class="n">foo</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">getrefcount</span><span class="p">(</span><span class="n">foo</span><span class="p">))</span>
 </pre></div>
 
 
@@ -406,17 +406,17 @@ once when and only when nextoffset &gt; maxnextoffset.
 <p>引用计数这个简单的机制会带来许多问题，如无法解决循环引用、需要线程锁及效率低下。为了解决循环引用的问题，<a href="https://docs.python.org/3.6/library/gc.html">gc模块</a>在python 1.5版本中被加入。</p>
 <p>由于循环引用只会在container容器类型中发生，所以<code>gc</code>模块并不会追踪python中所有的对象。我们可以使用<code>gc.is_tracked</code>函数来判断某个对象是否被追踪：</p>
 <div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">gc</span><span class="o">.</span><span class="n">is_tracked</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="bp">False</span>
+<span class="kc">False</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">gc</span><span class="o">.</span><span class="n">is_tracked</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
-<span class="bp">False</span>
+<span class="kc">False</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">gc</span><span class="o">.</span><span class="n">is_tracked</span><span class="p">([])</span>
-<span class="bp">True</span>
+<span class="kc">True</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">gc</span><span class="o">.</span><span class="n">is_tracked</span><span class="p">({})</span>  <span class="c1">#这个字典为空，因此未被追踪</span>
-<span class="bp">False</span>
+<span class="kc">False</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">gc</span><span class="o">.</span><span class="n">is_tracked</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>  <span class="c1">#这个字典所有元素都为原子类型，因此未被追踪</span>
-<span class="bp">False</span>
+<span class="kc">False</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">gc</span><span class="o">.</span><span class="n">is_tracked</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">[]})</span>
-<span class="bp">True</span>
+<span class="kc">True</span>
 </pre></div>
 
 
@@ -556,7 +556,7 @@ once when and only when nextoffset &gt; maxnextoffset.
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2020 Charlie Hu
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

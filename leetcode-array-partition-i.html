@@ -298,29 +298,29 @@ All the integers in the array will be in the range of [-10000, 10000].</p>
 <p><a href="https://leetcode.com/problems/array-partition-i/#/description">Source link</a></p>
 <hr>
 <h3>Most popular solution</h3>
-<div class="highlight"><pre><span></span><span class="kr">class</span> <span class="nx">Solution</span><span class="p">(</span><span class="nx">object</span><span class="p">)</span><span class="o">:</span>
+<div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="n">Solution</span><span class="p">(</span><span class="k">object</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-    <span class="nx">def</span> <span class="nx">arrayPairSum</span><span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="nx">nums</span><span class="p">)</span><span class="o">:</span>
-        <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">        :type nums: List[int]</span>
-<span class="s2">        :rtype: int</span>
-<span class="s2">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="nx">sum</span><span class="p">(</span><span class="nx">sorted</span><span class="p">(</span><span class="nx">nums</span><span class="p">)[</span><span class="o">::</span><span class="mi">2</span><span class="p">])</span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">arrayPairSum</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">nums</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">        </span><span class="ss">&quot;&quot;&quot;</span>
+<span class="ss">        :type nums: List[int]</span>
+<span class="ss">        :rtype: int</span>
+<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">sorted</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span><span class="o">[</span><span class="n">::2</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 
 
 <p><strong>Mark:</strong> 87%</p>
 <hr>
 <h3>My solution</h3>
-<div class="highlight"><pre><span></span><span class="kr">class</span> <span class="nx">Solution</span><span class="p">(</span><span class="nx">object</span><span class="p">)</span><span class="o">:</span>
+<div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="n">Solution</span><span class="p">(</span><span class="k">object</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-    <span class="nx">def</span> <span class="nx">arrayPairSum</span><span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="nx">nums</span><span class="p">)</span><span class="o">:</span>
-        <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">        :type nums: List[int]</span>
-<span class="s2">        :rtype: int</span>
-<span class="s2">        &quot;&quot;&quot;</span>
-        <span class="nx">nums</span><span class="p">.</span><span class="nx">sort</span><span class="p">()</span>
-        <span class="k">return</span> <span class="nx">sum</span><span class="p">(</span><span class="nx">nums</span><span class="p">[</span><span class="o">::</span><span class="mi">2</span><span class="p">])</span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">arrayPairSum</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">nums</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">        </span><span class="ss">&quot;&quot;&quot;</span>
+<span class="ss">        :type nums: List[int]</span>
+<span class="ss">        :rtype: int</span>
+<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="n">nums</span><span class="p">.</span><span class="n">sort</span><span class="p">()</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">::2</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
 </pre></div>
 
 
@@ -342,11 +342,11 @@ Help on built-in function sorted in module <strong>builtin</strong>:</p>
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
+        <li><a href="/leetcode-two-sum.html">LeetCode - Two Sum</a></li>
         <li><a href="/leetcode-distribute-candies.html">LeetCode - Distribute Candies</a></li>
         <li><a href="/leetcode-hamming-distance.html">LeetCode - Hamming Distance</a></li>
-        <li><a href="/leetcode-two-sum.html">LeetCode - Two Sum</a></li>
-        <li><a href="/leetcode-maximum-length-of-pair-chain.html">LeetCode - Maximum Length of Pair Chain</a></li>
         <li><a href="/leetcode-integer-break.html">LeetCode - Integer Break</a></li>
+        <li><a href="/leetcode-island-perimeter.html">LeetCode - Island Perimeter</a></li>
     </ul>
 </section>
         </article>
@@ -462,7 +462,7 @@ Help on built-in function sorted in module <strong>builtin</strong>:</p>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2020 Charlie Hu
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

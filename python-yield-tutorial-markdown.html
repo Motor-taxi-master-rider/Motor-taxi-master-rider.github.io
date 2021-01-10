@@ -294,7 +294,7 @@ Tower of Babel            </a>
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>&#39;fun&#39;
+<div class="highlight"><pre><span></span><span class="err">&#39;fun&#39;</span>
 </pre></div>
 
 
@@ -302,7 +302,7 @@ Tower of Babel            </a>
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>&lt;generator object gen at 0x0000000007503780&gt;
+<div class="highlight"><pre><span></span><span class="err">&lt;generator object gen at 0x0000000007503780&gt;</span>
 </pre></div>
 
 
@@ -318,20 +318,20 @@ Tower of Babel            </a>
 
 
 <div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">counter</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>0
-1
-2
-3
-4
-5
-6
-7
-8
-9
+<div class="highlight"><pre><span></span><span class="err">0</span>
+<span class="err">1</span>
+<span class="err">2</span>
+<span class="err">3</span>
+<span class="err">4</span>
+<span class="err">5</span>
+<span class="err">6</span>
+<span class="err">7</span>
+<span class="err">8</span>
+<span class="err">9</span>
 </pre></div>
 
 
@@ -340,32 +340,32 @@ Tower of Babel            </a>
 <div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">counter_sample</span><span class="p">(</span><span class="n">top</span><span class="p">):</span>
     <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">while</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="n">top</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;-&gt; before yield&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&gt; before yield&#39;</span><span class="p">)</span>
         <span class="k">yield</span> <span class="n">n</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;-&gt; after yield&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&gt; after yield&#39;</span><span class="p">)</span>
         <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
 
 <span class="n">c</span> <span class="o">=</span> <span class="n">counter_sample</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>-&gt; before yield
-0
+<div class="highlight"><pre><span></span><span class="err">-&gt; before yield</span>
+<span class="err">0</span>
 </pre></div>
 
 
 <p><strong>StopIteration</strong> raised when function returns</p>
-<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="bp">None</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="kc">None</span><span class="p">))</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>-&gt; after yield
--&gt; before yield
-1
+<div class="highlight"><pre><span></span><span class="err">-&gt; after yield</span>
+<span class="err">-&gt; before yield</span>
+<span class="err">1</span>
 </pre></div>
 
 
@@ -373,14 +373,14 @@ Tower of Babel            </a>
 <p>You can <strong>send</strong> data to a coroutine.</p>
 <div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generator</span><span class="p">():</span>
     <span class="n">item</span> <span class="o">=</span> <span class="k">yield</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;item = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;item = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
     <span class="k">yield</span> <span class="mi">10</span>
 </pre></div>
 
 
 <p><strong>Prime</strong> the coroutine</p>
 <div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">generator</span><span class="p">()</span>
-<span class="n">g</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
 </pre></div>
 
 
@@ -390,22 +390,22 @@ Tower of Babel            </a>
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>item = 20
+<div class="highlight"><pre><span></span><span class="err">item = 20</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;value = {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;value = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>value = 10
+<div class="highlight"><pre><span></span><span class="err">value = 10</span>
 </pre></div>
 
 
 <p>A coroutine which <strong>receives</strong> data as well as <strong>produces</strong> data</p>
 <div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">averager</span><span class="p">():</span>
-    <span class="n">total</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">average</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">None</span>
-    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">total</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">average</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">None</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">term</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">average</span>
         <span class="n">total</span> <span class="o">+=</span> <span class="n">term</span>
         <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -414,7 +414,7 @@ Tower of Babel            </a>
 
 
 <div class="highlight"><pre><span></span><span class="n">avg</span> <span class="o">=</span> <span class="n">averager</span><span class="p">()</span>
-<span class="n">avg</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+<span class="n">avg</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
 </pre></div>
 
 
@@ -422,7 +422,7 @@ Tower of Babel            </a>
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>10.0
+<div class="highlight"><pre><span></span><span class="err">10.0</span>
 </pre></div>
 
 
@@ -430,7 +430,7 @@ Tower of Babel            </a>
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>15.0
+<div class="highlight"><pre><span></span><span class="err">15.0</span>
 </pre></div>
 
 
@@ -438,7 +438,7 @@ Tower of Babel            </a>
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>20.0
+<div class="highlight"><pre><span></span><span class="err">20.0</span>
 </pre></div>
 
 
@@ -457,16 +457,16 @@ Tower of Babel            </a>
 <span class="k">class</span> <span class="nc">BadStupidHandler</span><span class="p">(</span><span class="n">tornado</span><span class="o">.</span><span class="n">web</span><span class="o">.</span><span class="n">RequestHandler</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;{}&lt;br&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&lt;br&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
             <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">GoodStupidHandler</span><span class="p">(</span><span class="n">tornado</span><span class="o">.</span><span class="n">web</span><span class="o">.</span><span class="n">RequestHandler</span><span class="p">):</span>
-    <span class="nd">@tornado.gen.coroutine</span>
+    <span class="nd">@tornado</span><span class="o">.</span><span class="n">gen</span><span class="o">.</span><span class="n">coroutine</span>
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;{}&lt;br&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&lt;br&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
             <span class="k">yield</span> <span class="n">tornado</span><span class="o">.</span><span class="n">gen</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
 
@@ -483,23 +483,23 @@ Tower of Babel            </a>
 <p>A context manager is to change:</p>
 <div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
     <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;some.txt&#39;</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">())</span> <span class="c1"># do something with f</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">())</span> <span class="c1"># do something with f</span>
 <span class="k">finally</span><span class="p">:</span>
     <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>coroutine
+<div class="highlight"><pre><span></span><span class="err">coroutine</span>
 </pre></div>
 
 
 <p>To:</p>
 <div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;some.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">())</span> <span class="c1"># do something with f</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">())</span> <span class="c1"># do something with f</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>coroutine
+<div class="highlight"><pre><span></span><span class="err">coroutine</span>
 </pre></div>
 
 
@@ -517,7 +517,7 @@ Tower of Babel            </a>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">original_write</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span> <span class="o">=</span> <span class="n">reverse_write</span>
-        <span class="k">return</span> <span class="s1">&#39;This is mirror {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">&#39;This is mirror </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">sys</span>
@@ -527,22 +527,22 @@ Tower of Babel            </a>
 
 
 <div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">Mirror</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="k">as</span> <span class="n">first_string</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">first_string</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="mi">123456789</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Out there&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">first_string</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="mi">123456789</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Out there&#39;</span><span class="p">)</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>0001 rorrim si sihT
-987654321
-Out there
+<div class="highlight"><pre><span></span><span class="err">0001 rorrim si sihT</span>
+<span class="err">987654321</span>
+<span class="err">Out there</span>
 </pre></div>
 
 
 <p>Use decorator <code>contextlib.contextmanager</code> and <code>generator</code> to simplfy your own context manager</p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">contextlib</span>
 
-<span class="nd">@contextlib.contextmanager</span>
+<span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
 <span class="k">def</span> <span class="nf">Mirror_new</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
     <span class="kn">import</span> <span class="nn">sys</span>
 
@@ -552,21 +552,21 @@ Out there
 
     <span class="n">original_write</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span> <span class="o">=</span> <span class="n">reverse_write</span>
-    <span class="k">yield</span> <span class="s1">&#39;This is mirror {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+    <span class="k">yield</span> <span class="s1">&#39;This is mirror </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span> <span class="o">=</span> <span class="n">original_write</span>
 </pre></div>
 
 
 <div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">Mirror_new</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="k">as</span> <span class="n">first_string</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">first_string</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="mi">123456789</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Out there&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">first_string</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="mi">123456789</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Out there&#39;</span><span class="p">)</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>0001 rorrim si sihT
-987654321
-Out there
+<div class="highlight"><pre><span></span><span class="err">0001 rorrim si sihT</span>
+<span class="err">987654321</span>
+<span class="err">Out there</span>
 </pre></div>
 
 
@@ -581,13 +581,13 @@ Out there
         <span class="k">return</span> <span class="bp">self</span>
 
     <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gen</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gen</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_gen</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_gen</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">True</span>
+            <span class="k">return</span> <span class="kc">True</span>
 </pre></div>
 
 
@@ -600,21 +600,21 @@ Out there
         <span class="n">original_write</span><span class="p">(</span><span class="n">text</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
     <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span> <span class="o">=</span> <span class="n">reverse_write</span>
-    <span class="k">yield</span> <span class="s1">&#39;This is mirror {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+    <span class="k">yield</span> <span class="s1">&#39;This is mirror </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span> <span class="o">=</span> <span class="n">original_write</span>
 </pre></div>
 
 
 <div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">Mirror_custom</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="k">as</span> <span class="n">first_string</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">first_string</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="mi">123456789</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Out there&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">first_string</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="mi">123456789</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Out there&#39;</span><span class="p">)</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>0001 rorrim si sihT
-987654321
-Out there
+<div class="highlight"><pre><span></span><span class="err">0001 rorrim si sihT</span>
+<span class="err">987654321</span>
+<span class="err">Out there</span>
 </pre></div>
 
 
@@ -628,17 +628,17 @@ Out there
         <span class="k">return</span> <span class="bp">self</span>
 
     <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gen</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gen</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">exc_type</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">exc_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_gen</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_gen</span><span class="o">.</span><span class="n">throw</span><span class="p">(</span><span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">)</span>
                 <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Generator didn&#39;t stop&quot;</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">True</span>
+                <span class="k">return</span> <span class="kc">True</span>
         <span class="k">except</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">exc_value</span><span class="p">:</span> <span class="k">raise</span>
 </pre></div>
@@ -648,7 +648,7 @@ Out there
 <p>Following statement is very common in tornado framwork</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tornado</span> <span class="kn">import</span> <span class="n">gen</span>
 
-<span class="nd">@gen.coroutine</span>
+<span class="nd">@gen</span><span class="o">.</span><span class="n">coroutine</span>
 <span class="k">def</span> <span class="nf">fetch_coroutine</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
     <span class="n">http_client</span> <span class="o">=</span> <span class="n">AsyncHTTPClient</span><span class="p">()</span>
     <span class="n">response</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">http_client</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
@@ -664,7 +664,7 @@ Out there
 <span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>    
     <span class="n">sleep_time</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">3</span>
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">sleep_time</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;sleep for {} seconds&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sleep_time</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;sleep for </span><span class="si">{}</span><span class="s1"> seconds&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sleep_time</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
 </pre></div>
 
@@ -687,19 +687,19 @@ Inspired by @contextmanager：</p>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gen</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_gen</span> <span class="o">=</span> <span class="n">gen</span>
         <span class="n">initive</span> <span class="o">=</span> <span class="n">Future</span><span class="p">()</span>
-        <span class="n">initive</span><span class="o">.</span><span class="n">set_result</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+        <span class="n">initive</span><span class="o">.</span><span class="n">set_result</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">initive</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">future</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">next_future</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gen</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">())</span>
         <span class="k">except</span> <span class="ne">StopIteration</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">exc</span><span class="o">.</span><span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">exc</span><span class="o">.</span><span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">exc</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">next_future</span><span class="o">.</span><span class="n">add_done_callback</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">step</span><span class="p">)</span>
 
-<span class="nd">@wrapt.decorator</span>
+<span class="nd">@wrapt</span><span class="o">.</span><span class="n">decorator</span>
 <span class="k">def</span> <span class="nf">inlined_future</span><span class="p">(</span><span class="n">wrapped</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
     <span class="n">Task</span><span class="p">(</span><span class="n">wrapped</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
 </pre></div>
@@ -708,11 +708,11 @@ Inspired by @contextmanager：</p>
 <div class="highlight"><pre><span></span><span class="nd">@inlined_future</span>
 <span class="k">def</span> <span class="nf">do_func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
     <span class="n">result</span> <span class="o">=</span> <span class="k">yield</span> <span class="n">pool</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Got:&#39;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Got:&#39;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">do_func_slow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
     <span class="n">result</span><span class="o">=</span><span class="n">func</span><span class="p">(</span><span class="n">x</span> <span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Got:&#39;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Got:&#39;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
 </pre></div>
 
 
@@ -721,16 +721,16 @@ Inspired by @contextmanager：</p>
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>sleep for 2.4873064812324777 seconds
-Got: 0
-sleep for 1.4432468827933995 seconds
-Got: 2
-sleep for 1.9532320529696823 seconds
-Got: 4
-sleep for 0.584825861467138 seconds
-Got: 6
-sleep for 1.8091265383050155 seconds
-Got: 8
+<div class="highlight"><pre><span></span><span class="err">sleep for 2.4873064812324777 seconds</span>
+<span class="c">Got: 0</span>
+<span class="err">sleep for 1.4432468827933995 seconds</span>
+<span class="c">Got: 2</span>
+<span class="err">sleep for 1.9532320529696823 seconds</span>
+<span class="c">Got: 4</span>
+<span class="err">sleep for 0.584825861467138 seconds</span>
+<span class="c">Got: 6</span>
+<span class="err">sleep for 1.8091265383050155 seconds</span>
+<span class="c">Got: 8</span>
 </pre></div>
 
 
@@ -745,9 +745,9 @@ Got: 8
 
 <span class="k">def</span> <span class="nf">gen_fn</span><span class="p">():</span>
     <span class="n">result</span> <span class="o">=</span> <span class="k">yield</span> <span class="mi">1</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;result of yield: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;result of yield: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
     <span class="n">result2</span> <span class="o">=</span> <span class="k">yield</span> <span class="mi">2</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;result of 2nd yield: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result2</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;result of 2nd yield: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result2</span><span class="p">))</span>
     <span class="k">return</span> <span class="s1">&#39;done&#39;</span>
 
 <span class="k">def</span> <span class="nf">normal_fn</span><span class="p">():</span>
@@ -759,11 +759,11 @@ Got: 8
 </pre></div>
 
 
-<div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>1
+<div class="highlight"><pre><span></span><span class="err">1</span>
 </pre></div>
 
 
@@ -771,7 +771,7 @@ Got: 8
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>&lt;function __main__.gen_fn&gt;
+<div class="highlight"><pre><span></span><span class="err">&lt;function __main__.gen_fn&gt;</span>
 </pre></div>
 
 
@@ -779,7 +779,7 @@ Got: 8
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>&lt;function __main__.normal_fn&gt;
+<div class="highlight"><pre><span></span><span class="err">&lt;function __main__.normal_fn&gt;</span>
 </pre></div>
 
 
@@ -787,7 +787,7 @@ Got: 8
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>True
+<div class="highlight"><pre><span></span><span class="err">True</span>
 </pre></div>
 
 
@@ -795,7 +795,7 @@ Got: 8
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>&#39;0b100000&#39;
+<div class="highlight"><pre><span></span><span class="err">&#39;0b100000&#39;</span>
 </pre></div>
 
 
@@ -803,7 +803,7 @@ Got: 8
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>False
+<div class="highlight"><pre><span></span><span class="err">False</span>
 </pre></div>
 
 
@@ -813,7 +813,7 @@ Got: 8
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>generator
+<div class="highlight"><pre><span></span><span class="err">generator</span>
 </pre></div>
 
 
@@ -821,7 +821,7 @@ Got: 8
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>&#39;gen_fn&#39;
+<div class="highlight"><pre><span></span><span class="err">&#39;gen_fn&#39;</span>
 </pre></div>
 
 
@@ -833,7 +833,7 @@ Got: 8
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>True
+<div class="highlight"><pre><span></span><span class="err">True</span>
 </pre></div>
 
 
@@ -841,17 +841,17 @@ Got: 8
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>False
+<div class="highlight"><pre><span></span><span class="err">False</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span></span><span class="n">gen1</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">gen1</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
 
 <span class="n">gen1</span><span class="o">.</span><span class="n">gi_frame</span><span class="o">.</span><span class="n">f_lasti</span>
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>2
+<div class="highlight"><pre><span></span><span class="err">2</span>
 </pre></div>
 
 
@@ -859,32 +859,32 @@ Got: 8
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>  5           0 LOAD_CONST               1 (1)
-              2 YIELD_VALUE
-              4 STORE_FAST               0 (result)
+<div class="highlight"><pre><span></span>  <span class="mi">5</span>           <span class="mi">0</span> <span class="n">LOAD_CONST</span>               <span class="mi">1</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+              <span class="mi">2</span> <span class="n">YIELD_VALUE</span>
+              <span class="mi">4</span> <span class="n">STORE_FAST</span>               <span class="mi">0</span> <span class="p">(</span><span class="k">result</span><span class="p">)</span>
 
-  6           6 LOAD_GLOBAL              0 (print)
-              8 LOAD_CONST               2 (&#39;result of yield: {}&#39;)
-             10 LOAD_ATTR                1 (format)
-             12 LOAD_FAST                0 (result)
-             14 CALL_FUNCTION            1
-             16 CALL_FUNCTION            1
-             18 POP_TOP
+  <span class="mi">6</span>           <span class="mi">6</span> <span class="n">LOAD_GLOBAL</span>              <span class="mi">0</span> <span class="p">(</span><span class="n">print</span><span class="p">)</span>
+              <span class="mi">8</span> <span class="n">LOAD_CONST</span>               <span class="mi">2</span> <span class="p">(</span><span class="s1">&#39;result of yield: {}&#39;</span><span class="p">)</span>
+             <span class="mi">10</span> <span class="n">LOAD_ATTR</span>                <span class="mi">1</span> <span class="p">(</span><span class="n">format</span><span class="p">)</span>
+             <span class="mi">12</span> <span class="n">LOAD_FAST</span>                <span class="mi">0</span> <span class="p">(</span><span class="k">result</span><span class="p">)</span>
+             <span class="mi">14</span> <span class="n">CALL_FUNCTION</span>            <span class="mi">1</span>
+             <span class="mi">16</span> <span class="n">CALL_FUNCTION</span>            <span class="mi">1</span>
+             <span class="mi">18</span> <span class="n">POP_TOP</span>
 
-  7          20 LOAD_CONST               3 (2)
-             22 YIELD_VALUE
-             24 STORE_FAST               1 (result2)
+  <span class="mi">7</span>          <span class="mi">20</span> <span class="n">LOAD_CONST</span>               <span class="mi">3</span> <span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+             <span class="mi">22</span> <span class="n">YIELD_VALUE</span>
+             <span class="mi">24</span> <span class="n">STORE_FAST</span>               <span class="mi">1</span> <span class="p">(</span><span class="n">result2</span><span class="p">)</span>
 
-  8          26 LOAD_GLOBAL              0 (print)
-             28 LOAD_CONST               4 (&#39;result of 2nd yield: {}&#39;)
-             30 LOAD_ATTR                1 (format)
-             32 LOAD_FAST                1 (result2)
-             34 CALL_FUNCTION            1
-             36 CALL_FUNCTION            1
-             38 POP_TOP
+  <span class="mi">8</span>          <span class="mi">26</span> <span class="n">LOAD_GLOBAL</span>              <span class="mi">0</span> <span class="p">(</span><span class="n">print</span><span class="p">)</span>
+             <span class="mi">28</span> <span class="n">LOAD_CONST</span>               <span class="mi">4</span> <span class="p">(</span><span class="s1">&#39;result of 2nd yield: {}&#39;</span><span class="p">)</span>
+             <span class="mi">30</span> <span class="n">LOAD_ATTR</span>                <span class="mi">1</span> <span class="p">(</span><span class="n">format</span><span class="p">)</span>
+             <span class="mi">32</span> <span class="n">LOAD_FAST</span>                <span class="mi">1</span> <span class="p">(</span><span class="n">result2</span><span class="p">)</span>
+             <span class="mi">34</span> <span class="n">CALL_FUNCTION</span>            <span class="mi">1</span>
+             <span class="mi">36</span> <span class="n">CALL_FUNCTION</span>            <span class="mi">1</span>
+             <span class="mi">38</span> <span class="n">POP_TOP</span>
 
-  9          40 LOAD_CONST               5 (&#39;done&#39;)
-             42 RETURN_VALUE
+  <span class="mi">9</span>          <span class="mi">40</span> <span class="n">LOAD_CONST</span>               <span class="mi">5</span> <span class="p">(</span><span class="s1">&#39;done&#39;</span><span class="p">)</span>
+             <span class="mi">42</span> <span class="n">RETURN_VALUE</span>
 </pre></div>
 
 
@@ -894,13 +894,13 @@ Got: 8
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>result of yield: hello
+<div class="highlight"><pre><span></span><span class="k">result</span> <span class="k">of</span> <span class="n">yield</span><span class="p">:</span> <span class="n">hello</span>
 
 
 
 
 
-22
+<span class="mi">22</span>
 </pre></div>
 
 
@@ -908,7 +908,7 @@ Got: 8
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>{&#39;result&#39;: &#39;hello&#39;}
+<div class="highlight"><pre><span></span><span class="err">{&#39;result&#39;: &#39;hello&#39;}</span>
 </pre></div>
 
 
@@ -916,31 +916,31 @@ Got: 8
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>result of 2nd yield: world
+<div class="highlight"><pre><span></span><span class="k">result</span> <span class="k">of</span> <span class="mi">2</span><span class="n">nd</span> <span class="n">yield</span><span class="p">:</span> <span class="n">world</span>
 
 
 
----------------------------------------------------------------------------
+<span class="c1">---------------------------------------------------------------------------</span>
 
-StopIteration                             Traceback (most recent call last)
+<span class="n">StopIteration</span>                             <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="k">call</span> <span class="k">last</span><span class="p">)</span>
 
-&lt;ipython-input-124-b432c08ca417&gt; in &lt;module&gt;()
-----&gt; 1 gen1.send(&#39;world&#39;)
-
-
-StopIteration: done
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="k">input</span><span class="o">-</span><span class="mi">124</span><span class="o">-</span><span class="n">b432c08ca417</span><span class="o">&gt;</span> <span class="k">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="c1">----&gt; 1 gen1.send(&#39;world&#39;)</span>
 
 
-sleep for 0.9637312558255126 seconds
-Got: 8
-sleep for 1.0164703671835906 seconds
-Got: 2
-sleep for 1.0941822049442602 seconds
-Got: 4
-sleep for 2.2731928774129755 seconds
-Got: 0
-sleep for 2.4067928659249773 seconds
-Got: 6
+<span class="n">StopIteration</span><span class="p">:</span> <span class="n">done</span>
+
+
+<span class="n">sleep</span> <span class="k">for</span> <span class="mi">0</span><span class="p">.</span><span class="mi">9637312558255126</span> <span class="n">seconds</span>
+<span class="n">Got</span><span class="p">:</span> <span class="mi">8</span>
+<span class="n">sleep</span> <span class="k">for</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0164703671835906</span> <span class="n">seconds</span>
+<span class="n">Got</span><span class="p">:</span> <span class="mi">2</span>
+<span class="n">sleep</span> <span class="k">for</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0941822049442602</span> <span class="n">seconds</span>
+<span class="n">Got</span><span class="p">:</span> <span class="mi">4</span>
+<span class="n">sleep</span> <span class="k">for</span> <span class="mi">2</span><span class="p">.</span><span class="mi">2731928774129755</span> <span class="n">seconds</span>
+<span class="n">Got</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">sleep</span> <span class="k">for</span> <span class="mi">2</span><span class="p">.</span><span class="mi">4067928659249773</span> <span class="n">seconds</span>
+<span class="n">Got</span><span class="p">:</span> <span class="mi">6</span>
 </pre></div>
 
 
@@ -957,11 +957,11 @@ Got: 6
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/yi-ge-jian-dan-de-wen-ben-jie-xi-ji-suan-qi.html">一个简单的文本解析计算器</a></li>
-        <li><a href="/flunet-python-167-coroutine-understading.html">Flunet Python 16.7 coroutine understading</a></li>
-        <li><a href="/python-coroutine-example-game-of-life.html">Python Coroutine Example -- Game of life</a></li>
         <li><a href="/replace-asyncio-with-native-coroutine.html">Replace asyncio with native coroutine</a></li>
-        <li><a href="/python-coroutine-example-rock-paper-scissors.html">Python Coroutine Example -- Rock Paper Scissors</a></li>
+        <li><a href="/review-guess-word-and-hangman-game.html">[Review] Guess word and hangman game</a></li>
+        <li><a href="/yi-ge-jian-dan-de-wen-ben-jie-xi-ji-suan-qi.html">一个简单的文本解析计算器</a></li>
+        <li><a href="/python-coroutine-example-game-of-life.html">Python Coroutine Example -- Game of life</a></li>
+        <li><a href="/flunet-python-167-coroutine-understading.html">Flunet Python 16.7 coroutine understading</a></li>
     </ul>
 </section>
         </article>
@@ -1077,7 +1077,7 @@ Got: 6
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2020 Charlie Hu
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

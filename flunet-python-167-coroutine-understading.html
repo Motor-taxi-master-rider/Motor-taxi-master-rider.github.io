@@ -292,10 +292,10 @@ Tower of Babel            </a>
 <span class="k">def</span> <span class="nf">averager</span><span class="p">():</span>  <span class="c1"># &lt;1&gt;</span>
     <span class="n">total</span> <span class="o">=</span> <span class="mf">0.0</span>
     <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">average</span> <span class="o">=</span> <span class="bp">None</span>
-    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">average</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">term</span> <span class="o">=</span> <span class="k">yield</span>  <span class="c1"># &lt;2&gt;</span>
-        <span class="k">if</span> <span class="n">term</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>  <span class="c1"># &lt;3&gt;</span>
+        <span class="k">if</span> <span class="n">term</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># &lt;3&gt;</span>
             <span class="k">break</span>
         <span class="n">total</span> <span class="o">+=</span> <span class="n">term</span>
         <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -305,7 +305,7 @@ Tower of Babel            </a>
 
 <span class="c1">### the delegating generator</span>
 <span class="k">def</span> <span class="nf">grouper</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>  <span class="c1"># &lt;5&gt;# &lt;6&gt;</span>
-  <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+  <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">results</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="k">yield from</span> <span class="n">averager</span><span class="p">()</span>  <span class="c1"># &lt;7&gt;</span>
 
 
@@ -318,7 +318,7 @@ Tower of Babel            </a>
         <span class="nb">next</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>  <span class="c1"># &lt;10&gt;</span>
         <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span>
             <span class="n">group</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>  <span class="c1"># &lt;11&gt;</span>
-        <span class="n">group</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>  <span class="c1"># important! &lt;12&gt;</span>
+        <span class="n">group</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>  <span class="c1"># important! &lt;12&gt;</span>
 
     <span class="c1">#print(results)  # uncomment to debug</span>
     <span class="n">report</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
@@ -328,7 +328,7 @@ Tower of Babel            </a>
 <span class="k">def</span> <span class="nf">report</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
         <span class="n">group</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{:2} {:5} averaging {:.2f}{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:2}</span><span class="s1"> </span><span class="si">{:5}</span><span class="s1"> averaging </span><span class="si">{:.2f}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
               <span class="n">result</span><span class="o">.</span><span class="n">count</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">average</span><span class="p">,</span> <span class="n">unit</span><span class="p">))</span>
 
 
@@ -407,9 +407,9 @@ Tower of Babel            </a>
         <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span>
             <span class="n">group</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">group</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+            <span class="n">group</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">StopIteration</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;end of child iterater&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;end of child iterater&#39;</span><span class="p">)</span>
 </pre></div>
 
 
@@ -443,11 +443,11 @@ Tower of Babel            </a>
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/review-guess-word-and-hangman-game.html">[Review] Guess word and hangman game</a></li>
+        <li><a href="/python-yield-tutorial-markdown.html">Python yield tutorial markdown</a></li>
+        <li><a href="/replace-asyncio-with-native-coroutine.html">Replace asyncio with native coroutine</a></li>
         <li><a href="/yi-ge-jian-dan-de-wen-ben-jie-xi-ji-suan-qi.html">一个简单的文本解析计算器</a></li>
         <li><a href="/python-coroutine-example-game-of-life.html">Python Coroutine Example -- Game of life</a></li>
-        <li><a href="/python-yield-tutorial-markdown.html">Python yield tutorial markdown</a></li>
-        <li><a href="/python-coroutine-example-rock-paper-scissors.html">Python Coroutine Example -- Rock Paper Scissors</a></li>
+        <li><a href="/review-guess-word-and-hangman-game.html">[Review] Guess word and hangman game</a></li>
     </ul>
 </section>
         </article>
@@ -563,7 +563,7 @@ Tower of Babel            </a>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2020 Charlie Hu
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
