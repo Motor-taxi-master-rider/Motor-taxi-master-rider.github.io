@@ -570,13 +570,13 @@ Tower of Babel            </a>
 
 
 <p>比较容易让人炸脑的是用list来管理栈的过程。以<code>1+2*4-5</code>这个表达式举例，传入<code>evaluate</code>方法的生成树是这样的。</p>
-<div class="highlight"><pre><span></span><span class="err">第一层</span><span class="o">:</span>
-              <span class="n">BinOp</span>             <span class="s2">&quot;-&quot;</span>            <span class="n">Number</span>
-<span class="err">第二层：</span>
-      <span class="n">Number</span>   <span class="s2">&quot;+&quot;</span>      <span class="n">BinOp</span>                    <span class="mi">5</span>
-<span class="err">第三层：</span>
-        <span class="mi">1</span>        <span class="n">Number</span>  <span class="s2">&quot;*&quot;</span>  <span class="n">Number</span>
-<span class="err">第四层：</span>            <span class="mi">2</span>             <span class="mi">4</span>
+<div class="highlight"><pre><span></span>第一层:
+              BinOp             &quot;-&quot;            Number
+第二层：
+      Number   &quot;+&quot;      BinOp                    5
+第三层：
+        1        Number  &quot;*&quot;  Number
+第四层：            2             4
 </pre></div>
 
 
@@ -602,11 +602,11 @@ Tower of Babel            </a>
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/review-guess-word-and-hangman-game.html">[Review] Guess word and hangman game</a></li>
-        <li><a href="/python-yield-tutorial-markdown.html">Python yield tutorial markdown</a></li>
-        <li><a href="/replace-asyncio-with-native-coroutine.html">Replace asyncio with native coroutine</a></li>
-        <li><a href="/python-coroutine-example-rock-paper-scissors.html">Python Coroutine Example -- Rock Paper Scissors</a></li>
-        <li><a href="/python-coroutine-example-game-of-life.html">Python Coroutine Example -- Game of life</a></li>
+        <li><a href="/leetcode-invert-binary-tree.html">LeetCode - Invert binary tree</a></li>
+        <li><a href="/leetcode-merge-two-binary-trees.html">LeetCode - Merge Two Binary Trees</a></li>
+        <li><a href="/leetcode-find-bottom-left-tree-value.html">LeetCode - Find Bottom Left Tree Value</a></li>
+        <li><a href="/pythonicde-fan-han-shu.html">Pythonic的泛函数</a></li>
+        <li><a href="/flunet-python-167-coroutine-understading.html">Flunet Python 16.7 coroutine understading</a></li>
     </ul>
 </section>
         </article>
@@ -641,9 +641,9 @@ Tower of Babel            </a>
 <li class="list-group-item">
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
   <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/translate-pythonzhong-ru-he-jiang-duo-ge-can-shu-chuan-ru-maphan-shu.html">[Translate] Python中如何将多个参数传入map函数</a></li>
     <li class="list-group-item"><a href="/review-guess-word-and-hangman-game.html">[Review] Guess word and hangman game</a></li>
     <li class="list-group-item"><a href="/stackoverflow-list-generator-algorithms.html">StackOverflow list generator algorithms</a></li>
-    <li class="list-group-item"><a href="/build-a-circular-list-and-regex-trie.html">Build a circular list and regex trie</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Recent Posts -->
@@ -652,9 +652,6 @@ Tower of Babel            </a>
 <li class="list-group-item">
   <a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
   <ul class="list-group list-inline tagcloud" id="tags">
-    <li class="list-group-item tag-4">
-      <a href="/tag/algorithm.html">Algorithm</a>
-    </li>
     <li class="list-group-item tag-3">
       <a href="/tag/algorithms.html">Algorithms</a>
     </li>
@@ -675,6 +672,9 @@ Tower of Babel            </a>
     </li>
     <li class="list-group-item tag-3">
       <a href="/tag/python.html">Python</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/stack.html">Stack</a>
     </li>
     <li class="list-group-item tag-2">
       <a href="/tag/string.html">String</a>
@@ -722,7 +722,7 @@ Tower of Babel            </a>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2018 Charlie Hu
+         <div class="col-xs-10">&copy; 2020 Charlie Hu
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
