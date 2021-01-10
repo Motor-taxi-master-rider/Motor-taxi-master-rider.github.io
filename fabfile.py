@@ -5,8 +5,6 @@ import shutil
 import sys
 import SocketServer
 
-from pelican.server import ComplexHTTPRequestHandler
-
 # Local path configuration (can be absolute or relative to fabfile)
 env.deploy_path = 'output'
 DEPLOY_PATH = env.deploy_path
@@ -21,7 +19,7 @@ env.cloudfiles_api_key = 'my_rackspace_api_key'
 env.cloudfiles_container = 'my_cloudfiles_container'
 
 # Github Pages configuration
-env.github_pages_branch = "gh-pages"
+env.github_pages_branch = "master"
 
 # Port for `serve`
 PORT = 8000
@@ -46,6 +44,8 @@ def regenerate():
 
 def serve():
     """Serve site at http://localhost:8000/"""
+    from pelican.server import ComplexHTTPRequestHandler
+
     os.chdir(env.deploy_path)
 
     class AddressReuseTCPServer(SocketServer.TCPServer):

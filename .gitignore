@@ -3,6 +3,7 @@ _theme_packages/*
 _posts/draft_*.md
 __pycache__/*
 output/*
+*.pyc
 
 Thumbs.db
 .DS_Store

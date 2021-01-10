@@ -222,9 +222,17 @@ _Bingo_！我们可以使用`itertools.repeat()`来制作`a` ，`b`， `c`的无
 你可能会喜欢我的其他文章：
 
 - [How to Use datetime.timedelta in Python With Examples](https://miguendes.me/how-to-use-datetimetimedelta-in-python-with-examples)
+
 - [73 Examples to Help You Master Python's f-strings](https://miguendes.me/73-examples-to-help-you-master-pythons-f-strings)
+
 - [How to Check if an Exception Is Raised (or Not) With pytest](https://miguendes.me/how-to-check-if-an-exception-is-raised-or-not-with-pytest)
+
 - [3 Ways to Test API Client Applications in Python](https://miguendes.me/3-ways-to-test-api-client-applications-in-python)
+
 - [Everything You Need to Know About Python's Namedtuples](https://miguendes.me/everything-you-need-to-know-about-pythons-namedtuples)
+
 - [The Best Way to Compare Two Dictionaries in Python](https://miguendes.me/the-best-way-to-compare-two-dictionaries-in-python)
-- [5 Hidden Python Features You Probably Never Heard Of
+
+- [5 Hidden Python Features You Probably Never Heard Of](https://miguendes.me/5-hidden-python-features-you-probably-never-heard-of)
+
+  
