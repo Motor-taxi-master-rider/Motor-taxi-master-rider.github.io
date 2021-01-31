@@ -243,6 +243,58 @@ Tower of Babel            </a>
             <li class="active">Charlie Hu</li>
         </ol>
             <article>
+                <h2><a href="/linklist-problems-summary.html">Linklist Problems Summary</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-07-08T00:00:00+08:00"> Sat 08 July 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/linklist.html">Linklist</a>
+        /
+	<a href="/tag/data_structure.html">Data_Structure</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><h3>Description</h3>
+<p>链表问题是经常会遇到的数据结构问题。该类问题的难点主要集中再单向遍历以及链表有环的情况下。很多链表问题只要利用两个速度不一的指针来完成单向遍历就可以简化问题、减少复杂度。本文基于一些常见的链表问题来分析比较良好的方案以及python实现。</p>
+<h3>准备工作</h3>
+<p>在解决问题之前，我们先要定义这次使用的链表的数据结构。
+在此我们定义了一个普通的value和next指针的链表结构，并重写了__len__魔术方法来计算无环链表自身的长度，添加了traversal方法来帮助我们遍历链表验证结论。
+在SampleLinklist类中我们定义了一些链表示例来辅助我们验证结论。</p>
+<div class="highlight"><pre><span></span><span class="c1">### -*- coding: utf-8 -*-</span>
+
+
+<span class="k">class</span> <span class="nc">Linklist</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="nb">next</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="nb">next</span>
+
+    <span class="k">def</span> <span class="nf">traversal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        遍历该节点开始的链表</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">traversal</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        用于之后的if Linklist判断</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/linklist-problems-summary.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="/leetcode-next-greater-element-ii.html">LeetCode - Next Greater Element II</a></h2>
                     <div class="well well-sm">
 <footer class="post-info">
@@ -359,34 +411,6 @@ Tower of Babel            </a>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2><a href="/leetcode-add-one-row-to-tree.html">LeetCode - Add One Row to Tree</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-06-26T00:00:00+08:00"> Mon 26 June 2017</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="/tag/leetcode.html">LeetCode</a>
-        /
-	<a href="/tag/tree.html">Tree</a>
-        /
-	<a href="/tag/recursion.html">Recursion</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Description</h3>
-<p>Given the root of a binary tree, then value <code>v</code> and depth <code>d</code>, you need to add a row of nodes with value <code>v</code> at the given depth <code>d</code>. The root node is at depth 1.
-The adding rule is: given a positive integer depth <code>d</code>, for each NOT …</p>
-                    <a class="btn btn-default btn-xs" href="/leetcode-add-one-row-to-tree.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="/author/charlie-hu6.html">&laquo;</a>
@@ -419,6 +443,8 @@ The adding rule is: given a positive integer depth <code>d</code>, for each NOT 
                             href="/author/charlie-hu13.html">13</a></li>
                     <li class=""><a
                             href="/author/charlie-hu14.html">14</a></li>
+                    <li class=""><a
+                            href="/author/charlie-hu15.html">15</a></li>
                 <li class="next"><a
                         href="/author/charlie-hu8.html">&raquo;</a></li>
         </ul>
@@ -451,9 +477,9 @@ The adding rule is: given a positive integer depth <code>d</code>, for each NOT 
 <li class="list-group-item">
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
   <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/translate-pythonku-jie-shao-shi-yong-luxjin-xing-zhi-neng-ke-shi-shu-ju-fa-xian.html">[Translate] Python库介绍：使用Lux进行智能可视数据发现</a></li>
     <li class="list-group-item"><a href="/translate-pythonzhong-ru-he-jiang-duo-ge-can-shu-chuan-ru-maphan-shu.html">[Translate] Python中如何将多个参数传入map函数</a></li>
     <li class="list-group-item"><a href="/review-guess-word-and-hangman-game.html">[Review] Guess word and hangman game</a></li>
-    <li class="list-group-item"><a href="/stackoverflow-list-generator-algorithms.html">StackOverflow list generator algorithms</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Recent Posts -->
@@ -480,7 +506,7 @@ The adding rule is: given a positive integer depth <code>d</code>, for each NOT 
     <li class="list-group-item tag-3">
       <a href="/tag/math.html">Math</a>
     </li>
-    <li class="list-group-item tag-3">
+    <li class="list-group-item tag-2">
       <a href="/tag/python.html">Python</a>
     </li>
     <li class="list-group-item tag-4">

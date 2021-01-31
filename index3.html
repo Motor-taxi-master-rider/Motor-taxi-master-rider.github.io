@@ -238,6 +238,59 @@ Tower of Babel            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
+                <h2><a href="/python-yield-tutorial-markdown.html">Python yield tutorial markdown</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-11-02T00:00:00+08:00"> Thu 02 November 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/coroutine.html">Coroutine</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><h3>Description</h3>
+<p>本文是我的<a href="https://github.com/Motor-taxi-master-rider/Python/blob/master/Script/coroutine.ipynb">jupyter notebook</a>的markdown版本。</p>
+<h3>An introduction to Python yield</h3>
+<h4>WHAT</h4>
+<h3>A function and a generater</h3>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fun</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s1">&#39;fun&#39;</span>
+
+<span class="k">def</span> <span class="nf">gen</span><span class="p">():</span>
+    <span class="k">yield</span> <span class="s1">&#39;gen&#39;</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">fun</span><span class="p">()</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="err">&#39;fun&#39;</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="n">gen</span><span class="p">()</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="err">&lt;generator object gen at 0x0000000007503780&gt;</span>
+</pre></div>
+
+
+<h3>A range() like example</h3>
+<p><strong>for</strong> ... <strong>in range()</strong> loop is used quite often when iterating objects in <code>python</code>.</p>
+<p>In …</p>
+                    <a class="btn btn-default btn-xs" href="/python-yield-tutorial-markdown.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="/pythonla-ji-chu-li-ji-zhi.html">Python垃圾处理机制</a></h2>
                     <div class="well well-sm">
 <footer class="post-info">
@@ -355,43 +408,6 @@ Tower of Babel            </a>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2><a href="/python-descriptor-behavior-ii.html">Python Descriptor Behavior II</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-09-25T00:00:00+08:00"> Mon 25 September 2017</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="/tag/descriptor.html">Descriptor</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Description</h3>
-<p>在之前一篇<a href="https://motor-taxi-master-rider.github.io/python/2017/08/05/python-descriptor">文章</a>中我们讨论了python描述符以及其行为，也做了一些总结。但个人能力有限，对描述符访问的优先规则解释的不是非常清楚。</p>
-<p>近日看到一篇文章：<a href="http://fanchunke.me/Python/Python%E4%B8%AD%E7%9A%84%E5%B1%9E%E6%80%A7%E8%AE%BF%E9%97%AE%E4%B8%8E%E6%8F%8F%E8%BF%B0%E7%AC%A6/">Python中的属性访问与描述符</a>中对于属性访问优先规则的部分解释的很清晰，遂记录下来学习。</p>
-<h3>属性访问的优先规则</h3>
-<p>属性访问的入口点是<code>__getattribute__</code>方法。它的实现中定义了Python中属性访问的优先规则。Python官方文档中对<code>__getattribute__</code>的底层实现有相关的介绍，本文暂时只是讨论属性查找的规则，相关规则可见下图：</p>
-<p><img src="https://motor-taxi-master-rider.github.io/assets/img/python_descriptor.png"  title="{{site.title }}"/></p>
-<p>上图是查找b.x这样一个属性的过程。在这里要对此图进行简单的介绍：</p>
-<ol>
-<li>
-<p>查找属性的第一步是搜索基类列表，即type(b).<strong>mro</strong>，直到找到该属性的第一个定义，并将该属性的值赋值给<code>descr</code></p>
-</li>
-<li>
-<p>判断descr的类型。它的类型可分为数据描述符、非数据描述符、普通属性、未找到等类型。若descr为数据描述符，则调用desc.<strong>get</strong>(b, type(b))，并将结果返回，结束执行。否则进行下一步</p>
-</li>
-<li>
-<p>如果<code>descr</code>为非数据描述符、普通属性、未找到等类型 …</p></li></ol>
-                    <a class="btn btn-default btn-xs" href="/python-descriptor-behavior-ii.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="/index2.html">&laquo;</a>
@@ -424,6 +440,8 @@ Tower of Babel            </a>
                             href="/index13.html">13</a></li>
                     <li class=""><a
                             href="/index14.html">14</a></li>
+                    <li class=""><a
+                            href="/index15.html">15</a></li>
                 <li class="next"><a
                         href="/index4.html">&raquo;</a></li>
         </ul>
@@ -456,9 +474,9 @@ Tower of Babel            </a>
 <li class="list-group-item">
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
   <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/translate-pythonku-jie-shao-shi-yong-luxjin-xing-zhi-neng-ke-shi-shu-ju-fa-xian.html">[Translate] Python库介绍：使用Lux进行智能可视数据发现</a></li>
     <li class="list-group-item"><a href="/translate-pythonzhong-ru-he-jiang-duo-ge-can-shu-chuan-ru-maphan-shu.html">[Translate] Python中如何将多个参数传入map函数</a></li>
     <li class="list-group-item"><a href="/review-guess-word-and-hangman-game.html">[Review] Guess word and hangman game</a></li>
-    <li class="list-group-item"><a href="/stackoverflow-list-generator-algorithms.html">StackOverflow list generator algorithms</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Recent Posts -->
@@ -485,7 +503,7 @@ Tower of Babel            </a>
     <li class="list-group-item tag-3">
       <a href="/tag/math.html">Math</a>
     </li>
-    <li class="list-group-item tag-3">
+    <li class="list-group-item tag-2">
       <a href="/tag/python.html">Python</a>
     </li>
     <li class="list-group-item tag-4">

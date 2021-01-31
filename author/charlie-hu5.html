@@ -243,6 +243,46 @@ Tower of Babel            </a>
             <li class="active">Charlie Hu</li>
         </ol>
             <article>
+                <h2><a href="/pythonzhuang-shi-qi-de-zheng-que-da-kai-fang-shi-2.html">Python装饰器的正确打开方式(2)</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-08-23T00:00:00+08:00"> Wed 23 August 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/decorator.html">Decorator</a>
+        /
+	<a href="/tag/wrapt.html">Wrapt</a>
+        /
+	<a href="/tag/descriptor.html">Descriptor</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><h3>Description</h3>
+<p>装饰器是python语言的一个非常常用及pythonic的特性，但往往由于忽视python中的内省，我们会写出一些不是特别完美的自定义装饰器。Graham Dumpleton写了一系列<a href="https://github.com/GrahamDumpleton/wrapt/blob/develop/blog/README.md">博客</a>，深入剖析了如何实现行为良好的装饰器。此外他还是<a href="http://wrapt.readthedocs.org/en/latest/">wrapt模块</a>的作者,他将他对装饰器的深厚知识充分应用到这个模块之中。这个模块的作用是简化装饰器和动态函数包装起的实现，使得多层装饰也支持内省且行为正确，既可以应用到方法上，也可以作为描述符使用。</p>
+<p>本文拾取了Graham Dumpleton在wrapt模块中附带的一系列博文的牙慧，旨在带来对python装饰器更深的理解和更好的设计。
+<a href="https://motor-taxi-master-rider.github.io/python/2017/08/18/right-ways-to-use-python-decorators-1">上一篇文章</a>论述了普通装饰器可能带来的一些内省缺陷，并提出了一些解决方案。本文接上文更深入地介绍python装饰器的高级用法以便之后继续探讨关于内省缺陷的解决方案。</p>
+<h3>带参数的装饰器</h3>
+<p>接上文，我们至今为止的所创建的所有装饰器都不能传入任何参数，但要知道通过传入参数来改变装饰器的部分装饰行为是一种很常见并且强大的特性。通常我们只要用一个接受参数的函数闭包就能构成一个带参数的装饰器。</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">with_arguments</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
+    <span class="nd">@decorator</span>
+    <span class="k">def</span> <span class="nf">_wrapper</span><span class="p">(</span><span class="n">wrapped</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">wrapped</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_wrapper</span>
+
+<span class="nd">@with_arguments</span><span class="p">(</span><span class="n">arg</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">function</span><span class="p">():</span>
+    <span class="k">pass …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/pythonzhuang-shi-qi-de-zheng-que-da-kai-fang-shi-2.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="/leetcode-replace-words.html">LeetCode - Replace Words</a></h2>
                     <div class="well well-sm">
 <footer class="post-info">
@@ -384,33 +424,6 @@ What if the linked list is extremely large and its length is unknown to you? Cou
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2><a href="/python-memoryview-and-annotation-ideas.html">Python Memoryview and Annotation Ideas</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-08-10T00:00:00+08:00"> Thu 10 August 2017</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="/tag/memoryview.html">Memoryview</a>
-        /
-	<a href="/tag/annotation.html">Annotation</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Description</h3>
-<p><strong>Memoryview</strong> (内存视图)是一个内置类，它能让用户在不复制内容的情况下操作同一个数组的不同切片。memoryview 的概念受到了 NumPy 的启发（参见 2.9.3 节）。Travis Oliphant 是 NumPy 的主要作者，他在回答“ When should a memoryview be used?” [link](http://stackoverflow.com/questions/4845418/when-should-a-memoryview-be-used/）这个问题时是这样说的：</p>
-<p>内存视图其实是泛化和去数学化的 NumPy 数组。它让你在不需要复制内容的前提下，在数据结构之间共享内存。其中数据结构可以是任何形式，比如 PIL 图片、SQLite 数据库和 NumPy 的数组，等等。这个功能在处理大型数据集合的时候非常重要。</p>
-<p>memoryview …</p>
-                    <a class="btn btn-default btn-xs" href="/python-memoryview-and-annotation-ideas.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="/author/charlie-hu4.html">&laquo;</a>
@@ -443,6 +456,8 @@ What if the linked list is extremely large and its length is unknown to you? Cou
                             href="/author/charlie-hu13.html">13</a></li>
                     <li class=""><a
                             href="/author/charlie-hu14.html">14</a></li>
+                    <li class=""><a
+                            href="/author/charlie-hu15.html">15</a></li>
                 <li class="next"><a
                         href="/author/charlie-hu6.html">&raquo;</a></li>
         </ul>
@@ -475,9 +490,9 @@ What if the linked list is extremely large and its length is unknown to you? Cou
 <li class="list-group-item">
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
   <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/translate-pythonku-jie-shao-shi-yong-luxjin-xing-zhi-neng-ke-shi-shu-ju-fa-xian.html">[Translate] Python库介绍：使用Lux进行智能可视数据发现</a></li>
     <li class="list-group-item"><a href="/translate-pythonzhong-ru-he-jiang-duo-ge-can-shu-chuan-ru-maphan-shu.html">[Translate] Python中如何将多个参数传入map函数</a></li>
     <li class="list-group-item"><a href="/review-guess-word-and-hangman-game.html">[Review] Guess word and hangman game</a></li>
-    <li class="list-group-item"><a href="/stackoverflow-list-generator-algorithms.html">StackOverflow list generator algorithms</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Recent Posts -->
@@ -504,7 +519,7 @@ What if the linked list is extremely large and its length is unknown to you? Cou
     <li class="list-group-item tag-3">
       <a href="/tag/math.html">Math</a>
     </li>
-    <li class="list-group-item tag-3">
+    <li class="list-group-item tag-2">
       <a href="/tag/python.html">Python</a>
     </li>
     <li class="list-group-item tag-4">
