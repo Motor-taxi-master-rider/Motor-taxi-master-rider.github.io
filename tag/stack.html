@@ -244,6 +244,50 @@ Tower of Babel            </a>
         <li class="active">Stack</li>
     </ol>
             <article>
+                <h2><a href="/.html"></a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2021-02-26T00:00:00+08:00"> Fri 26 February 2021</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/algorithms.html">Algorithms</a>
+        /
+	<a href="/tag/python.html">Python</a>
+        /
+	<a href="/tag/stack.html">Stack</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>很久之前基于生成器写过<a href="https://motor-taxi-master-rider.github.io/yi-ge-jian-dan-de-wen-ben-jie-xi-ji-suan-qi.html">一个简单的文本解析计算器</a>。这个计算器集中了很多面向对象的思想，但却不是很多有用。虽然它支持求幂<code>^</code>操作，但却无法处理括号，并没有那么有用。</p>
+<p>学习栈的时候有了解过如何用后缀表达式求表达式的值，一直没有动手去亲自实现这一算法。最近有被问到和这个算法相类似的题，动手尝试下加深了印象。</p>
+<h1>中缀表达式转化后缀表达式</h1>
+<p>中缀转化后缀的规则如下，来自王道学堂：</p>
+<p><img alt="后缀表达式的计算步骤" src="https://motor-taxi-master-rider.github.io/assets/img/postfix_expression.png"></p>
+<p>按照这一逻辑，实现的算法如下：</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">postfix_expression</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">string</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="n">priority_map</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;+&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">operator_stack</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">postfix_expression</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">string</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39; &#39;</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">continue</span>
+
+        <span class="k">if</span> <span class="n">string …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="/leetcode-next-greater-element-ii.html">LeetCode - Next Greater Element II</a></h2>
                     <div class="well well-sm">
 <footer class="post-info">
@@ -353,9 +397,9 @@ Tower of Babel            </a>
 <li class="list-group-item">
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
   <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/.html"></a></li>
     <li class="list-group-item"><a href="/leetcode-next-greater-element-ii.html">LeetCode - Next Greater Element II</a></li>
     <li class="list-group-item"><a href="/leetcode-queue-reconstruction-by-height.html">LeetCode - Queue Reconstruction by Height</a></li>
-    <li class="list-group-item"><a href="/leetcode-next-greater-element-i.html">LeetCode - Next Greater Element I</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Recent Posts -->
@@ -367,19 +411,19 @@ Tower of Babel            </a>
     <li class="list-group-item tag-3">
       <a href="/tag/algorithms.html">Algorithms</a>
     </li>
-    <li class="list-group-item tag-3">
+    <li class="list-group-item tag-4">
       <a href="/tag/bit_manipulation.html">Bit_manipulation</a>
     </li>
     <li class="list-group-item tag-2">
       <a href="/tag/coroutine.html">Coroutine</a>
     </li>
-    <li class="list-group-item tag-3">
+    <li class="list-group-item tag-4">
       <a href="/tag/descriptor.html">Descriptor</a>
     </li>
     <li class="list-group-item tag-1">
       <a href="/tag/leetcode.html">Leetcode</a>
     </li>
-    <li class="list-group-item tag-3">
+    <li class="list-group-item tag-4">
       <a href="/tag/math.html">Math</a>
     </li>
     <li class="list-group-item tag-2">
@@ -388,7 +432,7 @@ Tower of Babel            </a>
     <li class="list-group-item tag-4">
       <a href="/tag/stack.html">Stack</a>
     </li>
-    <li class="list-group-item tag-2">
+    <li class="list-group-item tag-3">
       <a href="/tag/string.html">String</a>
     </li>
     <li class="list-group-item tag-2">
@@ -434,7 +478,7 @@ Tower of Babel            </a>
    <div class="container">
       <hr>
       <div class="row">
-         <div class="col-xs-10">&copy; 2017 Charlie Hu
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
             &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
             <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
             <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>

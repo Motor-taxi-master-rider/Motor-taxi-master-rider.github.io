@@ -238,6 +238,50 @@ Tower of Babel            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
+                <h2><a href="/.html"></a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2021-02-26T00:00:00+08:00"> Fri 26 February 2021</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/algorithms.html">Algorithms</a>
+        /
+	<a href="/tag/python.html">Python</a>
+        /
+	<a href="/tag/stack.html">Stack</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>很久之前基于生成器写过<a href="https://motor-taxi-master-rider.github.io/yi-ge-jian-dan-de-wen-ben-jie-xi-ji-suan-qi.html">一个简单的文本解析计算器</a>。这个计算器集中了很多面向对象的思想，但却不是很多有用。虽然它支持求幂<code>^</code>操作，但却无法处理括号，并没有那么有用。</p>
+<p>学习栈的时候有了解过如何用后缀表达式求表达式的值，一直没有动手去亲自实现这一算法。最近有被问到和这个算法相类似的题，动手尝试下加深了印象。</p>
+<h1>中缀表达式转化后缀表达式</h1>
+<p>中缀转化后缀的规则如下，来自王道学堂：</p>
+<p><img alt="后缀表达式的计算步骤" src="https://motor-taxi-master-rider.github.io/assets/img/postfix_expression.png"></p>
+<p>按照这一逻辑，实现的算法如下：</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">postfix_expression</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">string</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="n">priority_map</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;+&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">operator_stack</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">postfix_expression</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">string</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39; &#39;</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">continue</span>
+
+        <span class="k">if</span> <span class="n">string …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="/translate-pythonku-jie-shao-shi-yong-luxjin-xing-zhi-neng-ke-shi-shu-ju-fa-xian.html">[Translate] Python库介绍：使用Lux进行智能可视数据发现</a></h2>
                     <div class="well well-sm">
 <footer class="post-info">
@@ -381,44 +425,6 @@ Tower of Babel            </a>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2><a href="/build-a-circular-list-and-regex-trie.html">Build a circular list and regex trie</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2018-01-06T00:00:00+08:00"> Sat 06 January 2018</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="/tag/algorithm.html">Algorithm</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Dancing programs</h3>
-<p>这个问题来自<code>Advent of code</code>的<a href="http://adventofcode.com/2017/day/16">第十六日</a>。</p>
-<p>解决代码如下:</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
-    <span class="c1"># 循环数组，start为头指针</span>
-    <span class="n">result_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
-    <span class="c1"># 减少Partner时间复杂度的字典</span>
-    <span class="n">result_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">s</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">result_list</span><span class="p">)}</span>
-    <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">result_list</span><span class="p">)</span>
-    <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
-
-    <span class="k">for</span> <span class="n">action</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">action</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;s&#39;</span><span class="p">):</span>
-            <span class="n">start</span> <span class="o">=</span> <span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="n">length</span><span class="p">)</span> <span class="o">%</span> <span class="n">length</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">action</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
-            <span class="k">continue</span>
-
-        <span class="k">if …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="/build-a-circular-list-and-regex-trie.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev disabled"><a href="#">&laquo;</a></li>
@@ -484,9 +490,9 @@ Tower of Babel            </a>
 <li class="list-group-item">
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
   <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/.html"></a></li>
     <li class="list-group-item"><a href="/translate-pythonku-jie-shao-shi-yong-luxjin-xing-zhi-neng-ke-shi-shu-ju-fa-xian.html">[Translate] Python库介绍：使用Lux进行智能可视数据发现</a></li>
     <li class="list-group-item"><a href="/translate-pythonzhong-ru-he-jiang-duo-ge-can-shu-chuan-ru-maphan-shu.html">[Translate] Python中如何将多个参数传入map函数</a></li>
-    <li class="list-group-item"><a href="/review-guess-word-and-hangman-game.html">[Review] Guess word and hangman game</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Recent Posts -->
@@ -498,19 +504,19 @@ Tower of Babel            </a>
     <li class="list-group-item tag-3">
       <a href="/tag/algorithms.html">Algorithms</a>
     </li>
-    <li class="list-group-item tag-3">
+    <li class="list-group-item tag-4">
       <a href="/tag/bit_manipulation.html">Bit_manipulation</a>
     </li>
     <li class="list-group-item tag-2">
       <a href="/tag/coroutine.html">Coroutine</a>
     </li>
-    <li class="list-group-item tag-3">
+    <li class="list-group-item tag-4">
       <a href="/tag/descriptor.html">Descriptor</a>
     </li>
     <li class="list-group-item tag-1">
       <a href="/tag/leetcode.html">Leetcode</a>
     </li>
-    <li class="list-group-item tag-3">
+    <li class="list-group-item tag-4">
       <a href="/tag/math.html">Math</a>
     </li>
     <li class="list-group-item tag-2">
@@ -519,7 +525,7 @@ Tower of Babel            </a>
     <li class="list-group-item tag-4">
       <a href="/tag/stack.html">Stack</a>
     </li>
-    <li class="list-group-item tag-2">
+    <li class="list-group-item tag-3">
       <a href="/tag/string.html">String</a>
     </li>
     <li class="list-group-item tag-2">

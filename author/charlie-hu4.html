@@ -243,6 +243,32 @@ Tower of Babel            </a>
             <li class="active">Charlie Hu</li>
         </ol>
             <article>
+                <h2><a href="/leetcode-integer-break.html">LeetCode - Integer Break</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-09-26T00:00:00+08:00"> Tue 26 September 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/leetcode.html">Leetcode</a>
+        /
+	<a href="/tag/math.html">Math</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><h3>Description</h3>
+<p>Given a positive integer n, break it into the sum of <strong>at least</strong> two positive integers and maximize the product of those integers. Return the maximum product you can get.</p>
+<p>For example, given n = 2, return 1 (2 = 1 + 1); given n = 10, return 36 (10 = 3 + 3 + 4 …</p>
+                    <a class="btn btn-default btn-xs" href="/leetcode-integer-break.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="/python-descriptor-behavior-ii.html">Python Descriptor Behavior II</a></h2>
                     <div class="well well-sm">
 <footer class="post-info">
@@ -375,55 +401,6 @@ Now your job is to find the total Hamming distance between all pairs of the give
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2><a href="/yi-ge-jian-dan-de-wen-ben-jie-xi-ji-suan-qi.html">一个简单的文本解析计算器</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-08-31T00:00:00+08:00"> Thu 31 August 2017</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="/tag/coroutine.html">Coroutine</a>
-        /
-	<a href="/tag/singledispatch.html">Singledispatch</a>
-        /
-	<a href="/tag/tree.html">Tree</a>
-        /
-	<a href="/tag/stackless.html">Stackless</a>
-        /
-	<a href="/tag/metaprogramming.html">Metaprogramming</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Description</h3>
-<p>之前在《python cookbook》上8.22节看到了用非递归的方式实现访问者模式的<a href="http://python3-cookbook.readthedocs.io/zh_CN/latest/c08/p22_implementing_visitor_pattern_without_recursion.html">方法</a>，通过巧妙地使用生成器的方式在树遍历或者搜索算法中中消除递归。从而避免了在使用访问者模式遍历深层嵌套树形数据结构时，因为超过嵌套层级限制而失败的情况。</p>
-<p>原文是David Dabeaz基于python3.3版本构建的，很不凑巧的是，在python3.4版本又推出了一个非常强大的协程和生成器的新特性：<code>yield from</code>，这无疑为我们增添了新的玩具。</p>
-<p>2014年，Dabeaz的<a href="http://www.dabeaz.com/finalgenerator">Final generator</a>讲座全面地介绍了许多协程编写的诀窍并且炸毁了许多听众的大脑（包括笔者的），在课程的最后一部分他又从头用协程代替了经典的访问者模式，用于计算算术表达式。受他的课程的引导和启发便有了本文。</p>
-<h3>代码实现</h3>
-<p>我们希望实现的计算器能够这样使用：</p>
-<div class="highlight"><pre><span></span><span class="n">cal</span> <span class="o">=</span> <span class="n">Calculator</span><span class="p">()</span>
-<span class="n">cal</span><span class="o">.</span><span class="n">caculate</span><span class="p">(</span><span class="s1">&#39;1+2*4-5^2&#39;</span><span class="p">)</span>
-
-<span class="o">&gt;&gt;&gt;</span> <span class="o">-</span><span class="mi">16</span>
-</pre></div>
-
-
-<p>从逻辑上来说，这个文本计算器会为我们分三步做事情：</p>
-<ol>
-<li>解析传入文本，将文本转换成可识别单元。很容易想到的是使用正则表达式来解析文本。</li>
-<li>确定运算的先后顺序，如乘除优先于加减。在这里我们将识别好的单元构造成树来体现运算的优先级。</li>
-<li>深度遍历生成树，计算并输出结果。</li>
-</ol>
-<p>接下来我们就来一步一步实现这一简易编译器 …</p>
-                    <a class="btn btn-default btn-xs" href="/yi-ge-jian-dan-de-wen-ben-jie-xi-ji-suan-qi.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="/author/charlie-hu3.html">&laquo;</a>
@@ -490,9 +467,9 @@ Now your job is to find the total Hamming distance between all pairs of the give
 <li class="list-group-item">
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
   <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/.html"></a></li>
     <li class="list-group-item"><a href="/translate-pythonku-jie-shao-shi-yong-luxjin-xing-zhi-neng-ke-shi-shu-ju-fa-xian.html">[Translate] Python库介绍：使用Lux进行智能可视数据发现</a></li>
     <li class="list-group-item"><a href="/translate-pythonzhong-ru-he-jiang-duo-ge-can-shu-chuan-ru-maphan-shu.html">[Translate] Python中如何将多个参数传入map函数</a></li>
-    <li class="list-group-item"><a href="/review-guess-word-and-hangman-game.html">[Review] Guess word and hangman game</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Recent Posts -->
@@ -504,19 +481,19 @@ Now your job is to find the total Hamming distance between all pairs of the give
     <li class="list-group-item tag-3">
       <a href="/tag/algorithms.html">Algorithms</a>
     </li>
-    <li class="list-group-item tag-3">
+    <li class="list-group-item tag-4">
       <a href="/tag/bit_manipulation.html">Bit_manipulation</a>
     </li>
     <li class="list-group-item tag-2">
       <a href="/tag/coroutine.html">Coroutine</a>
     </li>
-    <li class="list-group-item tag-3">
+    <li class="list-group-item tag-4">
       <a href="/tag/descriptor.html">Descriptor</a>
     </li>
     <li class="list-group-item tag-1">
       <a href="/tag/leetcode.html">Leetcode</a>
     </li>
-    <li class="list-group-item tag-3">
+    <li class="list-group-item tag-4">
       <a href="/tag/math.html">Math</a>
     </li>
     <li class="list-group-item tag-2">
@@ -525,7 +502,7 @@ Now your job is to find the total Hamming distance between all pairs of the give
     <li class="list-group-item tag-4">
       <a href="/tag/stack.html">Stack</a>
     </li>
-    <li class="list-group-item tag-2">
+    <li class="list-group-item tag-3">
       <a href="/tag/string.html">String</a>
     </li>
     <li class="list-group-item tag-2">

@@ -243,6 +243,55 @@ Tower of Babel            </a>
             <li class="active">Charlie Hu</li>
         </ol>
             <article>
+                <h2><a href="/yi-ge-jian-dan-de-wen-ben-jie-xi-ji-suan-qi.html">一个简单的文本解析计算器</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-08-31T00:00:00+08:00"> Thu 31 August 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/coroutine.html">Coroutine</a>
+        /
+	<a href="/tag/singledispatch.html">Singledispatch</a>
+        /
+	<a href="/tag/tree.html">Tree</a>
+        /
+	<a href="/tag/stackless.html">Stackless</a>
+        /
+	<a href="/tag/metaprogramming.html">Metaprogramming</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><h3>Description</h3>
+<p>之前在《python cookbook》上8.22节看到了用非递归的方式实现访问者模式的<a href="http://python3-cookbook.readthedocs.io/zh_CN/latest/c08/p22_implementing_visitor_pattern_without_recursion.html">方法</a>，通过巧妙地使用生成器的方式在树遍历或者搜索算法中中消除递归。从而避免了在使用访问者模式遍历深层嵌套树形数据结构时，因为超过嵌套层级限制而失败的情况。</p>
+<p>原文是David Dabeaz基于python3.3版本构建的，很不凑巧的是，在python3.4版本又推出了一个非常强大的协程和生成器的新特性：<code>yield from</code>，这无疑为我们增添了新的玩具。</p>
+<p>2014年，Dabeaz的<a href="http://www.dabeaz.com/finalgenerator">Final generator</a>讲座全面地介绍了许多协程编写的诀窍并且炸毁了许多听众的大脑（包括笔者的），在课程的最后一部分他又从头用协程代替了经典的访问者模式，用于计算算术表达式。受他的课程的引导和启发便有了本文。</p>
+<h3>代码实现</h3>
+<p>我们希望实现的计算器能够这样使用：</p>
+<div class="highlight"><pre><span></span><span class="n">cal</span> <span class="o">=</span> <span class="n">Calculator</span><span class="p">()</span>
+<span class="n">cal</span><span class="o">.</span><span class="n">caculate</span><span class="p">(</span><span class="s1">&#39;1+2*4-5^2&#39;</span><span class="p">)</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="o">-</span><span class="mi">16</span>
+</pre></div>
+
+
+<p>从逻辑上来说，这个文本计算器会为我们分三步做事情：</p>
+<ol>
+<li>解析传入文本，将文本转换成可识别单元。很容易想到的是使用正则表达式来解析文本。</li>
+<li>确定运算的先后顺序，如乘除优先于加减。在这里我们将识别好的单元构造成树来体现运算的优先级。</li>
+<li>深度遍历生成树，计算并输出结果。</li>
+</ol>
+<p>接下来我们就来一步一步实现这一简易编译器 …</p>
+                    <a class="btn btn-default btn-xs" href="/yi-ge-jian-dan-de-wen-ben-jie-xi-ji-suan-qi.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="/pythonzhuang-shi-qi-de-zheng-que-da-kai-fang-shi-2.html">Python装饰器的正确打开方式(2)</a></h2>
                     <div class="well well-sm">
 <footer class="post-info">
@@ -393,37 +442,6 @@ What if the linked list is extremely large and its length is unknown to you? Cou
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2><a href="/pythonicde-fan-han-shu.html">Pythonic的泛函数</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-08-15T00:00:00+08:00"> Tue 15 August 2017</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="/tag/singledispatch.html">Singledispatch</a>
-        /
-	<a href="/tag/multidispatch.html">Multidispatch</a>
-        /
-	<a href="/tag/overload.html">Overload</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Description</h3>
-<p>因为python不支持重载方法或函数，所以我们无法像java那样用不同的签名定义某个方法的变体来实现用不同的方式处理不同的数据类型，导致这个区别的根本原因是python语言的动态性。但也正因得益于此，利用动态参数类型以及字典参数列表，在python中我们常常可以把方法变成一个分派函数，使用一串if/elif/else调用专门的函数来实现类java重载的功能。然而这样并不便于模块的用户拓展，还显得很愚蠢：实现一长，分派函数会变得很大，而且它与各个专门函数之间的耦合也很紧密。</p>
-<p>我们这里的泛型函数是指由一组为不同类型参数执行相似操作的函数组成的函数，具体调用哪一个函数的实现取决于分发算法和参数类型（也即是python中的参数列表类型重载）。在这里我们例举了<code>Fluent Python</code>里的singledispath和<code>Python Cookbook</code>里的利用函数注解实现方法重载的例子。来展现函数重载这一静态类型特性在python这个动态类型语言中的实现以及局限。对于这个特性实现牵扯到了python的多种元特性让它成为了一个实在有趣的话题。</p>
-<p>Python单分发器（Singledispatch）是实现泛型函数的一种形式，由一个单一参数来决定选择和调用哪个函数。在Python3.4中，singledispath方法第一出现在functools模块中，你可以在<a href="https://www.python.org/dev/peps/pep-0443/">PEP 443 — Single-dispatch generic function</a>找到关于它更多特性的介绍。</p>
-<p>在<code>Python Cookbook</code>中介绍了一个不完美但可行的利用函数注解方式实现方法重载的方法，分别用元函数和与singledispath类似的装饰器实现。这是一个比较深入的关于函数注解的应用。你也可以在之前的博文中找到一些比较不深入的对于函数注解的<a href="https://motor-taxi-master-rider.github.io/python/2017/08/10/python-memoryview-and-annotation-ideas#description">应用</a>。</p>
-<h3>代码示例 …</h3>
-                    <a class="btn btn-default btn-xs" href="/pythonicde-fan-han-shu.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="/author/charlie-hu4.html">&laquo;</a>
@@ -490,9 +508,9 @@ What if the linked list is extremely large and its length is unknown to you? Cou
 <li class="list-group-item">
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
   <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/.html"></a></li>
     <li class="list-group-item"><a href="/translate-pythonku-jie-shao-shi-yong-luxjin-xing-zhi-neng-ke-shi-shu-ju-fa-xian.html">[Translate] Python库介绍：使用Lux进行智能可视数据发现</a></li>
     <li class="list-group-item"><a href="/translate-pythonzhong-ru-he-jiang-duo-ge-can-shu-chuan-ru-maphan-shu.html">[Translate] Python中如何将多个参数传入map函数</a></li>
-    <li class="list-group-item"><a href="/review-guess-word-and-hangman-game.html">[Review] Guess word and hangman game</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Recent Posts -->
@@ -504,19 +522,19 @@ What if the linked list is extremely large and its length is unknown to you? Cou
     <li class="list-group-item tag-3">
       <a href="/tag/algorithms.html">Algorithms</a>
     </li>
-    <li class="list-group-item tag-3">
+    <li class="list-group-item tag-4">
       <a href="/tag/bit_manipulation.html">Bit_manipulation</a>
     </li>
     <li class="list-group-item tag-2">
       <a href="/tag/coroutine.html">Coroutine</a>
     </li>
-    <li class="list-group-item tag-3">
+    <li class="list-group-item tag-4">
       <a href="/tag/descriptor.html">Descriptor</a>
     </li>
     <li class="list-group-item tag-1">
       <a href="/tag/leetcode.html">Leetcode</a>
     </li>
-    <li class="list-group-item tag-3">
+    <li class="list-group-item tag-4">
       <a href="/tag/math.html">Math</a>
     </li>
     <li class="list-group-item tag-2">
@@ -525,7 +543,7 @@ What if the linked list is extremely large and its length is unknown to you? Cou
     <li class="list-group-item tag-4">
       <a href="/tag/stack.html">Stack</a>
     </li>
-    <li class="list-group-item tag-2">
+    <li class="list-group-item tag-3">
       <a href="/tag/string.html">String</a>
     </li>
     <li class="list-group-item tag-2">

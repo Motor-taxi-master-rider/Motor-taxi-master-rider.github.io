@@ -243,6 +243,37 @@ Tower of Babel            </a>
             <li class="active">Charlie Hu</li>
         </ol>
             <article>
+                <h2><a href="/pythonicde-fan-han-shu.html">Pythonic的泛函数</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-08-15T00:00:00+08:00"> Tue 15 August 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/singledispatch.html">Singledispatch</a>
+        /
+	<a href="/tag/multidispatch.html">Multidispatch</a>
+        /
+	<a href="/tag/overload.html">Overload</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><h3>Description</h3>
+<p>因为python不支持重载方法或函数，所以我们无法像java那样用不同的签名定义某个方法的变体来实现用不同的方式处理不同的数据类型，导致这个区别的根本原因是python语言的动态性。但也正因得益于此，利用动态参数类型以及字典参数列表，在python中我们常常可以把方法变成一个分派函数，使用一串if/elif/else调用专门的函数来实现类java重载的功能。然而这样并不便于模块的用户拓展，还显得很愚蠢：实现一长，分派函数会变得很大，而且它与各个专门函数之间的耦合也很紧密。</p>
+<p>我们这里的泛型函数是指由一组为不同类型参数执行相似操作的函数组成的函数，具体调用哪一个函数的实现取决于分发算法和参数类型（也即是python中的参数列表类型重载）。在这里我们例举了<code>Fluent Python</code>里的singledispath和<code>Python Cookbook</code>里的利用函数注解实现方法重载的例子。来展现函数重载这一静态类型特性在python这个动态类型语言中的实现以及局限。对于这个特性实现牵扯到了python的多种元特性让它成为了一个实在有趣的话题。</p>
+<p>Python单分发器（Singledispatch）是实现泛型函数的一种形式，由一个单一参数来决定选择和调用哪个函数。在Python3.4中，singledispath方法第一出现在functools模块中，你可以在<a href="https://www.python.org/dev/peps/pep-0443/">PEP 443 — Single-dispatch generic function</a>找到关于它更多特性的介绍。</p>
+<p>在<code>Python Cookbook</code>中介绍了一个不完美但可行的利用函数注解方式实现方法重载的方法，分别用元函数和与singledispath类似的装饰器实现。这是一个比较深入的关于函数注解的应用。你也可以在之前的博文中找到一些比较不深入的对于函数注解的<a href="https://motor-taxi-master-rider.github.io/python/2017/08/10/python-memoryview-and-annotation-ideas#description">应用</a>。</p>
+<h3>代码示例 …</h3>
+                    <a class="btn btn-default btn-xs" href="/pythonicde-fan-han-shu.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="/python-memoryview-and-annotation-ideas.html">Python Memoryview and Annotation Ideas</a></h2>
                     <div class="well well-sm">
 <footer class="post-info">
@@ -364,50 +395,6 @@ the caller …</p>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2><a href="/flunet-python-167-coroutine-understading.html">Flunet Python 16.7 coroutine understading</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-07-18T00:00:00+08:00"> Tue 18 July 2017</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="/tag/fluent_python.html">Fluent_Python</a>
-        /
-	<a href="/tag/coroutine.html">Coroutine</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Description</h3>
-<p>援引自《Fluent Python》16.7节中关于调用方通过yield from委派生成器调用子生成器的例子。因为一个代码细节造成了对于委派生成器理解上的困难，因此基于个人的理解做出相应地修改来优化该段代码。</p>
-<h3>原例</h3>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
-
-<span class="n">Result</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Result&#39;</span><span class="p">,</span> <span class="s1">&#39;count average&#39;</span><span class="p">)</span>
-
-
-<span class="c1">### the subgenerator</span>
-<span class="k">def</span> <span class="nf">averager</span><span class="p">():</span>  <span class="c1"># &lt;1&gt;</span>
-    <span class="n">total</span> <span class="o">=</span> <span class="mf">0.0</span>
-    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">average</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="n">term</span> <span class="o">=</span> <span class="k">yield</span>  <span class="c1"># &lt;2&gt;</span>
-        <span class="k">if</span> <span class="n">term</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># &lt;3&gt;</span>
-            <span class="k">break</span>
-        <span class="n">total</span> <span class="o">+=</span> <span class="n">term</span>
-        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">average</span> <span class="o">=</span> <span class="n">total</span><span class="o">/</span><span class="n">count</span>
-    <span class="k">return …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="/flunet-python-167-coroutine-understading.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="/author/charlie-hu5.html">&laquo;</a>
@@ -474,9 +461,9 @@ the caller …</p>
 <li class="list-group-item">
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
   <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/.html"></a></li>
     <li class="list-group-item"><a href="/translate-pythonku-jie-shao-shi-yong-luxjin-xing-zhi-neng-ke-shi-shu-ju-fa-xian.html">[Translate] Python库介绍：使用Lux进行智能可视数据发现</a></li>
     <li class="list-group-item"><a href="/translate-pythonzhong-ru-he-jiang-duo-ge-can-shu-chuan-ru-maphan-shu.html">[Translate] Python中如何将多个参数传入map函数</a></li>
-    <li class="list-group-item"><a href="/review-guess-word-and-hangman-game.html">[Review] Guess word and hangman game</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Recent Posts -->
@@ -488,19 +475,19 @@ the caller …</p>
     <li class="list-group-item tag-3">
       <a href="/tag/algorithms.html">Algorithms</a>
     </li>
-    <li class="list-group-item tag-3">
+    <li class="list-group-item tag-4">
       <a href="/tag/bit_manipulation.html">Bit_manipulation</a>
     </li>
     <li class="list-group-item tag-2">
       <a href="/tag/coroutine.html">Coroutine</a>
     </li>
-    <li class="list-group-item tag-3">
+    <li class="list-group-item tag-4">
       <a href="/tag/descriptor.html">Descriptor</a>
     </li>
     <li class="list-group-item tag-1">
       <a href="/tag/leetcode.html">Leetcode</a>
     </li>
-    <li class="list-group-item tag-3">
+    <li class="list-group-item tag-4">
       <a href="/tag/math.html">Math</a>
     </li>
     <li class="list-group-item tag-2">
@@ -509,7 +496,7 @@ the caller …</p>
     <li class="list-group-item tag-4">
       <a href="/tag/stack.html">Stack</a>
     </li>
-    <li class="list-group-item tag-2">
+    <li class="list-group-item tag-3">
       <a href="/tag/string.html">String</a>
     </li>
     <li class="list-group-item tag-2">
