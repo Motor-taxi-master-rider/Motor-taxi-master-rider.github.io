@@ -238,6 +238,46 @@ Tower of Babel            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
+                <h2><a href="/translatecong-xin-shou-dao-zhuan-jia-ru-he-yong-pythonbian-xie-pei-zhi-wen-jian.html">[Translate]从新手到专家：如何用Python编写配置文件</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2021-03-06T00:00:00+08:00"> Sat 06 March 2021</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/translate.html">Translate</a>
+        /
+	<a href="/tag/python.html">Python</a>
+        /
+	<a href="/tag/configuration.html">Configuration</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><blockquote>
+<p>原作者：<a href="https://towardsdatascience.com/from-novice-to-expert-how-to-write-a-configuration-file-in-python-273e171a8eb3">Xiaoxu Gao</a></p>
+<p>将配置文件视为生产代码
+</p>
+</blockquote>
+<p>设计软件时，我们通常要花费很多精力编写高质量代码。但这还不够，一个好的软件还应关注它的生态系统，例如测试，部署，网络等，这其中最重要的一方面就是配置管理。</p>
+<p>好的配置管理应允许在任何环境下执行软件，并且无需更改代码。它可以帮助运维们管理所有麻烦的设置，并提供了有关过程中可能发生的情况的视图，甚至允许他们在运行时更改软件的行为。</p>
+<p>最常见的配置文件有数据库的秘钥和外部服务的证书，及已部署服务器的主机名，动态参数等。</p>
+<p>在本文中，我想与你们分享一些配置管理的最佳实践，以及如何在Python中实现它们。如果你有更多想法，请在下面留下你的评论。</p>
+<h2>什么时候需要一个单独的配置文件？</h2>
+<p>在编写任何配置文件前，我们应该问问自己为什么需要一个外部文件？难道不能把它们变成代码里的常数吗？实际上，著名的<a href="https://12factor.net">《十二要素应用》</a>已经为我们回答了这个问题：</p>
+<blockquote>
+<p>一个验证应用程序的所有确配置是否均已正确地从代码中分解出来的试金石是：代码库是否随时可以在不损害任何证书的情况下开源。请注意，配置的定义<strong>不</strong>包括内部应用程序配置，例如Rails中的<code>config /routes.rb</code>或是<a href="https://spring.io/">Spring</a>中<a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans">代码模块的连接方式</a>。这种类型的配置在不同部署版本之间不会有所不同，因此最好直接写在代码里。</p>
+</blockquote>
+<p>这篇文章建议将任何依赖于环境的参数 …</p>
+                    <a class="btn btn-default btn-xs" href="/translatecong-xin-shou-dao-zhuan-jia-ru-he-yong-pythonbian-xie-pei-zhi-wen-jian.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="/jian-dan-de-wen-ben-jie-xi-ji-suan-qi-v2.html">简单的文本解析计算器 v2</a></h2>
                     <div class="well well-sm">
 <footer class="post-info">
@@ -386,45 +426,6 @@ Tower of Babel            </a>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2><a href="/stackoverflow-list-generator-algorithms.html">StackOverflow list generator algorithms</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2018-03-11T00:00:00+08:00"> Sun 11 March 2018</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="/tag/algorithm.html">Algorithm</a>
-        /
-	<a href="/tag/generator.html">Generator</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Faltten nested lists with indices</h3>
-<p>这个问题来自<a href="http://adventofcode.com/2017/day/16">StackOverflow</a>。</p>
-<p>对于一个嵌套的列表L:</p>
-<div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="p">[[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]],</span> <span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,[</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]],</span> <span class="mi">10</span><span class="p">]</span>
-</pre></div>
-
-
-<p>希望有一个函数能够yield出每个元素的嵌套位置元组：</p>
-<div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-<span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-<span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-<span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-<span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-<span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-<span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0 …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="/stackoverflow-list-generator-algorithms.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev disabled"><a href="#">&laquo;</a></li>
@@ -490,9 +491,9 @@ Tower of Babel            </a>
 <li class="list-group-item">
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
   <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/translatecong-xin-shou-dao-zhuan-jia-ru-he-yong-pythonbian-xie-pei-zhi-wen-jian.html">[Translate]从新手到专家：如何用Python编写配置文件</a></li>
     <li class="list-group-item"><a href="/jian-dan-de-wen-ben-jie-xi-ji-suan-qi-v2.html">简单的文本解析计算器 v2</a></li>
     <li class="list-group-item"><a href="/translate-pythonku-jie-shao-shi-yong-luxjin-xing-zhi-neng-ke-shi-shu-ju-fa-xian.html">[Translate] Python库介绍：使用Lux进行智能可视数据发现</a></li>
-    <li class="list-group-item"><a href="/translate-pythonzhong-ru-he-jiang-duo-ge-can-shu-chuan-ru-maphan-shu.html">[Translate] Python中如何将多个参数传入map函数</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Recent Posts -->

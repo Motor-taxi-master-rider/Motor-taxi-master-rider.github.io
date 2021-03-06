@@ -238,6 +238,58 @@ Tower of Babel            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
+                <h2><a href="/leetcode-find-largest-value-in-each-tree-row.html">LeetCode - Find Largest Value in Each Tree Row</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-05-20T00:00:00+08:00"> Sat 20 May 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/leetcode.html">LeetCode</a>
+        /
+	<a href="/tag/tree.html">Tree</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><h3>Description</h3>
+<p>You need to find the largest value in each row of a binary tree.</p>
+<p><strong>Example:</strong></p>
+<div class="highlight"><pre><span></span><span class="n">Input</span><span class="o">:</span>
+
+          <span class="mi">1</span>
+         <span class="o">/</span> <span class="o">\</span>
+        <span class="mi">3</span>   <span class="mi">2</span>
+       <span class="o">/</span> <span class="o">\</span>   <span class="o">\</span>  
+      <span class="mi">5</span>   <span class="mi">3</span>   <span class="mi">9</span>
+
+<span class="n">Output</span><span class="o">:</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">9</span><span class="o">]</span>
+</pre></div>
+
+
+<p><a href="https://leetcode.com/problems/find-largest-value-in-each-tree-row/#/description">Source link</a></p>
+<hr>
+<h3>Best practice</h3>
+<blockquote>
+<p>设树根为第0层，则第i层的最大值等于结果集result[i]。遍历每一层比较相同序号的根值的最大值。</p>
+</blockquote>
+<p>C++ version</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">result</span><span class="p">;</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">vector …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/leetcode-find-largest-value-in-each-tree-row.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="/leetcode-find-all-duplicates-in-an-array.html">LeetCode - Find All Duplicates in an Array</a></h2>
                     <div class="well well-sm">
 <footer class="post-info">
@@ -365,32 +417,6 @@ Tower of Babel            </a>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2><a href="/leetcode-optimal-division.html">LeetCode - Optimal Division</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-05-11T00:00:00+08:00"> Thu 11 May 2017</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="/tag/leetcode.html">LeetCode</a>
-        /
-	<a href="/tag/string.html">String</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Description</h3>
-<p>Given a list of <strong>positive integers</strong>, the adjacent integers will perform the float division. For example, [2,3,4] -&gt; 2 / 3 / 4.</p>
-<p>However, you can add any number of parenthesis at any position to change the priority of operations. You should find out how to add parenthesis to get …</p>
-                    <a class="btn btn-default btn-xs" href="/leetcode-optimal-division.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="/index11.html">&laquo;</a>
@@ -457,9 +483,9 @@ Tower of Babel            </a>
 <li class="list-group-item">
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
   <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/translatecong-xin-shou-dao-zhuan-jia-ru-he-yong-pythonbian-xie-pei-zhi-wen-jian.html">[Translate]从新手到专家：如何用Python编写配置文件</a></li>
     <li class="list-group-item"><a href="/jian-dan-de-wen-ben-jie-xi-ji-suan-qi-v2.html">简单的文本解析计算器 v2</a></li>
     <li class="list-group-item"><a href="/translate-pythonku-jie-shao-shi-yong-luxjin-xing-zhi-neng-ke-shi-shu-ju-fa-xian.html">[Translate] Python库介绍：使用Lux进行智能可视数据发现</a></li>
-    <li class="list-group-item"><a href="/translate-pythonzhong-ru-he-jiang-duo-ge-can-shu-chuan-ru-maphan-shu.html">[Translate] Python中如何将多个参数传入map函数</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Recent Posts -->

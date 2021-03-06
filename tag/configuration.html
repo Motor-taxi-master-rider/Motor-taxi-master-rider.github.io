@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>LeetCode - Array Partition I - Tower of Babel</title>
+    <title>Configuration - Tower of Babel</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -174,23 +174,16 @@ init_mathjax();
 </script>
     <link href="/assets/favicon.ico" rel="icon">
 
-<link rel="canonical" href="/leetcode-array-partition-i.html">
 
-        <meta name="author" content="Charlie Hu" />
-        <meta name="keywords" content="LeetCode,Algorithms,Python_sort()" />
-        <meta name="description" content="Description Given an array of 2n integers, your task is to group these integers into n pairs of integer, say (a1, b1), (a2, b2), ..., (an, bn) which makes sum of min(ai, bi) for all i from 1 to n as large as possible. -Example: &#39;&#39;&#39; Input: [1,4,3,2 …" />
+    <meta name="author" content="Charlie Hu" />
+    <meta name="keywords" content="Configuration" />
 
+    <!-- Open Graph tags -->
         <meta property="og:site_name" content="Tower of Babel" />
-        <meta property="og:type" content="article"/>
-        <meta property="og:title" content="LeetCode - Array Partition I"/>
-        <meta property="og:url" content="/leetcode-array-partition-i.html"/>
-        <meta property="og:description" content="Description Given an array of 2n integers, your task is to group these integers into n pairs of integer, say (a1, b1), (a2, b2), ..., (an, bn) which makes sum of min(ai, bi) for all i from 1 to n as large as possible. -Example: &#39;&#39;&#39; Input: [1,4,3,2 …"/>
-        <meta property="article:published_time" content="2017-05-08" />
-            <meta property="article:section" content="Python" />
-            <meta property="article:tag" content="LeetCode" />
-            <meta property="article:tag" content="Algorithms" />
-            <meta property="article:tag" content="Python_sort()" />
-            <meta property="article:author" content="Charlie Hu" />
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="Tower of Babel"/>
+        <meta property="og:url" content=""/>
+        <meta property="og:description" content="Tower of Babel"/>
 
 
 
@@ -245,29 +238,18 @@ Tower of Babel            </a>
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
-            <ol class="breadcrumb">
-                <li><a href="" title="Tower of Babel"><i class="fa fa-home fa-lg"></i></a></li>
-                <li><a href="/category/python.html" title="Python">Python</a></li>
-                <li class="active">LeetCode - Array Partition I</li>
-            </ol>
-    <section id="content">
-        <article>
-            <header class="page-header">
-                <h1>
-                    <a href="/leetcode-array-partition-i.html"
-                       rel="bookmark"
-                       title="Permalink to LeetCode - Array Partition I">
-                        LeetCode - Array Partition I
-                    </a>
-                </h1>
-            </header>
-            <div class="entry-content">
-                <div class="panel">
-                    <div class="panel-body">
+    <ol class="breadcrumb">
+        <li><a href="" title="Tower of Babel"><i class="fa fa-home fa-lg"></i></a></li>
+        <li><a href="/" title="Tags">Tags</a></li>
+        <li class="active">Configuration</li>
+    </ol>
+            <article>
+                <h2><a href="/translatecong-xin-shou-dao-zhuan-jia-ru-he-yong-pythonbian-xie-pei-zhi-wen-jian.html">[Translate]从新手到专家：如何用Python编写配置文件</a></h2>
+                    <div class="well well-sm">
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-05-08T00:00:00+08:00"> Mon 08 May 2017</time>
+        <i class="fa fa-calendar"></i><time datetime="2021-03-06T00:00:00+08:00"> Sat 06 March 2021</time>
     </span>
 
 
@@ -275,82 +257,32 @@ Tower of Babel            </a>
 
 
 <span class="label label-default">Tags</span>
-	<a href="/tag/leetcode.html">LeetCode</a>
+	<a href="/tag/translate.html">Translate</a>
         /
-	<a href="/tag/algorithms.html">Algorithms</a>
+	<a href="/tag/python.html">Python</a>
         /
-	<a href="/tag/python_sort.html">Python_sort()</a>
+	<a href="/tag/configuration.html">Configuration</a>
     
 </footer><!-- /.post-info -->                    </div>
+                <div class="summary"><blockquote>
+<p>原作者：<a href="https://towardsdatascience.com/from-novice-to-expert-how-to-write-a-configuration-file-in-python-273e171a8eb3">Xiaoxu Gao</a></p>
+<p>将配置文件视为生产代码
+</p>
+</blockquote>
+<p>设计软件时，我们通常要花费很多精力编写高质量代码。但这还不够，一个好的软件还应关注它的生态系统，例如测试，部署，网络等，这其中最重要的一方面就是配置管理。</p>
+<p>好的配置管理应允许在任何环境下执行软件，并且无需更改代码。它可以帮助运维们管理所有麻烦的设置，并提供了有关过程中可能发生的情况的视图，甚至允许他们在运行时更改软件的行为。</p>
+<p>最常见的配置文件有数据库的秘钥和外部服务的证书，及已部署服务器的主机名，动态参数等。</p>
+<p>在本文中，我想与你们分享一些配置管理的最佳实践，以及如何在Python中实现它们。如果你有更多想法，请在下面留下你的评论。</p>
+<h2>什么时候需要一个单独的配置文件？</h2>
+<p>在编写任何配置文件前，我们应该问问自己为什么需要一个外部文件？难道不能把它们变成代码里的常数吗？实际上，著名的<a href="https://12factor.net">《十二要素应用》</a>已经为我们回答了这个问题：</p>
+<blockquote>
+<p>一个验证应用程序的所有确配置是否均已正确地从代码中分解出来的试金石是：代码库是否随时可以在不损害任何证书的情况下开源。请注意，配置的定义<strong>不</strong>包括内部应用程序配置，例如Rails中的<code>config /routes.rb</code>或是<a href="https://spring.io/">Spring</a>中<a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans">代码模块的连接方式</a>。这种类型的配置在不同部署版本之间不会有所不同，因此最好直接写在代码里。</p>
+</blockquote>
+<p>这篇文章建议将任何依赖于环境的参数 …</p>
+                    <a class="btn btn-default btn-xs" href="/translatecong-xin-shou-dao-zhuan-jia-ru-he-yong-pythonbian-xie-pei-zhi-wen-jian.html">more ...</a>
                 </div>
-                <h3>Description</h3>
-<p>Given an array of <strong>2n</strong> integers, your task is to group these integers into <strong>n</strong> pairs of integer, say (a1, b1), (a2, b2), ..., (an, bn) which makes sum of min(ai, bi) for all i from 1 to n as large as possible.
-<!-- more --></p>
-<p>-<strong>Example:</strong>
-'''
-Input: [1,4,3,2]</p>
-<p>Output: 4
-Explanation: n is 2, and the maximum sum of pairs is 4.
-'''</p>
-<p>-<strong>Note:</strong>
-n is a positive integer, which is in the range of [1, 10000].
-All the integers in the array will be in the range of [-10000, 10000].</p>
-<p><a href="https://leetcode.com/problems/array-partition-i/#/description">Source link</a></p>
-<hr>
-<h3>Most popular solution</h3>
-<div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="n">Solution</span><span class="p">(</span><span class="k">object</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">arrayPairSum</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">nums</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
-<span class="w">        </span><span class="ss">&quot;&quot;&quot;</span>
-<span class="ss">        :type nums: List[int]</span>
-<span class="ss">        :rtype: int</span>
-<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">sorted</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span><span class="o">[</span><span class="n">::2</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
-</pre></div>
-
-
-<p><strong>Mark:</strong> 87%</p>
-<hr>
-<h3>My solution</h3>
-<div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="n">Solution</span><span class="p">(</span><span class="k">object</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">arrayPairSum</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">nums</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
-<span class="w">        </span><span class="ss">&quot;&quot;&quot;</span>
-<span class="ss">        :type nums: List[int]</span>
-<span class="ss">        :rtype: int</span>
-<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
-<span class="w">        </span><span class="n">nums</span><span class="p">.</span><span class="n">sort</span><span class="p">()</span><span class="w"></span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">::2</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
-</pre></div>
-
-
-<p><strong>Mark:</strong> 85%</p>
-<hr>
-<h3>Additional</h3>
-<p>'''
-Help on method_descriptor:</p>
-<p>sort(...)
-L.sort(cmp=None, key=None, reverse=False) -- stable sort <em>IN PLACE</em>;
-cmp(x, y) -&gt; -1, 0, 1</p>
-<p>help(sorted)
-Help on built-in function sorted in module <strong>builtin</strong>:</p>
-<p>sorted(...)
-    sorted(iterable, cmp=None, key=None, reverse=False) --&gt; new sorted list
-'''</p>
-            </div>
-            <!-- /.entry-content -->
-<section class="well" id="related-posts">
-    <h4>Related Posts:</h4>
-    <ul>
-        <li><a href="/leetcode-two-sum.html">LeetCode - Two Sum</a></li>
-        <li><a href="/leetcode-distribute-candies.html">LeetCode - Distribute Candies</a></li>
-        <li><a href="/leetcode-hamming-distance.html">LeetCode - Hamming Distance</a></li>
-        <li><a href="/leetcode-find-all-duplicates-in-an-array.html">LeetCode - Find All Duplicates in an Array</a></li>
-        <li><a href="/leetcode-next-greater-element-i.html">LeetCode - Next Greater Element I</a></li>
-    </ul>
-</section>
-        </article>
-    </section>
+            </article>
+            <hr/>
 
         </div>
         <div class="col-sm-3" id="sidebar">
@@ -382,8 +314,6 @@ Help on built-in function sorted in module <strong>builtin</strong>:</p>
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
   <ul class="list-group" id="recentposts">
     <li class="list-group-item"><a href="/translatecong-xin-shou-dao-zhuan-jia-ru-he-yong-pythonbian-xie-pei-zhi-wen-jian.html">[Translate]从新手到专家：如何用Python编写配置文件</a></li>
-    <li class="list-group-item"><a href="/jian-dan-de-wen-ben-jie-xi-ji-suan-qi-v2.html">简单的文本解析计算器 v2</a></li>
-    <li class="list-group-item"><a href="/translate-pythonku-jie-shao-shi-yong-luxjin-xing-zhi-neng-ke-shi-shu-ju-fa-xian.html">[Translate] Python库介绍：使用Lux进行智能可视数据发现</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Recent Posts -->
