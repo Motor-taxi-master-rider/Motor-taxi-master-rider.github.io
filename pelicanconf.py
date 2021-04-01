@@ -117,7 +117,7 @@ DISPLAY_ARCHIVE_ON_MENU = True
 YEAR_ARCHIVE_SAVE_AS = 'posts/{date:%Y}/index.html'
 MONTH_ARCHIVE_SAVE_AS = 'posts/{date:%Y}/{date:%b}/index.html'
 ABOUT_ME = 'Software engineer, Geeker. ' \
-           'Here I mostly blog about Python, algorithm and how programing can be intersting.'
+           'Here I mostly blog about Python, algorithm and how programing can be interesting.'
 
 # for Tique Search Plugin
 DIRECT_TEMPLATES = ('index','tags', 'categories', 'authors', 'archives', 'search')
