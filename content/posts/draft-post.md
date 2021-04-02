@@ -43,7 +43,7 @@
 * 翻转汉堡肉饼
 * 将沙拉、肉饼和调味料加入，完成订单
 
-她在任务之间无缝切换。首先，她检查烤架上的肉饼，然后取出煮熟的肉饼；之后，她取出一个订单；在之后如果有肉饼，她就可以完成一个多汁的汉堡，并结束订单。
+她在各个任务之间无缝切换：首先，她检查烤架上的肉饼，然后取出煮熟的肉饼；之后，她取出一个订单；在之后如果有肉饼，她就可以完成一个多汁的汉堡，并结束订单。
 
 **Parallel Salads**则配备了许多人手，在工作中他们时刻微笑并礼貌地和顾客交谈。他们每个人都分别为一名顾客做沙拉。他们取订单，将所有成分添加到干净的碗中，优雅而干练，将它们充分混合，之后将沙拉放入给顾客的容器中，把之前的碗递给另一名员工。那名员工与此同时负责洗碗的工作。
 
@@ -99,14 +99,14 @@ Python中有两种选项用于并发：
 
 **threading**库可以让工人在执行过程中随时切换任务。工人可能在取单到一半时突然切换到检查肉饼或做汉堡的任务中，之后在任意时刻又可能再次切换到其他任务之中。
 
-让我们看一个用线程实现的**Concurrent Burgers**：
+让我们看下用线程实现的**Concurrent Burgers**：
 
 ```python
 from concurrent.futures import ThreadPoolExecutor
 import queues
 
 
-# 注意: 为了让你专注于线程实现的细节，有些方法和变量被忽略了
+# 注意: 为了让你专注于实现细节，有些方法和变量被忽略了
 
 
 def run_concurrent_burgers():
@@ -162,3 +162,118 @@ def make_burgers(orders, cooked_patties):
 
 当进行多线程编程时，我们必须确保一次只有一个线程正在读取或写入某个状态。否则，我们可能会遇到两个线程都握着同一块馅饼的情况，最终我们就要面对一个相当生气的客户了。这类问题被称为**线程安全**。
 
+为避免此问题，我们使用`Queue`传递状态。在各个任务中，调用`Queues`的`get`会**阻塞**，直到有客户，订单或馅饼就绪。操作系统不会尝试切换到任何阻塞的线程，这使我们可以轻松安全地切换状态。只要线程将状态放入`Queue`的中并不再使用它，那么获取状态的线程就知道在使用该状态时时不会有其它线程对其进行更改。
+
+#### threading的优点
+
+* I/O过程不会阻塞其他任务
+* Python不同版本和库出色支持——如果程序可以单线程运行，则绝大多数情况下它也可以用多线程运行
+
+#### threading的缺点
+
+* 由于系统线程之间切换的开销，性能比`asyncio`差
+* 不是线程安全的
+* 无法加速处理色拉之类的CPU约束问题（因为Python[仅允许一个线程同时运行](https://wiki.python.org/moin/GlobalInterpreterLock)）——单个工人同时制作多个沙拉的速度不会比他们一个个顺序制作沙拉快，因为制作所有沙拉需要花费的时间总量相同。
+
+
+
+### **Concurrent Burgers** 的asyncio实现
+
+在**asyncio**中，事件循环(**event loop**)管理着所有的任务。任务们可以处于各种不同的状态，最重要的两个状态是就绪态(**ready**)和等待态(**waiting**)。在每次循环中，事件循环都会检查是否有之前处于等待的任务由于其他人物的完成而就绪。然后，它会选择一个就绪的任务并运行它，直到任务完成或需要等待另一个任务为止。通常任务等待的是一种I/O操作，例如磁盘读写或发出http请求。
+
+两个关键字可以涵盖大多数**asyncio**的用法：**async**和**await**。
+
+* **async**用于标记某一函数必须作为单独的任务运行。
+* **await**会创建一个新任务，并放弃对事件循环的控制。它将任务置于等待状态，在新任务完成时再次变成就绪态。
+
+让我们看下用**asyncio**实现的**Concurrent Burgers**：
+
+```python
+import asyncio
+
+# 注意: 为了让你专注于实现细节，有些方法和变量被忽略了
+
+
+def run_concurrent_burgers():
+    # 这些队列用于放弃控制
+    customers = asyncio.Queue()
+    orders = asyncio.Queue(maxsize=5)  # 一次最多处理五个订单
+    cooked_patties = asyncio.Queue()
+
+    # 烤架完全独立于工人,它能将生肉饼变成熟肉饼
+    grill = Grill()
+
+    # 在默认的asyncio event loop中执行所有任务
+    asyncio.gather(
+        take_orders(customers, orders),
+        cook_patties(grill, cooked_patties),
+        make_burgers(orders, cooked_patties),
+    )
+
+
+# 用async def来定义asyncio任务
+async def take_orders(customers, orders):
+    while True:
+        # 允许在这里和下面的的await中切换到其他任务
+        customer = await customers.get()
+        order = take_order(customer)
+        await orders.put(order)
+
+
+async def cook_patties(grill, cooked_patties):
+    for position in range(len(grill)):
+        grill[position] = raw_patties.pop()
+
+    while True:
+        for position, patty in enumerate(grill):
+            if patty.cooked:
+                # put_noawait允许我们在不创建新任务放弃控制器
+                # 的前提下往队列里添加元素
+                cooked_patties.put_noawait(patty)
+                grill[position] = raw_patties.pop()
+
+        # 等30秒之后再次检查
+        await asyncio.sleep(30)
+
+
+async def make_burgers(orders, cooked_patties):
+    while True:
+        patty = await cooked_patties.get()
+        order = await orders.get()
+        burger = order.make_burger(patty)
+        customer = await order.shout_for_customer()
+        customer.serve(burger)
+```
+
+所有取单、烤肉饼和制作汉堡包的任务都使用`async def`声明。
+
+在这些任务中，工作单元每次调用`await`都会切换到新任务。等待发生在以下时刻：
+
+* 接受订单阶段
+  * 将要与下一个客户交谈时
+  * 将订单添加到订单队列时
+* 烹调阶段
+  * 当所有的肉饼都经过检查时
+* 制作汉堡阶段
+  * 等待煮熟的小馅饼时
+  * 等待订单时
+  * 给顾客上餐汉堡时
+
+拼图的最后一块是在`run_concurrent_burger`中，调用`asyncio.gather`安排了之后由事件循环执行的所有任务，在本例中就是餐厅的工作人员。
+
+既然我们确切地知道任务何时切换，那实际上并不需要如此小心地共享状态。我们仅用列表来替代队列就能实现目标，并且，两个任务不会因此在某一时刻持有同一块馅饼。虽然如此，我还是强烈建议使用`asyncio`队列。因为它提供了明智的挂起时点，使得我们可以非常轻松地完成任务之间的协作。
+
+使用`asyncio`的另一个有趣的方面是`async`关键字会更改该函数的接口。因为它不能直接调用非异步函数。这同时可以被认为是一件好事和坏事。一方面，你可能会说这会损害代码的可组合性：因为你将无法混用异步函数和正常函数。另一方面，如果`asyncio`仅用于I/O，它会强制将I/O与业务逻辑分离，从而把`asyncio`代码限制在应用程序的边缘，使得代码库更易于理解和测试。在静态类型函数语言中，显式标记I/O是相当普遍的做法——这在Haskell中是必需的。
+
+#### Asyncio的优点
+
+* 对于I/O密集型程序而言非常快
+  * 由于只有一个系统线程，所以开销比线程更少
+  * 所有高性能的Web服务器框架都在使用`asyncio`——查看[测试跑分](https://www.techempower.com/benchmarks/#section=data-r19&hw=ph&test=fortune&l=zijzen-1r)
+* 线程安全
+
+#### Asyncio的缺点
+* 无法加快CPU密集型问题
+* Python的新特性
+  * 需求Python 3.5+
+  * 对大多数I/O场景都有支持，但不像非`asyncio`方案那样完整
