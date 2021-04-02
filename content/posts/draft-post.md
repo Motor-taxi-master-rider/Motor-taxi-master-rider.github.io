@@ -92,3 +92,73 @@ Python中有两种选项用于并发：
 
 * 对于**threading**库，操作系统掌握了不同线程的信息，可以在任何时候中断它们并切换成其他任务。程序本身对此没有控制权。这种模式被称为[抢先式多任务处理](https://en.wikipedia.org/wiki/Preemption_%28computing%29#Preemptive_multitasking)，因为操作系统可以抢占你的线程来进行线程间的切换在大多数编程语言中，线程可以在多核上并行运行，然而在Python中，一次只能执行一个线程。
 * 借助**asyncio**，程序本身可以决定何时在任务之间进行切换 每个任务在准备好切换时都可以选择放弃控制，从而与其他任务协作。因此，这被称为[协作多任务处理](https://en.wikipedia.org/wiki/Cooperative_multitasking)，因为每个任务必须在无法继续进行时主动放弃控制权来相互协作。
+
+
+
+### **Concurrent Burgers** 的线程实现
+
+**threading**库可以让工人在执行过程中随时切换任务。工人可能在取单到一半时突然切换到检查肉饼或做汉堡的任务中，之后在任意时刻又可能再次切换到其他任务之中。
+
+让我们看一个用线程实现的**Concurrent Burgers**：
+
+```python
+from concurrent.futures import ThreadPoolExecutor
+import queues
+
+
+# 注意: 为了让你专注于线程实现的细节，有些方法和变量被忽略了
+
+
+def run_concurrent_burgers():
+    # 创建阻塞队列
+    customers = queue.Queue()
+    orders = queue.Queue(maxsize=5)  # 一次最多处理五个订单
+    cooked_patties = queue.Queue()
+
+    # 烤架完全独立于工人,它能将生肉饼变成熟肉饼
+    # 这部分就像从磁盘I/O或者网络请求一样
+    grill = Grill()
+
+    # 在线程池中运行三个任务
+    with ThreadPoolExecutor() as executor:
+        executor.submit(take_orders, customers, orders)
+        executor.submit(cook_patties, grill, cooked_patties)
+        executor.submit(make_burgers, orders, cooked_patties)
+
+
+def take_orders(customers, orders):
+    while True:
+        customer = customers.get()
+        order = take_order(customer)
+        orders.put(order)
+
+
+def cook_patties(grill, cook_patties):
+    for position in range(len(grill)):
+        grill[position] = raw_patties.pop()
+
+    while True:
+        for position, patty in enumerate(grill):
+            if patty.cooked:
+                cooked_patties.put(patty)
+                grill[position] = raw_patties.pop()
+
+        # 等一分钟之后再次检查
+        threading.sleep(60)
+
+
+def make_burgers(orders, cooked_patties):
+    while True:
+        patty = cooked_patties.get()
+        order = orders.get()
+        burger = order.make_burger(patty)
+        customer = order.shout_for_customer()
+        customer.serve(burger)
+```
+
+接受订单，烹饪肉饼和制作汉堡的这几个任务都是一个无限循环，不断地被执行。
+
+`run_concurrent_burgers`中，我们在单独的线程中启动每个任务。可以手动地为每个任务创建一个线程，但是标准库中存在一个更好的接口，叫做`ThreadPoolExecutor`，它会为提交给它的每个任务创建一个线程。
+
+当进行多线程编程时，我们必须确保一次只有一个线程正在读取或写入某个状态。否则，我们可能会遇到两个线程都握着同一块馅饼的情况，最终我们就要面对一个相当生气的客户了。这类问题被称为**线程安全**。
+
