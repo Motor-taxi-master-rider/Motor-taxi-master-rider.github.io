@@ -152,7 +152,7 @@ div.collapseheader {
 
 </style>
 
-<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
 <script type="text/javascript">
 init_mathjax = function() {
     if (window.MathJax) {
@@ -205,13 +205,11 @@ init_mathjax();
 
 
 
-
-
 </head>
 <body>
 
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-	<div class="container">
+    <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -240,8 +238,11 @@ Tower of Babel            </a>
         <!-- /.navbar-collapse -->
     </div>
 </div> <!-- /.navbar -->
+
 <!-- Banner -->
 <!-- End Banner -->
+
+<!-- Content Container -->
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
@@ -392,8 +393,8 @@ Tower of Babel            </a>
 
 
 <p>然而，即便使用了functools的修正方法保存了原函数的 <strong>name</strong> 和 <strong>doc</strong> 方法，但还是会在以下几个方面存在缺陷：
-<em> 保存函数参数规范（<code>inspect.getargspec()</code>）
-</em> 保存函数获取源码的能力（<code>inspect.getsource()</code>）
+* 保存函数参数规范（<code>inspect.getargspec()</code>）
+* 保存函数获取源码的能力（<code>inspect.getsource()</code>）
 * 叠加附加在描述符上的能力</p>
 <h3>解决方案</h3>
 <h4>描述符装饰器</h4>
@@ -569,8 +570,8 @@ Tower of Babel            </a>
 <p>我们也很绝望啊,所以只能改进啦。接下来我们会设计一个统一装饰器（宇宙装饰器）来对装饰器附加在普通函数、实例方法、类方法、静态函数甚至类上的情况分发对应的策略。</p>
 <h4>讲类方法和静态方法纳入疆界</h4>
 <p>在解决之前，我们先明确一下问题。我们的目标是让我们的装饰器能够区分以下三种不同的方法：
-<em> 通过类的途径运行的实例方法
-</em> 被classmethod装饰的类方法
+* 通过类的途径运行的实例方法
+* 被classmethod装饰的类方法
 * 被staticmethod装饰的静态方法</p>
 <p>首先能想到的是一个简单的方法，就是在传入一个参数来记录被绑定的方法类型。因此我们可以对代码作如下修改。</p>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">bound_function_wrapper</span><span class="p">(</span><span class="n">object_proxy</span><span class="p">):</span>
@@ -769,6 +770,8 @@ Tower of Babel            </a>
         </div>
     </div>
 </div>
+<!-- End Content Container -->
+
 <footer>
    <div class="container">
       <hr>

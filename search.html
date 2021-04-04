@@ -153,7 +153,7 @@ div.collapseheader {
 
 </style>
 
-<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
 <script type="text/javascript">
 init_mathjax = function() {
     if (window.MathJax) {
@@ -198,13 +198,11 @@ init_mathjax();
 
 
 
-
-
 </head>
 <body>
 
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-	<div class="container">
+    <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -233,8 +231,11 @@ Tower of Babel            </a>
         <!-- /.navbar-collapse -->
     </div>
 </div> <!-- /.navbar -->
+
 <!-- Banner -->
 <!-- End Banner -->
+
+<!-- Content Container -->
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
@@ -345,6 +346,8 @@ Tower of Babel            </a>
         </div>
     </div>
 </div>
+<!-- End Content Container -->
+
 <footer>
    <div class="container">
       <hr>
@@ -404,15 +407,14 @@ jQuery(document).ready(function($) {
 });
 });
 </script>
+    <script src="/tipuesearch_content.js"></script>
     <script type="text/javascript" src="/theme/tipuesearch/tipuesearch_set.js"></script>
     <script type="text/javascript" src="/theme/tipuesearch/tipuesearch.min.js"></script>
     <script>
     $(document).ready(function() {
       $('#tipue_search_input').tipuesearch({
-        'mode' : 'json',
         'show': 10,
-        'newWindow': false,
-        'contentLocation': 'tipuesearch_content.json'
+        'newWindow': false
       });
     });
     </script>

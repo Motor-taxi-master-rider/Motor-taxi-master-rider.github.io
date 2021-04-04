@@ -152,7 +152,7 @@ div.collapseheader {
 
 </style>
 
-<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
 <script type="text/javascript">
 init_mathjax = function() {
     if (window.MathJax) {
@@ -205,13 +205,11 @@ init_mathjax();
 
 
 
-
-
 </head>
 <body>
 
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-	<div class="container">
+    <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -240,8 +238,11 @@ Tower of Babel            </a>
         <!-- /.navbar-collapse -->
     </div>
 </div> <!-- /.navbar -->
+
 <!-- Banner -->
 <!-- End Banner -->
+
+<!-- Content Container -->
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
@@ -546,7 +547,7 @@ print<span class="o">(</span><span class="s1">&#39;DEBUG&#39;</span> in os.envir
 <h2>选项4：Dynaconf --- Python的强大配置模块</h2>
 <p><a href="https://dynaconf.readthedocs.io/en/docs_223/">Dynaconf</a>是用于Python的非常强大的配置模块，支持多种文件格式：yaml，json，ini，toml和py。 它可以自动加载<code>.env</code>文件并支持自定义校验规则。简而言之，它涵盖了前三个选项的几乎所有功能，甚至远超这些。例如，你可以存储加密的密码，然后使用<a href="https://dynaconf.readthedocs.io/en/docs_223/guides/extend.html#creating-new-loaders">自定义加载器</a>解密密码。它还与Flask，Django和Pytest完美集成。我不会在本文中提及它所有的功能，更多详细信息，请参阅其<a href="https://dynaconf.readthedocs.io/en/docs_223/">文档</a>。</p>
 <h3>读取</h3>
-<p><img alt="" src="https://miro.medium.com/max/500/1*fSaf_r2bQmDxIsxKB6IKDw.png"></p>
+<p><img alt="1" src="https://miro.medium.com/max/500/1*fSaf_r2bQmDxIsxKB6IKDw.png"></p>
 <p><code>Dynaconf</code>使用<code>.env</code>文件查找所有设置文件，并使用其中字段填充<code>settings</code>对象。 如果两个设置文件具有相同的变量，则该值将被后面的设置文件覆盖。</p>
 <h3>校验</h3>
 <p>对我来说，其中一个有趣的功能是自定义<a href="https://towardsdatascience.com/6-approaches-to-validate-class-attributes-in-python-b51cffb8c4ea">验证器</a>。之前提到过<code>Configureparser</code>对于INI文件的校验不够严格，但这点却可以在<code>dynaconf</code>中实现。在下面的示例中，我检查了文件中是否存在某些键以及这些键是否具有正确的值。 如果你从支持多种数据类型的YAML或TOML文件中读取数据，甚至可以检查某个数字是否在一定范围内。</p>
@@ -697,10 +698,10 @@ print<span class="o">(</span><span class="s1">&#39;DEBUG&#39;</span> in os.envir
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="/translate-pythonzhong-ru-he-jiang-duo-ge-can-shu-chuan-ru-maphan-shu.html">[Translate] Python中如何将多个参数传入map函数</a></li>
         <li><a href="/translatezhang-wo-pythonbing-fa-rang-ni-geng-kuai-xiang-yong-wu-can.html">[Translate]掌握Python并发让你更快享用午餐</a></li>
         <li><a href="/translate-pythonku-jie-shao-shi-yong-luxjin-xing-zhi-neng-ke-shi-shu-ju-fa-xian.html">[Translate] Python库介绍：使用Lux进行智能可视数据发现</a></li>
-        <li><a href="/leetcode-island-perimeter.html">LeetCode - Island Perimeter</a></li>
+        <li><a href="/translate-pythonzhong-ru-he-jiang-duo-ge-can-shu-chuan-ru-maphan-shu.html">[Translate] Python中如何将多个参数传入map函数</a></li>
+        <li><a href="/jian-dan-de-wen-ben-jie-xi-ji-suan-qi-v2.html">简单的文本解析计算器 v2</a></li>
         <li><a href="/top-10-python-libraries-of-2017.html">Top 10 Python libraries of 2017</a></li>
     </ul>
 </section>
@@ -813,6 +814,8 @@ print<span class="o">(</span><span class="s1">&#39;DEBUG&#39;</span> in os.envir
         </div>
     </div>
 </div>
+<!-- End Content Container -->
+
 <footer>
    <div class="container">
       <hr>
