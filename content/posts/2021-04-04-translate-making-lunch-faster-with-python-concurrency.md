@@ -1,4 +1,8 @@
-# 掌握Python并发让你更快享用午餐
+---
+layout: post
+title: [Translate]掌握Python并发让你更快享用午餐
+tags: Translate,Python,Concurrency
+---
 
 > 一个关于线程、异步、多进程和云函数的午餐故事。
 >
@@ -195,7 +199,7 @@ import asyncio
 
 
 def run_concurrent_burgers():
-    # 这些队列用于放弃控制
+    # 这些队列用于让任务放弃控制
     customers = asyncio.Queue()
     orders = asyncio.Queue(maxsize=5)  # 一次最多处理五个订单
     cooked_patties = asyncio.Queue()
@@ -273,7 +277,196 @@ async def make_burgers(orders, cooked_patties):
 * 线程安全
 
 #### Asyncio的缺点
+
 * 无法加快CPU密集型问题
 * Python的新特性
-  * 需求Python 3.5+
-  * 对大多数I/O场景都有支持，但不像非`asyncio`方案那样完整
+  * 要求Python 3.5+
+  * `asyncio`支持绝大多数I/O场景，但不像非`asyncio`方案那样完整
+
+
+
+## 并行实战
+
+在**Parallel Salads**中，同时有数个工人并行制作沙拉，我们将使用多进程来实现它。
+
+之后，我们会访问**Cloud Coffees**，以了解如何使用云函数来并行执行任务。
+
+
+
+### **Parallel Salads**的多进程实现
+
+**Parallel Salads**可以完美地阐述一个典型的多进程场景。
+
+**Parallel Salads**中的每个工人都代表由操作系统产生的一个新进程。这些进程通过`ProcessPoolExecutor`创建，并被各自分配任务。
+
+```python
+import multiprocessing as mp
+from concurrent.futures import ProcessPoolExecutor
+
+# 注意: 为了让你专注于实现细节，有些方法和变量被忽略了
+
+
+def run_parallel_salads():
+    # 创建可以在多进程之间通信的队列
+    customers = mp.Queue()
+    bowls = mp.Queue()
+    dirty_bowls = mp.Queue()
+
+    # 在process pool executor中并行执行所有任务
+    with ProcessPoolExecutor(max_workers=NUM_STAFF) as executor:
+        # 让除了一个工人以外的所有工人制作沙拉
+        for _ in range(NUM_STAFF - 1):
+            executor.submit(make_salad, customers, bowls, dirty_bowls)
+
+        # 让一个工人洗碗
+        executor.submit(wash_bowls, dirty_bowls, bowls)
+
+
+def make_salad(customers, bowls):
+    while True:
+        customer = customers.get()
+        order = take_order(customer)
+        bowl = bowls.get()
+        bowl.add(ingredients)
+        bowl.add(dressing)
+        bowl.mix()
+        salad = fill_container(bowl)
+        customer.serve(salad)
+        dirty_bowls.put(bowl)
+
+
+def wash_bowls(dirty_bowls, bowls):
+    while True:
+        bowl = dirty_bowls.get()
+        wash(bowl)
+        bowls.put(bowl)
+```
+
+`multiprocessing`把每个任务放在单独的进程中执行。这些进程由操作系统控制，独立且并行运行，不会相互阻塞。实际上，可并行的进程数受到CPU内核数的限制，因此我们将限制实际制作沙拉的人员数量。
+
+因为这些任务处于不同的进程中，所以它们不共享任何普通的Python状态。每个进程都持有整个程序状态的独立副本。我们必须使用特殊的多进程队列控制它们之间进行通信。
+
+
+
+#### 让asyncio和multiprocessing协作
+
+一种使用多进程的用例是在`asyncio`程序中分流CPU密集型任务，以防止它们阻塞应用程序的其余部分。以下是一个简单的使用这一技术的框架：
+
+```python
+import asyncio
+from concurrent.futures import ProcessPoolExecutor
+
+process_pool = ProcessPoolExecutor()  # 默认进程数量为核心数
+
+
+async def handle_long_request(n):
+    event_loop = asyncio.get_running_loop()
+    # calculate_n_pi将在单独的进程中运行，从而允许asyncio的事件循环继续并行处理其他异步任务
+    return await event_loop.run_in_executor(process_pool_executor, calculate_n_pi, n)
+
+
+def calculate_n_pi(n):
+    threading.sleep(60)
+    return n * 3.14
+```
+
+#### 多进程的优点
+
+* 加速CPU密集型任务
+* 线程安全
+* 可用于在额外的进程中执行Web服务器中的长运算
+
+#### 多进程的缺点
+
+* 不共享资源
+* 高开销 - 不适合I/O密集型任务
+
+
+
+### **Cloud Coffes**的云函数实现
+
+当你和朋友散步去公园吃午餐时，你发现一团蓬松的五彩云朵盘旋在人群的上方。你靠近仔细观察，看到了**Cloud Coffees**的标志。
+
+虽然朋友讨厌咖啡，你们俩还是决定去喝一杯。当你们走上前，每人都有招待自己的摊位，里面有一个咖啡师，咖啡师慢慢飘下云层。你下单后，咖啡师煮咖啡给你。
+
+热闹的人群突然来到**Cloud Coffees**，在短暂等待后更多摊位漂浮了下来，他们很快就得到了服务。这些额外的咖啡师会等一会儿以吸引更多的顾客，然后才飘回云中，但他们并不会理会其它摊位的顾客。
+
+当你回去的时候，会发现摊位的数量与正在下订单的客户数量几乎相同。如果有更多的客户到达，更多的摊位会出现在云中，订单完成后一小会儿，摊位就会消失在云中。
+
+你的朋友点了一个复杂的订单，试图冲淡咖啡的味道，到现在还没有拿到他的饮料。咖啡师正在添加棉花糖和巧克力薄片时，突然就将整杯咖啡毫不客气地扔到垃圾箱中，向他喊“你超时了”。
+
+你们俩都歇斯底里地回到了公园。
+
+如果编写的是Web服务，则云函数是另一个值得考虑的选项。到目前为止，它们的代码是迄今为止最容易实现的，因为你只需要考虑一次完成一个订单的情况，完全可以忽略并发性。
+
+```python
+def cloud_coffees(order):
+    ground_coffee = grind_beans()
+    coffee = brew_coffee(ground_coffee)
+    coffee.add_embellishments(order)
+    return coffee
+```
+
+每个请求都由整个应用程序的单独实例来满足。创建新实例时会有一些启动延迟。出于这个原因，实例可能会停留一会等待后续更多请求，满足之后来的请求就无需启动时延了。如果在一定时间内没有任何请求，该实例将被收回。
+
+每个请求会在几分钟后超时，取决于具体实现方式。你必须确保您的任务在此超时之前完成，否则它们将不会完成而直接消失。
+
+实例之间无法通信，永远不要在请求之间存储任何状态，因为该实例可能随时消失。
+
+云函数最常见的实现有AWS Lambda，Azure Functions和Google Cloud Functions。
+
+#### 云函数的优点
+
+* 极其简单的模型
+* 可以比运行持久性的服务器便宜
+* 无负担缩容及扩若
+
+#### 云函数的缺点
+
+* 启动新实例会有延迟
+* 请求有超时限制
+* 对Python版本的控制较少 - 你只能使用云提供商有的版本
+
+
+
+## 你会选择哪个并发选项？
+
+让我们将之前讨论的所有内容汇总到这张表中。
+
+|                        | threading                                         | asyncio                                    | multiprocessing                                 | cloud functions                              |
+| ---------------------- | ------------------------------------------------- | ------------------------------------------ | ----------------------------------------------- | -------------------------------------------- |
+| **并发类型**           | 抢先式多任务处理                                  | 协作式多任务处理                           | 多进程                                          | 多实例                                       |
+| **并发/并行？**        | 并发                                              | 并发                                       | 并行                                            | 并行                                         |
+| **是否为显示并发控制** | 否                                                | 是                                         | 否                                              | 否                                           |
+| **切换如何决定**       | 操作系统决定何时切换任务                          | 任务自己决定何时放弃控制                   | 进程在不同的CPU内核中同时运行                   | 请求在不同的实例中同时运行                   |
+| **最大并行处理**       | 1                                                 | 1                                          | CPU核心数                                       | 无限制                                       |
+| **任务间通信**         | 共享状态                                          | 共享状态                                   | 多进程队列和函数返回值                          | 无法通信                                     |
+| **是否线程安全**       | 否                                                | 是                                         | 是                                              | 是                                           |
+| **适合的任务类型**     | I/O密集型                                         | I/O密集型                                  | CPU密集型                                       | CPU密集型（ 如果运行时间少于超时时间~5分钟） |
+| **执行负担**           | 每个任务的系统线程消耗RAM并增加任务之间的切换时间 | 极少，所有任务在单个线程中的单个进程中运行 | 每个任务的系统进程比线程消耗更多的RAM和切换时间 | 启动新实例会带来延迟时间的成本               |
+
+现在你已经了解了所有选项，那么选择就很容易了。
+
+在你做出选择之前，应当再次确认你是否确实有加快任务的执行速度的需求。如果任务每周运行一次而且只耗时10分钟，那么加速有任何意义吗？
+
+如果确认完毕，只需参考以下流程图：
+
+<img src="https://sourcery.ai/static/c92fee8f46d84540664149241c608807/62de4/concurrency-flowchart.png" style="zoom:80%;" />
+
+
+
+## 结论
+
+现在，你已经看到了Python中可用的所有核心并发选项的示例：
+
+* threading
+* asyncio
+* multiprocessing
+
+以及为并行Python提供的简化环境的部署选项：
+
+* 云函数
+
+你还了解它们之间的区别，每个方法的优缺点以及如何选择它们。
+
+希望这篇文章对你有所帮助！
