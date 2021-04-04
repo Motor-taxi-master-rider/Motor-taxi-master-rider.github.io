@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Python async，dictionary，machine learning moudles笔记 - Tower of Babel</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+<style type="text/css">
+
+/*some stuff for output/input prompts*/
+div.cell{border:1px solid transparent;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch}div.cell.selected{border-radius:4px;border:thin #ababab solid}
+div.cell.edit_mode{border-radius:4px;border:thin #008000 solid}
+div.cell{width:100%;padding:5px 5px 5px 0;margin:0;outline:none}
+div.prompt{min-width:11ex;padding:.4em;margin:0;font-family:monospace;text-align:right;line-height:1.21429em}
+@media (max-width:480px){div.prompt{text-align:left}}div.inner_cell{display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch;-webkit-box-flex:1;-moz-box-flex:1;box-flex:1;flex:1}
+div.input_area{border:1px solid #cfcfcf;border-radius:4px;background:#f7f7f7;line-height:1.21429em}
+div.prompt:empty{padding-top:0;padding-bottom:0}
+div.input{page-break-inside:avoid;display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:horizontal;-moz-box-align:stretch;display:box;box-orient:horizontal;box-align:stretch;}
+div.inner_cell{width:90%;}
+div.input_area{border:1px solid #cfcfcf;border-radius:4px;background:#f7f7f7;}
+div.input_prompt{color:navy;border-top:1px solid transparent;}
+div.output_wrapper{margin-top:5px;position:relative;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;width:100%;}
+div.output_scroll{height:24em;width:100%;overflow:auto;border-radius:4px;-webkit-box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);-moz-box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);}
+div.output_collapsed{margin:0px;padding:0px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;width:100%;}
+div.out_prompt_overlay{height:100%;padding:0px 0.4em;position:absolute;border-radius:4px;}
+div.out_prompt_overlay:hover{-webkit-box-shadow:inset 0 0 1px #000000;-moz-box-shadow:inset 0 0 1px #000000;box-shadow:inset 0 0 1px #000000;background:rgba(240, 240, 240, 0.5);}
+div.output_prompt{color:darkred;}
+
+a.anchor-link:link{text-decoration:none;padding:0px 20px;visibility:hidden;}
+h1:hover .anchor-link,h2:hover .anchor-link,h3:hover .anchor-link,h4:hover .anchor-link,h5:hover .anchor-link,h6:hover .anchor-link{visibility:visible;}
+/* end stuff for output/input prompts*/
+
+
+.highlight-ipynb .hll { background-color: #ffffcc }
+.highlight-ipynb  { background: #f8f8f8; }
+.highlight-ipynb .c { color: #408080; font-style: italic } /* Comment */
+.highlight-ipynb .err { border: 1px solid #FF0000 } /* Error */
+.highlight-ipynb .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight-ipynb .o { color: #666666 } /* Operator */
+.highlight-ipynb .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight-ipynb .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight-ipynb .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight-ipynb .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight-ipynb .gd { color: #A00000 } /* Generic.Deleted */
+.highlight-ipynb .ge { font-style: italic } /* Generic.Emph */
+.highlight-ipynb .gr { color: #FF0000 } /* Generic.Error */
+.highlight-ipynb .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight-ipynb .gi { color: #00A000 } /* Generic.Inserted */
+.highlight-ipynb .go { color: #888888 } /* Generic.Output */
+.highlight-ipynb .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight-ipynb .gs { font-weight: bold } /* Generic.Strong */
+.highlight-ipynb .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight-ipynb .gt { color: #0044DD } /* Generic.Traceback */
+.highlight-ipynb .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight-ipynb .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight-ipynb .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight-ipynb .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight-ipynb .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight-ipynb .kt { color: #B00040 } /* Keyword.Type */
+.highlight-ipynb .m { color: #666666 } /* Literal.Number */
+.highlight-ipynb .s { color: #BA2121 } /* Literal.String */
+.highlight-ipynb .na { color: #7D9029 } /* Name.Attribute */
+.highlight-ipynb .nb { color: #008000 } /* Name.Builtin */
+.highlight-ipynb .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight-ipynb .no { color: #880000 } /* Name.Constant */
+.highlight-ipynb .nd { color: #AA22FF } /* Name.Decorator */
+.highlight-ipynb .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight-ipynb .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight-ipynb .nf { color: #0000FF } /* Name.Function */
+.highlight-ipynb .nl { color: #A0A000 } /* Name.Label */
+.highlight-ipynb .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight-ipynb .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight-ipynb .nv { color: #19177C } /* Name.Variable */
+.highlight-ipynb .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight-ipynb .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight-ipynb .mf { color: #666666 } /* Literal.Number.Float */
+.highlight-ipynb .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight-ipynb .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight-ipynb .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight-ipynb .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight-ipynb .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight-ipynb .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight-ipynb .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight-ipynb .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight-ipynb .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight-ipynb .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight-ipynb .sx { color: #008000 } /* Literal.String.Other */
+.highlight-ipynb .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight-ipynb .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight-ipynb .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight-ipynb .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight-ipynb .vc { color: #19177C } /* Name.Variable.Class */
+.highlight-ipynb .vg { color: #19177C } /* Name.Variable.Global */
+.highlight-ipynb .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight-ipynb .il { color: #666666 } /* Literal.Number.Integer.Long */
+</style>
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+div.entry-content {
+  overflow: visible;
+  padding: 8px;
+}
+.input_area {
+  padding: 0.2em;
+}
+
+a.heading-anchor {
+ white-space: normal;
+}
+
+.rendered_html
+code {
+ font-size: .8em;
+}
+
+pre.ipynb {
+  color: black;
+  background: #f7f7f7;
+  border: none;
+  box-shadow: none;
+  margin-bottom: 0;
+  padding: 0;
+  margin: 0px;
+  font-size: 13px;
+}
+
+/* remove the prompt div from text cells */
+div.text_cell .prompt {
+    display: none;
+}
+
+/* remove horizontal padding from text cells, */
+/* so it aligns with outer body text */
+div.text_cell_render {
+    padding: 0.5em 0em;
+}
+
+img.anim_icon{padding:0; border:0; vertical-align:middle; -webkit-box-shadow:none; -box-shadow:none}
+
+div.collapseheader {
+    width=100%;
+    padding: 2px;
+    cursor: pointer;
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+</style>
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+<script type="text/javascript">
+init_mathjax = function() {
+    if (window.MathJax) {
+        // MathJax loaded
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+            },
+            displayAlign: 'left', // Change this to 'center' to center equations.
+            "HTML-CSS": {
+                styles: {'.MathJax_Display': {"margin": 0}}
+            }
+        });
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    }
+}
+init_mathjax();
+</script>
+    <link href="/assets/favicon.ico" rel="icon">
+
+<link rel="canonical" href="/python-asyncdictionarymachine-learning-moudlesbi-ji.html">
+
+        <meta name="author" content="Charlie Hu" />
+        <meta name="keywords" content="Async,Dictionary,Machine" />
+        <meta name="description" content="Description Jesse Jiryu Davis在 Pycon2014 的演讲A. Jesse Jiryu Davis: What Is Async, How Does It Work, And When Should I Use It?分析了为什么以及在什么情况下要用异步的方式处理io。之前在300line里，他和Guido合著的async crawler部分里就介绍了使用协程相对线程的优势：在python里线程需要50K的内存，而协程只需要3K。在该演讲中，他进一步阐述了协程的优势及应用场景。 Raymond Hettinger在 Pycon2017 的演讲Modern Python Dictionaries A confluence of a dozen great ideas和Brandon Rhodes的The …" />
+
+        <meta property="og:site_name" content="Tower of Babel" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Python async，dictionary，machine learning moudles笔记"/>
+        <meta property="og:url" content="/python-asyncdictionarymachine-learning-moudlesbi-ji.html"/>
+        <meta property="og:description" content="Description Jesse Jiryu Davis在 Pycon2014 的演讲A. Jesse Jiryu Davis: What Is Async, How Does It Work, And When Should I Use It?分析了为什么以及在什么情况下要用异步的方式处理io。之前在300line里，他和Guido合著的async crawler部分里就介绍了使用协程相对线程的优势：在python里线程需要50K的内存，而协程只需要3K。在该演讲中，他进一步阐述了协程的优势及应用场景。 Raymond Hettinger在 Pycon2017 的演讲Modern Python Dictionaries A confluence of a dozen great ideas和Brandon Rhodes的The …"/>
+        <meta property="article:published_time" content="2017-11-05" />
+            <meta property="article:section" content="Python" />
+            <meta property="article:tag" content="Async" />
+            <meta property="article:tag" content="Dictionary" />
+            <meta property="article:tag" content="Machine" />
+            <meta property="article:author" content="Charlie Hu" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.flatly.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link href="/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+        <link href="/static/css/custom.css" rel="stylesheet">
+
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+Tower of Babel            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                         <li><a href="/pages/about.html">
+                             About
+                          </a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><span>
+                <form class="navbar-search" action="/search.html">
+                  <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
+                </form></span>
+              </li>
+              <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+            <ol class="breadcrumb">
+                <li><a href="" title="Tower of Babel"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="/category/python.html" title="Python">Python</a></li>
+                <li class="active">Python async，dictionary，machine learning moudles笔记</li>
+            </ol>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/python-asyncdictionarymachine-learning-moudlesbi-ji.html"
+                       rel="bookmark"
+                       title="Permalink to Python async，dictionary，machine learning moudles笔记">
+                        Python async，dictionary，machine learning moudles笔记
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-11-05T00:00:00+08:00"> Sun 05 November 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/async.html">Async</a>
+        /
+	<a href="/tag/dictionary.html">Dictionary</a>
+        /
+	<a href="/tag/machine.html">Machine</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <h3>Description</h3>
+<p>Jesse Jiryu Davis在 <strong>Pycon2014</strong> 的演讲<a href="https://www.youtube.com/watch?v=9WV7juNmyE8">A. Jesse Jiryu Davis: What Is Async, How Does It Work, And When Should I Use It?</a>分析了为什么以及在什么情况下要用异步的方式处理io。之前在<code>300line</code>里，他和Guido合著的async crawler部分里就介绍了使用协程相对线程的优势：在python里线程需要50K的内存，而协程只需要3K。在该演讲中，他进一步阐述了协程的优势及应用场景。</p>
+<p>Raymond Hettinger在 <strong>Pycon2017</strong> 的演讲<a href="https://www.youtube.com/watch?v=npw4s1QTmPg">Modern Python Dictionaries A confluence of a dozen great ideas</a>和Brandon Rhodes的<a href="https://www.youtube.com/watch?v=66P5FMkWoVU">The Dictionary Even Mightier</a>的主题是python字典在3.6版本的极大改进：减少20%-30%的内存占用及保持元素的插入顺序。</p>
+<p><strong>TalkPython</strong> 中Pete Garcin的访谈<a href="https://talkpython.fm/episodes/show/131/top-10-machine-learning-libraries">Top 10 machine learning libraries</a>介绍了目前最流行的十个机器学习库，谈论了它们的异同以及初学者的学习路径。</p>
+<h3>Async</h3>
+<p>Jesse举了纽约三种餐厅的例子作为三种不同场景。</p>
+<p>第一个是三明治商店。顾客到柜台排队，厨师接到订单就开始制作三明治直到完成三明治。这个例子描述的是cpu密集型服务的机制，这里没有也无法使用异步机制，整个服务的吞吐量受到计算能力的限制。</p>
+<p><img src="https://motor-taxi-master-rider.github.io/assets/img/async_sample_subs.png"  title="Sandwich"/></p>
+<p>第二个是披萨店。顾客点单后，厨师需要将制作好的披萨用微波炉加热后交给顾客。由于需要等待披萨的加热，因此就有了异步操作的必要性。这种服务的吞吐量受到内存的限制，服务器也需要后台来处理pending的请求。</p>
+<p><img src="https://motor-taxi-master-rider.github.io/assets/img/async_sample_pizza.png"  title="Pizza"/></p>
+<p>第三个是一种寿司店。在这里顾客的需求由服务员告知厨房，同时厨房完成的寿司也需要服务器送到客户面前。现实中这样服务的例子就是谷歌邮箱服务：当客户登录谷歌邮箱之后并不会做太多动作，当客户收到邮件的这一事件发生的时候服务器才会将数据推到客户的面前。这就致使了大量长连接的产生。这些链接大部分的时间处于空闲状态，如果对每个链接都创建一个线程的话很快就会消耗完系统的内存。而异步正是为了最小化每个链接消耗的资源而诞生的。</p>
+<p><img src="https://motor-taxi-master-rider.github.io/assets/img/async_sample_omakase.png"  title="Omakase"/></p>
+<p>协程相对线程另一个区别与优点就是，当我们进行多线程编程时要时时注意竞态，导致我们不得不用锁来控制共享资源。这是由于线程是程序员并没有对线程的完全控制权导致的，我们并不能知道线程什么时候切换，什么时候运行和阻塞——我们将这些都交给操作系统来完成了。而协程则只会在yield处暂停和接受输入，我们完全可以控制整个异步过程。</p>
+<p>在演讲的最后，Jesse告诉了我们哪类服务适合async而哪类不适合：</p>
+<p><img src="https://motor-taxi-master-rider.github.io/assets/img/async_should_use.png"  title="Should I Use It?"/></p>
+<p>他认为第二和第三种类型的服务是适合async的服务。这里也也指出了async的不足之处，async要求服务处理时至上而下每一部分都是异步的。因此我们的DB driver也需要支持异步，否则它将会阻塞整个程序。还有一点，async程序与线程编程将会非常不同，因此当你要实现一个异步服务时，一个async专家是必不可少的。</p>
+<h3>Dictionary in 3.6</h3>
+<p>Brandon Rhodes在他的演讲中提到了十几年来python开发者为了使字典越来越人性化所做的努力：
+- 在python2.6之前字典没有类似列表推导式的功能，python在3中加入了字典推导式并且回推给了2.7，使得字典不再是一个推导式的特例
+- 字典的<code>keys()</code>等函数变成了生成器。为了和以前的借口，还实现了<code>__contains__</code>,<code>__sub__</code>,<code>__and__</code>,<code>__xor__</code>,<code>isdisjoint</code>,<code>__iter__</code>方法。这点也得益于python协议式的设计。
+- 内存共享。同一个类的多个实例在内存中共享相同的<code>hashcode</code>和<code>key</code>的储存，使得python运行时刻的字典内存占用减少了10%-20%。字典创建在一个类的第一个实例<code>__init__</code>时，因此我们建议在类的<code>__init__</code>中初始化全部可能将要用到的实例变量，否则新的变量被添加时候将会用之前机制的变量字典，从而导致无法享受内存共享的优势。
+- python为了防止因为hash conflict而引起的DOS攻击，在3.3版本中将hash方法的因子设置为一个随机值，因此我们每次从resize后的字典中取值时将会的到不同顺序的数值。
+- SipHash是python3.4-3.6版本中对随机hash的替代。
+- 受数据库及索引的启发，Raymond Hettinger在python3.6版本中部署了新的字典机制。原先的字典机制将会使字典哈希表保持1/3的空间来减少hash conflit的产生。这样每个空闲键值对将会产生24比特的内存浪费。新的机制用一个索引数组机制去除了这些空间的浪费并且使得字典中的键值对在字典resize后也能保持键值对的原本输入顺序。这个机制相较于3.5版本能减少字典20%至25%的内存使用。
+- 现在每个字典会有个版本，这样我们处理当相同版本的字典时就不用从头遍历每一个字典了。</p>
+<div class="highlight"><pre><span></span><span class="n">dit</span> <span class="o">=</span> <span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;a&#39;</span><span class="p">}</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">27</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">dit</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">dit</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">20</span><span class="p">):</span>
+    <span class="n">dit</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">dit</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+</pre></div>
+
+
+<p>以上这段代码在python2.7中由于resize可能会得到以下的结果：</p>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">21</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+
+
+<p>而在pytho3.6中则能保持元素录入的顺序：</p>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">21</span><span class="p">]</span>
+<span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">19</span><span class="p">]</span>
+</pre></div>
+
+
+<h3>Machine learning libraries</h3>
+<p>在这个谈话中，Michael Kennedy和Pete Garcin谈论了他们认为的python最好的十个库。
+- <code>Numpy</code>和<code>Scipy</code>是一切模块的基础。
+- <code>Scikit-learn</code>是一个较早的模块，是<code>Scipy</code>家族的一部分。它提供给了我们一些常用的机器学习算法和分类，聚类，回归，模型工具。它非常简明直接，但缺少对GPU运算的支持。
+- <code>Keras</code>是一个比较新的high-level模块，可以<code>Theano</code>,<code>Tensorflow</code>,<code>CNTK</code>中的任意一个模块作为后台。它的设计目标是机器学期程序的快速开发，因此具有极高的易用性。
+- <code>Tensorflow</code>是现在热度最高的机器学习模块，它能充分利用GPU的矩阵及并行计算优势。而从Google要推出TPU这一举措来看，Google也正在大力推广这一模块。
+- <code>Theano</code>比较老迈，也是同<code>Tensorflow</code>一样的low-level的机器学习模块。由于它的核心开发都跑去谷歌了，所以它和<code>Tensorflow</code>其实非常相像。
+- 除了机器学习算法，为了获得干净的数据，我们也需要<code>Pandas</code>来帮助我们处理矩阵数据。它也是<code>Scipy</code>家族的一部分。
+- <code>Caffe</code>和<code>Caffe2</code>是由Facebook在背后支持的机器视觉项目。它们针对互联网及移动部署做了相对的优化。
+- <code>Jupyter</code>改变了数据科学家们交流和发表研究成果的方式。
+- <code>CNTK</code>是微软最新的机器学习模块，擅长low-level的计算，如有向图。
+- <code>NLTK</code>是一个相对成熟自然语言处理模块，擅长文本分析和处理。</p>
+<p>Pete Garcin最后向初学者推荐了<code>Keras</code>作为了解机器学习的入口。</p>
+<h3>Additional</h3>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="/instagram-python-migrationbi-ji.html">Instagram python migration笔记</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<div id="aboutme">
+        <p>
+            <img width="100%" class="img-thumbnail" src="/assets/img/avatar.png"/>
+        </p>
+    <p>
+      <strong>About Charlie Hu</strong><br/>
+        Software engineer, Geeker. Here I mostly blog about Python, algorithm and how programing can be interesting.
+    </p>
+</div><!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://github.com/Motor-taxi-master-rider"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+    <li class="list-group-item"><a href="https://weibo.com/u/3025131943"><i class="fa fa-weibo fa-lg"></i> weibo</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Recent Posts -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
+  <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/translatezhang-wo-pythonbing-fa-rang-ni-geng-kuai-xiang-yong-wu-can.html">[Translate]掌握Python并发让你更快享用午餐</a></li>
+    <li class="list-group-item"><a href="/translatecong-xin-shou-dao-zhuan-jia-ru-he-yong-pythonbian-xie-pei-zhi-wen-jian.html">[Translate]从新手到专家：如何用Python编写配置文件</a></li>
+    <li class="list-group-item"><a href="/jian-dan-de-wen-ben-jie-xi-ji-suan-qi-v2.html">简单的文本解析计算器 v2</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Recent Posts -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <ul class="list-group list-inline tagcloud" id="tags">
+    <li class="list-group-item tag-3">
+      <a href="/tag/algorithms.html">Algorithms</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/bit_manipulation.html">Bit_manipulation</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/coroutine.html">Coroutine</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="/tag/leetcode.html">Leetcode</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/math.html">Math</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/python.html">Python</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/stack.html">Stack</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="/tag/string.html">String</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/translate.html">Translate</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/tree.html">Tree</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/Github -->
+<li class="list-group-item">
+  <h4><i class="fa fa-github fa-lg"></i><span class="icon-label">GitHub Repos</span></h4>
+  <div id="gh_repos">
+    <p class="list-group-item">Status updating...</p>
+  </div>
+  <a href="https://github.com/Motor-taxi-master-rider">@Motor-taxi-master-rider</a> on GitHub
+</li>
+<!-- End Sidebar/Github -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="http://getpelican.com/" target="_blank">Pelican</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://python.org/" target="_blank">Python.org</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+    <script src="/static/js/custom.js"></script>
+
+
+<!-- GitHub JS Code -->
+<script type="text/javascript">
+$(document).ready(function () {
+  if (!window.jXHR) {
+    var jxhr = document.createElement('script');
+    jxhr.type = 'text/javascript';
+    jxhr.src = '/theme/js/jXHR.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(jxhr, s);
+  }
+
+  github.showRepos({
+    user: 'Motor-taxi-master-rider',
+    count: 3,
+    skip_forks: true,
+    target: '#gh_repos'
+  });
+});
+</script>
+<script src="/theme/js/github.js" type="text/javascript"></script>
+<!-- End GitHub JS Code -->
+
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+    $("div.collapseheader").click(function () {
+    $header = $(this).children("span").first();
+    $codearea = $(this).children(".input_area");
+    console.log($(this).children());
+    $codearea.slideToggle(500, function () {
+        $header.text(function () {
+            return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+        });
+    });
+});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>[Translate]掌握Python并发让你更快享用午餐 - Tower of Babel</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+<style type="text/css">
+
+/*some stuff for output/input prompts*/
+div.cell{border:1px solid transparent;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch}div.cell.selected{border-radius:4px;border:thin #ababab solid}
+div.cell.edit_mode{border-radius:4px;border:thin #008000 solid}
+div.cell{width:100%;padding:5px 5px 5px 0;margin:0;outline:none}
+div.prompt{min-width:11ex;padding:.4em;margin:0;font-family:monospace;text-align:right;line-height:1.21429em}
+@media (max-width:480px){div.prompt{text-align:left}}div.inner_cell{display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch;-webkit-box-flex:1;-moz-box-flex:1;box-flex:1;flex:1}
+div.input_area{border:1px solid #cfcfcf;border-radius:4px;background:#f7f7f7;line-height:1.21429em}
+div.prompt:empty{padding-top:0;padding-bottom:0}
+div.input{page-break-inside:avoid;display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:horizontal;-moz-box-align:stretch;display:box;box-orient:horizontal;box-align:stretch;}
+div.inner_cell{width:90%;}
+div.input_area{border:1px solid #cfcfcf;border-radius:4px;background:#f7f7f7;}
+div.input_prompt{color:navy;border-top:1px solid transparent;}
+div.output_wrapper{margin-top:5px;position:relative;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;width:100%;}
+div.output_scroll{height:24em;width:100%;overflow:auto;border-radius:4px;-webkit-box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);-moz-box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);}
+div.output_collapsed{margin:0px;padding:0px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;width:100%;}
+div.out_prompt_overlay{height:100%;padding:0px 0.4em;position:absolute;border-radius:4px;}
+div.out_prompt_overlay:hover{-webkit-box-shadow:inset 0 0 1px #000000;-moz-box-shadow:inset 0 0 1px #000000;box-shadow:inset 0 0 1px #000000;background:rgba(240, 240, 240, 0.5);}
+div.output_prompt{color:darkred;}
+
+a.anchor-link:link{text-decoration:none;padding:0px 20px;visibility:hidden;}
+h1:hover .anchor-link,h2:hover .anchor-link,h3:hover .anchor-link,h4:hover .anchor-link,h5:hover .anchor-link,h6:hover .anchor-link{visibility:visible;}
+/* end stuff for output/input prompts*/
+
+
+.highlight-ipynb .hll { background-color: #ffffcc }
+.highlight-ipynb  { background: #f8f8f8; }
+.highlight-ipynb .c { color: #408080; font-style: italic } /* Comment */
+.highlight-ipynb .err { border: 1px solid #FF0000 } /* Error */
+.highlight-ipynb .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight-ipynb .o { color: #666666 } /* Operator */
+.highlight-ipynb .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight-ipynb .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight-ipynb .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight-ipynb .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight-ipynb .gd { color: #A00000 } /* Generic.Deleted */
+.highlight-ipynb .ge { font-style: italic } /* Generic.Emph */
+.highlight-ipynb .gr { color: #FF0000 } /* Generic.Error */
+.highlight-ipynb .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight-ipynb .gi { color: #00A000 } /* Generic.Inserted */
+.highlight-ipynb .go { color: #888888 } /* Generic.Output */
+.highlight-ipynb .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight-ipynb .gs { font-weight: bold } /* Generic.Strong */
+.highlight-ipynb .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight-ipynb .gt { color: #0044DD } /* Generic.Traceback */
+.highlight-ipynb .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight-ipynb .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight-ipynb .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight-ipynb .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight-ipynb .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight-ipynb .kt { color: #B00040 } /* Keyword.Type */
+.highlight-ipynb .m { color: #666666 } /* Literal.Number */
+.highlight-ipynb .s { color: #BA2121 } /* Literal.String */
+.highlight-ipynb .na { color: #7D9029 } /* Name.Attribute */
+.highlight-ipynb .nb { color: #008000 } /* Name.Builtin */
+.highlight-ipynb .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight-ipynb .no { color: #880000 } /* Name.Constant */
+.highlight-ipynb .nd { color: #AA22FF } /* Name.Decorator */
+.highlight-ipynb .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight-ipynb .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight-ipynb .nf { color: #0000FF } /* Name.Function */
+.highlight-ipynb .nl { color: #A0A000 } /* Name.Label */
+.highlight-ipynb .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight-ipynb .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight-ipynb .nv { color: #19177C } /* Name.Variable */
+.highlight-ipynb .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight-ipynb .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight-ipynb .mf { color: #666666 } /* Literal.Number.Float */
+.highlight-ipynb .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight-ipynb .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight-ipynb .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight-ipynb .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight-ipynb .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight-ipynb .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight-ipynb .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight-ipynb .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight-ipynb .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight-ipynb .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight-ipynb .sx { color: #008000 } /* Literal.String.Other */
+.highlight-ipynb .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight-ipynb .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight-ipynb .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight-ipynb .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight-ipynb .vc { color: #19177C } /* Name.Variable.Class */
+.highlight-ipynb .vg { color: #19177C } /* Name.Variable.Global */
+.highlight-ipynb .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight-ipynb .il { color: #666666 } /* Literal.Number.Integer.Long */
+</style>
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+div.entry-content {
+  overflow: visible;
+  padding: 8px;
+}
+.input_area {
+  padding: 0.2em;
+}
+
+a.heading-anchor {
+ white-space: normal;
+}
+
+.rendered_html
+code {
+ font-size: .8em;
+}
+
+pre.ipynb {
+  color: black;
+  background: #f7f7f7;
+  border: none;
+  box-shadow: none;
+  margin-bottom: 0;
+  padding: 0;
+  margin: 0px;
+  font-size: 13px;
+}
+
+/* remove the prompt div from text cells */
+div.text_cell .prompt {
+    display: none;
+}
+
+/* remove horizontal padding from text cells, */
+/* so it aligns with outer body text */
+div.text_cell_render {
+    padding: 0.5em 0em;
+}
+
+img.anim_icon{padding:0; border:0; vertical-align:middle; -webkit-box-shadow:none; -box-shadow:none}
+
+div.collapseheader {
+    width=100%;
+    padding: 2px;
+    cursor: pointer;
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+</style>
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+<script type="text/javascript">
+init_mathjax = function() {
+    if (window.MathJax) {
+        // MathJax loaded
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+            },
+            displayAlign: 'left', // Change this to 'center' to center equations.
+            "HTML-CSS": {
+                styles: {'.MathJax_Display': {"margin": 0}}
+            }
+        });
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    }
+}
+init_mathjax();
+</script>
+    <link href="/assets/favicon.ico" rel="icon">
+
+<link rel="canonical" href="/translatezhang-wo-pythonbing-fa-rang-ni-geng-kuai-xiang-yong-wu-can.html">
+
+        <meta name="author" content="Charlie Hu" />
+        <meta name="keywords" content="Translate,Python,Concurrency" />
+        <meta name="description" content="一个关于线程、异步、多进程和云函数的午餐故事。 原作者：Brendan Maginnis 简介 我将给你们讲一个故事来解释Python中不同的并发和并行选项。 在这个故事中，我们将看到为什么单个人的多任务处理像并发，而多个人执行自己的任务就像并行处理。 我们将在一些知名餐厅的午餐时间观察这些场景在实际中是否可以快速而有效地为客户提供服务。之后，我将使用Python模拟各类餐厅，最后比较不同的并发方案，并说明它们分别适用与何种场景。 在接下来的内容中，我会解释如下几点： 并发和并行之间有什么区别？ 比较不同的并发方案，包括线程，异步，多进程和云函数 每种并发方案的优缺点 如何使用简单的流程图找到适合场景的并发方案 什么是并发？什么是并行？ 让我们从它们的定义说起： 如果一个系统可以同时支持两个或多个正在进行的操作，则称该系统是并发的。 如果一个系统可以支持同时执行的两个或多个动作，则称该系统为并行系统。 这两个概念之间的关键区别是“进行中”这一定义。 ——《并发的艺术》 现在让我们直接进入故事环节。 正值午餐时间，你转过一条从未见过的街道。摆在你面前的有两种就餐选择：一个叫Concurrent Burgers的市场摊位和一个叫Parallel Salads的商店。 两家店看起来都很美味，但排队的人又很多，所以你想知道哪家能先为你服务 …" />
+
+        <meta property="og:site_name" content="Tower of Babel" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="[Translate]掌握Python并发让你更快享用午餐"/>
+        <meta property="og:url" content="/translatezhang-wo-pythonbing-fa-rang-ni-geng-kuai-xiang-yong-wu-can.html"/>
+        <meta property="og:description" content="一个关于线程、异步、多进程和云函数的午餐故事。 原作者：Brendan Maginnis 简介 我将给你们讲一个故事来解释Python中不同的并发和并行选项。 在这个故事中，我们将看到为什么单个人的多任务处理像并发，而多个人执行自己的任务就像并行处理。 我们将在一些知名餐厅的午餐时间观察这些场景在实际中是否可以快速而有效地为客户提供服务。之后，我将使用Python模拟各类餐厅，最后比较不同的并发方案，并说明它们分别适用与何种场景。 在接下来的内容中，我会解释如下几点： 并发和并行之间有什么区别？ 比较不同的并发方案，包括线程，异步，多进程和云函数 每种并发方案的优缺点 如何使用简单的流程图找到适合场景的并发方案 什么是并发？什么是并行？ 让我们从它们的定义说起： 如果一个系统可以同时支持两个或多个正在进行的操作，则称该系统是并发的。 如果一个系统可以支持同时执行的两个或多个动作，则称该系统为并行系统。 这两个概念之间的关键区别是“进行中”这一定义。 ——《并发的艺术》 现在让我们直接进入故事环节。 正值午餐时间，你转过一条从未见过的街道。摆在你面前的有两种就餐选择：一个叫Concurrent Burgers的市场摊位和一个叫Parallel Salads的商店。 两家店看起来都很美味，但排队的人又很多，所以你想知道哪家能先为你服务 …"/>
+        <meta property="article:published_time" content="2021-04-04" />
+            <meta property="article:section" content="posts" />
+            <meta property="article:tag" content="Translate" />
+            <meta property="article:tag" content="Python" />
+            <meta property="article:tag" content="Concurrency" />
+            <meta property="article:author" content="Charlie Hu" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.flatly.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link href="/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+        <link href="/static/css/custom.css" rel="stylesheet">
+
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+Tower of Babel            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                         <li><a href="/pages/about.html">
+                             About
+                          </a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><span>
+                <form class="navbar-search" action="/search.html">
+                  <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
+                </form></span>
+              </li>
+              <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+            <ol class="breadcrumb">
+                <li><a href="" title="Tower of Babel"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="/category/posts.html" title="posts">posts</a></li>
+                <li class="active">[Translate]掌握Python并发让你更快享用午餐</li>
+            </ol>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/translatezhang-wo-pythonbing-fa-rang-ni-geng-kuai-xiang-yong-wu-can.html"
+                       rel="bookmark"
+                       title="Permalink to [Translate]掌握Python并发让你更快享用午餐">
+                        [Translate]掌握Python并发让你更快享用午餐
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2021-04-04T00:00:00+08:00"> Sun 04 April 2021</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/translate.html">Translate</a>
+        /
+	<a href="/tag/python.html">Python</a>
+        /
+	<a href="/tag/concurrency.html">Concurrency</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <blockquote>
+<p>一个关于线程、异步、多进程和云函数的午餐故事。</p>
+<p>原作者：<a href="https://sourcery.ai/blog/concurrency/">Brendan Maginnis</a></p>
+</blockquote>
+<h2>简介</h2>
+<p>我将给你们讲一个故事来解释Python中不同的并发和并行选项。</p>
+<p>在这个故事中，我们将看到为什么单个人的多任务处理像并发，而多个人执行自己的任务就像并行处理。 我们将在一些知名餐厅的午餐时间观察这些场景在实际中是否可以快速而有效地为客户提供服务。之后，我将使用Python模拟各类餐厅，最后比较不同的并发方案，并说明它们分别适用与何种场景。</p>
+<p>在接下来的内容中，我会解释如下几点：</p>
+<ul>
+<li>并发和并行之间有什么区别？</li>
+<li>比较不同的并发方案，包括线程，异步，多进程和云函数</li>
+<li>每种并发方案的优缺点</li>
+<li>如何使用简单的流程图找到适合场景的并发方案</li>
+</ul>
+<h2>什么是并发？什么是并行？</h2>
+<p>让我们从它们的定义说起：</p>
+<blockquote>
+<p>如果一个系统可以同时支持两个或多个正在进行的操作，则称该系统是并发的。</p>
+<p>如果一个系统可以支持同时执行的两个或多个动作，则称该系统为并行系统。</p>
+<p>这两个概念之间的关键区别是“进行中”这一定义。</p>
+<p>——《并发的艺术》</p>
+</blockquote>
+<p>现在让我们直接进入故事环节。</p>
+<p>正值午餐时间，你转过一条从未见过的街道。摆在你面前的有两种就餐选择：一个叫<strong>Concurrent Burgers</strong>的市场摊位和一个叫<strong>Parallel Salads</strong>的商店。</p>
+<p>两家店看起来都很美味，但排队的人又很多，所以你想知道哪家能先为你服务。</p>
+<p><strong>Concurrent Burgers</strong>由一名中年女士经营，工作时开心大笑，手臂上有着Python的蟒蛇纹身。她正在执行以下任务：</p>
+<ul>
+<li>拿取一个订单</li>
+<li>翻转汉堡肉饼</li>
+<li>将沙拉、肉饼和调味料加入，完成订单</li>
+</ul>
+<p>她在各个任务之间无缝切换：首先，她检查烤架上的肉饼，然后取出煮熟的肉饼；之后，她取出一个订单；在之后如果有肉饼，她就可以完成一个多汁的汉堡，并结束订单。</p>
+<p><strong>Parallel Salads</strong>则配备了许多人手，在工作中他们时刻微笑并礼貌地和顾客交谈。他们每个人都分别为一名顾客做沙拉。他们取订单，将所有成分添加到干净的碗中，优雅而干练，将它们充分混合，之后将沙拉放入给顾客的容器中，把之前的碗递给另一名员工。那名员工与此同时负责洗碗的工作。</p>
+<p>两家餐厅之间的主要区别在于工人的数量以及任务的执行方式：</p>
+<ul>
+<li><strong>Concurrent Burgers</strong>同时（但不是并行的）有多个正在进行的任务，只有一个工人在所有的任务之间切换。</li>
+<li><strong>Parallel Salads</strong>并行执行多项任务，多个工人同每人执行一项任务。</li>
+</ul>
+<p>你会发现两家餐厅都能以相同的速度为顾客提供服务。<strong>Concurrent Burgers</strong>的女老板在同一时间制作多个汉堡，整体速度受限于她的小烤架烤熟肉饼的速度。<strong>Parallel Salads</strong>雇用了多名员工，每人分别制作一份沙拉，整体速度被混合每份沙拉的时间所限制。</p>
+<p>你意识到<strong>Concurrent Burgers</strong>处理的是<strong>I/O密集型</strong>任务而<strong>Parallel Salads</strong>则处理的是<strong>CPU密集型</strong>任务。</p>
+<ul>
+<li><strong>I/O密集型</strong>意味着程序主要受到I/O子系统的限制，从计算机的角度来讲，I/O意味着从磁盘读取或执行网络请求之类的操作。 在<strong>Concurrent Burgers</strong>中，烤肉饼就是一种I/O操作</li>
+<li><strong>CPU密集型</strong>意味着程序主要受到CPU运算速度的限制。如果CPU运行速度更快，则程序运行速度也会得到极大提升。在<strong>Parallel Salads</strong>中，CPU运行速度对应了制作沙拉的人的速度。</li>
+</ul>
+<p>面对这两个选择，你绞尽脑汁想了五分钟依然不知所措，无法做出决定，然后有个能拿主意的朋友打断了你，邀请你去排它们中某家的队。</p>
+<p>请注意：<strong>Concurrent Burgers</strong>因为“同时进行两个或多个操作”既是并发的也是并行的。并行处理是并发处理的子集。</p>
+<p>这两家店为并发任务和并行任务之间的区别提供了直觉感受。现在，我们将研究如何用Python代码实现这两者的模式。</p>
+<h3>我们有哪些选择？</h3>
+<p>Python中有两种选项用于并发：</p>
+<ul>
+<li><strong>threading</strong></li>
+<li><strong>asyncio</strong></li>
+</ul>
+<p>有内置的库用于并行：</p>
+<ul>
+<li><strong>multiprocessing</strong></li>
+</ul>
+<p>如果你在云服务中运行python程序，还有另一个用于并行的选项：</p>
+<ul>
+<li><strong>cloud functions</strong></li>
+</ul>
+<h2>并发实战</h2>
+<p>让我们看一下使用<strong>threading</strong>和<strong>asyncio</strong>的两种<strong>Concurrent Burgers</strong>的可能实现。在这两种情况下，只有一个工人接单，烤肉饼，做汉堡。</p>
+<p>对于<strong>threading</strong>和<strong>asyncio</strong>，只有一个处理器在执行任务，因此它在需要处理的不同任务之间进行切换。线程和异步之间的区别是如何决定任务该被切换。</p>
+<ul>
+<li>对于<strong>threading</strong>库，操作系统掌握了不同线程的信息，可以在任何时候中断它们并切换成其他任务。程序本身对此没有控制权。这种模式被称为<a href="https://en.wikipedia.org/wiki/Preemption_%28computing%29#Preemptive_multitasking">抢先式多任务处理</a>，因为操作系统可以抢占你的线程来进行线程间的切换在大多数编程语言中，线程可以在多核上并行运行，然而在Python中，一次只能执行一个线程。</li>
+<li>借助<strong>asyncio</strong>，程序本身可以决定何时在任务之间进行切换 每个任务在准备好切换时都可以选择放弃控制，从而与其他任务协作。因此，这被称为<a href="https://en.wikipedia.org/wiki/Cooperative_multitasking">协作多任务处理</a>，因为每个任务必须在无法继续进行时主动放弃控制权来相互协作。</li>
+</ul>
+<h3><strong>Concurrent Burgers</strong> 的线程实现</h3>
+<p><strong>threading</strong>库可以让工人在执行过程中随时切换任务。工人可能在取单到一半时突然切换到检查肉饼或做汉堡的任务中，之后在任意时刻又可能再次切换到其他任务之中。</p>
+<p>让我们看下用线程实现的<strong>Concurrent Burgers</strong>：</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">ThreadPoolExecutor</span>
+<span class="kn">import</span> <span class="nn">queues</span>
+
+
+<span class="c1"># 注意: 为了让你专注于实现细节，有些方法和变量被忽略了</span>
+
+
+<span class="k">def</span> <span class="nf">run_concurrent_burgers</span><span class="p">():</span>
+    <span class="c1"># 创建阻塞队列</span>
+    <span class="n">customers</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+    <span class="n">orders</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>  <span class="c1"># 一次最多处理五个订单</span>
+    <span class="n">cooked_patties</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+
+    <span class="c1"># 烤架完全独立于工人,它能将生肉饼变成熟肉饼</span>
+    <span class="c1"># 这部分就像从磁盘I/O或者网络请求一样</span>
+    <span class="n">grill</span> <span class="o">=</span> <span class="n">Grill</span><span class="p">()</span>
+
+    <span class="c1"># 在线程池中运行三个任务</span>
+    <span class="k">with</span> <span class="n">ThreadPoolExecutor</span><span class="p">()</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+        <span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">take_orders</span><span class="p">,</span> <span class="n">customers</span><span class="p">,</span> <span class="n">orders</span><span class="p">)</span>
+        <span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">cook_patties</span><span class="p">,</span> <span class="n">grill</span><span class="p">,</span> <span class="n">cooked_patties</span><span class="p">)</span>
+        <span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">make_burgers</span><span class="p">,</span> <span class="n">orders</span><span class="p">,</span> <span class="n">cooked_patties</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">take_orders</span><span class="p">(</span><span class="n">customers</span><span class="p">,</span> <span class="n">orders</span><span class="p">):</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">customer</span> <span class="o">=</span> <span class="n">customers</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="n">order</span> <span class="o">=</span> <span class="n">take_order</span><span class="p">(</span><span class="n">customer</span><span class="p">)</span>
+        <span class="n">orders</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">cook_patties</span><span class="p">(</span><span class="n">grill</span><span class="p">,</span> <span class="n">cook_patties</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">position</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">grill</span><span class="p">)):</span>
+        <span class="n">grill</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_patties</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">position</span><span class="p">,</span> <span class="n">patty</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">grill</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">patty</span><span class="o">.</span><span class="n">cooked</span><span class="p">:</span>
+                <span class="n">cooked_patties</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">patty</span><span class="p">)</span>
+                <span class="n">grill</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_patties</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+        <span class="c1"># 等一分钟之后再次检查</span>
+        <span class="n">threading</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">make_burgers</span><span class="p">(</span><span class="n">orders</span><span class="p">,</span> <span class="n">cooked_patties</span><span class="p">):</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">patty</span> <span class="o">=</span> <span class="n">cooked_patties</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="n">order</span> <span class="o">=</span> <span class="n">orders</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="n">burger</span> <span class="o">=</span> <span class="n">order</span><span class="o">.</span><span class="n">make_burger</span><span class="p">(</span><span class="n">patty</span><span class="p">)</span>
+        <span class="n">customer</span> <span class="o">=</span> <span class="n">order</span><span class="o">.</span><span class="n">shout_for_customer</span><span class="p">()</span>
+        <span class="n">customer</span><span class="o">.</span><span class="n">serve</span><span class="p">(</span><span class="n">burger</span><span class="p">)</span>
+</pre></div>
+
+
+<p>接受订单，烹饪肉饼和制作汉堡的这几个任务都是一个无限循环，不断地被执行。</p>
+<p><code>run_concurrent_burgers</code>中，我们在单独的线程中启动每个任务。可以手动地为每个任务创建一个线程，但是标准库中存在一个更好的接口，叫做<code>ThreadPoolExecutor</code>，它会为提交给它的每个任务创建一个线程。</p>
+<p>当进行多线程编程时，我们必须确保一次只有一个线程正在读取或写入某个状态。否则，我们可能会遇到两个线程都握着同一块馅饼的情况，最终我们就要面对一个相当生气的客户了。这类问题被称为<strong>线程安全</strong>。</p>
+<p>为避免此问题，我们使用<code>Queue</code>传递状态。在各个任务中，调用<code>Queues</code>的<code>get</code>会<strong>阻塞</strong>，直到有客户，订单或馅饼就绪。操作系统不会尝试切换到任何阻塞的线程，这使我们可以轻松安全地切换状态。只要线程将状态放入<code>Queue</code>的中并不再使用它，那么获取状态的线程就知道在使用该状态时时不会有其它线程对其进行更改。</p>
+<h4>threading的优点</h4>
+<ul>
+<li>I/O过程不会阻塞其他任务</li>
+<li>Python不同版本和库出色支持——如果程序可以单线程运行，则绝大多数情况下它也可以用多线程运行</li>
+</ul>
+<h4>threading的缺点</h4>
+<ul>
+<li>由于系统线程之间切换的开销，性能比<code>asyncio</code>差</li>
+<li>不是线程安全的</li>
+<li>无法加速处理色拉之类的CPU约束问题（因为Python<a href="https://wiki.python.org/moin/GlobalInterpreterLock">仅允许一个线程同时运行</a>）——单个工人同时制作多个沙拉的速度不会比他们一个个顺序制作沙拉快，因为制作所有沙拉需要花费的时间总量相同。</li>
+</ul>
+<h3><strong>Concurrent Burgers</strong> 的asyncio实现</h3>
+<p>在<strong>asyncio</strong>中，事件循环(<strong>event loop</strong>)管理着所有的任务。任务们可以处于各种不同的状态，最重要的两个状态是就绪态(<strong>ready</strong>)和等待态(<strong>waiting</strong>)。在每次循环中，事件循环都会检查是否有之前处于等待的任务由于其他人物的完成而就绪。然后，它会选择一个就绪的任务并运行它，直到任务完成或需要等待另一个任务为止。通常任务等待的是一种I/O操作，例如磁盘读写或发出http请求。</p>
+<p>两个关键字可以涵盖大多数<strong>asyncio</strong>的用法：<strong>async</strong>和<strong>await</strong>。</p>
+<ul>
+<li><strong>async</strong>用于标记某一函数必须作为单独的任务运行。</li>
+<li><strong>await</strong>会创建一个新任务，并放弃对事件循环的控制。它将任务置于等待状态，在新任务完成时再次变成就绪态。</li>
+</ul>
+<p>让我们看下用<strong>asyncio</strong>实现的<strong>Concurrent Burgers</strong>：</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
+
+<span class="c1"># 注意: 为了让你专注于实现细节，有些方法和变量被忽略了</span>
+
+
+<span class="k">def</span> <span class="nf">run_concurrent_burgers</span><span class="p">():</span>
+    <span class="c1"># 这些队列用于让任务放弃控制</span>
+    <span class="n">customers</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+    <span class="n">orders</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Queue</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>  <span class="c1"># 一次最多处理五个订单</span>
+    <span class="n">cooked_patties</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+
+    <span class="c1"># 烤架完全独立于工人,它能将生肉饼变成熟肉饼</span>
+    <span class="n">grill</span> <span class="o">=</span> <span class="n">Grill</span><span class="p">()</span>
+
+    <span class="c1"># 在默认的asyncio event loop中执行所有任务</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span>
+        <span class="n">take_orders</span><span class="p">(</span><span class="n">customers</span><span class="p">,</span> <span class="n">orders</span><span class="p">),</span>
+        <span class="n">cook_patties</span><span class="p">(</span><span class="n">grill</span><span class="p">,</span> <span class="n">cooked_patties</span><span class="p">),</span>
+        <span class="n">make_burgers</span><span class="p">(</span><span class="n">orders</span><span class="p">,</span> <span class="n">cooked_patties</span><span class="p">),</span>
+    <span class="p">)</span>
+
+
+<span class="c1"># 用async def来定义asyncio任务</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">take_orders</span><span class="p">(</span><span class="n">customers</span><span class="p">,</span> <span class="n">orders</span><span class="p">):</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="c1"># 允许在这里和下面的的await中切换到其他任务</span>
+        <span class="n">customer</span> <span class="o">=</span> <span class="k">await</span> <span class="n">customers</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="n">order</span> <span class="o">=</span> <span class="n">take_order</span><span class="p">(</span><span class="n">customer</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">orders</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">cook_patties</span><span class="p">(</span><span class="n">grill</span><span class="p">,</span> <span class="n">cooked_patties</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">position</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">grill</span><span class="p">)):</span>
+        <span class="n">grill</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_patties</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">position</span><span class="p">,</span> <span class="n">patty</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">grill</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">patty</span><span class="o">.</span><span class="n">cooked</span><span class="p">:</span>
+                <span class="c1"># put_noawait允许我们在不创建新任务放弃控制器</span>
+                <span class="c1"># 的前提下往队列里添加元素</span>
+                <span class="n">cooked_patties</span><span class="o">.</span><span class="n">put_noawait</span><span class="p">(</span><span class="n">patty</span><span class="p">)</span>
+                <span class="n">grill</span><span class="p">[</span><span class="n">position</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_patties</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+        <span class="c1"># 等30秒之后再次检查</span>
+        <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">make_burgers</span><span class="p">(</span><span class="n">orders</span><span class="p">,</span> <span class="n">cooked_patties</span><span class="p">):</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">patty</span> <span class="o">=</span> <span class="k">await</span> <span class="n">cooked_patties</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="n">order</span> <span class="o">=</span> <span class="k">await</span> <span class="n">orders</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="n">burger</span> <span class="o">=</span> <span class="n">order</span><span class="o">.</span><span class="n">make_burger</span><span class="p">(</span><span class="n">patty</span><span class="p">)</span>
+        <span class="n">customer</span> <span class="o">=</span> <span class="k">await</span> <span class="n">order</span><span class="o">.</span><span class="n">shout_for_customer</span><span class="p">()</span>
+        <span class="n">customer</span><span class="o">.</span><span class="n">serve</span><span class="p">(</span><span class="n">burger</span><span class="p">)</span>
+</pre></div>
+
+
+<p>所有取单、烤肉饼和制作汉堡包的任务都使用<code>async def</code>声明。</p>
+<p>在这些任务中，工作单元每次调用<code>await</code>都会切换到新任务。等待发生在以下时刻：</p>
+<ul>
+<li>接受订单阶段</li>
+<li>将要与下一个客户交谈时</li>
+<li>将订单添加到订单队列时</li>
+<li>烹调阶段</li>
+<li>当所有的肉饼都经过检查时</li>
+<li>制作汉堡阶段</li>
+<li>等待煮熟的小馅饼时</li>
+<li>等待订单时</li>
+<li>给顾客上餐汉堡时</li>
+</ul>
+<p>拼图的最后一块是在<code>run_concurrent_burger</code>中，调用<code>asyncio.gather</code>安排了之后由事件循环执行的所有任务，在本例中就是餐厅的工作人员。</p>
+<p>既然我们确切地知道任务何时切换，那实际上并不需要如此小心地共享状态。我们仅用列表来替代队列就能实现目标，并且，两个任务不会因此在某一时刻持有同一块馅饼。虽然如此，我还是强烈建议使用<code>asyncio</code>队列。因为它提供了明智的挂起时点，使得我们可以非常轻松地完成任务之间的协作。</p>
+<p>使用<code>asyncio</code>的另一个有趣的方面是<code>async</code>关键字会更改该函数的接口。因为它不能直接调用非异步函数。这同时可以被认为是一件好事和坏事。一方面，你可能会说这会损害代码的可组合性：因为你将无法混用异步函数和正常函数。另一方面，如果<code>asyncio</code>仅用于I/O，它会强制将I/O与业务逻辑分离，从而把<code>asyncio</code>代码限制在应用程序的边缘，使得代码库更易于理解和测试。在静态类型函数语言中，显式标记I/O是相当普遍的做法——这在Haskell中是必需的。</p>
+<h4>Asyncio的优点</h4>
+<ul>
+<li>对于I/O密集型程序而言非常快</li>
+<li>由于只有一个系统线程，所以开销比线程更少</li>
+<li>所有高性能的Web服务器框架都在使用<code>asyncio</code>——查看<a href="https://www.techempower.com/benchmarks/#section=data-r19&amp;hw=ph&amp;test=fortune&amp;l=zijzen-1r">测试跑分</a></li>
+<li>线程安全</li>
+</ul>
+<h4>Asyncio的缺点</h4>
+<ul>
+<li>无法加快CPU密集型问题</li>
+<li>Python的新特性</li>
+<li>要求Python 3.5+</li>
+<li><code>asyncio</code>支持绝大多数I/O场景，但不像非<code>asyncio</code>方案那样完整</li>
+</ul>
+<h2>并行实战</h2>
+<p>在<strong>Parallel Salads</strong>中，同时有数个工人并行制作沙拉，我们将使用多进程来实现它。</p>
+<p>之后，我们会访问<strong>Cloud Coffees</strong>，以了解如何使用云函数来并行执行任务。</p>
+<h3><strong>Parallel Salads</strong>的多进程实现</h3>
+<p><strong>Parallel Salads</strong>可以完美地阐述一个典型的多进程场景。</p>
+<p><strong>Parallel Salads</strong>中的每个工人都代表由操作系统产生的一个新进程。这些进程通过<code>ProcessPoolExecutor</code>创建，并被各自分配任务。</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">multiprocessing</span> <span class="k">as</span> <span class="nn">mp</span>
+<span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">ProcessPoolExecutor</span>
+
+<span class="c1"># 注意: 为了让你专注于实现细节，有些方法和变量被忽略了</span>
+
+
+<span class="k">def</span> <span class="nf">run_parallel_salads</span><span class="p">():</span>
+    <span class="c1"># 创建可以在多进程之间通信的队列</span>
+    <span class="n">customers</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+    <span class="n">bowls</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+    <span class="n">dirty_bowls</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+
+    <span class="c1"># 在process pool executor中并行执行所有任务</span>
+    <span class="k">with</span> <span class="n">ProcessPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="n">NUM_STAFF</span><span class="p">)</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+        <span class="c1"># 让除了一个工人以外的所有工人制作沙拉</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NUM_STAFF</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">make_salad</span><span class="p">,</span> <span class="n">customers</span><span class="p">,</span> <span class="n">bowls</span><span class="p">,</span> <span class="n">dirty_bowls</span><span class="p">)</span>
+
+        <span class="c1"># 让一个工人洗碗</span>
+        <span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">wash_bowls</span><span class="p">,</span> <span class="n">dirty_bowls</span><span class="p">,</span> <span class="n">bowls</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">make_salad</span><span class="p">(</span><span class="n">customers</span><span class="p">,</span> <span class="n">bowls</span><span class="p">):</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">customer</span> <span class="o">=</span> <span class="n">customers</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="n">order</span> <span class="o">=</span> <span class="n">take_order</span><span class="p">(</span><span class="n">customer</span><span class="p">)</span>
+        <span class="n">bowl</span> <span class="o">=</span> <span class="n">bowls</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="n">bowl</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">ingredients</span><span class="p">)</span>
+        <span class="n">bowl</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">dressing</span><span class="p">)</span>
+        <span class="n">bowl</span><span class="o">.</span><span class="n">mix</span><span class="p">()</span>
+        <span class="n">salad</span> <span class="o">=</span> <span class="n">fill_container</span><span class="p">(</span><span class="n">bowl</span><span class="p">)</span>
+        <span class="n">customer</span><span class="o">.</span><span class="n">serve</span><span class="p">(</span><span class="n">salad</span><span class="p">)</span>
+        <span class="n">dirty_bowls</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">bowl</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">wash_bowls</span><span class="p">(</span><span class="n">dirty_bowls</span><span class="p">,</span> <span class="n">bowls</span><span class="p">):</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">bowl</span> <span class="o">=</span> <span class="n">dirty_bowls</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="n">wash</span><span class="p">(</span><span class="n">bowl</span><span class="p">)</span>
+        <span class="n">bowls</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">bowl</span><span class="p">)</span>
+</pre></div>
+
+
+<p><code>multiprocessing</code>把每个任务放在单独的进程中执行。这些进程由操作系统控制，独立且并行运行，不会相互阻塞。实际上，可并行的进程数受到CPU内核数的限制，因此我们将限制实际制作沙拉的人员数量。</p>
+<p>因为这些任务处于不同的进程中，所以它们不共享任何普通的Python状态。每个进程都持有整个程序状态的独立副本。我们必须使用特殊的多进程队列控制它们之间进行通信。</p>
+<h4>让asyncio和multiprocessing协作</h4>
+<p>一种使用多进程的用例是在<code>asyncio</code>程序中分流CPU密集型任务，以防止它们阻塞应用程序的其余部分。以下是一个简单的使用这一技术的框架：</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">ProcessPoolExecutor</span>
+
+<span class="n">process_pool</span> <span class="o">=</span> <span class="n">ProcessPoolExecutor</span><span class="p">()</span>  <span class="c1"># 默认进程数量为核心数</span>
+
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">handle_long_request</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">event_loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_running_loop</span><span class="p">()</span>
+    <span class="c1"># calculate_n_pi将在单独的进程中运行，从而允许asyncio的事件循环继续并行处理其他异步任务</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="n">event_loop</span><span class="o">.</span><span class="n">run_in_executor</span><span class="p">(</span><span class="n">process_pool_executor</span><span class="p">,</span> <span class="n">calculate_n_pi</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">calculate_n_pi</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">threading</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="mf">3.14</span>
+</pre></div>
+
+
+<h4>多进程的优点</h4>
+<ul>
+<li>加速CPU密集型任务</li>
+<li>线程安全</li>
+<li>可用于在额外的进程中执行Web服务器中的长运算</li>
+</ul>
+<h4>多进程的缺点</h4>
+<ul>
+<li>不共享资源</li>
+<li>高开销 - 不适合I/O密集型任务</li>
+</ul>
+<h3><strong>Cloud Coffes</strong>的云函数实现</h3>
+<p>当你和朋友散步去公园吃午餐时，你发现一团蓬松的五彩云朵盘旋在人群的上方。你靠近仔细观察，看到了<strong>Cloud Coffees</strong>的标志。</p>
+<p>虽然朋友讨厌咖啡，你们俩还是决定去喝一杯。当你们走上前，每人都有招待自己的摊位，里面有一个咖啡师，咖啡师慢慢飘下云层。你下单后，咖啡师煮咖啡给你。</p>
+<p>热闹的人群突然来到<strong>Cloud Coffees</strong>，在短暂等待后更多摊位漂浮了下来，他们很快就得到了服务。这些额外的咖啡师会等一会儿以吸引更多的顾客，然后才飘回云中，但他们并不会理会其它摊位的顾客。</p>
+<p>当你回去的时候，会发现摊位的数量与正在下订单的客户数量几乎相同。如果有更多的客户到达，更多的摊位会出现在云中，订单完成后一小会儿，摊位就会消失在云中。</p>
+<p>你的朋友点了一个复杂的订单，试图冲淡咖啡的味道，到现在还没有拿到他的饮料。咖啡师正在添加棉花糖和巧克力薄片时，突然就将整杯咖啡毫不客气地扔到垃圾箱中，向他喊“你超时了”。</p>
+<p>你们俩都歇斯底里地回到了公园。</p>
+<p>如果编写的是Web服务，则云函数是另一个值得考虑的选项。到目前为止，它们的代码是迄今为止最容易实现的，因为你只需要考虑一次完成一个订单的情况，完全可以忽略并发性。</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cloud_coffees</span><span class="p">(</span><span class="n">order</span><span class="p">):</span>
+    <span class="n">ground_coffee</span> <span class="o">=</span> <span class="n">grind_beans</span><span class="p">()</span>
+    <span class="n">coffee</span> <span class="o">=</span> <span class="n">brew_coffee</span><span class="p">(</span><span class="n">ground_coffee</span><span class="p">)</span>
+    <span class="n">coffee</span><span class="o">.</span><span class="n">add_embellishments</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">coffee</span>
+</pre></div>
+
+
+<p>每个请求都由整个应用程序的单独实例来满足。创建新实例时会有一些启动延迟。出于这个原因，实例可能会停留一会等待后续更多请求，满足之后来的请求就无需启动时延了。如果在一定时间内没有任何请求，该实例将被收回。</p>
+<p>每个请求会在几分钟后超时，取决于具体实现方式。你必须确保您的任务在此超时之前完成，否则它们将不会完成而直接消失。</p>
+<p>实例之间无法通信，永远不要在请求之间存储任何状态，因为该实例可能随时消失。</p>
+<p>云函数最常见的实现有AWS Lambda，Azure Functions和Google Cloud Functions。</p>
+<h4>云函数的优点</h4>
+<ul>
+<li>极其简单的模型</li>
+<li>可以比运行持久性的服务器便宜</li>
+<li>无负担缩容及扩若</li>
+</ul>
+<h4>云函数的缺点</h4>
+<ul>
+<li>启动新实例会有延迟</li>
+<li>请求有超时限制</li>
+<li>对Python版本的控制较少 - 你只能使用云提供商有的版本</li>
+</ul>
+<h2>你会选择哪个并发选项？</h2>
+<p>让我们将之前讨论的所有内容汇总到这张表中。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>threading</th>
+<th>asyncio</th>
+<th>multiprocessing</th>
+<th>cloud functions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>并发类型</strong></td>
+<td>抢先式多任务处理</td>
+<td>协作式多任务处理</td>
+<td>多进程</td>
+<td>多实例</td>
+</tr>
+<tr>
+<td><strong>并发/并行？</strong></td>
+<td>并发</td>
+<td>并发</td>
+<td>并行</td>
+<td>并行</td>
+</tr>
+<tr>
+<td><strong>是否为显示并发控制</strong></td>
+<td>否</td>
+<td>是</td>
+<td>否</td>
+<td>否</td>
+</tr>
+<tr>
+<td><strong>切换如何决定</strong></td>
+<td>操作系统决定何时切换任务</td>
+<td>任务自己决定何时放弃控制</td>
+<td>进程在不同的CPU内核中同时运行</td>
+<td>请求在不同的实例中同时运行</td>
+</tr>
+<tr>
+<td><strong>最大并行处理</strong></td>
+<td>1</td>
+<td>1</td>
+<td>CPU核心数</td>
+<td>无限制</td>
+</tr>
+<tr>
+<td><strong>任务间通信</strong></td>
+<td>共享状态</td>
+<td>共享状态</td>
+<td>多进程队列和函数返回值</td>
+<td>无法通信</td>
+</tr>
+<tr>
+<td><strong>是否线程安全</strong></td>
+<td>否</td>
+<td>是</td>
+<td>是</td>
+<td>是</td>
+</tr>
+<tr>
+<td><strong>适合的任务类型</strong></td>
+<td>I/O密集型</td>
+<td>I/O密集型</td>
+<td>CPU密集型</td>
+<td>CPU密集型（ 如果运行时间少于超时时间~5分钟）</td>
+</tr>
+<tr>
+<td><strong>执行负担</strong></td>
+<td>每个任务的系统线程消耗RAM并增加任务之间的切换时间</td>
+<td>极少，所有任务在单个线程中的单个进程中运行</td>
+<td>每个任务的系统进程比线程消耗更多的RAM和切换时间</td>
+<td>启动新实例会带来延迟时间的成本</td>
+</tr>
+</tbody>
+</table>
+<p>现在你已经了解了所有选项，那么选择就很容易了。</p>
+<p>在你做出选择之前，应当再次确认你是否确实有加快任务的执行速度的需求。如果任务每周运行一次而且只耗时10分钟，那么加速有任何意义吗？</p>
+<p>如果确认完毕，只需参考以下流程图：</p>
+<p><img src="https://sourcery.ai/static/c92fee8f46d84540664149241c608807/62de4/concurrency-flowchart.png" style="zoom:80%;" /></p>
+<h2>结论</h2>
+<p>现在，你已经看到了Python中可用的所有核心并发选项的示例：</p>
+<ul>
+<li>threading</li>
+<li>asyncio</li>
+<li>multiprocessing</li>
+</ul>
+<p>以及为并行Python提供的简化环境的部署选项：</p>
+<ul>
+<li>云函数</li>
+</ul>
+<p>你还了解它们之间的区别，每个方法的优缺点以及如何选择它们。</p>
+<p>希望这篇文章对你有所帮助！</p>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="/translate-pythonzhong-ru-he-jiang-duo-ge-can-shu-chuan-ru-maphan-shu.html">[Translate] Python中如何将多个参数传入map函数</a></li>
+        <li><a href="/translatecong-xin-shou-dao-zhuan-jia-ru-he-yong-pythonbian-xie-pei-zhi-wen-jian.html">[Translate]从新手到专家：如何用Python编写配置文件</a></li>
+        <li><a href="/translate-pythonku-jie-shao-shi-yong-luxjin-xing-zhi-neng-ke-shi-shu-ju-fa-xian.html">[Translate] Python库介绍：使用Lux进行智能可视数据发现</a></li>
+        <li><a href="/leetcode-island-perimeter.html">LeetCode - Island Perimeter</a></li>
+        <li><a href="/top-10-python-libraries-of-2017.html">Top 10 Python libraries of 2017</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<div id="aboutme">
+        <p>
+            <img width="100%" class="img-thumbnail" src="/assets/img/avatar.png"/>
+        </p>
+    <p>
+      <strong>About Charlie Hu</strong><br/>
+        Software engineer, Geeker. Here I mostly blog about Python, algorithm and how programing can be interesting.
+    </p>
+</div><!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://github.com/Motor-taxi-master-rider"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+    <li class="list-group-item"><a href="https://weibo.com/u/3025131943"><i class="fa fa-weibo fa-lg"></i> weibo</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Recent Posts -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
+  <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/translatezhang-wo-pythonbing-fa-rang-ni-geng-kuai-xiang-yong-wu-can.html">[Translate]掌握Python并发让你更快享用午餐</a></li>
+    <li class="list-group-item"><a href="/translatecong-xin-shou-dao-zhuan-jia-ru-he-yong-pythonbian-xie-pei-zhi-wen-jian.html">[Translate]从新手到专家：如何用Python编写配置文件</a></li>
+    <li class="list-group-item"><a href="/jian-dan-de-wen-ben-jie-xi-ji-suan-qi-v2.html">简单的文本解析计算器 v2</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Recent Posts -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <ul class="list-group list-inline tagcloud" id="tags">
+    <li class="list-group-item tag-3">
+      <a href="/tag/algorithms.html">Algorithms</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/bit_manipulation.html">Bit_manipulation</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/coroutine.html">Coroutine</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="/tag/leetcode.html">Leetcode</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/math.html">Math</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/python.html">Python</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/stack.html">Stack</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="/tag/string.html">String</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/translate.html">Translate</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/tree.html">Tree</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/Github -->
+<li class="list-group-item">
+  <h4><i class="fa fa-github fa-lg"></i><span class="icon-label">GitHub Repos</span></h4>
+  <div id="gh_repos">
+    <p class="list-group-item">Status updating...</p>
+  </div>
+  <a href="https://github.com/Motor-taxi-master-rider">@Motor-taxi-master-rider</a> on GitHub
+</li>
+<!-- End Sidebar/Github -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="http://getpelican.com/" target="_blank">Pelican</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://python.org/" target="_blank">Python.org</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+    <script src="/static/js/custom.js"></script>
+
+
+<!-- GitHub JS Code -->
+<script type="text/javascript">
+$(document).ready(function () {
+  if (!window.jXHR) {
+    var jxhr = document.createElement('script');
+    jxhr.type = 'text/javascript';
+    jxhr.src = '/theme/js/jXHR.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(jxhr, s);
+  }
+
+  github.showRepos({
+    user: 'Motor-taxi-master-rider',
+    count: 3,
+    skip_forks: true,
+    target: '#gh_repos'
+  });
+});
+</script>
+<script src="/theme/js/github.js" type="text/javascript"></script>
+<!-- End GitHub JS Code -->
+
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+    $("div.collapseheader").click(function () {
+    $header = $(this).children("span").first();
+    $codearea = $(this).children(".input_area");
+    console.log($(this).children());
+    $codearea.slideToggle(500, function () {
+        $header.text(function () {
+            return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+        });
+    });
+});
+});
+</script>
+</body>
+</html>

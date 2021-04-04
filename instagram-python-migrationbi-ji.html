@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Instagram python migration笔记 - Tower of Babel</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+<style type="text/css">
+
+/*some stuff for output/input prompts*/
+div.cell{border:1px solid transparent;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch}div.cell.selected{border-radius:4px;border:thin #ababab solid}
+div.cell.edit_mode{border-radius:4px;border:thin #008000 solid}
+div.cell{width:100%;padding:5px 5px 5px 0;margin:0;outline:none}
+div.prompt{min-width:11ex;padding:.4em;margin:0;font-family:monospace;text-align:right;line-height:1.21429em}
+@media (max-width:480px){div.prompt{text-align:left}}div.inner_cell{display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch;-webkit-box-flex:1;-moz-box-flex:1;box-flex:1;flex:1}
+div.input_area{border:1px solid #cfcfcf;border-radius:4px;background:#f7f7f7;line-height:1.21429em}
+div.prompt:empty{padding-top:0;padding-bottom:0}
+div.input{page-break-inside:avoid;display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:horizontal;-moz-box-align:stretch;display:box;box-orient:horizontal;box-align:stretch;}
+div.inner_cell{width:90%;}
+div.input_area{border:1px solid #cfcfcf;border-radius:4px;background:#f7f7f7;}
+div.input_prompt{color:navy;border-top:1px solid transparent;}
+div.output_wrapper{margin-top:5px;position:relative;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;width:100%;}
+div.output_scroll{height:24em;width:100%;overflow:auto;border-radius:4px;-webkit-box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);-moz-box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);}
+div.output_collapsed{margin:0px;padding:0px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;width:100%;}
+div.out_prompt_overlay{height:100%;padding:0px 0.4em;position:absolute;border-radius:4px;}
+div.out_prompt_overlay:hover{-webkit-box-shadow:inset 0 0 1px #000000;-moz-box-shadow:inset 0 0 1px #000000;box-shadow:inset 0 0 1px #000000;background:rgba(240, 240, 240, 0.5);}
+div.output_prompt{color:darkred;}
+
+a.anchor-link:link{text-decoration:none;padding:0px 20px;visibility:hidden;}
+h1:hover .anchor-link,h2:hover .anchor-link,h3:hover .anchor-link,h4:hover .anchor-link,h5:hover .anchor-link,h6:hover .anchor-link{visibility:visible;}
+/* end stuff for output/input prompts*/
+
+
+.highlight-ipynb .hll { background-color: #ffffcc }
+.highlight-ipynb  { background: #f8f8f8; }
+.highlight-ipynb .c { color: #408080; font-style: italic } /* Comment */
+.highlight-ipynb .err { border: 1px solid #FF0000 } /* Error */
+.highlight-ipynb .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight-ipynb .o { color: #666666 } /* Operator */
+.highlight-ipynb .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight-ipynb .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight-ipynb .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight-ipynb .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight-ipynb .gd { color: #A00000 } /* Generic.Deleted */
+.highlight-ipynb .ge { font-style: italic } /* Generic.Emph */
+.highlight-ipynb .gr { color: #FF0000 } /* Generic.Error */
+.highlight-ipynb .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight-ipynb .gi { color: #00A000 } /* Generic.Inserted */
+.highlight-ipynb .go { color: #888888 } /* Generic.Output */
+.highlight-ipynb .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight-ipynb .gs { font-weight: bold } /* Generic.Strong */
+.highlight-ipynb .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight-ipynb .gt { color: #0044DD } /* Generic.Traceback */
+.highlight-ipynb .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight-ipynb .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight-ipynb .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight-ipynb .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight-ipynb .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight-ipynb .kt { color: #B00040 } /* Keyword.Type */
+.highlight-ipynb .m { color: #666666 } /* Literal.Number */
+.highlight-ipynb .s { color: #BA2121 } /* Literal.String */
+.highlight-ipynb .na { color: #7D9029 } /* Name.Attribute */
+.highlight-ipynb .nb { color: #008000 } /* Name.Builtin */
+.highlight-ipynb .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight-ipynb .no { color: #880000 } /* Name.Constant */
+.highlight-ipynb .nd { color: #AA22FF } /* Name.Decorator */
+.highlight-ipynb .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight-ipynb .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight-ipynb .nf { color: #0000FF } /* Name.Function */
+.highlight-ipynb .nl { color: #A0A000 } /* Name.Label */
+.highlight-ipynb .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight-ipynb .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight-ipynb .nv { color: #19177C } /* Name.Variable */
+.highlight-ipynb .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight-ipynb .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight-ipynb .mf { color: #666666 } /* Literal.Number.Float */
+.highlight-ipynb .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight-ipynb .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight-ipynb .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight-ipynb .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight-ipynb .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight-ipynb .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight-ipynb .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight-ipynb .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight-ipynb .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight-ipynb .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight-ipynb .sx { color: #008000 } /* Literal.String.Other */
+.highlight-ipynb .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight-ipynb .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight-ipynb .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight-ipynb .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight-ipynb .vc { color: #19177C } /* Name.Variable.Class */
+.highlight-ipynb .vg { color: #19177C } /* Name.Variable.Global */
+.highlight-ipynb .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight-ipynb .il { color: #666666 } /* Literal.Number.Integer.Long */
+</style>
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+div.entry-content {
+  overflow: visible;
+  padding: 8px;
+}
+.input_area {
+  padding: 0.2em;
+}
+
+a.heading-anchor {
+ white-space: normal;
+}
+
+.rendered_html
+code {
+ font-size: .8em;
+}
+
+pre.ipynb {
+  color: black;
+  background: #f7f7f7;
+  border: none;
+  box-shadow: none;
+  margin-bottom: 0;
+  padding: 0;
+  margin: 0px;
+  font-size: 13px;
+}
+
+/* remove the prompt div from text cells */
+div.text_cell .prompt {
+    display: none;
+}
+
+/* remove horizontal padding from text cells, */
+/* so it aligns with outer body text */
+div.text_cell_render {
+    padding: 0.5em 0em;
+}
+
+img.anim_icon{padding:0; border:0; vertical-align:middle; -webkit-box-shadow:none; -box-shadow:none}
+
+div.collapseheader {
+    width=100%;
+    padding: 2px;
+    cursor: pointer;
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+</style>
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+<script type="text/javascript">
+init_mathjax = function() {
+    if (window.MathJax) {
+        // MathJax loaded
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+            },
+            displayAlign: 'left', // Change this to 'center' to center equations.
+            "HTML-CSS": {
+                styles: {'.MathJax_Display': {"margin": 0}}
+            }
+        });
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    }
+}
+init_mathjax();
+</script>
+    <link href="/assets/favicon.ico" rel="icon">
+
+<link rel="canonical" href="/instagram-python-migrationbi-ji.html">
+
+        <meta name="author" content="Charlie Hu" />
+        <meta name="keywords" content="Async" />
+        <meta name="description" content="Description Lisa Guo和Hui Ding在 Pycon2017 的keynote分享了Instagram成功从python2.7、Django1.3升级到python3.6、Django1.8的经历。 在Talk Python fm之前的episode中，我惊喜地发现了有一期Michael Kennedy邀请到了David Beazley。在哪一期节目中他们畅谈了python concurrency相关及David在Github上的async项目Curio。 Instagram 很难想象Instagram能在保持产品功能高速迭代的同时完成从python2.7版本到3.5版本的跨越。他们在版本更新途中在代码层面遇到的主要有以下几类问题。 Unicode Python3最显著的改动就是严格化了UNICODE/STR/BYTE的转换。Instagram编写了一些功能函数（ensure_binary,ensure_str,ensure_text）来确保之前代码里的输入和输出符合python3的标准。 Data format incompatible 在Instagram中经常用到了pickle模块。该模块在python2和3中的区别是：python3的pickle的协议最高版本提升到了4。他们发现即使将协议版本hardcode到python2里的2，由于版本2和3的同时存在，他们之间的相互序列化的转化也会存在问题。因此他们将不同版本的pickle结果隔离 …" />
+
+        <meta property="og:site_name" content="Tower of Babel" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Instagram python migration笔记"/>
+        <meta property="og:url" content="/instagram-python-migrationbi-ji.html"/>
+        <meta property="og:description" content="Description Lisa Guo和Hui Ding在 Pycon2017 的keynote分享了Instagram成功从python2.7、Django1.3升级到python3.6、Django1.8的经历。 在Talk Python fm之前的episode中，我惊喜地发现了有一期Michael Kennedy邀请到了David Beazley。在哪一期节目中他们畅谈了python concurrency相关及David在Github上的async项目Curio。 Instagram 很难想象Instagram能在保持产品功能高速迭代的同时完成从python2.7版本到3.5版本的跨越。他们在版本更新途中在代码层面遇到的主要有以下几类问题。 Unicode Python3最显著的改动就是严格化了UNICODE/STR/BYTE的转换。Instagram编写了一些功能函数（ensure_binary,ensure_str,ensure_text）来确保之前代码里的输入和输出符合python3的标准。 Data format incompatible 在Instagram中经常用到了pickle模块。该模块在python2和3中的区别是：python3的pickle的协议最高版本提升到了4。他们发现即使将协议版本hardcode到python2里的2，由于版本2和3的同时存在，他们之间的相互序列化的转化也会存在问题。因此他们将不同版本的pickle结果隔离 …"/>
+        <meta property="article:published_time" content="2017-11-11" />
+            <meta property="article:section" content="Python" />
+            <meta property="article:tag" content="Async" />
+            <meta property="article:author" content="Charlie Hu" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.flatly.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link href="/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+        <link href="/static/css/custom.css" rel="stylesheet">
+
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+Tower of Babel            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                         <li><a href="/pages/about.html">
+                             About
+                          </a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><span>
+                <form class="navbar-search" action="/search.html">
+                  <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
+                </form></span>
+              </li>
+              <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+            <ol class="breadcrumb">
+                <li><a href="" title="Tower of Babel"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="/category/python.html" title="Python">Python</a></li>
+                <li class="active">Instagram python migration笔记</li>
+            </ol>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/instagram-python-migrationbi-ji.html"
+                       rel="bookmark"
+                       title="Permalink to Instagram python migration笔记">
+                        Instagram python migration笔记
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-11-11T00:00:00+08:00"> Sat 11 November 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/async.html">Async</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <h3>Description</h3>
+<p>Lisa Guo和Hui Ding在 <strong>Pycon2017</strong> 的<a href="https://www.youtube.com/watch?v=66XoCk79kjM">keynote</a>分享了Instagram成功从python2.7、Django1.3升级到python3.6、Django1.8的经历。</p>
+<p>在Talk Python fm之前的episode中，我惊喜地发现了有一期Michael Kennedy邀请到了<a href="https://talkpython.fm/episodes/transcript/107/python-concurrency-with-curio">David Beazley</a>。在哪一期节目中他们畅谈了python concurrency相关及David在Github上的async项目<a href="https://github.com/dabeaz/curio">Curio</a>。</p>
+<h3>Instagram</h3>
+<p>很难想象Instagram能在保持产品功能高速迭代的同时完成从python2.7版本到3.5版本的跨越。他们在版本更新途中在代码层面遇到的主要有以下几类问题。</p>
+<h4>Unicode</h4>
+<p>Python3最显著的改动就是严格化了UNICODE/STR/BYTE的转换。Instagram编写了一些功能函数（<code>ensure_binary</code>,<code>ensure_str</code>,<code>ensure_text</code>）来确保之前代码里的输入和输出符合python3的标准。</p>
+<h4>Data format incompatible</h4>
+<p>在Instagram中经常用到了<code>pickle</code>模块。该模块在python2和3中的区别是：python3的pickle的协议最高版本提升到了4。他们发现即使将协议版本hardcode到python2里的2，由于版本2和3的同时存在，他们之间的相互序列化的转化也会存在问题。因此他们将不同版本的pickle结果隔离，做到自取自拿。</p>
+<h4>Iterator</h4>
+<p>Python3中的许多函数的返回值被修改成了迭代器（<code>map</code>,<code>filter</code>,<code>dict.item</code>），迭代器使得Instagram中那些会遍历两遍这些函数返回结果的代码全部失效。这其实非常难以调试，因此他们首先将所有该类函数的返回值用<code>list</code>方法还原成列表，然后将优化只迭代一遍的实例。</p>
+<h4>Dictionary ordering</h4>
+<p><a href="https://motor-taxi-master-rider.github.io/python/2017/11/05/note-for-async-dictionary-machine-learing">之前的一篇note</a>也讲过，由于python字典的版本改动，字典中的返回值将大大不同。</p>
+<div class="highlight"><pre><span></span><span class="n">testdict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="mi">3</span><span class="p">}</span>
+<span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">testdict</span><span class="p">)</span>
+</pre></div>
+
+
+<p>各版本的返回结果大致为：</p>
+<div class="highlight"><pre><span></span><span class="n">python2</span><span class="p">:</span> <span class="err">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="mi">3</span><span class="err">}</span> <span class="p">(</span><span class="n">hardcode</span> <span class="n">hashcode</span><span class="p">)</span>
+
+<span class="n">python3</span><span class="p">.</span><span class="mi">5</span><span class="p">.</span><span class="mi">1</span><span class="p">:</span> <span class="p">(</span><span class="n">random</span><span class="p">)</span>
+
+<span class="n">python3</span><span class="p">.</span><span class="mi">6</span><span class="err">：{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="mi">3</span><span class="err">}</span> <span class="p">(</span><span class="n">keep</span> <span class="k">order</span><span class="p">)</span>
+</pre></div>
+
+
+<p>为了追求兼容性，他们对<code>json.dumps</code>函数加了参数：</p>
+<div class="highlight"><pre><span></span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">testdict</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+
+<p>另外他们也提到了以下的一个小的Unicode的改动将Instagram的性能提升了12%：</p>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">uwsgi</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;optimize_men&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;True&#39;</span>
+    <span class="n">optimize_men</span><span class="p">()</span>
+</pre></div>
+
+
+<p>to</p>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">uwsgi</span><span class="o">.</span><span class="n">opt</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;optimize_men&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="o">==</span> <span class="sa">b</span><span class="s1">&#39;True&#39;</span>
+    <span class="n">optimize_men</span><span class="p">()</span>
+</pre></div>
+
+
+<p>未来他们计划使用了python3完善好的特性type hints和mypy来提高他们codebase的健壮性，使用asyncio库用异步来处理之前的一些线程操作。</p>
+<h3>Curio</h3>
+<p>David Beazley一直是一位我非常喜欢的python授业者，同时也是python cookbook的作者。他在这次访谈中提到了在python中实现async的另一种思路，也就是他写<code>Curio</code>库的目的。</p>
+<p>在以教授python为业之前，他是教计算机科学系操作系统课程的教授。在课上他会告诉学生们如何用C语言来写操作系统的内核，内核做的事情主要就是多任务管理和IO，这和<code>asyncio</code>库所做的非常相似。既然<code>asyncio</code>库能将<code>callback</code>,<code>futures</code>,<code>coroutine</code>神奇地组合成一个奇妙的任务管理系统，为什么我们不能模仿系统内核也去实现一个任务管理系统呢？本身async编程也是一个焕发第二春的旧想法。</p>
+<p>David也提到，由于python3.5中<code>async/await</code>关键字的加入，他之前的许多演讲和教程都有些过时了。这使他觉得，我们或许不该关注aync底层到底是如何实现的：无论是用<code>callback</code>还是用其他技术，而是关注我们该如何利用async编程或者说是async应该在的的领域。</p>
+<p>可能现在async最大的问题就是它的传染性，一旦你代码中的一部分变成async，拿它所对应的整个代码生态链也必须是async的，否则小小的一段同步代码就会阻塞整个程序。虽然没有特别夸张，但是对于线程编程来说，这一点确实是值得考虑的。虽然asyncio库提供了一个函数作为对async中线程的支持，但是并没有将线程纳入<code>eventloop</code>处理的范畴之中，<code>coroutine</code>也不是线程安全的。David的设想就是在不远的将来能将线程和async统一结合起来，使得<code>eventloop</code>能同时兼任地处理协程和线程，这样对async的未来定是大有裨益。事实上David在<code>Curio</code>中已经完成了一个统一队列的组件（universal queue object）作为线程和协程的交流媒介。</p>
+<h3>Additional</h3>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="/python-asyncdictionarymachine-learning-moudlesbi-ji.html">Python async，dictionary，machine learning moudles笔记</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<div id="aboutme">
+        <p>
+            <img width="100%" class="img-thumbnail" src="/assets/img/avatar.png"/>
+        </p>
+    <p>
+      <strong>About Charlie Hu</strong><br/>
+        Software engineer, Geeker. Here I mostly blog about Python, algorithm and how programing can be interesting.
+    </p>
+</div><!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://github.com/Motor-taxi-master-rider"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+    <li class="list-group-item"><a href="https://weibo.com/u/3025131943"><i class="fa fa-weibo fa-lg"></i> weibo</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Recent Posts -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
+  <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/translatezhang-wo-pythonbing-fa-rang-ni-geng-kuai-xiang-yong-wu-can.html">[Translate]掌握Python并发让你更快享用午餐</a></li>
+    <li class="list-group-item"><a href="/translatecong-xin-shou-dao-zhuan-jia-ru-he-yong-pythonbian-xie-pei-zhi-wen-jian.html">[Translate]从新手到专家：如何用Python编写配置文件</a></li>
+    <li class="list-group-item"><a href="/jian-dan-de-wen-ben-jie-xi-ji-suan-qi-v2.html">简单的文本解析计算器 v2</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Recent Posts -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <ul class="list-group list-inline tagcloud" id="tags">
+    <li class="list-group-item tag-3">
+      <a href="/tag/algorithms.html">Algorithms</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/bit_manipulation.html">Bit_manipulation</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/coroutine.html">Coroutine</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="/tag/leetcode.html">Leetcode</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/math.html">Math</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/python.html">Python</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/stack.html">Stack</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="/tag/string.html">String</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/translate.html">Translate</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/tree.html">Tree</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/Github -->
+<li class="list-group-item">
+  <h4><i class="fa fa-github fa-lg"></i><span class="icon-label">GitHub Repos</span></h4>
+  <div id="gh_repos">
+    <p class="list-group-item">Status updating...</p>
+  </div>
+  <a href="https://github.com/Motor-taxi-master-rider">@Motor-taxi-master-rider</a> on GitHub
+</li>
+<!-- End Sidebar/Github -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="http://getpelican.com/" target="_blank">Pelican</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://python.org/" target="_blank">Python.org</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+    <script src="/static/js/custom.js"></script>
+
+
+<!-- GitHub JS Code -->
+<script type="text/javascript">
+$(document).ready(function () {
+  if (!window.jXHR) {
+    var jxhr = document.createElement('script');
+    jxhr.type = 'text/javascript';
+    jxhr.src = '/theme/js/jXHR.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(jxhr, s);
+  }
+
+  github.showRepos({
+    user: 'Motor-taxi-master-rider',
+    count: 3,
+    skip_forks: true,
+    target: '#gh_repos'
+  });
+});
+</script>
+<script src="/theme/js/github.js" type="text/javascript"></script>
+<!-- End GitHub JS Code -->
+
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+    $("div.collapseheader").click(function () {
+    $header = $(this).children("span").first();
+    $codearea = $(this).children(".input_area");
+    console.log($(this).children());
+    $codearea.slideToggle(500, function () {
+        $header.text(function () {
+            return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+        });
+    });
+});
+});
+</script>
+</body>
+</html>

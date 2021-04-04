@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>[Translate] Python库介绍：使用Lux进行智能可视数据发现 - Tower of Babel</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+<style type="text/css">
+
+/*some stuff for output/input prompts*/
+div.cell{border:1px solid transparent;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch}div.cell.selected{border-radius:4px;border:thin #ababab solid}
+div.cell.edit_mode{border-radius:4px;border:thin #008000 solid}
+div.cell{width:100%;padding:5px 5px 5px 0;margin:0;outline:none}
+div.prompt{min-width:11ex;padding:.4em;margin:0;font-family:monospace;text-align:right;line-height:1.21429em}
+@media (max-width:480px){div.prompt{text-align:left}}div.inner_cell{display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch;-webkit-box-flex:1;-moz-box-flex:1;box-flex:1;flex:1}
+div.input_area{border:1px solid #cfcfcf;border-radius:4px;background:#f7f7f7;line-height:1.21429em}
+div.prompt:empty{padding-top:0;padding-bottom:0}
+div.input{page-break-inside:avoid;display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:horizontal;-moz-box-align:stretch;display:box;box-orient:horizontal;box-align:stretch;}
+div.inner_cell{width:90%;}
+div.input_area{border:1px solid #cfcfcf;border-radius:4px;background:#f7f7f7;}
+div.input_prompt{color:navy;border-top:1px solid transparent;}
+div.output_wrapper{margin-top:5px;position:relative;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;width:100%;}
+div.output_scroll{height:24em;width:100%;overflow:auto;border-radius:4px;-webkit-box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);-moz-box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);}
+div.output_collapsed{margin:0px;padding:0px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;width:100%;}
+div.out_prompt_overlay{height:100%;padding:0px 0.4em;position:absolute;border-radius:4px;}
+div.out_prompt_overlay:hover{-webkit-box-shadow:inset 0 0 1px #000000;-moz-box-shadow:inset 0 0 1px #000000;box-shadow:inset 0 0 1px #000000;background:rgba(240, 240, 240, 0.5);}
+div.output_prompt{color:darkred;}
+
+a.anchor-link:link{text-decoration:none;padding:0px 20px;visibility:hidden;}
+h1:hover .anchor-link,h2:hover .anchor-link,h3:hover .anchor-link,h4:hover .anchor-link,h5:hover .anchor-link,h6:hover .anchor-link{visibility:visible;}
+/* end stuff for output/input prompts*/
+
+
+.highlight-ipynb .hll { background-color: #ffffcc }
+.highlight-ipynb  { background: #f8f8f8; }
+.highlight-ipynb .c { color: #408080; font-style: italic } /* Comment */
+.highlight-ipynb .err { border: 1px solid #FF0000 } /* Error */
+.highlight-ipynb .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight-ipynb .o { color: #666666 } /* Operator */
+.highlight-ipynb .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight-ipynb .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight-ipynb .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight-ipynb .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight-ipynb .gd { color: #A00000 } /* Generic.Deleted */
+.highlight-ipynb .ge { font-style: italic } /* Generic.Emph */
+.highlight-ipynb .gr { color: #FF0000 } /* Generic.Error */
+.highlight-ipynb .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight-ipynb .gi { color: #00A000 } /* Generic.Inserted */
+.highlight-ipynb .go { color: #888888 } /* Generic.Output */
+.highlight-ipynb .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight-ipynb .gs { font-weight: bold } /* Generic.Strong */
+.highlight-ipynb .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight-ipynb .gt { color: #0044DD } /* Generic.Traceback */
+.highlight-ipynb .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight-ipynb .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight-ipynb .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight-ipynb .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight-ipynb .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight-ipynb .kt { color: #B00040 } /* Keyword.Type */
+.highlight-ipynb .m { color: #666666 } /* Literal.Number */
+.highlight-ipynb .s { color: #BA2121 } /* Literal.String */
+.highlight-ipynb .na { color: #7D9029 } /* Name.Attribute */
+.highlight-ipynb .nb { color: #008000 } /* Name.Builtin */
+.highlight-ipynb .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight-ipynb .no { color: #880000 } /* Name.Constant */
+.highlight-ipynb .nd { color: #AA22FF } /* Name.Decorator */
+.highlight-ipynb .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight-ipynb .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight-ipynb .nf { color: #0000FF } /* Name.Function */
+.highlight-ipynb .nl { color: #A0A000 } /* Name.Label */
+.highlight-ipynb .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight-ipynb .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight-ipynb .nv { color: #19177C } /* Name.Variable */
+.highlight-ipynb .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight-ipynb .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight-ipynb .mf { color: #666666 } /* Literal.Number.Float */
+.highlight-ipynb .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight-ipynb .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight-ipynb .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight-ipynb .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight-ipynb .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight-ipynb .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight-ipynb .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight-ipynb .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight-ipynb .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight-ipynb .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight-ipynb .sx { color: #008000 } /* Literal.String.Other */
+.highlight-ipynb .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight-ipynb .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight-ipynb .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight-ipynb .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight-ipynb .vc { color: #19177C } /* Name.Variable.Class */
+.highlight-ipynb .vg { color: #19177C } /* Name.Variable.Global */
+.highlight-ipynb .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight-ipynb .il { color: #666666 } /* Literal.Number.Integer.Long */
+</style>
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+div.entry-content {
+  overflow: visible;
+  padding: 8px;
+}
+.input_area {
+  padding: 0.2em;
+}
+
+a.heading-anchor {
+ white-space: normal;
+}
+
+.rendered_html
+code {
+ font-size: .8em;
+}
+
+pre.ipynb {
+  color: black;
+  background: #f7f7f7;
+  border: none;
+  box-shadow: none;
+  margin-bottom: 0;
+  padding: 0;
+  margin: 0px;
+  font-size: 13px;
+}
+
+/* remove the prompt div from text cells */
+div.text_cell .prompt {
+    display: none;
+}
+
+/* remove horizontal padding from text cells, */
+/* so it aligns with outer body text */
+div.text_cell_render {
+    padding: 0.5em 0em;
+}
+
+img.anim_icon{padding:0; border:0; vertical-align:middle; -webkit-box-shadow:none; -box-shadow:none}
+
+div.collapseheader {
+    width=100%;
+    padding: 2px;
+    cursor: pointer;
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+</style>
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+<script type="text/javascript">
+init_mathjax = function() {
+    if (window.MathJax) {
+        // MathJax loaded
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+            },
+            displayAlign: 'left', // Change this to 'center' to center equations.
+            "HTML-CSS": {
+                styles: {'.MathJax_Display': {"margin": 0}}
+            }
+        });
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    }
+}
+init_mathjax();
+</script>
+    <link href="/assets/favicon.ico" rel="icon">
+
+<link rel="canonical" href="/translate-pythonku-jie-shao-shi-yong-luxjin-xing-zhi-neng-ke-shi-shu-ju-fa-xian.html">
+
+        <meta name="author" content="Charlie Hu" />
+        <meta name="keywords" content="Translate,Python,Data Science" />
+        <meta name="description" content="原作者：Parul Pandey 探索性的数据分析是一种态度，是一种灵活性，是一种去寻找那些我们认为不存在的事物以及我们相信存在的事物的意愿。— John W Tukey 在数据科学领域，数据可视化的重要性和必要性并没有得到足够的重视。 一张图片胜过千言万语，这句话适用于任何与数据相关的项目的生命周期中。 然而很多时候，实现这些可视化的工具往往不够智能。 事实上这意味着，尽管我们有数以百计的可视化库，但其中绝大多数都要求用户自己编写大量代码才能绘制简单图形。 这会让人们的关注焦点转移到可视化的内部机制上，而不是真正重要的东西：数据内的关系上。 如果说现在有一种工具可以通过向用户推荐相关的可视化建议来简化数据探索的过程呢？一个名为Lux💡的新库横空出世，它正是为解决这些问题而开发的。 当前高效数据探索面临的挑战 如今，数据分析师可以使用多种工具进行数据探索。 尽管交互式Jupyter笔记本允许人们在其之上迭代实验，还有一些强大的BI工具，如Power BI和Tableau，让普通人仅需单击遍可实现高级别的数据探索，可即便有这些功能强大的工具问世，阻碍数据探索流程的挑战仍然存在。 当我们从在脑中分析问题转向在实际探寻可行的解决方案时尤其如此。 让我们看一下数据分析师当前面临的三个主要的、可识别的障碍： 代码与交互工具之间的脱节 虽然需要编程的工具提供了灵活性，但是编程经验较少的人通常不会使用它们。 另一方面，虽然点击交互的工具易于使用，但它们的灵活性有限且难以自定义。 绘图需要大量代码和先决条件 其次，需要创建可视化时，我们首先需要考虑的是所有的规格应当如何被可视化。 之后我们需要将这些规格的细节信息转换为代码。 上图显示了在两个流行的python库 …" />
+
+        <meta property="og:site_name" content="Tower of Babel" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="[Translate] Python库介绍：使用Lux进行智能可视数据发现"/>
+        <meta property="og:url" content="/translate-pythonku-jie-shao-shi-yong-luxjin-xing-zhi-neng-ke-shi-shu-ju-fa-xian.html"/>
+        <meta property="og:description" content="原作者：Parul Pandey 探索性的数据分析是一种态度，是一种灵活性，是一种去寻找那些我们认为不存在的事物以及我们相信存在的事物的意愿。— John W Tukey 在数据科学领域，数据可视化的重要性和必要性并没有得到足够的重视。 一张图片胜过千言万语，这句话适用于任何与数据相关的项目的生命周期中。 然而很多时候，实现这些可视化的工具往往不够智能。 事实上这意味着，尽管我们有数以百计的可视化库，但其中绝大多数都要求用户自己编写大量代码才能绘制简单图形。 这会让人们的关注焦点转移到可视化的内部机制上，而不是真正重要的东西：数据内的关系上。 如果说现在有一种工具可以通过向用户推荐相关的可视化建议来简化数据探索的过程呢？一个名为Lux💡的新库横空出世，它正是为解决这些问题而开发的。 当前高效数据探索面临的挑战 如今，数据分析师可以使用多种工具进行数据探索。 尽管交互式Jupyter笔记本允许人们在其之上迭代实验，还有一些强大的BI工具，如Power BI和Tableau，让普通人仅需单击遍可实现高级别的数据探索，可即便有这些功能强大的工具问世，阻碍数据探索流程的挑战仍然存在。 当我们从在脑中分析问题转向在实际探寻可行的解决方案时尤其如此。 让我们看一下数据分析师当前面临的三个主要的、可识别的障碍： 代码与交互工具之间的脱节 虽然需要编程的工具提供了灵活性，但是编程经验较少的人通常不会使用它们。 另一方面，虽然点击交互的工具易于使用，但它们的灵活性有限且难以自定义。 绘图需要大量代码和先决条件 其次，需要创建可视化时，我们首先需要考虑的是所有的规格应当如何被可视化。 之后我们需要将这些规格的细节信息转换为代码。 上图显示了在两个流行的python库 …"/>
+        <meta property="article:published_time" content="2021-01-23" />
+            <meta property="article:section" content="posts" />
+            <meta property="article:tag" content="Translate" />
+            <meta property="article:tag" content="Python" />
+            <meta property="article:tag" content="Data Science" />
+            <meta property="article:author" content="Charlie Hu" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.flatly.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link href="/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+        <link href="/static/css/custom.css" rel="stylesheet">
+
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+Tower of Babel            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                         <li><a href="/pages/about.html">
+                             About
+                          </a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><span>
+                <form class="navbar-search" action="/search.html">
+                  <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
+                </form></span>
+              </li>
+              <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+            <ol class="breadcrumb">
+                <li><a href="" title="Tower of Babel"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="/category/posts.html" title="posts">posts</a></li>
+                <li class="active">[Translate] Python库介绍：使用Lux进行智能可视数据发现</li>
+            </ol>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/translate-pythonku-jie-shao-shi-yong-luxjin-xing-zhi-neng-ke-shi-shu-ju-fa-xian.html"
+                       rel="bookmark"
+                       title="Permalink to [Translate] Python库介绍：使用Lux进行智能可视数据发现">
+                        [Translate] Python库介绍：使用Lux进行智能可视数据发现
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2021-01-23T00:00:00+08:00"> Sat 23 January 2021</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/translate.html">Translate</a>
+        /
+	<a href="/tag/python.html">Python</a>
+        /
+	<a href="/tag/data-science.html">Data Science</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <blockquote>
+<p>原作者：<a href="https://towardsdatascience.com/intelligent-visual-data-discovery-with-lux-a-python-library-dc36a5742b2f">Parul Pandey</a></p>
+<p>探索性的数据分析是一种态度，是一种灵活性，是一种去寻找那些我们认为不存在的事物以及我们相信存在的事物的意愿。— John W Tukey</p>
+</blockquote>
+<p>在数据科学领域，数据可视化的重要性和必要性并没有得到足够的重视。 一张图片胜过千言万语，这句话适用于任何与数据相关的项目的生命周期中。 然而很多时候，实现这些可视化的工具往往不够智能。 事实上这意味着，尽管我们有数以百计的可视化库，但其中绝大多数都要求用户自己编写大量代码才能绘制简单图形。 这会让人们的关注焦点转移到可视化的内部机制上，而不是真正重要的东西：数据内的关系上。
+如果说现在有一种工具可以通过向用户推荐相关的可视化建议来简化数据探索的过程呢？一个名为Lux💡的新库横空出世，它正是为解决这些问题而开发的。</p>
+<h2>当前高效数据探索面临的挑战</h2>
+<p>如今，数据分析师可以使用多种工具进行数据探索。 尽管交互式Jupyter笔记本允许人们在其之上迭代实验，还有一些强大的BI工具，如Power BI和Tableau，让普通人仅需单击遍可实现高级别的数据探索，可即便有这些功能强大的工具问世，阻碍数据探索流程的挑战仍然存在。 当我们从在脑中分析问题转向在实际探寻可行的解决方案时尤其如此。 让我们看一下数据分析师当前面临的三个主要的、可识别的障碍：</p>
+<h3>代码与交互工具之间的脱节</h3>
+<p><img alt="" src="https://miro.medium.com/max/700/1*eICf9YDCGUkAj7ztbJfDxQ.png"></p>
+<p>虽然需要编程的工具提供了灵活性，但是编程经验较少的人通常不会使用它们。 另一方面，虽然点击交互的工具易于使用，但它们的灵活性有限且难以自定义。</p>
+<h3>绘图需要大量代码和先决条件</h3>
+<p><img alt="" src="https://miro.medium.com/max/700/1*LhV8mxQeLVZpTnbuDkexaA.png"></p>
+<p>其次，需要创建可视化时，我们首先需要考虑的是所有的规格应当如何被可视化。 之后我们需要将这些规格的细节信息转换为代码。 上图显示了在两个流行的python库（Matplotlib和Plotly）中，仅仅是为了输出一个柱状图就需要大量的的代码。 这种情况同样会影响数据浏览，尤其是当用户对所要查找的内容只有模糊的概念时。</p>
+<h3>试错是一个即繁琐又令人窒息的过程</h3>
+<p><img alt="" src="https://miro.medium.com/max/700/1*gEYLRK3qTEntQbyQrQ57Tw.png"></p>
+<p>每次EDA（Exploratory data analysis）都需要不断的反复试验。 用户必须先试验多种可视化效果，然后才能确定最终的可视化效果。 分析人员有可能会因此错过数据集中的关键信息。 另一个常见的问题是分析人员可能并不知道应该对数据执行哪些操作才能获得所需的关键信息，并且他们往往会迷失方向，无法分析出有效的结论。</p>
+<blockquote>
+<p>在人们分析和思考他们的数据与实际如何处理数据才能获得有价值的信息之间存在明显的鸿沟。 Lux正是解决这些可能的鸿沟一步。</p>
+</blockquote>
+<h2>Lux</h2>
+<p><img alt="" src="https://miro.medium.com/max/700/1*qJUn-Hz73MDAIbbocGth8A.png"></p>
+<p>Lux是一个旨在通过自动执行某些方面的数据探查，来帮助用户探索和发现他们数据中的有意义的见解的Python库。它试图弥合代码与交互式界面之间的鸿沟。Lux以一种表意语言的方式，使得在用户仅仅给出一个模糊的分析意图的情况下，它也能自动推断出其中未指定的细节并决定适当的可视化映射。</p>
+<blockquote>
+<p>Lux的目标是，即使数据科学家对还没想好他们需要什么有用的信息，他们也可以更轻松地探索数据。</p>
+</blockquote>
+<p><img alt="" src="https://miro.medium.com/max/700/1*4EVGIetnQ6Gdffb7CVN70g.png"></p>
+<ul>
+<li>Lux将交互式可视化的功能直接集成进了Jupyter notebooks，以弥合代码与交互式界面之间的鸿沟。</li>
+<li>Lux使用强大的表意语言，允许用户指定其在分析中感兴趣的部分以降低编程成本。</li>
+<li>Lux会自动向用户提供数据的可视化建议。</li>
+</ul>
+<p>现在，我们对Lux怎样参与用户探索数据时遇到的常见问题有了一个清晰的认识。 现在让我们来看一个使用Lux库的示例。 为了提供一个快速演示，我将使用一个简单的案例。 在你对这个例子有了清晰地认识之后，便可以将其与你选择的数据集结合使用。</p>
+<h2>案例研究：分析Palmer Penguins🐧数据集</h2>
+<p><img alt="" src="https://miro.medium.com/max/700/1*KU-V8tWWQU3nDtw12-bQ_g.png"></p>
+<p>Palmer企鹅数据集目前已成为数据科学界的新宠，它是被过度使用的Iris数据集的直接替代品。 该数据集包含344个企鹅的数据。 数据由<a href="https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php">Kristen Gorman</a>博士和南极洲<a href="https://pal.lternet.edu/">Palmer Station</a>站收集并提供。 首先让我们安装并导入Lux库。你可以通过<a href="https://mybinder.org/v2/gh/lux-org/lux-binder/master?urlpath=tree/demo/penguin_demo.ipynb">Binder</a>在Jupyter notbook中继续阅读本教程。</p>
+<h3>安装</h3>
+<div class="highlight"><pre><span></span>pip install lux-api
+
+<span class="c1"># 激活Jupyter notebook扩展</span>
+jupyter nbextension install --py luxwidget
+jupyter nbextension <span class="nb">enable</span> --py luxwidget
+
+<span class="c1"># 激活Jupyter lab拓展</span>
+jupyter labextension install @jupyter-widgets/jupyterlab-manager
+jupyter labextension install luxwidget
+</pre></div>
+
+
+<p>有关如何将Lux与SQL引擎配合使用的更多详细信息，请阅读<a href="https://lux-api.readthedocs.io/en/latest/source/getting_started/installation.html">文档</a>，该文档非常详实并且包含许多动手示例。</p>
+<h3>导入必要的库与数据集</h3>
+<p>一旦Lux库安装完毕，我们就可以导入数据集了。</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">lux</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;penguins_size.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+
+<p><img alt="" src="https://miro.medium.com/max/700/1*xjB_gOhZxA5VByQmPT4SAA.png"></p>
+<p>Lux的一个不错的点是它可以与Pandas框架一起使用并且无需对现有的格式进行任何修改。 比如说，如果你想删除任何行或列，Lux的建议会根据更新的dataframe生成。Pandas中的删除列，导入CSV等优秀的功能也被保留。 接下来让我们来概览一下数据集。</p>
+<div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+
+
+<p><img alt="" src="https://miro.medium.com/max/700/1*IF0BbBK7EbFGYqmWYiqmjA.png"></p>
+<p>数据集里有些空值，让我们摆脱它们。</p>
+<div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+</pre></div>
+
+
+<p>现在我们的数据已被加载至内存，接下来看Lux如何为我们简化EDA的流程。</p>
+<h3>使用Lux进行EDA：支持可视化dataframe工作流</h3>
+<p><img alt="" src="https://miro.medium.com/max/700/1*bq90-3tyPzRfiX_3BljW3g.png"></p>
+<div class="highlight"><pre><span></span><span class="n">df</span>
+</pre></div>
+
+
+<p>当dataframe被打印出来时，我们看到的是Pandas默认的表格格式。我们可以点击切换来获得由Lux自动生成的一组可视化建议。</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*jllD7z3O8Dzp6ESEmYB09A.gif"></p>
+<p>Lux中的建议组织在三个不同的选项卡中，分别表示用户可以在其探索过程中可以采取的下一步。
+<strong>相关性选项卡：</strong> 显示定量属性之间的成对关系，按最高相关至最低相关排序。</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*XeOuvZumJbmGv06hbI0wTw.png"></p>
+<p>我们可以看到企鹅鳍的长度与体重呈正相关。 企鹅嘴峰(culmen)的长度和深度也显现出一些有趣的模式，它们显然存在着某种负相关。 具体来说，“嘴峰”就是鸟类的上脊。</p>
+<p><img alt="" src="https://miro.medium.com/max/209/1*pG2QBvNZnw6-YvHj_S2P-Q.png"></p>
+<p><strong>分布选项卡:</strong> 显示一组单变量分布，按偏度从大到小排序。</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*CNwqZzOkDcT-E_AgsVgpAA.png"></p>
+<p><strong>出现率选项卡:</strong> 显示了一组从数据集中生成的条形图。</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*Un_ayLAcPOzWeYJbDoeV3g.png"></p>
+<p>此选项卡展示了三种不同的企鹅 - <strong>Adelie</strong>，<strong>Chinstrap</strong>和<strong>Gentoo</strong>。 还有三个不同的岛屿，分别是<strong>Torgersen</strong>，<strong>Biscoe</strong>和<strong>Dream</strong>。 被包含在数据集中雄性和雌性出现率也能在图表中清楚的看到。</p>
+<h4>基于意图的建议</h4>
+<p>除了基本的推荐功能外，我们还可以指定分析意图。 比方说，我们想找出嘴峰长度随企鹅物种变化的模式。 我们可以在此处将意图设置为<code>['culmen_length_mm'，'species']</code>。再次打印数据框时，就可以看到推荐已经编程与我们指定的意图相关的内容。</p>
+<div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">intent</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;culmen_length_mm&#39;</span><span class="p">,</span><span class="s1">&#39;species&#39;</span><span class="p">]</span>
+<span class="n">df</span>
+</pre></div>
+
+
+<p>在下图的左侧，我们看到的是与所选属性相对应的<code>Current Visualization</code>。 右侧则是<code>Enhace</code>：即在向当前选择中添加属性时会发生什么。 还有<code>Filter</code>选项卡，允许在固定选择的变量的同时添加过滤器。</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*u83PBMDZX2ft8tjiLgHY4w.gif"></p>
+<p>如果我们仔细观察物种内部的相关性，则会发现嘴峰长度和深度是正相关的，与之前的推测正相反。 这是一个典型的<a href="[https://en.wikipedia.org/wiki/Simpson%27s_paradox](https://en.wikipedia.org/wiki/Simpson's_paradox)">辛普森悖论</a>的例子。</p>
+<p><img alt="" src="https://miro.medium.com/max/282/1*bN1pTPMGUB8g7EpQurQbsQ.png"></p>
+<p>最后，通过比较鳍状肢的长度与嘴峰的长度，我们可以很清楚地将这三个物种分开。</p>
+<p><img alt="" src="https://miro.medium.com/max/287/1*1VeJ6DCycXM67Eg6l41vdg.png"></p>
+<h4>用插件导出可视化结果</h4>
+<p>Lux使得导出和分享生成的可视化结果变得异常简单。这些可视化图表可以以如下方式被导出成静态的HTML文件：</p>
+<div class="highlight"><pre><span></span><span class="err">df.save_as_html(&#39;file.html&#39;)</span>
+</pre></div>
+
+
+<p>我们还可以通过<code>recommendation</code>属性获得为dataframe生成的<a href="https://lux-api.readthedocs.io/en/latest/source/guide/export.html">建议集</a>。 它的返回格式为字典，由推荐类别的名称构成字典的关键字。</p>
+<div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">recommendation</span>
+</pre></div>
+
+
+<p><img alt="" src="https://miro.medium.com/max/700/1*bN7n7w7C0s_ayuj6tYV2ww.png"></p>
+<h4>以代码的格式导出可视化结果</h4>
+<p>我们不仅可以将可视化导出为HTML，还可以将其导出为代码。 下面的GIF显示了如何在<strong>发生率选项卡</strong>中查看第一个条形图的代码。 之后我们可以将可视化结果导出成代码至<a href="https://altair-viz.github.io/">Altair</a>中，以便进行进一步编辑或作为<a href="https://vega.github.io/vega-lite/">Vega-Lite</a>规范。 你可以在<a href="https://lux-api.readthedocs.io/en/latest/source/guide/export.html">这个文档中</a>找到更多详细信息。</p>
+<p><img alt="" src="https://miro.medium.com/max/700/1*g7Che5qL3Ttv-6wCY5cdCg.gif"></p>
+<h2>相关资源和练习</h2>
+<p>上面的一系列演示只是一个简单的入门教程。 <a href="https://github.com/lux-org/lux">Lux的Github</a>中包含许多资源以及有关如何使用Lux的交互式Binder notebook。 那里将会是一个很好的起点。 此外，这里还有还有详细的<a href="https://lux-api.readthedocs.io/en/latest/source/getting_started/installation.html">文档</a>。</p>
+<p><a href="https://github.com/lux-org/lux-binder">lux-binder</a></p>
+<h2>结论与下一步</h2>
+<p>在以上文章中，我们看到了如何通过使用Lux来完全转换Jupyter notebook中的数据分析工作流。 Lux提供了更多的视觉丰富性以鼓励有意义的数据探索。 Lux仍在<strong>积极开发</strong>中，其维护者希望从正在使用或可能对使用Lux感兴趣的用户得到更多反馈。 如果您有兴趣为这个库做贡献，请填写以下表格。 这将帮助团队了解他们如何为您改进工具。</p>
+<p><img alt="" src="https://miro.medium.com/max/617/1*EeleX4wYYG0eeLFBbR-QGQ.png"></p>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="/translate-pythonzhong-ru-he-jiang-duo-ge-can-shu-chuan-ru-maphan-shu.html">[Translate] Python中如何将多个参数传入map函数</a></li>
+        <li><a href="/translatezhang-wo-pythonbing-fa-rang-ni-geng-kuai-xiang-yong-wu-can.html">[Translate]掌握Python并发让你更快享用午餐</a></li>
+        <li><a href="/translatecong-xin-shou-dao-zhuan-jia-ru-he-yong-pythonbian-xie-pei-zhi-wen-jian.html">[Translate]从新手到专家：如何用Python编写配置文件</a></li>
+        <li><a href="/leetcode-island-perimeter.html">LeetCode - Island Perimeter</a></li>
+        <li><a href="/top-10-python-libraries-of-2017.html">Top 10 Python libraries of 2017</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<div id="aboutme">
+        <p>
+            <img width="100%" class="img-thumbnail" src="/assets/img/avatar.png"/>
+        </p>
+    <p>
+      <strong>About Charlie Hu</strong><br/>
+        Software engineer, Geeker. Here I mostly blog about Python, algorithm and how programing can be interesting.
+    </p>
+</div><!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://github.com/Motor-taxi-master-rider"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+    <li class="list-group-item"><a href="https://weibo.com/u/3025131943"><i class="fa fa-weibo fa-lg"></i> weibo</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Recent Posts -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
+  <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/translatezhang-wo-pythonbing-fa-rang-ni-geng-kuai-xiang-yong-wu-can.html">[Translate]掌握Python并发让你更快享用午餐</a></li>
+    <li class="list-group-item"><a href="/translatecong-xin-shou-dao-zhuan-jia-ru-he-yong-pythonbian-xie-pei-zhi-wen-jian.html">[Translate]从新手到专家：如何用Python编写配置文件</a></li>
+    <li class="list-group-item"><a href="/jian-dan-de-wen-ben-jie-xi-ji-suan-qi-v2.html">简单的文本解析计算器 v2</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Recent Posts -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <ul class="list-group list-inline tagcloud" id="tags">
+    <li class="list-group-item tag-3">
+      <a href="/tag/algorithms.html">Algorithms</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/bit_manipulation.html">Bit_manipulation</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/coroutine.html">Coroutine</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="/tag/leetcode.html">Leetcode</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/math.html">Math</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/python.html">Python</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/stack.html">Stack</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="/tag/string.html">String</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/translate.html">Translate</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/tree.html">Tree</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/Github -->
+<li class="list-group-item">
+  <h4><i class="fa fa-github fa-lg"></i><span class="icon-label">GitHub Repos</span></h4>
+  <div id="gh_repos">
+    <p class="list-group-item">Status updating...</p>
+  </div>
+  <a href="https://github.com/Motor-taxi-master-rider">@Motor-taxi-master-rider</a> on GitHub
+</li>
+<!-- End Sidebar/Github -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="http://getpelican.com/" target="_blank">Pelican</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://python.org/" target="_blank">Python.org</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+    <script src="/static/js/custom.js"></script>
+
+
+<!-- GitHub JS Code -->
+<script type="text/javascript">
+$(document).ready(function () {
+  if (!window.jXHR) {
+    var jxhr = document.createElement('script');
+    jxhr.type = 'text/javascript';
+    jxhr.src = '/theme/js/jXHR.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(jxhr, s);
+  }
+
+  github.showRepos({
+    user: 'Motor-taxi-master-rider',
+    count: 3,
+    skip_forks: true,
+    target: '#gh_repos'
+  });
+});
+</script>
+<script src="/theme/js/github.js" type="text/javascript"></script>
+<!-- End GitHub JS Code -->
+
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+    $("div.collapseheader").click(function () {
+    $header = $(this).children("span").first();
+    $codearea = $(this).children(".input_area");
+    console.log($(this).children());
+    $codearea.slideToggle(500, function () {
+        $header.text(function () {
+            return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+        });
+    });
+});
+});
+</script>
+</body>
+</html>

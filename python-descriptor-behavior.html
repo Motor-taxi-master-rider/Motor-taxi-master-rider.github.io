@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Python Descriptor Behavior - Tower of Babel</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+<style type="text/css">
+
+/*some stuff for output/input prompts*/
+div.cell{border:1px solid transparent;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch}div.cell.selected{border-radius:4px;border:thin #ababab solid}
+div.cell.edit_mode{border-radius:4px;border:thin #008000 solid}
+div.cell{width:100%;padding:5px 5px 5px 0;margin:0;outline:none}
+div.prompt{min-width:11ex;padding:.4em;margin:0;font-family:monospace;text-align:right;line-height:1.21429em}
+@media (max-width:480px){div.prompt{text-align:left}}div.inner_cell{display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch;-webkit-box-flex:1;-moz-box-flex:1;box-flex:1;flex:1}
+div.input_area{border:1px solid #cfcfcf;border-radius:4px;background:#f7f7f7;line-height:1.21429em}
+div.prompt:empty{padding-top:0;padding-bottom:0}
+div.input{page-break-inside:avoid;display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:horizontal;-moz-box-align:stretch;display:box;box-orient:horizontal;box-align:stretch;}
+div.inner_cell{width:90%;}
+div.input_area{border:1px solid #cfcfcf;border-radius:4px;background:#f7f7f7;}
+div.input_prompt{color:navy;border-top:1px solid transparent;}
+div.output_wrapper{margin-top:5px;position:relative;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;width:100%;}
+div.output_scroll{height:24em;width:100%;overflow:auto;border-radius:4px;-webkit-box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);-moz-box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);}
+div.output_collapsed{margin:0px;padding:0px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;width:100%;}
+div.out_prompt_overlay{height:100%;padding:0px 0.4em;position:absolute;border-radius:4px;}
+div.out_prompt_overlay:hover{-webkit-box-shadow:inset 0 0 1px #000000;-moz-box-shadow:inset 0 0 1px #000000;box-shadow:inset 0 0 1px #000000;background:rgba(240, 240, 240, 0.5);}
+div.output_prompt{color:darkred;}
+
+a.anchor-link:link{text-decoration:none;padding:0px 20px;visibility:hidden;}
+h1:hover .anchor-link,h2:hover .anchor-link,h3:hover .anchor-link,h4:hover .anchor-link,h5:hover .anchor-link,h6:hover .anchor-link{visibility:visible;}
+/* end stuff for output/input prompts*/
+
+
+.highlight-ipynb .hll { background-color: #ffffcc }
+.highlight-ipynb  { background: #f8f8f8; }
+.highlight-ipynb .c { color: #408080; font-style: italic } /* Comment */
+.highlight-ipynb .err { border: 1px solid #FF0000 } /* Error */
+.highlight-ipynb .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight-ipynb .o { color: #666666 } /* Operator */
+.highlight-ipynb .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight-ipynb .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight-ipynb .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight-ipynb .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight-ipynb .gd { color: #A00000 } /* Generic.Deleted */
+.highlight-ipynb .ge { font-style: italic } /* Generic.Emph */
+.highlight-ipynb .gr { color: #FF0000 } /* Generic.Error */
+.highlight-ipynb .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight-ipynb .gi { color: #00A000 } /* Generic.Inserted */
+.highlight-ipynb .go { color: #888888 } /* Generic.Output */
+.highlight-ipynb .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight-ipynb .gs { font-weight: bold } /* Generic.Strong */
+.highlight-ipynb .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight-ipynb .gt { color: #0044DD } /* Generic.Traceback */
+.highlight-ipynb .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight-ipynb .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight-ipynb .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight-ipynb .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight-ipynb .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight-ipynb .kt { color: #B00040 } /* Keyword.Type */
+.highlight-ipynb .m { color: #666666 } /* Literal.Number */
+.highlight-ipynb .s { color: #BA2121 } /* Literal.String */
+.highlight-ipynb .na { color: #7D9029 } /* Name.Attribute */
+.highlight-ipynb .nb { color: #008000 } /* Name.Builtin */
+.highlight-ipynb .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight-ipynb .no { color: #880000 } /* Name.Constant */
+.highlight-ipynb .nd { color: #AA22FF } /* Name.Decorator */
+.highlight-ipynb .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight-ipynb .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight-ipynb .nf { color: #0000FF } /* Name.Function */
+.highlight-ipynb .nl { color: #A0A000 } /* Name.Label */
+.highlight-ipynb .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight-ipynb .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight-ipynb .nv { color: #19177C } /* Name.Variable */
+.highlight-ipynb .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight-ipynb .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight-ipynb .mf { color: #666666 } /* Literal.Number.Float */
+.highlight-ipynb .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight-ipynb .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight-ipynb .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight-ipynb .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight-ipynb .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight-ipynb .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight-ipynb .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight-ipynb .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight-ipynb .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight-ipynb .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight-ipynb .sx { color: #008000 } /* Literal.String.Other */
+.highlight-ipynb .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight-ipynb .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight-ipynb .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight-ipynb .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight-ipynb .vc { color: #19177C } /* Name.Variable.Class */
+.highlight-ipynb .vg { color: #19177C } /* Name.Variable.Global */
+.highlight-ipynb .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight-ipynb .il { color: #666666 } /* Literal.Number.Integer.Long */
+</style>
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+div.entry-content {
+  overflow: visible;
+  padding: 8px;
+}
+.input_area {
+  padding: 0.2em;
+}
+
+a.heading-anchor {
+ white-space: normal;
+}
+
+.rendered_html
+code {
+ font-size: .8em;
+}
+
+pre.ipynb {
+  color: black;
+  background: #f7f7f7;
+  border: none;
+  box-shadow: none;
+  margin-bottom: 0;
+  padding: 0;
+  margin: 0px;
+  font-size: 13px;
+}
+
+/* remove the prompt div from text cells */
+div.text_cell .prompt {
+    display: none;
+}
+
+/* remove horizontal padding from text cells, */
+/* so it aligns with outer body text */
+div.text_cell_render {
+    padding: 0.5em 0em;
+}
+
+img.anim_icon{padding:0; border:0; vertical-align:middle; -webkit-box-shadow:none; -box-shadow:none}
+
+div.collapseheader {
+    width=100%;
+    padding: 2px;
+    cursor: pointer;
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+</style>
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+<script type="text/javascript">
+init_mathjax = function() {
+    if (window.MathJax) {
+        // MathJax loaded
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+            },
+            displayAlign: 'left', // Change this to 'center' to center equations.
+            "HTML-CSS": {
+                styles: {'.MathJax_Display': {"margin": 0}}
+            }
+        });
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    }
+}
+init_mathjax();
+</script>
+    <link href="/assets/favicon.ico" rel="icon">
+
+<link rel="canonical" href="/python-descriptor-behavior.html">
+
+        <meta name="author" content="Charlie Hu" />
+        <meta name="keywords" content="Descriptor" />
+        <meta name="description" content="Description 描述符是对多个属性运用相同存取逻辑的一种方式。例如，Django ORM 和 SQL Alchemy 等 ORM 中的字段类型是描述符，把数据库记录中字段里的数据与 Python 对象的属性对应起来。 描述符是实现了特定协议的类，这个协议包括 get、set 和 delete 方法。property 类实现了完整的描述符协议。通常，可以只实现部分协议。其实，我们在真实的代码中见到的大多数描述符只实现了 get 和 set 方法，还有很多只实现了其中的一个。 描述符是 Python 的独有特征，不仅在应用层中使用，在语言的基础设施中也有用到。除了特性之外，使用描述符的 Python 功能还有方法及 classmethod 和 staticmethod 装饰器。理解描述符是精通 Python 的关键。 本文在简要介绍描述符的基础上探讨描述符在python中的显隐性。 描述符种类 …" />
+
+        <meta property="og:site_name" content="Tower of Babel" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Python Descriptor Behavior"/>
+        <meta property="og:url" content="/python-descriptor-behavior.html"/>
+        <meta property="og:description" content="Description 描述符是对多个属性运用相同存取逻辑的一种方式。例如，Django ORM 和 SQL Alchemy 等 ORM 中的字段类型是描述符，把数据库记录中字段里的数据与 Python 对象的属性对应起来。 描述符是实现了特定协议的类，这个协议包括 get、set 和 delete 方法。property 类实现了完整的描述符协议。通常，可以只实现部分协议。其实，我们在真实的代码中见到的大多数描述符只实现了 get 和 set 方法，还有很多只实现了其中的一个。 描述符是 Python 的独有特征，不仅在应用层中使用，在语言的基础设施中也有用到。除了特性之外，使用描述符的 Python 功能还有方法及 classmethod 和 staticmethod 装饰器。理解描述符是精通 Python 的关键。 本文在简要介绍描述符的基础上探讨描述符在python中的显隐性。 描述符种类 …"/>
+        <meta property="article:published_time" content="2017-08-05" />
+            <meta property="article:section" content="Python" />
+            <meta property="article:tag" content="Descriptor" />
+            <meta property="article:author" content="Charlie Hu" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.flatly.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link href="/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+        <link href="/static/css/custom.css" rel="stylesheet">
+
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+Tower of Babel            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                         <li><a href="/pages/about.html">
+                             About
+                          </a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><span>
+                <form class="navbar-search" action="/search.html">
+                  <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
+                </form></span>
+              </li>
+              <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+            <ol class="breadcrumb">
+                <li><a href="" title="Tower of Babel"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="/category/python.html" title="Python">Python</a></li>
+                <li class="active">Python Descriptor Behavior</li>
+            </ol>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/python-descriptor-behavior.html"
+                       rel="bookmark"
+                       title="Permalink to Python Descriptor Behavior">
+                        Python Descriptor Behavior
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-08-05T00:00:00+08:00"> Sat 05 August 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/descriptor.html">Descriptor</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <h3>Description</h3>
+<p>描述符是对多个属性运用相同存取逻辑的一种方式。例如，Django ORM 和 SQL Alchemy 等 ORM 中的字段类型是描述符，把数据库记录中字段里的数据与 Python 对象的属性对应起来。</p>
+<p>描述符是实现了特定协议的类，这个协议包括 <strong>get</strong>、<strong>set</strong> 和 <strong>delete</strong> 方法。property 类实现了完整的描述符协议。通常，可以只实现部分协议。其实，我们在真实的代码中见到的大多数描述符只实现了 <strong>get</strong> 和 <strong>set</strong> 方法，还有很多只实现了其中的一个。</p>
+<p>描述符是 Python 的独有特征，不仅在应用层中使用，在语言的基础设施中也有用到。除了特性之外，使用描述符的 Python 功能还有方法及 classmethod 和 staticmethod 装饰器。理解描述符是精通 Python 的关键。</p>
+<p>本文在简要介绍描述符的基础上探讨描述符在python中的显隐性。</p>
+<h3>描述符种类</h3>
+<p>在正式探讨描述符在python中的显隐性前，先了解下三种描述符。</p>
+<h4>覆盖型描述符</h4>
+<p>实现 <strong>set</strong> 方法的描述符属于覆盖型描述符，因为虽然描述符是类属性，但是实现 <strong>set</strong> 方法的话，会覆盖对实例属性的赋值操作。</p>
+<h4>没有 <strong>get</strong> 方法的覆盖型描述符</h4>
+<p>通常，覆盖型描述符既会实现 <strong>set</strong> 方法，也会实现 <strong>get</strong> 方法，不过也可以只实现 <strong>set</strong> 方法，此时，只有写操作由描述符处理。通过实例读取描述符会返回描述符对象本身，因为没有处理读操作的 <strong>get</strong> 方法。如果直接通过实例的 <strong>dict</strong> 属性创建同名实例属性，以后再设置那个属性时，仍会由 <strong>set</strong> 方法插手接管，但是读取那个属性的话，就会直接从实例中返回新赋予的值，而不会返回描述符对象。也就是说，实例属性会遮盖描述符，不过只有读操作是如此。</p>
+<h4>非覆盖型描述符</h4>
+<p>没有实现 <strong>set</strong> 方法的描述符是非覆盖型描述符。如果设置了同名的实例属性，描述符会被遮盖，致使描述符无法处理那个实例的那个属性。方法是以非覆盖型描述符实现的。</p>
+<h3>Python属性查找策略</h3>
+<ol>
+<li>优先找到Python自动产生的属性。</li>
+<li>查找obj.<strong>class</strong>.<strong>dict</strong>，如果attr存在并且是覆盖型描述符，返回覆盖型描述符的__get__方法的结果，如果没有继续在obj.<strong>class</strong> 的父类以及祖先类中寻找覆盖型描述符。</li>
+<li>在obj.<strong>dict</strong> 中查找，这一步分两种情况，第一种情况是obj是一个普通实例，找到就直接返回，找不到进行下一步。第二种情况是obj是一个类，依次在obj和它的父类、祖先类的__dict__中查找，如果找到一个描述符就返回描述符的__get__方法的结果，否则直接返回attr。如果没有找到，进行下一步。</li>
+<li>在obj.<strong>class</strong>.<strong>dict</strong> 中查找，如果找到了一个描述符(这里的描述符一定是非覆盖型描述符)，返回描述符的__get__方法的结果。如果找到一个普通属性，直接返回属性值。如果没有继续在obj.<strong>class</strong> 的父类以及祖先类中寻找非覆盖型描述符。</li>
+<li>很不幸，Python终于受不了。在这一步，它raise <strong>AttributeError</strong>。</li>
+</ol>
+<h3>代码验证</h3>
+<p>接下来我们编写示例代码来对以上策略进行验证。</p>
+<div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">覆盖型描述符:</span>
+
+<span class="sd">    &gt;&gt;&gt; obj = Model()</span>
+<span class="sd">    &gt;&gt;&gt; obj.__dict__[&#39;over&#39;] = &#39;obj instance property over&#39;</span>
+<span class="sd">    &gt;&gt;&gt; obj.over  # doctest: +ELLIPSIS</span>
+<span class="sd">    Overriding.__get__() invoked with args:</span>
+<span class="sd">        self     = &lt;descriptorkinds.Overriding object at 0x...&gt;</span>
+<span class="sd">        instance = &lt;descriptorkinds.Model object at 0x...&gt;</span>
+<span class="sd">        owner    = &lt;class &#39;descriptorkinds.Model&#39;&gt;</span>
+<span class="sd">    &gt;&gt;&gt; Model.over  # doctest: +ELLIPSIS</span>
+<span class="sd">    Overriding.__get__() invoked with args:</span>
+<span class="sd">        self     = &lt;descriptorkinds.Overriding object at 0x...&gt;</span>
+<span class="sd">        instance = None</span>
+<span class="sd">        owner    = &lt;class &#39;descriptorkinds.Model&#39;&gt;</span>
+<span class="sd">    &gt;&gt;&gt; sub_obj = SubClass()</span>
+<span class="sd">    &gt;&gt;&gt; sub_obj.__dict__[&#39;over&#39;] = &#39;sub_obj instance property over&#39;</span>
+<span class="sd">    &gt;&gt;&gt; sub_obj.over  # doctest: +ELLIPSIS</span>
+<span class="sd">    Overriding.__get__() invoked with args:</span>
+<span class="sd">        self     = &lt;descriptorkinds.Overriding object at 0x...&gt;</span>
+<span class="sd">        instance = &lt;descriptorkinds.SubClass object at 0x...&gt;</span>
+<span class="sd">        owner    = &lt;class &#39;descriptorkinds.SubClass&#39;&gt;</span>
+<span class="sd">    &gt;&gt;&gt; SubClass.over  # doctest: +ELLIPSIS</span>
+<span class="sd">    Overriding.__get__() invoked with args:</span>
+<span class="sd">        self     = &lt;descriptorkinds.Overriding object at 0x...&gt;</span>
+<span class="sd">        instance = None</span>
+<span class="sd">        owner    = &lt;class &#39;descriptorkinds.SubClass&#39;&gt;</span>
+
+<span class="sd">#行为完全符合策略2。额外的，这里测试了获取类属性时传入参数的值。</span>
+
+<span class="sd">没有 __get__ 方法的覆盖型描述符:</span>
+
+<span class="sd">    &gt;&gt;&gt; obj.__dict__[&#39;over_no_get&#39;] = &#39;obj instance property over_no_get&#39;</span>
+<span class="sd">    &gt;&gt;&gt; obj.over_no_get  # doctest: +ELLIPSIS</span>
+<span class="sd">    &#39;obj instance property over_no_get&#39;</span>
+<span class="sd">    &gt;&gt;&gt; sub_obj.over_no_get  # doctest: +ELLIPSIS</span>
+<span class="sd">    &lt;descriptorkinds.OverridingNoGet object at 0x...&gt;</span>
+<span class="sd">    &gt;&gt;&gt; sub_obj.__dict__[&#39;over_no_get&#39;] = &#39;sub_obj instance property over_no_get&#39;</span>
+<span class="sd">    &gt;&gt;&gt; sub_obj.over_no_get  # doctest: +ELLIPSIS</span>
+<span class="sd">    &#39;sub_obj instance property over_no_get&#39;</span>
+
+<span class="sd">#行为符合策略4。其行为更像非覆盖型描述符。但无法直接使用obj.over_no_get的方式给实例属性赋值。</span>
+
+<span class="sd">非覆盖型描述符：</span>
+<span class="sd">    &gt;&gt;&gt; obj.non_over  # doctest: +ELLIPSIS</span>
+<span class="sd">    NonOverriding.__get__() invoked with args:</span>
+<span class="sd">        self     = &lt;descriptorkinds.NonOverriding object at 0x...&gt;</span>
+<span class="sd">        instance = &lt;descriptorkinds.Model object at 0x...&gt;</span>
+<span class="sd">        owner    = &lt;class &#39;descriptorkinds.Model&#39;&gt;</span>
+<span class="sd">    &gt;&gt;&gt; obj.non_over = &#39;obj instance property non_over&#39;</span>
+<span class="sd">    &gt;&gt;&gt; obj.non_over  # doctest: +ELLIPSIS</span>
+<span class="sd">    &#39;obj instance property non_over&#39;</span>
+<span class="sd">    &gt;&gt;&gt; sub_obj.non_over  # doctest: +ELLIPSIS</span>
+<span class="sd">    NonOverriding.__get__() invoked with args:</span>
+<span class="sd">        self     = &lt;descriptorkinds.NonOverriding object at 0x...&gt;</span>
+<span class="sd">        instance = &lt;descriptorkinds.SubClass object at 0x...&gt;</span>
+<span class="sd">        owner    = &lt;class &#39;descriptorkinds.SubClass&#39;&gt;</span>
+<span class="sd">    &gt;&gt;&gt; sub_obj.__dict__[&#39;non_over&#39;] = &#39;sub_obj instance property non_over&#39;</span>
+<span class="sd">    &gt;&gt;&gt; sub_obj.non_over  # doctest: +ELLIPSIS</span>
+<span class="sd">    &#39;sub_obj instance property non_over&#39;</span>
+
+<span class="sd">#行为符合策略4。</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1">### BEGIN DESCRIPTORKINDS</span>
+<span class="k">def</span> <span class="nf">print_args</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>  <span class="c1"># &lt;1&gt;</span>
+    <span class="n">cls_name</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+    <span class="n">arg_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;self&#39;</span><span class="p">,</span> <span class="s1">&#39;instance&#39;</span><span class="p">,</span> <span class="s1">&#39;owner&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;set&#39;</span><span class="p">:</span>
+        <span class="n">arg_names</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;value&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.__</span><span class="si">{}</span><span class="s1">__() invoked with args:&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cls_name</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">arg_name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">arg_names</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    </span><span class="si">{:8}</span><span class="s1"> = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">arg_name</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+
+
+<span class="k">class</span> <span class="nc">Overriding</span><span class="p">:</span>  <span class="c1"># &lt;2&gt;</span>
+    <span class="sd">&quot;&quot;&quot;a.k.a. data descriptor or enforced descriptor&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">owner</span><span class="p">):</span>
+        <span class="n">print_args</span><span class="p">(</span><span class="s1">&#39;get&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">owner</span><span class="p">)</span>  <span class="c1"># &lt;3&gt;</span>
+
+    <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="n">print_args</span><span class="p">(</span><span class="s1">&#39;set&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">OverridingNoGet</span><span class="p">:</span>  <span class="c1"># &lt;4&gt;</span>
+    <span class="sd">&quot;&quot;&quot;an overriding descriptor without ``__get__``&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="n">print_args</span><span class="p">(</span><span class="s1">&#39;set&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">NonOverriding</span><span class="p">:</span>  <span class="c1"># &lt;5&gt;</span>
+    <span class="sd">&quot;&quot;&quot;a.k.a. non-data or shadowable descriptor&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">owner</span><span class="p">):</span>
+        <span class="n">print_args</span><span class="p">(</span><span class="s1">&#39;get&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">owner</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Model</span><span class="p">:</span>  <span class="c1"># &lt;6&gt;</span>
+    <span class="n">over</span> <span class="o">=</span> <span class="n">Overriding</span><span class="p">()</span>
+    <span class="n">over_no_get</span> <span class="o">=</span> <span class="n">OverridingNoGet</span><span class="p">()</span>
+    <span class="n">non_over</span> <span class="o">=</span> <span class="n">NonOverriding</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">spam</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># &lt;7&gt;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Model.spam() invoked with arg:&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    self =&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">SubClass</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">spam</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;SubClass.spam() invoked with arg:&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    self =&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+</pre></div>
+
+
+<blockquote>
+<p>另外，在类中定义的函数属于绑定方法（bound method），因为用户定义的函数都有 <strong>get</strong> 方法，所以依附到类上时，就相当于描述符。</p>
+</blockquote>
+<div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">### BEGIN FUNC_DESCRIPTOR_DEMO</span>
+
+<span class="sd">    &gt;&gt;&gt; word = Text(&#39;forward&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; word  # &lt;1&gt;</span>
+<span class="sd">    Text(&#39;forward&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; word.reverse()  # &lt;2&gt;</span>
+<span class="sd">    Text(&#39;drawrof&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; Text.reverse(Text(&#39;backward&#39;))  # &lt;3&gt;</span>
+<span class="sd">    Text(&#39;drawkcab&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; type(Text.reverse), type(word.reverse)  # &lt;4&gt;</span>
+<span class="sd">    (&lt;class &#39;function&#39;&gt;, &lt;class &#39;method&#39;&gt;)</span>
+<span class="sd">    &gt;&gt;&gt; list(map(Text.reverse, [&#39;repaid&#39;, (10, 20, 30), Text(&#39;stressed&#39;)]))  # &lt;5&gt;</span>
+<span class="sd">    [&#39;diaper&#39;, (30, 20, 10), Text(&#39;desserts&#39;)]</span>
+<span class="sd">    &gt;&gt;&gt; Text.reverse.__get__(word)  # &lt;6&gt;</span>
+<span class="sd">    &lt;bound method Text.reverse of Text(&#39;forward&#39;)&gt;</span>
+<span class="sd">    &gt;&gt;&gt; Text.reverse.__get__(None, Text)  # &lt;7&gt;</span>
+<span class="sd">    &lt;function Text.reverse at 0x101244e18&gt;</span>
+<span class="sd">    &gt;&gt;&gt; word.reverse  # &lt;8&gt;</span>
+<span class="sd">    &lt;bound method Text.reverse of Text(&#39;forward&#39;)&gt;</span>
+<span class="sd">    &gt;&gt;&gt; word.reverse.__self__  # &lt;9&gt;</span>
+<span class="sd">    Text(&#39;forward&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; word.reverse.__func__ is Text.reverse  # &lt;10&gt;</span>
+<span class="sd">    True</span>
+
+<span class="sd">### END FUNC_DESCRIPTOR_DEMO</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c1">### BEGIN FUNC_DESCRIPTOR_EX</span>
+<span class="kn">import</span> <span class="nn">collections</span>
+
+
+<span class="k">class</span> <span class="nc">Text</span><span class="p">(</span><span class="n">collections</span><span class="o">.</span><span class="n">UserString</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;Text(</span><span class="si">{!r}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">reverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1">### END FUNC_DESCRIPTOR_EX</span>
+</pre></div>
+
+
+<h3>总结</h3>
+<blockquote>
+<p>描述符的作用方式可用以下函数表示：</p>
+</blockquote>
+<div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">C</span><span class="p">()</span>
+<span class="n">x</span><span class="o">.</span><span class="n">foo</span>
+<span class="o">==&gt;</span>
+<span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">):</span>
+  <span class="n">d</span> <span class="o">=</span> <span class="n">C</span><span class="o">.</span><span class="n">foo</span><span class="p">;</span>
+  <span class="n">D</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="vm">__class__</span>
+  <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="s1">&#39;__get__&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="s1">&#39;__set__&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="s1">&#39;foo&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">x</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">):</span>
+      <span class="k">return</span> <span class="n">D</span><span class="o">.</span><span class="fm">__get__</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span>
+<span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="s1">&#39;foo&#39;</span><span class="p">]</span> <span class="c1"># or from C, &amp;c</span>
+</pre></div>
+
+
+<h3>Additional</h3>
+<p><strong>描述符用法建议：</strong></p>
+<p>1.使用特性以保持简单</p>
+<p>内置的 property 类创建的其实是覆盖型描述符，<strong>set</strong> 方法和 <strong>get</strong> 方法都实现了，即便不定义设值方法也是如此。特性的 <strong>set</strong> 方法默认抛出 AttributeError: can't set attribute，因此创建只读属性最简单的方式是使用特性，这能避免下一条所述的问题。</p>
+<p>2.只读描述符必须有 <strong>set</strong> 方法</p>
+<p>如果使用描述符类实现只读属性，要记住，<strong>get</strong> 和 <strong>set</strong> 两个方法必须都定义，否则，实例的同名属性会遮盖描述符。只读属性的 <strong>set</strong> 方法只需抛出 AttributeError 异常，并提供合适的错误消息。</p>
+<p>3.用于验证的描述符可以只有 <strong>set</strong> 方法</p>
+<p>对仅用于验证的描述符来说，<strong>set</strong> 方法应该检查 value 参数获得的值，如果有效，使用描述符实例的名称为键，直接在实例的 <strong>dict</strong> 属性中设置。这样，从实例中读取同名属性的速度很快，因为不用经过 <strong>get</strong> 方法处理。</p>
+<p>4 仅有 <strong>get</strong> 方法的描述符可以实现高效缓存</p>
+<p>如果只编写了 <strong>get</strong> 方法，那么创建的是非覆盖型描述符。这种描述符可用于执行某些耗费资源的计算，然后为实例设置同名属性，缓存结果。同名实例属性会遮盖描述符，因此后续访问会直接从实例的 <strong>dict</strong> 属性中获取值，而不会再触发描述符的 <strong>get</strong> 方法。</p>
+<p>5.非特殊的方法可以被实例属性遮盖</p>
+<p>由于函数和方法只实现了 <strong>get</strong> 方法，它们不会处理同名实例属性的赋值操作。因此，像 my_obj.the_method = 7 这样简单赋值之后，后续通过该实例访问 the_method 得到的是数字 7——但是不影响类或其他实例。然而，特殊方法不受这个问题的影响。解释器只会在类中寻找特殊的方法，也就是说，repr(x) 执行的其实是 x.<strong>class</strong>.<strong>repr</strong>(x)，因此 x 的 <strong>repr</strong> 属性对 repr(x) 方法调用没有影响。出于同样的原因，实例的 <strong>getattr</strong> 属性不会破坏常规的属性访问规则。</p>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="/python-descriptor-behavior-ii.html">Python Descriptor Behavior II</a></li>
+        <li><a href="/pythonzhuang-shi-qi-de-zheng-que-da-kai-fang-shi-2.html">Python装饰器的正确打开方式(2)</a></li>
+        <li><a href="/pythonzhuang-shi-qi-de-zheng-que-da-kai-fang-shi-1.html">Python装饰器的正确打开方式(1)</a></li>
+    </ul>
+</section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<div id="aboutme">
+        <p>
+            <img width="100%" class="img-thumbnail" src="/assets/img/avatar.png"/>
+        </p>
+    <p>
+      <strong>About Charlie Hu</strong><br/>
+        Software engineer, Geeker. Here I mostly blog about Python, algorithm and how programing can be interesting.
+    </p>
+</div><!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://github.com/Motor-taxi-master-rider"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+    <li class="list-group-item"><a href="https://weibo.com/u/3025131943"><i class="fa fa-weibo fa-lg"></i> weibo</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Recent Posts -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
+  <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/translatezhang-wo-pythonbing-fa-rang-ni-geng-kuai-xiang-yong-wu-can.html">[Translate]掌握Python并发让你更快享用午餐</a></li>
+    <li class="list-group-item"><a href="/translatecong-xin-shou-dao-zhuan-jia-ru-he-yong-pythonbian-xie-pei-zhi-wen-jian.html">[Translate]从新手到专家：如何用Python编写配置文件</a></li>
+    <li class="list-group-item"><a href="/jian-dan-de-wen-ben-jie-xi-ji-suan-qi-v2.html">简单的文本解析计算器 v2</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Recent Posts -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <ul class="list-group list-inline tagcloud" id="tags">
+    <li class="list-group-item tag-3">
+      <a href="/tag/algorithms.html">Algorithms</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/bit_manipulation.html">Bit_manipulation</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/coroutine.html">Coroutine</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="/tag/leetcode.html">Leetcode</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/math.html">Math</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/python.html">Python</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/stack.html">Stack</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="/tag/string.html">String</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/translate.html">Translate</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/tree.html">Tree</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/Github -->
+<li class="list-group-item">
+  <h4><i class="fa fa-github fa-lg"></i><span class="icon-label">GitHub Repos</span></h4>
+  <div id="gh_repos">
+    <p class="list-group-item">Status updating...</p>
+  </div>
+  <a href="https://github.com/Motor-taxi-master-rider">@Motor-taxi-master-rider</a> on GitHub
+</li>
+<!-- End Sidebar/Github -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="http://getpelican.com/" target="_blank">Pelican</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://python.org/" target="_blank">Python.org</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+    <script src="/static/js/custom.js"></script>
+
+
+<!-- GitHub JS Code -->
+<script type="text/javascript">
+$(document).ready(function () {
+  if (!window.jXHR) {
+    var jxhr = document.createElement('script');
+    jxhr.type = 'text/javascript';
+    jxhr.src = '/theme/js/jXHR.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(jxhr, s);
+  }
+
+  github.showRepos({
+    user: 'Motor-taxi-master-rider',
+    count: 3,
+    skip_forks: true,
+    target: '#gh_repos'
+  });
+});
+</script>
+<script src="/theme/js/github.js" type="text/javascript"></script>
+<!-- End GitHub JS Code -->
+
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+    $("div.collapseheader").click(function () {
+    $header = $(this).children("span").first();
+    $codearea = $(this).children(".input_area");
+    console.log($(this).children());
+    $codearea.slideToggle(500, function () {
+        $header.text(function () {
+            return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+        });
+    });
+});
+});
+</script>
+</body>
+</html>

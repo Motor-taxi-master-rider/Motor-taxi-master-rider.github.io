@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Linklist Problems Summary - Tower of Babel</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+<style type="text/css">
+
+/*some stuff for output/input prompts*/
+div.cell{border:1px solid transparent;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch}div.cell.selected{border-radius:4px;border:thin #ababab solid}
+div.cell.edit_mode{border-radius:4px;border:thin #008000 solid}
+div.cell{width:100%;padding:5px 5px 5px 0;margin:0;outline:none}
+div.prompt{min-width:11ex;padding:.4em;margin:0;font-family:monospace;text-align:right;line-height:1.21429em}
+@media (max-width:480px){div.prompt{text-align:left}}div.inner_cell{display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch;-webkit-box-flex:1;-moz-box-flex:1;box-flex:1;flex:1}
+div.input_area{border:1px solid #cfcfcf;border-radius:4px;background:#f7f7f7;line-height:1.21429em}
+div.prompt:empty{padding-top:0;padding-bottom:0}
+div.input{page-break-inside:avoid;display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:horizontal;-moz-box-align:stretch;display:box;box-orient:horizontal;box-align:stretch;}
+div.inner_cell{width:90%;}
+div.input_area{border:1px solid #cfcfcf;border-radius:4px;background:#f7f7f7;}
+div.input_prompt{color:navy;border-top:1px solid transparent;}
+div.output_wrapper{margin-top:5px;position:relative;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;width:100%;}
+div.output_scroll{height:24em;width:100%;overflow:auto;border-radius:4px;-webkit-box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);-moz-box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);}
+div.output_collapsed{margin:0px;padding:0px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;width:100%;}
+div.out_prompt_overlay{height:100%;padding:0px 0.4em;position:absolute;border-radius:4px;}
+div.out_prompt_overlay:hover{-webkit-box-shadow:inset 0 0 1px #000000;-moz-box-shadow:inset 0 0 1px #000000;box-shadow:inset 0 0 1px #000000;background:rgba(240, 240, 240, 0.5);}
+div.output_prompt{color:darkred;}
+
+a.anchor-link:link{text-decoration:none;padding:0px 20px;visibility:hidden;}
+h1:hover .anchor-link,h2:hover .anchor-link,h3:hover .anchor-link,h4:hover .anchor-link,h5:hover .anchor-link,h6:hover .anchor-link{visibility:visible;}
+/* end stuff for output/input prompts*/
+
+
+.highlight-ipynb .hll { background-color: #ffffcc }
+.highlight-ipynb  { background: #f8f8f8; }
+.highlight-ipynb .c { color: #408080; font-style: italic } /* Comment */
+.highlight-ipynb .err { border: 1px solid #FF0000 } /* Error */
+.highlight-ipynb .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight-ipynb .o { color: #666666 } /* Operator */
+.highlight-ipynb .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight-ipynb .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight-ipynb .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight-ipynb .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight-ipynb .gd { color: #A00000 } /* Generic.Deleted */
+.highlight-ipynb .ge { font-style: italic } /* Generic.Emph */
+.highlight-ipynb .gr { color: #FF0000 } /* Generic.Error */
+.highlight-ipynb .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight-ipynb .gi { color: #00A000 } /* Generic.Inserted */
+.highlight-ipynb .go { color: #888888 } /* Generic.Output */
+.highlight-ipynb .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight-ipynb .gs { font-weight: bold } /* Generic.Strong */
+.highlight-ipynb .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight-ipynb .gt { color: #0044DD } /* Generic.Traceback */
+.highlight-ipynb .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight-ipynb .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight-ipynb .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight-ipynb .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight-ipynb .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight-ipynb .kt { color: #B00040 } /* Keyword.Type */
+.highlight-ipynb .m { color: #666666 } /* Literal.Number */
+.highlight-ipynb .s { color: #BA2121 } /* Literal.String */
+.highlight-ipynb .na { color: #7D9029 } /* Name.Attribute */
+.highlight-ipynb .nb { color: #008000 } /* Name.Builtin */
+.highlight-ipynb .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight-ipynb .no { color: #880000 } /* Name.Constant */
+.highlight-ipynb .nd { color: #AA22FF } /* Name.Decorator */
+.highlight-ipynb .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight-ipynb .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight-ipynb .nf { color: #0000FF } /* Name.Function */
+.highlight-ipynb .nl { color: #A0A000 } /* Name.Label */
+.highlight-ipynb .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight-ipynb .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight-ipynb .nv { color: #19177C } /* Name.Variable */
+.highlight-ipynb .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight-ipynb .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight-ipynb .mf { color: #666666 } /* Literal.Number.Float */
+.highlight-ipynb .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight-ipynb .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight-ipynb .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight-ipynb .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight-ipynb .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight-ipynb .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight-ipynb .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight-ipynb .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight-ipynb .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight-ipynb .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight-ipynb .sx { color: #008000 } /* Literal.String.Other */
+.highlight-ipynb .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight-ipynb .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight-ipynb .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight-ipynb .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight-ipynb .vc { color: #19177C } /* Name.Variable.Class */
+.highlight-ipynb .vg { color: #19177C } /* Name.Variable.Global */
+.highlight-ipynb .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight-ipynb .il { color: #666666 } /* Literal.Number.Integer.Long */
+</style>
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+div.entry-content {
+  overflow: visible;
+  padding: 8px;
+}
+.input_area {
+  padding: 0.2em;
+}
+
+a.heading-anchor {
+ white-space: normal;
+}
+
+.rendered_html
+code {
+ font-size: .8em;
+}
+
+pre.ipynb {
+  color: black;
+  background: #f7f7f7;
+  border: none;
+  box-shadow: none;
+  margin-bottom: 0;
+  padding: 0;
+  margin: 0px;
+  font-size: 13px;
+}
+
+/* remove the prompt div from text cells */
+div.text_cell .prompt {
+    display: none;
+}
+
+/* remove horizontal padding from text cells, */
+/* so it aligns with outer body text */
+div.text_cell_render {
+    padding: 0.5em 0em;
+}
+
+img.anim_icon{padding:0; border:0; vertical-align:middle; -webkit-box-shadow:none; -box-shadow:none}
+
+div.collapseheader {
+    width=100%;
+    padding: 2px;
+    cursor: pointer;
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+</style>
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+<script type="text/javascript">
+init_mathjax = function() {
+    if (window.MathJax) {
+        // MathJax loaded
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+            },
+            displayAlign: 'left', // Change this to 'center' to center equations.
+            "HTML-CSS": {
+                styles: {'.MathJax_Display': {"margin": 0}}
+            }
+        });
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    }
+}
+init_mathjax();
+</script>
+    <link href="/assets/favicon.ico" rel="icon">
+
+<link rel="canonical" href="/linklist-problems-summary.html">
+
+        <meta name="author" content="Charlie Hu" />
+        <meta name="keywords" content="Linklist,Data_Structure" />
+        <meta name="description" content="Description 链表问题是经常会遇到的数据结构问题。该类问题的难点主要集中再单向遍历以及链表有环的情况下。很多链表问题只要利用两个速度不一的指针来完成单向遍历就可以简化问题、减少复杂度。本文基于一些常见的链表问题来分析比较良好的方案以及python实现。 准备工作 在解决问题之前，我们先要定义这次使用的链表的数据结构。 在此我们定义了一个普通的value和next指针的链表结构，并重写了__len__魔术方法来计算无环链表自身的长度，添加了traversal方法来帮助我们遍历链表验证结论。 在SampleLinklist类中我们定义了一些链表示例来辅助我们验证结论。 ### -*- coding: utf-8 -*- class Linklist(object): def __init__(self, value, next): self.value = value self.next = next def traversal(self): &#34;&#34;&#34; 遍历该节点开始的链表 :return: &#34;&#34;&#34; print(self.value) if self.next: self.next.traversal() def __bool__(self): &#34;&#34;&#34; 用于之后的if Linklist判断 :return: &#34;&#34;&#34; return …" />
+
+        <meta property="og:site_name" content="Tower of Babel" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Linklist Problems Summary"/>
+        <meta property="og:url" content="/linklist-problems-summary.html"/>
+        <meta property="og:description" content="Description 链表问题是经常会遇到的数据结构问题。该类问题的难点主要集中再单向遍历以及链表有环的情况下。很多链表问题只要利用两个速度不一的指针来完成单向遍历就可以简化问题、减少复杂度。本文基于一些常见的链表问题来分析比较良好的方案以及python实现。 准备工作 在解决问题之前，我们先要定义这次使用的链表的数据结构。 在此我们定义了一个普通的value和next指针的链表结构，并重写了__len__魔术方法来计算无环链表自身的长度，添加了traversal方法来帮助我们遍历链表验证结论。 在SampleLinklist类中我们定义了一些链表示例来辅助我们验证结论。 ### -*- coding: utf-8 -*- class Linklist(object): def __init__(self, value, next): self.value = value self.next = next def traversal(self): &#34;&#34;&#34; 遍历该节点开始的链表 :return: &#34;&#34;&#34; print(self.value) if self.next: self.next.traversal() def __bool__(self): &#34;&#34;&#34; 用于之后的if Linklist判断 :return: &#34;&#34;&#34; return …"/>
+        <meta property="article:published_time" content="2017-07-08" />
+            <meta property="article:section" content="Python" />
+            <meta property="article:tag" content="Linklist" />
+            <meta property="article:tag" content="Data_Structure" />
+            <meta property="article:author" content="Charlie Hu" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.flatly.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link href="/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+        <link href="/static/css/custom.css" rel="stylesheet">
+
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+Tower of Babel            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                         <li><a href="/pages/about.html">
+                             About
+                          </a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><span>
+                <form class="navbar-search" action="/search.html">
+                  <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
+                </form></span>
+              </li>
+              <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+            <ol class="breadcrumb">
+                <li><a href="" title="Tower of Babel"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="/category/python.html" title="Python">Python</a></li>
+                <li class="active">Linklist Problems Summary</li>
+            </ol>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/linklist-problems-summary.html"
+                       rel="bookmark"
+                       title="Permalink to Linklist Problems Summary">
+                        Linklist Problems Summary
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-07-08T00:00:00+08:00"> Sat 08 July 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/linklist.html">Linklist</a>
+        /
+	<a href="/tag/data_structure.html">Data_Structure</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <h3>Description</h3>
+<p>链表问题是经常会遇到的数据结构问题。该类问题的难点主要集中再单向遍历以及链表有环的情况下。很多链表问题只要利用两个速度不一的指针来完成单向遍历就可以简化问题、减少复杂度。本文基于一些常见的链表问题来分析比较良好的方案以及python实现。</p>
+<h3>准备工作</h3>
+<p>在解决问题之前，我们先要定义这次使用的链表的数据结构。
+在此我们定义了一个普通的value和next指针的链表结构，并重写了__len__魔术方法来计算无环链表自身的长度，添加了traversal方法来帮助我们遍历链表验证结论。
+在SampleLinklist类中我们定义了一些链表示例来辅助我们验证结论。</p>
+<div class="highlight"><pre><span></span><span class="c1">### -*- coding: utf-8 -*-</span>
+
+
+<span class="k">class</span> <span class="nc">Linklist</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="nb">next</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="nb">next</span>
+
+    <span class="k">def</span> <span class="nf">traversal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        遍历该节点开始的链表</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">traversal</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        用于之后的if Linklist判断</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: 无环链表的长度</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="k">while</span> <span class="n">node</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">next</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">count</span>
+
+
+<span class="k">class</span> <span class="nc">SampleLinklist</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># 创建一个值为0-19的链表数组</span>
+        <span class="n">nodelist</span> <span class="o">=</span> <span class="p">[</span><span class="n">Linklist</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">)]</span>
+        <span class="c1"># 0-6为无环单链表；7-11为有环单链表（入口为8）；</span>
+        <span class="c1"># 12-14交于无环单链表(入口为5)；15-19交于有环链表（入口为9）；</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nodelist</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="o">!=</span> <span class="mi">6</span> <span class="ow">and</span> <span class="n">key</span> <span class="o">!=</span> <span class="mi">11</span> <span class="ow">and</span> <span class="n">key</span> <span class="o">!=</span> <span class="mi">14</span> <span class="ow">and</span> <span class="n">key</span> <span class="o">!=</span> <span class="mi">19</span><span class="p">:</span>
+                <span class="n">value</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">nodelist</span><span class="p">[</span><span class="n">key</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="mi">11</span><span class="p">:</span>
+                <span class="n">value</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">nodelist</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="mi">14</span><span class="p">:</span>
+                <span class="n">value</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">nodelist</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="mi">19</span><span class="p">:</span>
+                <span class="n">value</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">nodelist</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span>
+
+        <span class="c1">#无环单链表</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">normal_linklist</span> <span class="o">=</span> <span class="n">nodelist</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1">#有环单链表（入口为8）</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loop_linklist</span> <span class="o">=</span> <span class="n">nodelist</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>
+        <span class="c1">#与normal_linklist交于5</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">intersect_normal_linklist</span> <span class="o">=</span> <span class="p">(</span><span class="n">nodelist</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">nodelist</span><span class="p">[</span><span class="mi">12</span><span class="p">])</span>
+        <span class="c1"># 与nloop_linklist交于9</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">intersect_loop_linklist</span> <span class="o">=</span> <span class="p">(</span><span class="n">nodelist</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">nodelist</span><span class="p">[</span><span class="mi">15</span><span class="p">])</span>
+</pre></div>
+
+
+<h3>解决问题</h3>
+<h4>在O(1)时间删除链表节点</h4>
+<p><strong>题目描述：</strong> 给定链表的头指针和一个节点指针，在O(1)时间删除该节点。</p>
+<p><strong>分析：</strong> 本题与《编程之美》上的「从无头单链表中删除节点」类似。主要思想都是「狸猫换太子」，即用下一个节点数据覆盖要删除的节点，然后删除下一个节点。但是如果节点是尾节点时，python无法直接在内存中删除传入函数的对象，暂时还没找到办法解决。</p>
+<div class="highlight"><pre><span></span><span class="c1">### -*- coding: utf-8 -*-</span>
+
+<span class="kn">from</span> <span class="nn">linklist</span> <span class="kn">import</span> <span class="n">SampleLinklist</span>
+
+
+<span class="k">def</span> <span class="nf">delete_specified_node</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">node</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">next</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">storeNode</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">next</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">value</span>
+        <span class="n">node</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span>
+</pre></div>
+
+
+<h4>反转单链表</h4>
+<p><strong>题目描述：</strong> 输入一个单向链表，输出逆序反转后的链表。</p>
+<p><strong>分析：</strong> 链表的转置是一个很常见、很基础的数据结构题了。我们在这里运用了递归算法，将尾节点冒泡返回，然后对每个节点的指针反置。</p>
+<div class="highlight"><pre><span></span><span class="c1">### -*- coding: utf-8 -*-</span>
+
+<span class="kn">from</span> <span class="nn">linklist</span> <span class="kn">import</span> <span class="n">SampleLinklist</span>
+
+
+<span class="k">def</span> <span class="nf">revert_linklist</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">node</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">node</span><span class="o">.</span><span class="n">next</span><span class="p">:</span>
+        <span class="c1"># 返回链表尾节点为，既反转后链表头结点</span>
+        <span class="k">return</span> <span class="n">node</span>
+    <span class="c1"># 暂存头结点</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="n">revert_linklist</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">next</span><span class="p">)</span>
+    <span class="n">node</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">node</span>
+    <span class="n">node</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">header</span>
+</pre></div>
+
+
+<h4>找到单链表倒数第k个节点</h4>
+<p><strong>题目描述：</strong> 输入一个单向链表，输出该链表中倒数第k个节点，链表的倒数第0个节点为链表的尾指针。</p>
+<p><strong>分析：</strong> 设置两个指针 p1、p2，首先 p1 和 p2 都指向 head，然后 p2 向前走 k 步，这样 p1 和 p2 之间就间隔 k 个节点，最后 p1 和 p2 同时向前移动，直至 p2 走到链表末尾。</p>
+<div class="highlight"><pre><span></span><span class="c1">### -*- coding: utf-8 -*-</span>
+
+
+<span class="kn">from</span> <span class="nn">linklist</span> <span class="kn">import</span> <span class="n">SampleLinklist</span>
+
+
+<span class="k">def</span> <span class="nf">find_last_nth</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">header</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="c1"># 将fast和slow指针设至链表起点</span>
+    <span class="n">fast</span> <span class="o">=</span> <span class="n">slow</span> <span class="o">=</span> <span class="n">header</span>
+    <span class="c1"># 将fast走n个节点</span>
+    <span class="k">while</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span> <span class="ow">and</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span>
+        <span class="n">n</span> <span class="o">-=</span> <span class="mi">1</span>
+    <span class="c1"># n大于链表长度的情况</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">while</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span><span class="p">:</span>
+        <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span>
+        <span class="n">slow</span> <span class="o">=</span> <span class="n">slow</span><span class="o">.</span><span class="n">next</span>
+    <span class="k">return</span> <span class="n">slow</span>
+</pre></div>
+
+
+<h4>找到单链表中间节点</h4>
+<p><strong>题目描述：</strong> 求链表的中间节点，如果链表的长度为偶数，返回中间两个节点的任意一个，若为奇数，则返回中间节点。</p>
+<p><strong>分析：</strong> 此题的解决思路和第3题「求链表的倒数第 k 个节点」很相似。可以先求链表的长度， 然后计算出中间节点所在链表顺序的位置。但是如果要求只能扫描一遍链表，如何解决呢？ 最高效的解法和第3题一样，通过两个指针来完成。用两个指针从链表头节点开始，一个指针每次向后移动两步，一个每次移动一步，直到快指针移到到尾节点，那么慢指针即是所求。</p>
+<div class="highlight"><pre><span></span><span class="c1">### -*- coding: utf-8 -*-</span>
+
+
+<span class="kn">from</span> <span class="nn">linklist</span> <span class="kn">import</span> <span class="n">SampleLinklist</span>
+
+
+<span class="k">def</span> <span class="nf">find_mid</span><span class="p">(</span><span class="n">header</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">header</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="c1"># 将fast和slow指针设至链表起点</span>
+    <span class="n">fast</span> <span class="o">=</span> <span class="n">slow</span> <span class="o">=</span> <span class="n">header</span>
+    <span class="k">while</span>  <span class="n">fast</span> <span class="ow">and</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span><span class="p">:</span>
+        <span class="c1">#fast速度为slow两倍</span>
+        <span class="n">fast</span><span class="o">=</span><span class="n">fast</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span>
+        <span class="n">slow</span><span class="o">=</span><span class="n">slow</span><span class="o">.</span><span class="n">next</span>
+    <span class="k">return</span> <span class="n">slow</span>
+</pre></div>
+
+
+<h4>判断单链表是否有环</h4>
+<p><strong>题目描述：</strong> 输入一个单向链表，判断链表是否有环。如果链表存在环，如何找到环的入口点？</p>
+<p><strong>分析：</strong> 通过两个指针，分别从链表的头节点出发，一个每次向后移动一步，另一个移动两步，两个指针移动速度不一样，如果存在环，那么两个指针一定会在环里相遇。按照 p2 每次两步，p1 每次一步的方式走，发现 p2 和 p1 重合，确定了单向链表有环路了。接下来，让p2回到链表的头部，重新走，每次步长不是走2了，而是走1，那么当 p1 和 p2 再次相遇的时候，就是环路的入口了。为什么？：假定起点到环入口点的距离为 a，p1 和 p2 的相交点M与环入口点的距离为b，环路的周长为L，当 p1 和 p2 第一次相遇的时候，假定 p1 走了 n 步。那么有：p1走的路径： a+b ＝ n；p2走的路径： a+b+k<em>L = 2</em>n； p2 比 p1 多走了k圈环路，总路程是p1的2倍根据上述公式可以得到 k*L=a+b=n显然，如果从相遇点M开始，p1 再走 n 步的话，还可以再回到相遇点，同时p2从头开始走的话，经过n步，也会达到相遇点M。显然在这个步骤当中 p1 和 p2只有前 a 步走的路径不同，所以当 p1 和 p2 再次重合的时候，必然是在链表的环路入口点上。</p>
+<div class="highlight"><pre><span></span><span class="c1">### -*- coding: utf-8 -*-</span>
+
+
+<span class="kn">from</span> <span class="nn">linklist</span> <span class="kn">import</span> <span class="n">SampleLinklist</span>
+
+
+<span class="k">def</span> <span class="nf">is_loop</span><span class="p">(</span><span class="n">header</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">header</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="n">fast</span> <span class="o">=</span> <span class="n">slow</span> <span class="o">=</span> <span class="n">header</span>
+    <span class="k">while</span> <span class="n">fast</span> <span class="ow">and</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span><span class="p">:</span>
+        <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span>
+        <span class="n">slow</span> <span class="o">=</span> <span class="n">slow</span><span class="o">.</span><span class="n">next</span>
+        <span class="c1"># 找到两步长交汇点</span>
+        <span class="k">if</span> <span class="n">fast</span> <span class="o">==</span> <span class="n">slow</span><span class="p">:</span>
+            <span class="k">break</span>
+    <span class="k">if</span> <span class="n">fast</span> <span class="o">!=</span> <span class="n">slow</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="c1"># 将fast发配回起点</span>
+    <span class="n">fast</span> <span class="o">=</span> <span class="n">header</span>
+    <span class="c1">#当两节点再次相遇的时候则为环入口</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">fast</span> <span class="o">==</span> <span class="n">slow</span><span class="p">:</span>
+        <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span>
+        <span class="n">slow</span> <span class="o">=</span> <span class="n">slow</span><span class="o">.</span><span class="n">next</span>
+    <span class="k">return</span> <span class="n">fast</span>
+</pre></div>
+
+
+<h4>判断两个单链表是否相交</h4>
+<p><strong>题目描述：</strong> 给出两个链表的头指针，判断其是否相交。</p>
+<p><strong>分析：</strong> 如果两个无环链表相交，则其尾指针一定相同；如果两个有环链表相交，则两个链表都有共同一个环，即环上的任意一个节点都存在于两个链表上。因此，就可以判断一链表上俩指针相遇的那个节点，在不在另一条链表上。</p>
+<div class="highlight"><pre><span></span><span class="c1">### -*- coding: utf-8 -*-</span>
+
+
+<span class="kn">from</span> <span class="nn">linklist</span> <span class="kn">import</span> <span class="n">SampleLinklist</span>
+<span class="kn">from</span> <span class="nn">whether_linklist_has_loop</span> <span class="kn">import</span> <span class="n">is_loop</span>
+
+
+<span class="k">def</span> <span class="nf">is_intersect</span><span class="p">(</span><span class="n">header1</span><span class="p">,</span> <span class="n">header2</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">header1</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">header2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_loop</span><span class="p">(</span><span class="n">header1</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_loop</span><span class="p">(</span><span class="n">header2</span><span class="p">):</span>
+        <span class="c1"># 两个无环链表的尾节点是否相等决定了它们是否相交</span>
+        <span class="k">while</span> <span class="n">header1</span><span class="p">:</span>
+            <span class="n">header1</span> <span class="o">=</span> <span class="n">header1</span><span class="o">.</span><span class="n">next</span>
+        <span class="k">while</span> <span class="n">header2</span><span class="p">:</span>
+            <span class="n">header2</span> <span class="o">=</span> <span class="n">header2</span><span class="o">.</span><span class="n">next</span>
+        <span class="k">return</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">header1</span> <span class="o">==</span> <span class="n">header2</span> <span class="k">else</span> <span class="kc">False</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="n">is_loop</span><span class="p">(</span><span class="n">header1</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">is_loop</span><span class="p">(</span><span class="n">header2</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># 两个带环链表的入口必然在它们的环内</span>
+        <span class="n">intersect1</span> <span class="o">=</span> <span class="n">is_loop</span><span class="p">(</span><span class="n">header1</span><span class="p">)</span>
+        <span class="n">intersect2</span> <span class="o">=</span> <span class="n">is_loop</span><span class="p">(</span><span class="n">header2</span><span class="p">)</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">intersect2</span><span class="o">.</span><span class="n">next</span>
+        <span class="c1"># 如果任意链表环中有另一列表的节点则相交</span>
+        <span class="k">while</span> <span class="n">node</span> <span class="o">!=</span> <span class="n">intersect2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">node</span> <span class="o">==</span> <span class="n">intersect1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">next</span>
+        <span class="k">return</span> <span class="kc">False</span>
+</pre></div>
+
+
+<h4>找到链表相交点</h4>
+<p><strong>题目描述：</strong> 如果两个单链表相交，怎么求出他们相交的第一个节点呢？</p>
+<p><strong>分析：</strong> 当两链表无环时，则可采用对齐的思想。计算两个链表的长度 L1 , L2，分别用两个指针 p1 , p2 指向两个链表的头，然后将较长链表的 p1（假设为 p1）向后移动L2 - L1个节点，然后再同时向后移动p1 , p2，直到 p1 = p2。相遇的点就是相交的第一个节点。当两链表有环时，如果个环入口相等，则可看成以环入口为尾节点的无环情况。如果不等，则首公共节点为两个入口较近的那个。</p>
+<div class="highlight"><pre><span></span><span class="c1">### -*- coding: utf-8 -*-</span>
+
+
+<span class="kn">from</span> <span class="nn">linklist</span> <span class="kn">import</span> <span class="n">SampleLinklist</span>
+
+
+<span class="k">def</span> <span class="nf">find_intersect_first_common</span><span class="p">(</span><span class="n">header1</span><span class="p">,</span> <span class="n">header2</span><span class="p">):</span>
+    <span class="n">len1</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">header1</span><span class="p">)</span>
+    <span class="n">len2</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">header2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">len1</span> <span class="o">&gt;</span> <span class="n">len2</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">len1</span> <span class="o">-</span> <span class="n">len2</span><span class="p">):</span>
+            <span class="n">header1</span> <span class="o">=</span> <span class="n">header1</span><span class="o">.</span><span class="n">next</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">len2</span> <span class="o">-</span> <span class="n">len1</span><span class="p">):</span>
+            <span class="n">header2</span> <span class="o">=</span> <span class="n">header2</span><span class="o">.</span><span class="n">next</span>
+    <span class="k">while</span> <span class="n">header1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">header1</span> <span class="o">==</span> <span class="n">header2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">header1</span>
+        <span class="n">header1</span> <span class="o">=</span> <span class="n">header1</span><span class="o">.</span><span class="n">next</span>
+        <span class="n">header2</span> <span class="o">=</span> <span class="n">header2</span><span class="o">.</span><span class="n">next</span>
+    <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+
+
+<p><a href="https://github.com/Motor-taxi-master-rider/data_structure_and_algorithm/tree/master/linklist_problems">源码下载</a></p>
+<h3>Additional</h3>
+<p>参考文献:
+1. <a href="http://wuchong.me/blog/2014/03/25/interview-link-questions/">面试精选：链表问题集锦</a>
+2. <a href="http://www.ituring.com.cn/book/1564">流畅的python</a></p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<div id="aboutme">
+        <p>
+            <img width="100%" class="img-thumbnail" src="/assets/img/avatar.png"/>
+        </p>
+    <p>
+      <strong>About Charlie Hu</strong><br/>
+        Software engineer, Geeker. Here I mostly blog about Python, algorithm and how programing can be interesting.
+    </p>
+</div><!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://github.com/Motor-taxi-master-rider"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+    <li class="list-group-item"><a href="https://weibo.com/u/3025131943"><i class="fa fa-weibo fa-lg"></i> weibo</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Recent Posts -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
+  <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/translatezhang-wo-pythonbing-fa-rang-ni-geng-kuai-xiang-yong-wu-can.html">[Translate]掌握Python并发让你更快享用午餐</a></li>
+    <li class="list-group-item"><a href="/translatecong-xin-shou-dao-zhuan-jia-ru-he-yong-pythonbian-xie-pei-zhi-wen-jian.html">[Translate]从新手到专家：如何用Python编写配置文件</a></li>
+    <li class="list-group-item"><a href="/jian-dan-de-wen-ben-jie-xi-ji-suan-qi-v2.html">简单的文本解析计算器 v2</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Recent Posts -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <ul class="list-group list-inline tagcloud" id="tags">
+    <li class="list-group-item tag-3">
+      <a href="/tag/algorithms.html">Algorithms</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/bit_manipulation.html">Bit_manipulation</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/coroutine.html">Coroutine</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="/tag/leetcode.html">Leetcode</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/math.html">Math</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/python.html">Python</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/stack.html">Stack</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="/tag/string.html">String</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/translate.html">Translate</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/tree.html">Tree</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/Github -->
+<li class="list-group-item">
+  <h4><i class="fa fa-github fa-lg"></i><span class="icon-label">GitHub Repos</span></h4>
+  <div id="gh_repos">
+    <p class="list-group-item">Status updating...</p>
+  </div>
+  <a href="https://github.com/Motor-taxi-master-rider">@Motor-taxi-master-rider</a> on GitHub
+</li>
+<!-- End Sidebar/Github -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="http://getpelican.com/" target="_blank">Pelican</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://python.org/" target="_blank">Python.org</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+    <script src="/static/js/custom.js"></script>
+
+
+<!-- GitHub JS Code -->
+<script type="text/javascript">
+$(document).ready(function () {
+  if (!window.jXHR) {
+    var jxhr = document.createElement('script');
+    jxhr.type = 'text/javascript';
+    jxhr.src = '/theme/js/jXHR.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(jxhr, s);
+  }
+
+  github.showRepos({
+    user: 'Motor-taxi-master-rider',
+    count: 3,
+    skip_forks: true,
+    target: '#gh_repos'
+  });
+});
+</script>
+<script src="/theme/js/github.js" type="text/javascript"></script>
+<!-- End GitHub JS Code -->
+
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+    $("div.collapseheader").click(function () {
+    $header = $(this).children("span").first();
+    $codearea = $(this).children(".input_area");
+    console.log($(this).children());
+    $codearea.slideToggle(500, function () {
+        $header.text(function () {
+            return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+        });
+    });
+});
+});
+</script>
+</body>
+</html>

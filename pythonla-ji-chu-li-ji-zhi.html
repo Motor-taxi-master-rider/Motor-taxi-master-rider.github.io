@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Python垃圾处理机制 - Tower of Babel</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
+<style type="text/css">
+
+/*some stuff for output/input prompts*/
+div.cell{border:1px solid transparent;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch}div.cell.selected{border-radius:4px;border:thin #ababab solid}
+div.cell.edit_mode{border-radius:4px;border:thin #008000 solid}
+div.cell{width:100%;padding:5px 5px 5px 0;margin:0;outline:none}
+div.prompt{min-width:11ex;padding:.4em;margin:0;font-family:monospace;text-align:right;line-height:1.21429em}
+@media (max-width:480px){div.prompt{text-align:left}}div.inner_cell{display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;display:flex;flex-direction:column;align-items:stretch;-webkit-box-flex:1;-moz-box-flex:1;box-flex:1;flex:1}
+div.input_area{border:1px solid #cfcfcf;border-radius:4px;background:#f7f7f7;line-height:1.21429em}
+div.prompt:empty{padding-top:0;padding-bottom:0}
+div.input{page-break-inside:avoid;display:-webkit-box;-webkit-box-orient:horizontal;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:horizontal;-moz-box-align:stretch;display:box;box-orient:horizontal;box-align:stretch;}
+div.inner_cell{width:90%;}
+div.input_area{border:1px solid #cfcfcf;border-radius:4px;background:#f7f7f7;}
+div.input_prompt{color:navy;border-top:1px solid transparent;}
+div.output_wrapper{margin-top:5px;position:relative;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;width:100%;}
+div.output_scroll{height:24em;width:100%;overflow:auto;border-radius:4px;-webkit-box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);-moz-box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.8);}
+div.output_collapsed{margin:0px;padding:0px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-box-align:stretch;display:-moz-box;-moz-box-orient:vertical;-moz-box-align:stretch;display:box;box-orient:vertical;box-align:stretch;width:100%;}
+div.out_prompt_overlay{height:100%;padding:0px 0.4em;position:absolute;border-radius:4px;}
+div.out_prompt_overlay:hover{-webkit-box-shadow:inset 0 0 1px #000000;-moz-box-shadow:inset 0 0 1px #000000;box-shadow:inset 0 0 1px #000000;background:rgba(240, 240, 240, 0.5);}
+div.output_prompt{color:darkred;}
+
+a.anchor-link:link{text-decoration:none;padding:0px 20px;visibility:hidden;}
+h1:hover .anchor-link,h2:hover .anchor-link,h3:hover .anchor-link,h4:hover .anchor-link,h5:hover .anchor-link,h6:hover .anchor-link{visibility:visible;}
+/* end stuff for output/input prompts*/
+
+
+.highlight-ipynb .hll { background-color: #ffffcc }
+.highlight-ipynb  { background: #f8f8f8; }
+.highlight-ipynb .c { color: #408080; font-style: italic } /* Comment */
+.highlight-ipynb .err { border: 1px solid #FF0000 } /* Error */
+.highlight-ipynb .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight-ipynb .o { color: #666666 } /* Operator */
+.highlight-ipynb .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight-ipynb .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight-ipynb .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight-ipynb .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight-ipynb .gd { color: #A00000 } /* Generic.Deleted */
+.highlight-ipynb .ge { font-style: italic } /* Generic.Emph */
+.highlight-ipynb .gr { color: #FF0000 } /* Generic.Error */
+.highlight-ipynb .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight-ipynb .gi { color: #00A000 } /* Generic.Inserted */
+.highlight-ipynb .go { color: #888888 } /* Generic.Output */
+.highlight-ipynb .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight-ipynb .gs { font-weight: bold } /* Generic.Strong */
+.highlight-ipynb .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight-ipynb .gt { color: #0044DD } /* Generic.Traceback */
+.highlight-ipynb .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight-ipynb .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight-ipynb .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight-ipynb .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight-ipynb .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight-ipynb .kt { color: #B00040 } /* Keyword.Type */
+.highlight-ipynb .m { color: #666666 } /* Literal.Number */
+.highlight-ipynb .s { color: #BA2121 } /* Literal.String */
+.highlight-ipynb .na { color: #7D9029 } /* Name.Attribute */
+.highlight-ipynb .nb { color: #008000 } /* Name.Builtin */
+.highlight-ipynb .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight-ipynb .no { color: #880000 } /* Name.Constant */
+.highlight-ipynb .nd { color: #AA22FF } /* Name.Decorator */
+.highlight-ipynb .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight-ipynb .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight-ipynb .nf { color: #0000FF } /* Name.Function */
+.highlight-ipynb .nl { color: #A0A000 } /* Name.Label */
+.highlight-ipynb .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight-ipynb .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight-ipynb .nv { color: #19177C } /* Name.Variable */
+.highlight-ipynb .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight-ipynb .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight-ipynb .mf { color: #666666 } /* Literal.Number.Float */
+.highlight-ipynb .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight-ipynb .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight-ipynb .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight-ipynb .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight-ipynb .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight-ipynb .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight-ipynb .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight-ipynb .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight-ipynb .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight-ipynb .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight-ipynb .sx { color: #008000 } /* Literal.String.Other */
+.highlight-ipynb .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight-ipynb .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight-ipynb .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight-ipynb .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight-ipynb .vc { color: #19177C } /* Name.Variable.Class */
+.highlight-ipynb .vg { color: #19177C } /* Name.Variable.Global */
+.highlight-ipynb .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight-ipynb .il { color: #666666 } /* Literal.Number.Integer.Long */
+</style>
+
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+div.entry-content {
+  overflow: visible;
+  padding: 8px;
+}
+.input_area {
+  padding: 0.2em;
+}
+
+a.heading-anchor {
+ white-space: normal;
+}
+
+.rendered_html
+code {
+ font-size: .8em;
+}
+
+pre.ipynb {
+  color: black;
+  background: #f7f7f7;
+  border: none;
+  box-shadow: none;
+  margin-bottom: 0;
+  padding: 0;
+  margin: 0px;
+  font-size: 13px;
+}
+
+/* remove the prompt div from text cells */
+div.text_cell .prompt {
+    display: none;
+}
+
+/* remove horizontal padding from text cells, */
+/* so it aligns with outer body text */
+div.text_cell_render {
+    padding: 0.5em 0em;
+}
+
+img.anim_icon{padding:0; border:0; vertical-align:middle; -webkit-box-shadow:none; -box-shadow:none}
+
+div.collapseheader {
+    width=100%;
+    padding: 2px;
+    cursor: pointer;
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+</style>
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+<script type="text/javascript">
+init_mathjax = function() {
+    if (window.MathJax) {
+        // MathJax loaded
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+            },
+            displayAlign: 'left', // Change this to 'center' to center equations.
+            "HTML-CSS": {
+                styles: {'.MathJax_Display': {"margin": 0}}
+            }
+        });
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    }
+}
+init_mathjax();
+</script>
+    <link href="/assets/favicon.ico" rel="icon">
+
+<link rel="canonical" href="/pythonla-ji-chu-li-ji-zhi.html">
+
+        <meta name="author" content="Charlie Hu" />
+        <meta name="keywords" content="Gc,Memory_management" />
+        <meta name="description" content="Description 本文环境为python3.6。与c中拥有的malloc和free不同，python中的内存是编译器自动完成，因此我们并不需要时刻关心内存的使用情况。在Things you need to know about garbage collection in Python一文中给我们详细介绍了python gc的具体实现及细节，本文主要参考该博客来对python垃圾处理机制做一些总结。 内存管理 在python中小于512k的对象是会在内存中缓存的，这就导致小于256的整形及一些短字符串在程序中实际共享了同一个内存地址。像这样，python为了提高对内存操作的效率及减少碎片，在通用内存分配器上假设了一个特殊的管理器————PyMalloc。在cpython中，内存模型被形容为大致如下： _____ ______ ______ ________ [ int ] [ dict ] [ list ] ... [ string ] Python core | +3 | &lt;----- Object-specific memory -----&gt; | &lt;-- Non-object memory --&gt; | _______________________________ | | [ Python&#39;s object …" />
+
+        <meta property="og:site_name" content="Tower of Babel" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Python垃圾处理机制"/>
+        <meta property="og:url" content="/pythonla-ji-chu-li-ji-zhi.html"/>
+        <meta property="og:description" content="Description 本文环境为python3.6。与c中拥有的malloc和free不同，python中的内存是编译器自动完成，因此我们并不需要时刻关心内存的使用情况。在Things you need to know about garbage collection in Python一文中给我们详细介绍了python gc的具体实现及细节，本文主要参考该博客来对python垃圾处理机制做一些总结。 内存管理 在python中小于512k的对象是会在内存中缓存的，这就导致小于256的整形及一些短字符串在程序中实际共享了同一个内存地址。像这样，python为了提高对内存操作的效率及减少碎片，在通用内存分配器上假设了一个特殊的管理器————PyMalloc。在cpython中，内存模型被形容为大致如下： _____ ______ ______ ________ [ int ] [ dict ] [ list ] ... [ string ] Python core | +3 | &lt;----- Object-specific memory -----&gt; | &lt;-- Non-object memory --&gt; | _______________________________ | | [ Python&#39;s object …"/>
+        <meta property="article:published_time" content="2017-10-22" />
+            <meta property="article:section" content="Python" />
+            <meta property="article:tag" content="Gc" />
+            <meta property="article:tag" content="Memory_management" />
+            <meta property="article:author" content="Charlie Hu" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.flatly.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link href="/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+        <link href="/static/css/custom.css" rel="stylesheet">
+
+
+
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+Tower of Babel            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                         <li><a href="/pages/about.html">
+                             About
+                          </a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><span>
+                <form class="navbar-search" action="/search.html">
+                  <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
+                </form></span>
+              </li>
+              <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<!-- End Banner -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+            <ol class="breadcrumb">
+                <li><a href="" title="Tower of Babel"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="/category/python.html" title="Python">Python</a></li>
+                <li class="active">Python垃圾处理机制</li>
+            </ol>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="/pythonla-ji-chu-li-ji-zhi.html"
+                       rel="bookmark"
+                       title="Permalink to Python垃圾处理机制">
+                        Python垃圾处理机制
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-10-22T00:00:00+08:00"> Sun 22 October 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/gc.html">Gc</a>
+        /
+	<a href="/tag/memory_management.html">Memory_management</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <h3>Description</h3>
+<p>本文环境为python3.6。与c中拥有的malloc和free不同，python中的内存是编译器自动完成，因此我们并不需要时刻关心内存的使用情况。在<a href="https://rushter.com/blog/python-garbage-collector/">Things you need to know about garbage collection in Python</a>一文中给我们详细介绍了python gc的具体实现及细节，本文主要参考该博客来对python垃圾处理机制做一些总结。</p>
+<h3>内存管理</h3>
+<p>在python中小于512k的对象是会在内存中缓存的，这就导致小于256的整形及一些短字符串在程序中实际共享了同一个内存地址。像这样，python为了提高对内存操作的效率及减少碎片，在通用内存分配器上假设了一个特殊的管理器————<code>PyMalloc</code>。在<a href="https://github.com/python/cpython/blob/ad051cbce1360ad3055a048506c09bc2a5442474/Objects/obmalloc.c#L534">cpython</a>中，内存模型被形容为大致如下：</p>
+<div class="highlight"><pre><span></span><span class="err">_____   ______   ______       ________</span>
+<span class="err">[ int ] [ dict ] [ list ] ... [ string ]       Python core         |</span>
+<span class="err">+3 | &lt;----- Object-specific memory -----&gt; | &lt;-- Non-object memory --&gt; |</span>
+<span class="err">_______________________________       |                           |</span>
+<span class="err">[   Python&#39;s object allocator   ]      |                           |</span>
+<span class="err">+2 | ####### Object memory ####### | &lt;------ Internal buffers ------&gt; |</span>
+<span class="err">______________________________________________________________    |</span>
+<span class="err">[          Python&#39;s raw memory allocator (PyMem_ API)          ]   |</span>
+<span class="err">+1 | &lt;----- Python memory (under PyMem manager&#39;s control) ------&gt; |   |</span>
+<span class="err">__________________________________________________________________</span>
+<span class="err">[    Underlying general-purpose allocator (ex: C library malloc)   ]</span>
+<span class="err">0 | &lt;------ Virtual memory allocated for the python process -------&gt; |</span>
+<span class="err">=========================================================================</span>
+<span class="err">_______________________________________________________________________</span>
+<span class="err">[                OS-specific Virtual Memory Manager (VMM)               ]</span>
+<span class="err">-1 | &lt;--- Kernel dynamic storage allocation &amp; management (page-based) ---&gt; |</span>
+<span class="err">__________________________________   __________________________________</span>
+<span class="err">[                                  ] [                                  ]</span>
+<span class="err">-2 | &lt;-- Physical memory: ROM/RAM --&gt; | | &lt;-- Secondary storage (swap) --&gt; |</span>
+</pre></div>
+
+
+<p>python中占用内存较大的对象会被分配到标准的c内存分配器，小对象分配器则由三个级别的抽象构成<code>Arena</code>、<code>Pool</code>、<code>Block</code>。</p>
+<h4>Block</h4>
+<p>Block（块）是固定大小（8-512k）的内存块。为了方便起见，这些块被分为64类：</p>
+<table><thead><tr><th>Request in bytes</th><th>Size of allocated block</th><th>size class idx</th></tr></thead><tbody><tr><td>1-8</td><td>8</td><td>0</td></tr><tr><td>9-16</td><td>16</td><td>1</td></tr><tr><td>17-24</td><td>24</td><td>2</td></tr><tr><td>25-32</td><td>32</td><td>3</td></tr><tr><td>33-40</td><td>40</td><td>4</td></tr><tr><td>41-48</td><td>48</td><td>5</td></tr><tr><td>...</td><td>...</td><td>...</td></tr><tr><td>505-512</td><td>512</td><td>63</td></tr></tbody></table>
+
+<h4>Pool</h4>
+<p>Pool（池）是相同大小Block（块）的集合。通常来说，池的大小等于内存页的大小。固定块的大小能减少内存碎片的产生————当一个对象被销毁的时候，内存管理器能轻松地将相同大小的对象装载入块中。</p>
+<p>在cpython中，池被定义为如下结构：</p>
+<div class="highlight"><pre><span></span><span class="cm">/* Pool for small blocks. */</span>
+<span class="k">struct</span> <span class="n">pool_header</span> <span class="p">{</span>
+    <span class="k">union</span> <span class="p">{</span> <span class="n">block</span> <span class="o">*</span><span class="n">_padding</span><span class="p">;</span>
+            <span class="n">uint</span> <span class="n">count</span><span class="p">;</span> <span class="p">}</span> <span class="n">ref</span><span class="p">;</span>          <span class="cm">/* number of allocated blocks    */</span>
+    <span class="n">block</span> <span class="o">*</span><span class="n">freeblock</span><span class="p">;</span>                   <span class="cm">/* pool&#39;s free list head         */</span>
+    <span class="k">struct</span> <span class="n">pool_header</span> <span class="o">*</span><span class="n">nextpool</span><span class="p">;</span>       <span class="cm">/* next pool of this size class  */</span>
+    <span class="k">struct</span> <span class="n">pool_header</span> <span class="o">*</span><span class="n">prevpool</span><span class="p">;</span>       <span class="cm">/* previous pool       &quot;&quot;        */</span>
+    <span class="n">uint</span> <span class="n">arenaindex</span><span class="p">;</span>                    <span class="cm">/* index into arenas of base adr */</span>
+    <span class="n">uint</span> <span class="n">szidx</span><span class="p">;</span>                         <span class="cm">/* block size class index        */</span>
+    <span class="n">uint</span> <span class="n">nextoffset</span><span class="p">;</span>                    <span class="cm">/* bytes to virgin block         */</span>
+    <span class="n">uint</span> <span class="n">maxnextoffset</span><span class="p">;</span>                 <span class="cm">/* largest valid nextoffset      */</span>
+<span class="p">};</span>
+</pre></div>
+
+
+<p>池使用的是双向链表的结构，<code>nextpool</code>和<code>prevpool</code>字段指向链表节点。<code>szidx</code>字段保存了上文提到的该池的大小类别的序号（size class index），而<code>ref.count</code>字段则储存了被占用了的块的数量。<code>arenaindex</code>储存了该池在所在的内存空间的序号。对于<code>freeblock</code>则是这么解释的：</p>
+<div class="highlight"><pre><span></span><span class="n">pool</span><span class="o">-&gt;</span><span class="n">freeblock</span> <span class="n">points</span> <span class="k">to</span> <span class="n">the</span> <span class="k">start</span> <span class="k">of</span> <span class="n">a</span> <span class="n">singly</span><span class="o">-</span><span class="n">linked</span> <span class="n">list</span> <span class="k">of</span> <span class="k">free</span> <span class="n">blocks</span> <span class="n">within</span> <span class="n">the</span> <span class="n">pool</span><span class="p">.</span>  
+<span class="k">When</span> <span class="n">a</span> <span class="n">block</span> <span class="k">is</span> <span class="n">freed</span><span class="p">,</span> <span class="n">it</span><span class="s1">&#39;s inserted at the front of its pool&#39;</span><span class="n">s</span> <span class="n">freeblock</span> <span class="n">list</span><span class="p">.</span>  <span class="n">Note</span>
+<span class="n">that</span> <span class="n">the</span> <span class="n">available</span> <span class="n">blocks</span> <span class="k">in</span> <span class="n">a</span> <span class="n">pool</span> <span class="k">are</span> <span class="o">*</span><span class="k">not</span><span class="o">*</span> <span class="n">linked</span> <span class="k">all</span> <span class="n">together</span> <span class="k">when</span> <span class="n">a</span> <span class="n">pool</span>
+<span class="k">is</span> <span class="n">initialized</span><span class="p">.</span>  <span class="k">Instead</span> <span class="k">only</span> <span class="ss">&quot;the first two&quot;</span> <span class="p">(</span><span class="n">lowest</span> <span class="n">addresses</span><span class="p">)</span> <span class="n">blocks</span> <span class="k">are</span>
+<span class="k">set</span> <span class="n">up</span><span class="p">,</span> <span class="n">returning</span> <span class="n">the</span> <span class="k">first</span> <span class="n">such</span> <span class="n">block</span><span class="p">,</span> <span class="k">and</span> <span class="n">setting</span> <span class="n">pool</span><span class="o">-&gt;</span><span class="n">freeblock</span> <span class="k">to</span> <span class="n">a</span>
+<span class="n">one</span><span class="o">-</span><span class="n">block</span> <span class="n">list</span> <span class="n">holding</span> <span class="n">the</span> <span class="k">second</span> <span class="n">such</span> <span class="n">block</span><span class="p">.</span>  <span class="n">This</span> <span class="k">is</span> <span class="n">consistent</span> <span class="k">with</span> <span class="n">that</span>
+<span class="n">pymalloc</span> <span class="n">strives</span> <span class="k">at</span> <span class="k">all</span> <span class="n">levels</span> <span class="p">(</span><span class="n">arena</span><span class="p">,</span> <span class="n">pool</span><span class="p">,</span> <span class="k">and</span> <span class="n">block</span><span class="p">)</span> <span class="n">never</span> <span class="k">to</span> <span class="n">touch</span> <span class="n">a</span> <span class="n">piece</span>
+<span class="k">of</span> <span class="n">memory</span> <span class="k">until</span> <span class="n">it</span><span class="s1">&#39;s actually needed.</span>
+
+<span class="s1">So long as a pool is in the used state, we&#39;</span><span class="n">re</span> <span class="n">certain</span> <span class="n">there</span> <span class="o">*</span><span class="k">is</span><span class="o">*</span> <span class="n">a</span> <span class="n">block</span>
+<span class="n">available</span> <span class="k">for</span> <span class="n">allocating</span><span class="p">,</span> <span class="k">and</span> <span class="n">pool</span><span class="o">-&gt;</span><span class="n">freeblock</span> <span class="k">is</span> <span class="k">not</span> <span class="k">NULL</span><span class="p">.</span>  <span class="k">If</span> <span class="n">pool</span><span class="o">-&gt;</span><span class="n">freeblock</span>
+<span class="n">points</span> <span class="k">to</span> <span class="n">the</span> <span class="k">end</span> <span class="k">of</span> <span class="n">the</span> <span class="k">free</span> <span class="n">list</span> <span class="k">before</span> <span class="n">we</span><span class="s1">&#39;ve carved the entire pool into</span>
+<span class="s1">blocks, that means we simply haven&#39;</span><span class="n">t</span> <span class="n">yet</span> <span class="n">gotten</span> <span class="k">to</span> <span class="n">one</span> <span class="k">of</span> <span class="n">the</span> <span class="n">higher</span><span class="o">-</span><span class="n">address</span>
+<span class="n">blocks</span><span class="p">.</span>  <span class="n">The</span> <span class="k">offset</span> <span class="k">from</span> <span class="n">the</span> <span class="n">pool_header</span> <span class="k">to</span> <span class="n">the</span> <span class="k">start</span> <span class="k">of</span> <span class="ss">&quot;the next&quot;</span> <span class="n">virgin</span>
+<span class="n">block</span> <span class="k">is</span> <span class="n">stored</span> <span class="k">in</span> <span class="n">the</span> <span class="n">pool_header</span> <span class="n">nextoffset</span> <span class="n">member</span><span class="p">,</span> <span class="k">and</span> <span class="n">the</span> <span class="n">largest</span> <span class="n">value</span>
+<span class="k">of</span> <span class="n">nextoffset</span> <span class="n">that</span> <span class="n">makes</span> <span class="n">sense</span> <span class="k">is</span> <span class="n">stored</span> <span class="k">in</span> <span class="n">the</span> <span class="n">maxnextoffset</span> <span class="n">member</span> <span class="k">when</span> <span class="n">a</span>
+<span class="n">pool</span> <span class="k">is</span> <span class="n">initialized</span><span class="p">.</span>  <span class="k">All</span> <span class="n">the</span> <span class="n">blocks</span> <span class="k">in</span> <span class="n">a</span> <span class="n">pool</span> <span class="n">have</span> <span class="n">been</span> <span class="n">passed</span> <span class="k">out</span> <span class="k">at</span> <span class="n">least</span>
+<span class="n">once</span> <span class="k">when</span> <span class="k">and</span> <span class="k">only</span> <span class="k">when</span> <span class="n">nextoffset</span> <span class="o">&gt;</span> <span class="n">maxnextoffset</span><span class="p">.</span>
+</pre></div>
+
+
+<p>大概就是说，<code>freeblock</code>字段指向了一个单项链表，这个链表连接了该池中的一部分可用的块。之所以说是‘一部分’是因为在初始化池的时候系统只会给前两给内存块分配内存，这样使得只有当需要分配新内存的时候才会让池占用新的块空间，节省了内存的消耗。初始化池的时会进行的另一个操作是设置<code>maxnextoffset</code>字段，即内存指针最大偏移量。当需要拓展新的块空间时，通过<code>szidx</code>及<code>nextoffset</code>字段计算出新块所占用的内存地址区域并分配内存。最后，当<code>nextoffset</code>大于<code>maxnextoffset</code>时，整个池的就满了。</p>
+<p>为了更有效地进行池的管理，python引入了<code>usedpools</code>数组来储存各个<strong>size class</strong>的块：</p>
+<p><img src="https://motor-taxi-master-rider.github.io/assets/img/usedpools.svg"  title="usedpools示例"/></p>
+<p>值得注意的是，块和池并不是直接分配内存，它们所分配的内存来自于其所在的Arena（内存空间）。</p>
+<h4>Arena</h4>
+<p>Arena（内存空间）是由64个池组成的在堆上的256k的空间，同样也是双向链表。它的结构如下：</p>
+<div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">arena_object</span> <span class="p">{</span>
+    <span class="kt">uintptr_t</span> <span class="n">address</span><span class="p">;</span>
+    <span class="n">block</span><span class="o">*</span> <span class="n">pool_address</span><span class="p">;</span>
+    <span class="n">uint</span> <span class="n">nfreepools</span><span class="p">;</span>
+    <span class="n">uint</span> <span class="n">ntotalpools</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">pool_header</span><span class="o">*</span> <span class="n">freepools</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">arena_object</span><span class="o">*</span> <span class="n">nextarena</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">arena_object</span><span class="o">*</span> <span class="n">prevarena</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+
+
+<p>其中<code>ntotalpools</code>和<code>nfreepools</code>储存了内存空间上可用池的信息。<code>freepools</code>指向一个可用池的链表。</p>
+<h3>python中的垃圾处理</h3>
+<p>python中的垃圾处理机制由两部分组成：</p>
+<ol>
+<li>引用计数（<em>reference counting</em>）</li>
+<li>分代垃圾收集器（<em>generational garbage collector</em>）</li>
+</ol>
+<p>引用计数是我们无法染指只能了解的一部分，但它的机制也很简单，就是为每个对象维护一个引用计数，当这个引用计数落为0的时候立刻释放对象所占内存。它无法处理循环引用的情况，分代垃圾收集器即<code>gc</code>模块则是为了应对这种情况而产生。这两种技术相辅相成组成了python中的垃圾处理机制。</p>
+<p>基于引用计数的垃圾收集机制是一种相对简单的机制。在一些其他语言中，有一些更现代的机制，如java中的可达性算法。这个算法的基本思路就是通过一系列的称为<code>GC Roots</code>的对象作为起始点，从这些节点开始向下搜索所有走过的路径作为引用链，当一个对象到<code>GC Roots</code>没有任何引用链相连时候，则证明此对象不可用。这一种算法也能够避免循环引用的产生。</p>
+<p><img src="https://motor-taxi-master-rider.github.io/assets/img/reachability_analysis_algorithm.png"  title="可达性算法示例"/></p>
+<h4>引用计数</h4>
+<p>在python的<a href="https://docs.python.org/3.6/c-api/intro.html#objects-types-and-reference-counts">c api文档中</a>描述了cpython中引用计数的底层实现。</p>
+<p>cpython中通过<a href="https://docs.python.org/3.6/c-api/refcounting.html#c.Py_INCREF">Py_INCREF</a>和<a href="https://docs.python.org/3.6/c-api/refcounting.html#c.Py_DECREF">Py_DECREF</a>两个宏来控制引用计数的增加和减少。对象析构器会触发<code>Py_DECREF</code>宏，该宏会检查对象的引用计数是否会被降为0————为0时则立刻释放该对象的内存，这就使得引用计数释放内存具有即时性。</p>
+<p>你可以使用<code>sys.getrefcount</code>方法来取得某个对象的引用计数：</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+
+
+<span class="n">foo</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1">### 2 references, 1 from the foo var and 1 from getrefcount</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">getrefcount</span><span class="p">(</span><span class="n">foo</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="c1"># 4 references</span>
+    <span class="c1"># from the foo var, function argument, getrefcount and Python&#39;s function stack</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">getrefcount</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+
+<span class="n">bar</span><span class="p">(</span><span class="n">foo</span><span class="p">)</span>
+<span class="c1">### 2 references, the function scope is destroyed</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">getrefcount</span><span class="p">(</span><span class="n">foo</span><span class="p">))</span>
+</pre></div>
+
+
+<h4>分代垃圾收集器</h4>
+<p>引用计数这个简单的机制会带来许多问题，如无法解决循环引用、需要线程锁及效率低下。为了解决循环引用的问题，<a href="https://docs.python.org/3.6/library/gc.html">gc模块</a>在python 1.5版本中被加入。</p>
+<p>由于循环引用只会在container容器类型中发生，所以<code>gc</code>模块并不会追踪python中所有的对象。我们可以使用<code>gc.is_tracked</code>函数来判断某个对象是否被追踪：</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">gc</span><span class="o">.</span><span class="n">is_tracked</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="kc">False</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">gc</span><span class="o">.</span><span class="n">is_tracked</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
+<span class="kc">False</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">gc</span><span class="o">.</span><span class="n">is_tracked</span><span class="p">([])</span>
+<span class="kc">True</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">gc</span><span class="o">.</span><span class="n">is_tracked</span><span class="p">({})</span>  <span class="c1">#这个字典为空，因此未被追踪</span>
+<span class="kc">False</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">gc</span><span class="o">.</span><span class="n">is_tracked</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>  <span class="c1">#这个字典所有元素都为原子类型，因此未被追踪</span>
+<span class="kc">False</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">gc</span><span class="o">.</span><span class="n">is_tracked</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="p">[]})</span>
+<span class="kc">True</span>
+</pre></div>
+
+
+<p>与引用计数机制的即时触发不同的是，为了保证性能<code>gc</code>并不是实时触发的。</p>
+<p>首先要提到的是<code>gc</code>的 <strong>分代机制</strong>。作为一个分代垃圾收集器，所有被<code>gc</code>追踪的对象被分为三代：新生代、中年代和老年代，较新代的对象将会被更频繁的处理。所有新对象会被界定为新生代，只有当某个对象在一次<code>gc</code>中存活下来时它才会作为一个年迈的对象被标记为更老的一代。分代机制在一定程度上优化了<code>gc</code>的性能。</p>
+<p>当某一代加入的对象数量超过一个阈值时，就会触发<code>gc</code>处理这一代及更新代的对象。这一阈值可以使用<code>gc.get_threshold</code>方法获得，如标准的阈值为(700,10,10)分别对应新中老三代的阈值。值得一提的是，为了提升性能，对第三代的‘长寿’对象的收集（即全局垃圾收集）需要达到<a href="https://github.com/python/cpython/blob/051295a8c57cc649fa5eaa43526143984a147411/Modules/gcmodule.c#L94">一个特性的标准</a>————<code>long_lived_pending / long_lived_total</code>的比例大于25%。<code>long_lived_total</code>为在最近一次全局<code>gc</code>中存活下来的对象的数量，<code>long_lived_pending</code>为在所有非全局<code>gc</code>中存活下来的，现在处在老年代的对象的数量。</p>
+<p>其次我们要探讨的是python中 <strong>找出引用循环的算法</strong>。我们经常看到对该算法的描述为：找到系统的 <strong>根</strong> 对象，从该对象开始遍历所有被追踪的容器对象，这些可到达的对象是活着的；释放所有其他对象。然而因为我们无法完全找到拓展模块的 <strong>根</strong> 对象，这种传统的方式已经不能再当今版本的python中使用了，因此我们得采取一种新的处理引用循环的算法。我们只需要处理被追踪的容器对象，得益于这点，我们可以以较小的代价将所有被追踪的对象用双向链表串联起来（减少在任意位置插入或删除节点的代价），并做如下处理：</p>
+<ol>
+<li>对链表中的每个对象，设置一个<code>gc_ref</code>s字段使其等于该对象的引用计数值；</li>
+<li>对于链表中的每个对象，找到它所引用的目标对象并减1该容器的<code>gc_refs</code>值；</li>
+<li>所有<code>gc_refs</code>值大于1的对象是有被立案表外对象引用的对象，因此我们不能释放它们的内存，将它们移至另一个集合中去（更年迈的代）；</li>
+<li>所有被这些转移的容器对象引用的链表中对象也不能够被释放，也将它们移到另一个集合中，对被它们引用的对象做相同的操作；</li>
+<li>现在我们的链表里剩下对象就是被循环引用的的对象，将它们释放；</li>
+</ol>
+<h3>总结</h3>
+<p>尽管有分代垃圾收集器帮助我们处理循环引用的问题，但在我们的代码中我们还是要注意避免出现循环引用。因为如果出现大量循环引用的话，启动<code>gc</code>机制依然要耗费大量的资源。在这里原作者给大家的建议是使用python中的<code>weakref</code>模块，弱引用并不会增加引用计数，当它引用的对象不存在时它会返回None给调用方。</p>
+<p>另外，引用计数是一个我们不能控制的机制，但分代垃圾收集机制确是可以用<code>gc</code>模块hack的。我们可以使用<code>gc.disable()</code>来关闭分代垃圾收集器，并且使用<code>gc.collect()</code>函数来手动触发垃圾收集。但很多从业人员并不提倡这一点。</p>
+<h3>Additional</h3>
+<p>参考文献：
+1. <a href="https://rushter.com/blog/python-garbage-collector/">Things you need to know about garbage collection in Python</a>
+2. <a href="https://rushter.com/blog/python-memory-managment/">Python internals: Memory management</a>
+3. <a href="https://docs.python.org/3.6/c-api/intro.html#objects-types-and-reference-counts">Objects, Types and Reference Counts</a>
+4. <a href="https://docs.python.org/3.6/library/gc.html">Garbage Collector interface</a>
+5. <a href="http://arctrix.com/nas/python/gc/">Garbage Collection for Python</a></p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<div id="aboutme">
+        <p>
+            <img width="100%" class="img-thumbnail" src="/assets/img/avatar.png"/>
+        </p>
+    <p>
+      <strong>About Charlie Hu</strong><br/>
+        Software engineer, Geeker. Here I mostly blog about Python, algorithm and how programing can be interesting.
+    </p>
+</div><!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://github.com/Motor-taxi-master-rider"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+    <li class="list-group-item"><a href="https://weibo.com/u/3025131943"><i class="fa fa-weibo fa-lg"></i> weibo</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Recent Posts -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
+  <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/translatezhang-wo-pythonbing-fa-rang-ni-geng-kuai-xiang-yong-wu-can.html">[Translate]掌握Python并发让你更快享用午餐</a></li>
+    <li class="list-group-item"><a href="/translatecong-xin-shou-dao-zhuan-jia-ru-he-yong-pythonbian-xie-pei-zhi-wen-jian.html">[Translate]从新手到专家：如何用Python编写配置文件</a></li>
+    <li class="list-group-item"><a href="/jian-dan-de-wen-ben-jie-xi-ji-suan-qi-v2.html">简单的文本解析计算器 v2</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Recent Posts -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <ul class="list-group list-inline tagcloud" id="tags">
+    <li class="list-group-item tag-3">
+      <a href="/tag/algorithms.html">Algorithms</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/bit_manipulation.html">Bit_manipulation</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/coroutine.html">Coroutine</a>
+    </li>
+    <li class="list-group-item tag-1">
+      <a href="/tag/leetcode.html">Leetcode</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/math.html">Math</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/python.html">Python</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/stack.html">Stack</a>
+    </li>
+    <li class="list-group-item tag-3">
+      <a href="/tag/string.html">String</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/translate.html">Translate</a>
+    </li>
+    <li class="list-group-item tag-2">
+      <a href="/tag/tree.html">Tree</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/Github -->
+<li class="list-group-item">
+  <h4><i class="fa fa-github fa-lg"></i><span class="icon-label">GitHub Repos</span></h4>
+  <div id="gh_repos">
+    <p class="list-group-item">Status updating...</p>
+  </div>
+  <a href="https://github.com/Motor-taxi-master-rider">@Motor-taxi-master-rider</a> on GitHub
+</li>
+<!-- End Sidebar/Github -->
+
+<!-- Sidebar/Links -->
+<li class="list-group-item">
+  <h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+  <ul class="list-group" id="links">
+    <li class="list-group-item">
+      <a href="http://getpelican.com/" target="_blank">Pelican</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://python.org/" target="_blank">Python.org</a>
+    </li>
+    <li class="list-group-item">
+      <a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Links -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2021 Charlie Hu
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+    <script src="/static/js/custom.js"></script>
+
+
+<!-- GitHub JS Code -->
+<script type="text/javascript">
+$(document).ready(function () {
+  if (!window.jXHR) {
+    var jxhr = document.createElement('script');
+    jxhr.type = 'text/javascript';
+    jxhr.src = '/theme/js/jXHR.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(jxhr, s);
+  }
+
+  github.showRepos({
+    user: 'Motor-taxi-master-rider',
+    count: 3,
+    skip_forks: true,
+    target: '#gh_repos'
+  });
+});
+</script>
+<script src="/theme/js/github.js" type="text/javascript"></script>
+<!-- End GitHub JS Code -->
+
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+    $("div.collapseheader").click(function () {
+    $header = $(this).children("span").first();
+    $codearea = $(this).children(".input_area");
+    console.log($(this).children());
+    $codearea.slideToggle(500, function () {
+        $header.text(function () {
+            return $codearea.is(":visible") ? "Collapse Code" : "Expand Code";
+        });
+    });
+});
+});
+</script>
+</body>
+</html>
