@@ -318,7 +318,7 @@ print('DEBUG' in os.environ.keys())
 
 ### 读取
 
-![](https://miro.medium.com/max/500/1*fSaf_r2bQmDxIsxKB6IKDw.png)
+![1](https://miro.medium.com/max/500/1*fSaf_r2bQmDxIsxKB6IKDw.png)
 
 `Dynaconf`使用`.env`文件查找所有设置文件，并使用其中字段填充`settings`对象。 如果两个设置文件具有相同的变量，则该值将被后面的设置文件覆盖。
 
