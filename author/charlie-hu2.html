@@ -243,6 +243,36 @@ Tower of Babel            </a>
             <li class="active">Charlie Hu</li>
         </ol>
             <article>
+                <h2><a href="/review-guess-word-and-hangman-game.html">[Review] Guess word and hangman game</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2018-06-13T00:00:00+08:00"> Wed 13 June 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/game.html">Game</a>
+        /
+	<a href="/tag/coroutine.html">Coroutine</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><h3>Guess max score word</h3>
+<p>这个游戏来自<a href="http://pybit.es/codechallenge02.html">Pybites</a>。</p>
+<p>整个游戏的流程是这样的：</p>
+<p>首先随机的给出十个英文字母，如<code>O, S, J, I, O, O, R, H, X, D</code>, 之后玩家以这些字母拼出合理的英文单词。以给出字母为例，可以组成<code>DOOR</code>，但无法使用超过给出字母数量的单词来组词。之后会根据字母的稀有度给玩家所组单词来打分，如<code>E</code>、<code>A</code>等字母为一分，而<code>Y</code>,<code>Z</code>等字母则算作八九分。系统同时计算出这些字母实际能组成的最高分的单词，并计算玩家的打分比例。如果我们猜测的值为<code>DOOR</code>，则我们获得的字母分为五分，而给出的字母能组成的最高分单词为<code>SHOJI</code>(商会)分值为十五分，我们的得分比例则为33%。</p>
+<p>该游戏的源码可在此<a href="https://github.com/Motor-taxi-master-rider/challenges/blob/master/02/game.py">获得</a>。</p>
+<p>在寻找给出字母能组成的最高分单词时，我们使用了以下代码:</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_possible_dict_words</span><span class="p">(</span><span class="n">draw …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/review-guess-word-and-hangman-game.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="/stackoverflow-list-generator-algorithms.html">StackOverflow list generator algorithms</a></h2>
                     <div class="well well-sm">
 <footer class="post-info">
@@ -367,35 +397,6 @@ Tower of Babel            </a>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2><a href="/pyjion-python-debug-pandasyou-hua-bi-ji.html">Pyjion、python debug、pandas优化笔记</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-11-18T00:00:00+08:00"> Sat 18 November 2017</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="/tag/jit.html">JIT</a>
-        /
-	<a href="/tag/debug.html">Debug</a>
-        /
-	<a href="/tag/pandas.html">Pandas</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Description</h3>
-<p>Brett Cannon和Dino Viehland在 <strong>Pycon2016</strong> 的<a href="https://www.youtube.com/watch?v=1DAIzO3QXcA">Pyjion: who doesn’t want faster for free?</a>演讲中介绍了Microsoft为cpython提供JIT的c++项目<code>Pyjion</code>。之后我也在talkpython的往期访谈中找到与Brett Cannon的<code>Pyjion</code>相关的访谈，其中的很多看法让我大受脾益。</p>
-<p>Elizaveta Shashkova在 <strong>Pycon2017</strong> 的<a href="https://www.youtube.com/watch?v=NdObDUbLjdg&amp;feature=youtu.be">Debugging in Python 3 6 Better, Faster, Stronger</a>演讲非常令人印象深刻。她在开发pycharm的JetBrains公司工作，而pycharm因为它优秀的debug功能成为了我最喜欢的IDE，没有之一。虽然俄罗斯老姐有一点口音，但并不影响这是一次让人感到Bingo的演讲。</p>
-<p>同样在 <strong>Pycon2017</strong> 上，美丽的Sofia Heisler告诉了我们<a href="https://www.youtube.com/watch?v=HN5d490_KKk&amp;feature=youtu.be">No More Sad Pandas Optimizing …</a></p>
-                    <a class="btn btn-default btn-xs" href="/pyjion-python-debug-pandasyou-hua-bi-ji.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="/author/charlie-hu.html">&laquo;</a>
@@ -442,7 +443,7 @@ Tower of Babel            </a>
         </p>
     <p>
       <strong>About Charlie Hu</strong><br/>
-        Software engineer, Geeker. Here I mostly blog about Python, algorithm and how programing can be intersting.
+        Software engineer, Geeker. Here I mostly blog about Python, algorithm and how programing can be interesting.
     </p>
 </div><!-- Sidebar -->
 <section class="well well-sm">
@@ -462,9 +463,9 @@ Tower of Babel            </a>
 <li class="list-group-item">
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
   <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/translatezhang-wo-pythonbing-fa-rang-ni-geng-kuai-xiang-yong-wu-can.html">[Translate]掌握Python并发让你更快享用午餐</a></li>
     <li class="list-group-item"><a href="/translatecong-xin-shou-dao-zhuan-jia-ru-he-yong-pythonbian-xie-pei-zhi-wen-jian.html">[Translate]从新手到专家：如何用Python编写配置文件</a></li>
     <li class="list-group-item"><a href="/jian-dan-de-wen-ben-jie-xi-ji-suan-qi-v2.html">简单的文本解析计算器 v2</a></li>
-    <li class="list-group-item"><a href="/translate-pythonku-jie-shao-shi-yong-luxjin-xing-zhi-neng-ke-shi-shu-ju-fa-xian.html">[Translate] Python库介绍：使用Lux进行智能可视数据发现</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Recent Posts -->
@@ -482,9 +483,6 @@ Tower of Babel            </a>
     <li class="list-group-item tag-2">
       <a href="/tag/coroutine.html">Coroutine</a>
     </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/descriptor.html">Descriptor</a>
-    </li>
     <li class="list-group-item tag-1">
       <a href="/tag/leetcode.html">Leetcode</a>
     </li>
@@ -499,6 +497,9 @@ Tower of Babel            </a>
     </li>
     <li class="list-group-item tag-3">
       <a href="/tag/string.html">String</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/translate.html">Translate</a>
     </li>
     <li class="list-group-item tag-2">
       <a href="/tag/tree.html">Tree</a>

@@ -243,6 +243,60 @@ Tower of Babel            </a>
             <li class="active">Charlie Hu</li>
         </ol>
             <article>
+                <h2><a href="/pythonzhuang-shi-qi-de-zheng-que-da-kai-fang-shi-1.html">Python装饰器的正确打开方式(1)</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-08-18T00:00:00+08:00"> Fri 18 August 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/decorator.html">Decorator</a>
+        /
+	<a href="/tag/wrapt.html">Wrapt</a>
+        /
+	<a href="/tag/descriptor.html">Descriptor</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><h3>Description</h3>
+<p>装饰器是python语言的一个非常常用及pythonic的特性，但往往由于忽视python中的内省，我们会写出一些不是特别完美的自定义装饰器。Graham Dumpleton写了一系列<a href="https://github.com/GrahamDumpleton/wrapt/blob/develop/blog/README.md">博客</a>，深入剖析了如何实现行为良好的装饰器。此外他还是<a href="http://wrapt.readthedocs.org/en/latest/">wrapt模块</a>的作者,他将他对装饰器的深厚知识充分应用到这个模块之中。这个模块的作用是简化装饰器和动态函数包装起的实现，使得多层装饰也支持内省且行为正确，既可以应用到方法上，也可以作为描述符使用。</p>
+<p>本文拾取了Graham Dumpleton在wrapt模块中附带的一系列博文的牙慧，旨在带来对python装饰器更深的理解和更好的设计。</p>
+<h3>两类装饰器及内省缺陷</h3>
+<p>装饰器符<code>@</code>是一种语法糖，深究原理的话使用装饰器实际上是一种猴子补丁的实现方式。以下的两种方式是等价的：</p>
+<div class="highlight"><pre><span></span><span class="nd">@function_wrapper</span>
+<span class="k">def</span> <span class="nf">function</span><span class="p">():</span>
+    <span class="k">pass</span>
+</pre></div>
+
+
+<blockquote>
+<p>等价于</p>
+</blockquote>
+<div class="highlight"><pre><span></span><span class="c1">#在python2.4版本你会这么做</span>
+<span class="k">def</span> <span class="nf">function</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+<span class="n">function</span> <span class="o">=</span> <span class="n">function_wrapper</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+</pre></div>
+
+
+<p>而对于装饰器的实现，我们有以下两种方式：</p>
+<blockquote>
+<p>1.定义类</p>
+</blockquote>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">function_wrapper</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrapped</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wrapped</span> <span class="o">=</span> <span class="n">wrapped …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/pythonzhuang-shi-qi-de-zheng-que-da-kai-fang-shi-1.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="/leetcode-linked-list-random-node.html">LeetCode - Linked List Random Node</a></h2>
                     <div class="well well-sm">
 <footer class="post-info">
@@ -354,35 +408,6 @@ What if the linked list is extremely large and its length is unknown to you? Cou
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2><a href="/python-coroutine-example-rock-paper-scissors.html">Python Coroutine Example -- Rock Paper Scissors</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-07-24T00:00:00+08:00"> Mon 24 July 2017</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="/tag/coroutine.html">Coroutine</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Description</h3>
-<p>本代码来自Ian Ward的Jupyter Notebook -- “Iterables, Iterators, and Generators” 教程，实现了剪刀石头布的游戏。</p>
-<h3>预激协程</h3>
-<p>The flow is always the same when working with generators.
-a generator object is created by the caller
-the caller starts the generator
-the generator passes data to the caller (or signals the end of the sequence)
-the caller …</p>
-                    <a class="btn btn-default btn-xs" href="/python-coroutine-example-rock-paper-scissors.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="/author/charlie-hu5.html">&laquo;</a>
@@ -429,7 +454,7 @@ the caller …</p>
         </p>
     <p>
       <strong>About Charlie Hu</strong><br/>
-        Software engineer, Geeker. Here I mostly blog about Python, algorithm and how programing can be intersting.
+        Software engineer, Geeker. Here I mostly blog about Python, algorithm and how programing can be interesting.
     </p>
 </div><!-- Sidebar -->
 <section class="well well-sm">
@@ -449,9 +474,9 @@ the caller …</p>
 <li class="list-group-item">
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
   <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/translatezhang-wo-pythonbing-fa-rang-ni-geng-kuai-xiang-yong-wu-can.html">[Translate]掌握Python并发让你更快享用午餐</a></li>
     <li class="list-group-item"><a href="/translatecong-xin-shou-dao-zhuan-jia-ru-he-yong-pythonbian-xie-pei-zhi-wen-jian.html">[Translate]从新手到专家：如何用Python编写配置文件</a></li>
     <li class="list-group-item"><a href="/jian-dan-de-wen-ben-jie-xi-ji-suan-qi-v2.html">简单的文本解析计算器 v2</a></li>
-    <li class="list-group-item"><a href="/translate-pythonku-jie-shao-shi-yong-luxjin-xing-zhi-neng-ke-shi-shu-ju-fa-xian.html">[Translate] Python库介绍：使用Lux进行智能可视数据发现</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Recent Posts -->
@@ -469,9 +494,6 @@ the caller …</p>
     <li class="list-group-item tag-2">
       <a href="/tag/coroutine.html">Coroutine</a>
     </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/descriptor.html">Descriptor</a>
-    </li>
     <li class="list-group-item tag-1">
       <a href="/tag/leetcode.html">Leetcode</a>
     </li>
@@ -486,6 +508,9 @@ the caller …</p>
     </li>
     <li class="list-group-item tag-3">
       <a href="/tag/string.html">String</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/translate.html">Translate</a>
     </li>
     <li class="list-group-item tag-2">
       <a href="/tag/tree.html">Tree</a>

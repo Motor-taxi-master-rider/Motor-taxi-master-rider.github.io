@@ -238,6 +238,35 @@ Tower of Babel            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
+                <h2><a href="/pyjion-python-debug-pandasyou-hua-bi-ji.html">Pyjion、python debug、pandas优化笔记</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-11-18T00:00:00+08:00"> Sat 18 November 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/jit.html">JIT</a>
+        /
+	<a href="/tag/debug.html">Debug</a>
+        /
+	<a href="/tag/pandas.html">Pandas</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><h3>Description</h3>
+<p>Brett Cannon和Dino Viehland在 <strong>Pycon2016</strong> 的<a href="https://www.youtube.com/watch?v=1DAIzO3QXcA">Pyjion: who doesn’t want faster for free?</a>演讲中介绍了Microsoft为cpython提供JIT的c++项目<code>Pyjion</code>。之后我也在talkpython的往期访谈中找到与Brett Cannon的<code>Pyjion</code>相关的访谈，其中的很多看法让我大受脾益。</p>
+<p>Elizaveta Shashkova在 <strong>Pycon2017</strong> 的<a href="https://www.youtube.com/watch?v=NdObDUbLjdg&amp;feature=youtu.be">Debugging in Python 3 6 Better, Faster, Stronger</a>演讲非常令人印象深刻。她在开发pycharm的JetBrains公司工作，而pycharm因为它优秀的debug功能成为了我最喜欢的IDE，没有之一。虽然俄罗斯老姐有一点口音，但并不影响这是一次让人感到Bingo的演讲。</p>
+<p>同样在 <strong>Pycon2017</strong> 上，美丽的Sofia Heisler告诉了我们<a href="https://www.youtube.com/watch?v=HN5d490_KKk&amp;feature=youtu.be">No More Sad Pandas Optimizing …</a></p>
+                    <a class="btn btn-default btn-xs" href="/pyjion-python-debug-pandasyou-hua-bi-ji.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="/instagram-python-migrationbi-ji.html">Instagram python migration笔记</a></h2>
                     <div class="well well-sm">
 <footer class="post-info">
@@ -380,40 +409,6 @@ Tower of Babel            </a>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2><a href="/replace-asyncio-with-native-coroutine.html">Replace asyncio with native coroutine</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-10-08T00:00:00+08:00"> Sun 08 October 2017</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="/tag/asyncio.html">Asyncio</a>
-        /
-	<a href="/tag/coroutine.html">Coroutine</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Description</h3>
-<p>在David Beazley的<code>Topics of Interest(Python Asyncio)</code><a href="http://pyvideo.org/python-brasil-2015/keynote-david-beazley-topics-of-interest-python-asyncio.html">演讲</a>中，他介绍了由于async在python中的种种历史遗留，asyncio库在<code>aync/await</code>语句加入之后已经不是一种最直接有效的python async实现。在写了一个简单程序替代asyncio库并与其及gevent库的效率做比较之后，我们发现了python3.5版本中引入的原生协程在处理异步方面具有非常高的效率。在演讲的最后他提出，可能我们需要的async并不是一个库而更像是一些api来供我们更有效地做底层的使用。</p>
-<p>这次的演讲启迪了我许多，但碍于并没有相关的ppt和材料提供下载（有部分是David在台上光速Live coding的原因），我只能将其代码誊写下来，以供检验及研究，作为个人的读书笔记。</p>
-<h3>Core programing of async server</h3>
-<h4>准备工作</h4>
-<p>本文测试环境为python3.6版本，Intel Core i5-6500,8G RAM，win10。</p>
-<p>David用了以下程序来做async服务器的测试。该程序会发送10000个请求并计算服务器处理请求的速率：</p>
-<div class="highlight"><pre><span></span><span class="c1">#benchmark.py</span>
-
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">from</span> <span class="nn">socket …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="/replace-asyncio-with-native-coroutine.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="/index2.html">&laquo;</a>
@@ -460,7 +455,7 @@ Tower of Babel            </a>
         </p>
     <p>
       <strong>About Charlie Hu</strong><br/>
-        Software engineer, Geeker. Here I mostly blog about Python, algorithm and how programing can be intersting.
+        Software engineer, Geeker. Here I mostly blog about Python, algorithm and how programing can be interesting.
     </p>
 </div><!-- Sidebar -->
 <section class="well well-sm">
@@ -480,9 +475,9 @@ Tower of Babel            </a>
 <li class="list-group-item">
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
   <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/translatezhang-wo-pythonbing-fa-rang-ni-geng-kuai-xiang-yong-wu-can.html">[Translate]掌握Python并发让你更快享用午餐</a></li>
     <li class="list-group-item"><a href="/translatecong-xin-shou-dao-zhuan-jia-ru-he-yong-pythonbian-xie-pei-zhi-wen-jian.html">[Translate]从新手到专家：如何用Python编写配置文件</a></li>
     <li class="list-group-item"><a href="/jian-dan-de-wen-ben-jie-xi-ji-suan-qi-v2.html">简单的文本解析计算器 v2</a></li>
-    <li class="list-group-item"><a href="/translate-pythonku-jie-shao-shi-yong-luxjin-xing-zhi-neng-ke-shi-shu-ju-fa-xian.html">[Translate] Python库介绍：使用Lux进行智能可视数据发现</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Recent Posts -->
@@ -500,9 +495,6 @@ Tower of Babel            </a>
     <li class="list-group-item tag-2">
       <a href="/tag/coroutine.html">Coroutine</a>
     </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/descriptor.html">Descriptor</a>
-    </li>
     <li class="list-group-item tag-1">
       <a href="/tag/leetcode.html">Leetcode</a>
     </li>
@@ -517,6 +509,9 @@ Tower of Babel            </a>
     </li>
     <li class="list-group-item tag-3">
       <a href="/tag/string.html">String</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/translate.html">Translate</a>
     </li>
     <li class="list-group-item tag-2">
       <a href="/tag/tree.html">Tree</a>

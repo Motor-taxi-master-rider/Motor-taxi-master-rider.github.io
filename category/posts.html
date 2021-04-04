@@ -244,6 +244,56 @@ Tower of Babel            </a>
         <li class="active">posts</li>
     </ol>
             <article>
+                <h2><a href="/translatezhang-wo-pythonbing-fa-rang-ni-geng-kuai-xiang-yong-wu-can.html">[Translate]掌握Python并发让你更快享用午餐</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2021-04-04T00:00:00+08:00"> Sun 04 April 2021</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/translate.html">Translate</a>
+        /
+	<a href="/tag/python.html">Python</a>
+        /
+	<a href="/tag/concurrency.html">Concurrency</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><blockquote>
+<p>一个关于线程、异步、多进程和云函数的午餐故事。</p>
+<p>原作者：<a href="https://sourcery.ai/blog/concurrency/">Brendan Maginnis</a></p>
+</blockquote>
+<h2>简介</h2>
+<p>我将给你们讲一个故事来解释Python中不同的并发和并行选项。</p>
+<p>在这个故事中，我们将看到为什么单个人的多任务处理像并发，而多个人执行自己的任务就像并行处理。 我们将在一些知名餐厅的午餐时间观察这些场景在实际中是否可以快速而有效地为客户提供服务。之后，我将使用Python模拟各类餐厅，最后比较不同的并发方案，并说明它们分别适用与何种场景。</p>
+<p>在接下来的内容中，我会解释如下几点：</p>
+<ul>
+<li>并发和并行之间有什么区别？</li>
+<li>比较不同的并发方案，包括线程，异步，多进程和云函数</li>
+<li>每种并发方案的优缺点</li>
+<li>如何使用简单的流程图找到适合场景的并发方案</li>
+</ul>
+<h2>什么是并发？什么是并行？</h2>
+<p>让我们从它们的定义说起：</p>
+<blockquote>
+<p>如果一个系统可以同时支持两个或多个正在进行的操作，则称该系统是并发的。</p>
+<p>如果一个系统可以支持同时执行的两个或多个动作，则称该系统为并行系统。</p>
+<p>这两个概念之间的关键区别是“进行中”这一定义。</p>
+<p>——《并发的艺术》</p>
+</blockquote>
+<p>现在让我们直接进入故事环节。</p>
+<p>正值午餐时间，你转过一条从未见过的街道。摆在你面前的有两种就餐选择：一个叫<strong>Concurrent Burgers</strong>的市场摊位和一个叫<strong>Parallel Salads</strong>的商店。</p>
+<p>两家店看起来都很美味，但排队的人又很多，所以你想知道哪家能先为你服务 …</p>
+                    <a class="btn btn-default btn-xs" href="/translatezhang-wo-pythonbing-fa-rang-ni-geng-kuai-xiang-yong-wu-can.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="/translatecong-xin-shou-dao-zhuan-jia-ru-he-yong-pythonbian-xie-pei-zhi-wen-jian.html">[Translate]从新手到专家：如何用Python编写配置文件</a></h2>
                     <div class="well well-sm">
 <footer class="post-info">
@@ -402,36 +452,6 @@ Tower of Babel            </a>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2><a href="/review-guess-word-and-hangman-game.html">[Review] Guess word and hangman game</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2018-06-13T00:00:00+08:00"> Wed 13 June 2018</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="/tag/game.html">Game</a>
-        /
-	<a href="/tag/coroutine.html">Coroutine</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Guess max score word</h3>
-<p>这个游戏来自<a href="http://pybit.es/codechallenge02.html">Pybites</a>。</p>
-<p>整个游戏的流程是这样的：</p>
-<p>首先随机的给出十个英文字母，如<code>O, S, J, I, O, O, R, H, X, D</code>, 之后玩家以这些字母拼出合理的英文单词。以给出字母为例，可以组成<code>DOOR</code>，但无法使用超过给出字母数量的单词来组词。之后会根据字母的稀有度给玩家所组单词来打分，如<code>E</code>、<code>A</code>等字母为一分，而<code>Y</code>,<code>Z</code>等字母则算作八九分。系统同时计算出这些字母实际能组成的最高分的单词，并计算玩家的打分比例。如果我们猜测的值为<code>DOOR</code>，则我们获得的字母分为五分，而给出的字母能组成的最高分单词为<code>SHOJI</code>(商会)分值为十五分，我们的得分比例则为33%。</p>
-<p>该游戏的源码可在此<a href="https://github.com/Motor-taxi-master-rider/challenges/blob/master/02/game.py">获得</a>。</p>
-<p>在寻找给出字母能组成的最高分单词时，我们使用了以下代码:</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_possible_dict_words</span><span class="p">(</span><span class="n">draw …</span></pre></div>
-                    <a class="btn btn-default btn-xs" href="/review-guess-word-and-hangman-game.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev disabled"><a href="#">&laquo;</a></li>
@@ -451,7 +471,7 @@ Tower of Babel            </a>
         </p>
     <p>
       <strong>About Charlie Hu</strong><br/>
-        Software engineer, Geeker. Here I mostly blog about Python, algorithm and how programing can be intersting.
+        Software engineer, Geeker. Here I mostly blog about Python, algorithm and how programing can be interesting.
     </p>
 </div><!-- Sidebar -->
 <section class="well well-sm">
@@ -471,9 +491,9 @@ Tower of Babel            </a>
 <li class="list-group-item">
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
   <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/translatezhang-wo-pythonbing-fa-rang-ni-geng-kuai-xiang-yong-wu-can.html">[Translate]掌握Python并发让你更快享用午餐</a></li>
     <li class="list-group-item"><a href="/translatecong-xin-shou-dao-zhuan-jia-ru-he-yong-pythonbian-xie-pei-zhi-wen-jian.html">[Translate]从新手到专家：如何用Python编写配置文件</a></li>
     <li class="list-group-item"><a href="/jian-dan-de-wen-ben-jie-xi-ji-suan-qi-v2.html">简单的文本解析计算器 v2</a></li>
-    <li class="list-group-item"><a href="/translate-pythonku-jie-shao-shi-yong-luxjin-xing-zhi-neng-ke-shi-shu-ju-fa-xian.html">[Translate] Python库介绍：使用Lux进行智能可视数据发现</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Recent Posts -->
@@ -491,9 +511,6 @@ Tower of Babel            </a>
     <li class="list-group-item tag-2">
       <a href="/tag/coroutine.html">Coroutine</a>
     </li>
-    <li class="list-group-item tag-4">
-      <a href="/tag/descriptor.html">Descriptor</a>
-    </li>
     <li class="list-group-item tag-1">
       <a href="/tag/leetcode.html">Leetcode</a>
     </li>
@@ -508,6 +525,9 @@ Tower of Babel            </a>
     </li>
     <li class="list-group-item tag-3">
       <a href="/tag/string.html">String</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="/tag/translate.html">Translate</a>
     </li>
     <li class="list-group-item tag-2">
       <a href="/tag/tree.html">Tree</a>
