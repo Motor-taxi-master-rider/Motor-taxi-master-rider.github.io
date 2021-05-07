@@ -239,6 +239,38 @@ Tower of Babel            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
+                <h2><a href="/pythonla-ji-chu-li-ji-zhi.html">Python垃圾处理机制</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2017-10-22T00:00:00+08:00"> Sun 22 October 2017</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/gc.html">Gc</a>
+        /
+	<a href="/tag/memory_management.html">Memory_management</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><h3>Description</h3>
+<p>本文环境为python3.6。与c中拥有的malloc和free不同，python中的内存是编译器自动完成，因此我们并不需要时刻关心内存的使用情况。在<a href="https://rushter.com/blog/python-garbage-collector/">Things you need to know about garbage collection in Python</a>一文中给我们详细介绍了python gc的具体实现及细节，本文主要参考该博客来对python垃圾处理机制做一些总结。</p>
+<h3>内存管理</h3>
+<p>在python中小于512k的对象是会在内存中缓存的，这就导致小于256的整形及一些短字符串在程序中实际共享了同一个内存地址。像这样，python为了提高对内存操作的效率及减少碎片，在通用内存分配器上假设了一个特殊的管理器————<code>PyMalloc</code>。在<a href="https://github.com/python/cpython/blob/ad051cbce1360ad3055a048506c09bc2a5442474/Objects/obmalloc.c#L534">cpython</a>中，内存模型被形容为大致如下：</p>
+<div class="highlight"><pre><span></span><span class="err">_____   ______   ______       ________</span>
+<span class="err">[ int ] [ dict ] [ list ] ... [ string ]       Python core         |</span>
+<span class="err">+3 | &lt;----- Object-specific memory -----&gt; | &lt;-- Non-object memory --&gt; |</span>
+<span class="err">_______________________________       |                           |</span>
+<span class="err">[   Python&#39;s object …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/pythonla-ji-chu-li-ji-zhi.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="/replace-asyncio-with-native-coroutine.html">Replace asyncio with native coroutine</a></h2>
                     <div class="well well-sm">
 <footer class="post-info">
@@ -361,102 +393,6 @@ Tower of Babel            </a>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2><a href="/leetcode-maximum-xor-of-two-numbers-in-an-array.html">LeetCode - Maximum XOR of Two Numbers in an Array</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2017-09-17T00:00:00+08:00"> Sun 17 September 2017</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="/tag/leetcode.html">Leetcode</a>
-        /
-	<a href="/tag/bit_manipulaion.html">Bit_manipulaion</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><h3>Description</h3>
-<p>Given a <strong>non-empty</strong> array of numbers,</p>
-<div class="math">$$ a_0, a_1, a_2, … , a_{n-1}, where 0 ≤ a_i &lt; 2^{31} $$</div>
-<p>.</p>
-<p>Find the maximum result of a_i <code>XOR</code> a_j, where <code>0 ≤ i, j &lt; n</code>.</p>
-<p>Could you do this in <code>O(n)</code> runtime?</p>
-<p><strong>Example:</strong></p>
-<div class="highlight"><pre><span></span><span class="k">Input</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
-
-<span class="k">Output</span><span class="p">:</span> <span class="mi">28</span>
-
-<span class="n">Explanation</span><span class="p">:</span> <span class="n">The …</span></pre></div><script type='text/javascript'>if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
-
-    if (false) {
-        align = (screen.width < 768) ? "left" : align;
-        indent = (screen.width < 768) ? "0em" : indent;
-        linebreak = (screen.width < 768) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
-
-    var configscript = document.createElement('script');
-    configscript.type = 'text/x-mathjax-config';
-    configscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: true," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        availableFonts: ['STIX', 'TeX']," +
-        "        preferredFont: 'STIX'," +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-</script>
-                    <a class="btn btn-default btn-xs" href="/leetcode-maximum-xor-of-two-numbers-in-an-array.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev"><a href="/index3.html">&laquo;</a>
@@ -523,9 +459,9 @@ Tower of Babel            </a>
 <li class="list-group-item">
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
   <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/javafan-she-ji-chu-er-san-shi.html">Java反射基础二三事</a></li>
     <li class="list-group-item"><a href="/translatezhang-wo-pythonbing-fa-rang-ni-geng-kuai-xiang-yong-wu-can.html">[Translate]掌握Python并发让你更快享用午餐</a></li>
     <li class="list-group-item"><a href="/translatecong-xin-shou-dao-zhuan-jia-ru-he-yong-pythonbian-xie-pei-zhi-wen-jian.html">[Translate]从新手到专家：如何用Python编写配置文件</a></li>
-    <li class="list-group-item"><a href="/jian-dan-de-wen-ben-jie-xi-ji-suan-qi-v2.html">简单的文本解析计算器 v2</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Recent Posts -->

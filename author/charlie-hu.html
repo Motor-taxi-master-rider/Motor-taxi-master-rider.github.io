@@ -244,6 +244,80 @@ Tower of Babel            </a>
             <li class="active">Charlie Hu</li>
         </ol>
             <article>
+                <h2><a href="/javafan-she-ji-chu-er-san-shi.html">Java反射基础二三事</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2021-05-07T00:00:00+08:00"> Fri 07 May 2021</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="/tag/java.html">Java</a>
+        /
+	<a href="/tag/reflection.html">Reflection</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><hr>
+<blockquote>
+<p>来自：<a href="https://www.icourse163.org/course/ECNU-1206500807">Java核心技术(高阶)</a></p>
+</blockquote>
+<p>在此总结在该MOOC课程中第三章Java反射作业中遇到的问题及迷思。</p>
+<h2>问题</h2>
+<div class="highlight"><pre><span></span><span class="n">给定一个A</span><span class="p">.</span><span class="na">java</span><span class="err">，</span><span class="n">可以带包名</span><span class="err">。</span>
+
+<span class="c1">//===========</span>
+
+<span class="kd">class</span> <span class="nc">A</span>
+
+<span class="p">{</span>
+
+   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">f1</span><span class="p">()</span>
+
+  <span class="p">{</span>
+
+     <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;hello java&quot;</span><span class="p">);</span>
+
+  <span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="c1">//===========</span>
+
+
+
+<span class="n">再给定一个conf</span><span class="p">.</span><span class="na">txt</span><span class="err">，</span><span class="n">里面的内容如下</span>
+
+<span class="err">#</span><span class="o">==============</span>
+
+<span class="n">A</span><span class="p">,</span><span class="n">f1</span><span class="p">,</span><span class="mi">5</span>
+
+<span class="err">#</span><span class="o">==============</span>
+
+
+
+<span class="n">请编写一个程序</span><span class="err">，</span><span class="n">读取conf</span><span class="p">.</span><span class="na">txt的第一行</span><span class="err">，</span><span class="n">自动按照每5秒执行一次A</span><span class="p">.</span><span class="na">f1</span><span class="p">()</span><span class="err">。</span>
+</pre></div>
+
+
+<h1>分析</h1>
+<p>这个问题的解决方案分为两个部分：</p>
+<ol>
+<li>读取文件并解析出所需的三个参数（类名，方法名，执行间隔）</li>
+<li>使用反射的方式动态执行方法</li>
+</ol>
+<p>首先是读文件解析参数的代码：</p>
+<div class="highlight"><pre><span></span><span class="n">String</span> <span class="n">line</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="k">try</span> <span class="p">(</span><span class="kd">var</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="p">(</span><span class="k">new</span> <span class="n">FileInputStream</span><span class="p">(</span><span class="s">&quot;conf.txt&quot;</span><span class="p">),</span> <span class="n">StandardCharsets</span><span class="p">.</span><span class="na">UTF_8 …</span></pre></div>
+                    <a class="btn btn-default btn-xs" href="/javafan-she-ji-chu-er-san-shi.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="/translatezhang-wo-pythonbing-fa-rang-ni-geng-kuai-xiang-yong-wu-can.html">[Translate]掌握Python并发让你更快享用午餐</a></h2>
                     <div class="well well-sm">
 <footer class="post-info">
@@ -416,42 +490,6 @@ Tower of Babel            </a>
                 </div>
             </article>
             <hr/>
-            <article>
-                <h2><a href="/translate-pythonzhong-ru-he-jiang-duo-ge-can-shu-chuan-ru-maphan-shu.html">[Translate] Python中如何将多个参数传入map函数</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2021-01-10T00:00:00+08:00"> Sun 10 January 2021</time>
-    </span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="/tag/translate.html">Translate</a>
-        /
-	<a href="/tag/python.html">Python</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><blockquote>
-<p>来源：<a href="https://miguendes.me/how-to-pass-multiple-arguments-to-a-map-function-in-python">How to Pass Multiple Arguments to a map Function in Python</a>
-作者：Miguel Brito</p>
-</blockquote>
-<p>在这篇文章中，我会给大家展示当有多个参数需要传入<code>map</code>函数时我的处理方式。这个方法不仅适用于普通的<code>map</code>方法，同时你也能以同样的技巧给<code>concurrent.futures.Executor.map</code>和<code>multiprocessing.Pool</code>传入复数个参数。</p>
-<h2>问题</h2>
-<p>假设我们有一个叫做<code>sum_four</code>的函数，它接收四个参数并且返回它们的总和。</p>
-<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">sum_four</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span> <span class="o">+</span> <span class="n">d</span>
-</pre></div>
-
-
-<p>同时我们假设你在解决一个非常特殊的问题，该问题要求固定以上函数前三个参数。在仅改变最后一个参数的条件下 …</p>
-                    <a class="btn btn-default btn-xs" href="/translate-pythonzhong-ru-he-jiang-duo-ge-can-shu-chuan-ru-maphan-shu.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev disabled"><a href="#">&laquo;</a></li>
@@ -517,9 +555,9 @@ Tower of Babel            </a>
 <li class="list-group-item">
   <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
   <ul class="list-group" id="recentposts">
+    <li class="list-group-item"><a href="/javafan-she-ji-chu-er-san-shi.html">Java反射基础二三事</a></li>
     <li class="list-group-item"><a href="/translatezhang-wo-pythonbing-fa-rang-ni-geng-kuai-xiang-yong-wu-can.html">[Translate]掌握Python并发让你更快享用午餐</a></li>
     <li class="list-group-item"><a href="/translatecong-xin-shou-dao-zhuan-jia-ru-he-yong-pythonbian-xie-pei-zhi-wen-jian.html">[Translate]从新手到专家：如何用Python编写配置文件</a></li>
-    <li class="list-group-item"><a href="/jian-dan-de-wen-ben-jie-xi-ji-suan-qi-v2.html">简单的文本解析计算器 v2</a></li>
   </ul>
 </li>
 <!-- End Sidebar/Recent Posts -->

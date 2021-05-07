@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>StackOverflow list generator algorithms - Tower of Babel</title>
+    <title>Tower of Babel</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -174,22 +174,15 @@ init_mathjax();
 </script>
     <link href="/assets/favicon.ico" rel="icon">
 
-<link rel="canonical" href="/stackoverflow-list-generator-algorithms.html">
 
         <meta name="author" content="Charlie Hu" />
-        <meta name="keywords" content="Algorithm,Generator" />
-        <meta name="description" content="Faltten nested lists with indices 这个问题来自StackOverflow。 对于一个嵌套的列表L: L = [[[1, 2, 3], [4, 5]], [6], [7,[8,9]], 10] 希望有一个函数能够yield出每个元素的嵌套位置元组： (1, (0, 0, 0)) (2, (0, 0, 1)) (3, (0, 0, 2)) (4, (0, 1, 0)) (5, (0, 1, 1)) (6, (1, 0)) (7, (2, 0)) (8, (2, 1, 0 …" />
 
+    <!-- Open Graph tags -->
         <meta property="og:site_name" content="Tower of Babel" />
-        <meta property="og:type" content="article"/>
-        <meta property="og:title" content="StackOverflow list generator algorithms"/>
-        <meta property="og:url" content="/stackoverflow-list-generator-algorithms.html"/>
-        <meta property="og:description" content="Faltten nested lists with indices 这个问题来自StackOverflow。 对于一个嵌套的列表L: L = [[[1, 2, 3], [4, 5]], [6], [7,[8,9]], 10] 希望有一个函数能够yield出每个元素的嵌套位置元组： (1, (0, 0, 0)) (2, (0, 0, 1)) (3, (0, 0, 2)) (4, (0, 1, 0)) (5, (0, 1, 1)) (6, (1, 0)) (7, (2, 0)) (8, (2, 1, 0 …"/>
-        <meta property="article:published_time" content="2018-03-11" />
-            <meta property="article:section" content="posts" />
-            <meta property="article:tag" content="Algorithm" />
-            <meta property="article:tag" content="Generator" />
-            <meta property="article:author" content="Charlie Hu" />
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="Tower of Babel"/>
+        <meta property="og:url" content=""/>
+        <meta property="og:description" content="Tower of Babel"/>
 
 
 
@@ -245,142 +238,12 @@ Tower of Babel            </a>
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
-            <ol class="breadcrumb">
-                <li><a href="" title="Tower of Babel"><i class="fa fa-home fa-lg"></i></a></li>
-                <li><a href="/category/posts.html" title="posts">posts</a></li>
-                <li class="active">StackOverflow list generator algorithms</li>
-            </ol>
-    <section id="content">
-        <article>
-            <header class="page-header">
-                <h1>
-                    <a href="/stackoverflow-list-generator-algorithms.html"
-                       rel="bookmark"
-                       title="Permalink to StackOverflow list generator algorithms">
-                        StackOverflow list generator algorithms
-                    </a>
-                </h1>
-            </header>
-            <div class="entry-content">
-                <div class="panel">
-                    <div class="panel-body">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2018-03-11T00:00:00+08:00"> Sun 11 March 2018</time>
-    </span>
+<h1>Archives for May 2021</h1>
 
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="/tag/algorithm.html">Algorithm</a>
-        /
-	<a href="/tag/generator.html">Generator</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                </div>
-                <h3>Faltten nested lists with indices</h3>
-<p>这个问题来自<a href="http://adventofcode.com/2017/day/16">StackOverflow</a>。</p>
-<p>对于一个嵌套的列表L:</p>
-<div class="highlight"><pre><span></span><span class="n">L</span> <span class="o">=</span> <span class="p">[[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]],</span> <span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,[</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]],</span> <span class="mi">10</span><span class="p">]</span>
-</pre></div>
-
-
-<p>希望有一个函数能够yield出每个元素的嵌套位置元组：</p>
-<div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-<span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-<span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-<span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-<span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-<span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-<span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-<span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-<span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-<span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,))</span>
-</pre></div>
-
-
-<p>以<code>4</code>为例，元组<code>(0,1,0)</code>代表它处于第一层的 <strong>首个列表</strong> 中的 <strong>第二个列表</strong> 的 <strong>第一个元素</strong> 的的位置上。</p>
-<p>之前我也遇到过一个<code>yield from</code>的示例，在此不得不提一下</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">flatten</span><span class="p">(</span><span class="nb">iter</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="k">yield from</span> <span class="n">flatten</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">yield</span> <span class="n">item</span>
-</pre></div>
-
-
-<p>这个函数用递归的方式讲嵌套列表里的元素取出，<code>yield</code>出一个 <em>flatten</em> 版本的列表：<code>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</code>。</p>
-<p>回归到这个问题，提问者给出了一个基于递归和生成器的解决方案：</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">flatten</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">flatten</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
-                <span class="k">yield</span> <span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="p">,)</span> <span class="o">+</span> <span class="n">y</span>
-        <span class="k">except</span><span class="p">:</span>
-            <span class="k">yield</span> <span class="n">e</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="p">,)</span>
-</pre></div>
-
-
-<p>这个函数的关键在于利用了元组加法的性质<code>(1, 2) + (3,) = (1, 2, 3)</code>来返回出嵌套位置的信息，而元组本身则是由变量<code>e</code>和<code>x</code>传递。</p>
-<p>而底下的答案则提供了一个非递归的方案：</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">flatten</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
-    <span class="n">stack</span> <span class="o">=</span> <span class="p">[</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">l</span><span class="p">)]</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span>
-    <span class="k">while</span> <span class="n">stack</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">stack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-                <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-                <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">yield</span> <span class="n">x</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-            <span class="k">break</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-            <span class="n">path</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-</pre></div>
-
-
-<p>这个算法定义了两个栈<code>stack</code>和<code>path</code>。<code>path</code>用来存储当前追踪元素的嵌套位置信息，而<code>stack</code>则是以外层至内层的顺序将列表的<code>enumerate</code>迭代器入栈。并按层次遍历。算法本身巧妙的一点是将入栈的初始位置置为<code>None</code>，之后再通过对<code>enumerate</code>的拆包用元素的位置信息替换<code>path</code>栈的最后一个元素。这个方法没有使用递归。</p>
-<h3>Iterate through array while finding the mean of the top k elements</h3>
-<p>来源于Stack Overflow的问题: <a href="https://stackoverflow.com/questions/49000803/python-iterate-through-array-while-finding-the-mean-of-the-top-k-elements/49001728#49001728">Python iterate through array while finding the mean of the top k elements</a>。</p>
-<p>问题的描述是这样的：对于一个列表<code>a = [3, 5, 2, 7, 5, 3, 6, 8, 4]</code>, 我们希望找到所有连续三个元素中最大两个元素的均值。对于举例的列表<code>a</code>将生成列表<code>[4, 6, 6, 6, 5.5, 7, 7]</code>。首个连续三元素组合<code>[3, 5, 2]</code>的计算结果为<code>4</code>。</p>
-<p>我们可把整个问题分解成三个部分：<code>1.</code> 获得每个连续三元组 <code>2.</code> 取出前两大的元素 <code>3.</code> 计算平均值。对于所有问题，我比较喜欢这个解答：</p>
-<div class="highlight"><pre><span></span><span class="c1"># Sliding window</span>
-<span class="k">def</span> <span class="nf">windowed_iterator</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
-    <span class="n">iterators</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">tee</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-    <span class="n">iterators</span> <span class="o">=</span> <span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">islice</span><span class="p">(</span><span class="n">it</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">it</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">iterators</span><span class="p">))</span>
-    <span class="k">yield from</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">iterators</span><span class="p">)</span>
-
-<span class="n">windows</span> <span class="o">=</span> <span class="n">windowed_iterator</span><span class="p">(</span><span class="n">iterable</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-
-<span class="c1"># Top 2 elements</span>
-<span class="kn">from</span> <span class="nn">heapq</span> <span class="kn">import</span> <span class="n">nlargest</span>
-<span class="n">top_n</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">nlargest</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="n">windows</span><span class="p">)</span>
-
-<span class="c1"># Mean</span>
-<span class="kn">from</span> <span class="nn">statistics</span> <span class="kn">import</span> <span class="n">mean</span>
-<span class="n">means</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">top_n</span><span class="p">)</span>
-</pre></div>
-
-
-<p>比较有趣的是<code>Sliding window</code>的部分，这里我们用<code>itertools.tee</code>生成三个独立的迭代器。并且用<code>islice</code>和<code>zip</code>进行错位和组合，最终生成连续三元组序列。</p>
-<h3>Additional</h3>
-            </div>
-            <!-- /.entry-content -->
-<section class="well" id="related-posts">
-    <h4>Related Posts:</h4>
-    <ul>
-        <li><a href="/build-a-circular-list-and-regex-trie.html">Build a circular list and regex trie</a></li>
-        <li><a href="/find-longest-word-in-dictionary-that-is-a-subsequence-of-a-given-string.html">Find longest word in dictionary that is a subsequence of a given string</a></li>
-    </ul>
-</section>
-        </article>
-    </section>
-
+<dl>
+    <dt>Fri 07 May 2021</dt>
+    <dd><a href="/javafan-she-ji-chu-er-san-shi.html">Java反射基础二三事</a></dd>
+</dl>
         </div>
         <div class="col-sm-3" id="sidebar">
             <aside>
